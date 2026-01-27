@@ -1,5 +1,6 @@
-package es.instituto.orientacion.seguimiento_casos.entities;
+package es.instituto.orientacion.seguimiento_casos.controller;
 
+import es.instituto.orientacion.seguimiento_casos.entities.Caso;
 import es.instituto.orientacion.seguimiento_casos.interfaces.CasoRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
