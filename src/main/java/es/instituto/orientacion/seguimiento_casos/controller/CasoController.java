@@ -18,10 +18,10 @@ public class CasoController {
         this.casoRepository = casoRepository;
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public String listarCasos(Model model) {
         model.addAttribute("casos", casoRepository.findAll());
-        return "listar-casos";
+        return "listar_casos";
     }
 
     @GetMapping("/nuevo")
