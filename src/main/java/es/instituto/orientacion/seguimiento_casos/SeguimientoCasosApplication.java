@@ -9,9 +9,9 @@ import java.util.Scanner;
 @SpringBootApplication
 public class SeguimientoCasosApplication {
 
-    public static final int CREAR_CASO = 1;
-    public static final int REVISAR_CASO = 2;
-    public static final int ACTUALIZAR_CASO = 3;
+    //public static final int CREAR_CASO = 1;
+    //public static final int REVISAR_CASO = 2;
+    //public static final int ACTUALIZAR_CASO = 3;
 
     public static void main(String[] args) {
 		SpringApplication.run(SeguimientoCasosApplication.class, args);
