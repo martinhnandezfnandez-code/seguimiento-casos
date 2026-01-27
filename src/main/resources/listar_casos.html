@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Casos</title>
+</head>
+<body>
+<h1>Casos registrados</h1>
+<a href="/casos/nuevo">Crear nuevo caso</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Programa</th>
+        <th>Paso</th>
+        <th>Subpaso</th>
+        <th>Estado</th>
+        <th>Ubicación</th>
+        <th>Observaciones</th>
+    </tr>
+    <tr th:each="c : ${casos}">
+        <td th:text="${c.idCaso}"></td>
+        <td th:text="${c.programa}"></td>
+        <td th:text="${c.paso}"></td>
+        <td th:text="${c.subpaso}"></td>
+        <td th:text="${c.estado}"></td>
+        <td th:text="${c.ubicacionFisica}"></td>
+        <td th:text="${c.observacionesNeutras}"></td>
+    </tr>
+</table>
+</body>
+</html>

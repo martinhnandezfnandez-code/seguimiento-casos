@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuevo Caso</title>
+</head>
+<body>
+<h1>Crear nuevo caso</h1>
+<form th:action="@{/casos/guardar}" th:object="${caso}" method="post">
+    <label>Programa: <input type="text" th:field="*{programa}"/></label><br/>
+    <label>Paso: <input type="text" th:field="*{paso}"/></label><br/>
+    <label>Subpaso: <input type="text" th:field="*{subpaso}"/></label><br/>
+    <label>Estado: <input type="text" th:field="*{estado}"/></label><br/>
+    <label>Ubicación física: <input type="text" th:field="*{ubicacionFisica}"/></label><br/>
+    <label>Observaciones: <input type="text" th:field="*{observacionesNeutras}"/></label><br/>
+    <button type="submit">Guardar</button>
+</form>
+<a href="/casos">Volver al listado</a>
+</body>
+</html>
