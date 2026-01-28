@@ -1,19 +1,436 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Nuevo Caso</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de seguimiento del alumnado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #764ba2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 30px 0 20px 0;
+            font-size: 1.5em;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .field-group {
+            margin-bottom: 20px;
+        }
+
+        label, strong {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        input[type="text"]:hover,
+        input[type="number"]:hover,
+        textarea:hover {
+            border-color: #764ba2;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        button[type="submit"],
+        .btn-back {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-back:hover {
+            background: #5a6268;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.5);
+        }
+
+        .paso-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+
+        .identification {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left-color: #2196f3;
+        }
+
+        .paso-2 {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left-color: #ff9800;
+        }
+
+        .paso-11 {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left-color: #4caf50;
+        }
+
+        .observations {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            border-left-color: #e91e63;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+                padding: 12px 15px;
+            }
+
+            button[type="submit"],
+            .btn-back {
+                width: 100%;
+                padding: 12px 20px;
+            }
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Input requerido indicator */
+        input[required] {
+            border-left: 4px solid #ff5252;
+        }
+
+        input[required]:valid {
+            border-left: 4px solid #4caf50;
+        }
+    </style>
 </head>
 <body>
-<h1>Crear nuevo caso</h1>
-<form th:action="@{/casos/guardar}" th:object="${caso}" method="post">
-    <label>Programa: <input type="text" th:field="*{programa}"/></label><br/>
-    <label>Paso: <input type="text" th:field="*{paso}"/></label><br/>
-    <label>Subpaso: <input type="text" th:field="*{subpaso}"/></label><br/>
-    <label>Estado: <input type="text" th:field="*{estado}"/></label><br/>
-    <label>Ubicación física: <input type="text" th:field="*{ubicacionFisica}"/></label><br/>
-    <label>Observaciones: <input type="text" th:field="*{observacionesNeutras}"/></label><br/>
-    <button type="submit">Guardar</button>
-</form>
-<a href="/casos">Volver al listado</a>
+
+<div class="container">
+    <h1>Registro de Seguimiento del Alumnado</h1>
+
+    <form th:action="@{/alumnado/guardar}"
+          th:object="${alumnado}"
+          method="post">
+
+        <!-- Campo oculto para el ID (necesario para ediciones) -->
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="section identification">
+            <h2>🔍 Identificación</h2>
+
+            <div class="field-group">
+                <label for="idCaso">ID Caso:</label>
+                <input type="text" th:field="*{idCaso}" id="idCaso" placeholder="Ingrese el ID del caso">
+            </div>
+
+            <div class="field-group">
+                <label for="idDocumento">ID Documento físico: *</label>
+                <input type="number" th:field="*{idDocumento}" id="idDocumento" required placeholder="Número de documento físico">
+            </div>
+        </div>
+
+        <hr>
+
+
+        <div class="section">
+            <h2>📄 PASO 1 <span class="paso-badge">Anexo I</span></h2>
+            <div class="field-group">
+                <strong>Anexo I</strong>
+                <input type="text" th:field="*{paso1_1}" placeholder="Detalles del Anexo I">
+            </div>
+        </div>
+
+        <div class="section paso-2">
+            <h2>PASO 2 <span class="paso-badge">Múltiples Acciones</span></h2>
+
+            <div class="field-group">
+                <strong>Constitución del EA</strong>
+                <input type="text" th:field="*{paso2_1}" placeholder="Detalles de la constitución del EA">
+            </div>
+
+            <div class="field-group">
+                <strong>Acta con medidas inmediatas</strong>
+                <input type="text" th:field="*{paso2_2}" placeholder="Medidas inmediatas adoptadas">
+            </div>
+
+            <div class="field-group">
+                <strong>Informar a familia</strong>
+                <input type="text" th:field="*{paso2_3}" placeholder="Fecha/Confirmación de información a familia">
+            </div>
+
+            <div class="field-group">
+                <strong>Informar a Inspección</strong>
+                <input type="text" th:field="*{paso2_4}" placeholder="Fecha/Confirmación de información a Inspección">
+            </div>
+
+            <div class="field-group">
+                <strong>Informar a la CPAyC</strong>
+                <input type="text" th:field="*{paso2_5}" placeholder="Fecha/Confirmación de información a CPAyC">
+            </div>
+
+            <div class="field-group">
+                <strong>Cronograma – Anexo II</strong>
+                <input type="text" th:field="*{paso2_6}" placeholder="Cronograma establecido">
+            </div>
+
+            <div class="field-group">
+                <strong>Antiguo Anexo I</strong>
+                <input type="text" th:field="*{paso2_7}" placeholder="Referencia al antiguo Anexo I">
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h2>PASO 3</h2>
+            <div class="field-group">
+                <strong>EA: acta con medidas provisionales adoptadas</strong>
+                <input type="text" th:field="*{paso3_1}" placeholder="Medidas provisionales del EA">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>PASO 4 <span class="paso-badge">Anexo III</span></h2>
+            <div class="field-group">
+                <strong>Director/a informa a familia – Anexo III</strong>
+                <input type="text" th:field="*{paso4_1}" placeholder="Confirmación de información a familia">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>PASO 5 <span class="paso-badge">Anexos IV y V</span></h2>
+
+            <div class="field-group">
+                <strong>EA: Síntesis – Anexo IV</strong>
+                <input type="text" th:field="*{paso5_1}" placeholder="Síntesis del EA">
+            </div>
+
+            <div class="field-group">
+                <strong>EA: Ficha – Anexo V</strong>
+                <input type="text" th:field="*{paso5_2}" placeholder="Ficha del EA">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>PASO 6 <span class="paso-badge">Anexo VI</span></h2>
+
+            <div class="field-group">
+                <strong>Director/a traslada información a Inspección</strong>
+                <input type="text" th:field="*{paso6_1}" placeholder="Traslado a Inspección">
+            </div>
+
+            <div class="field-group">
+                <strong>Director/a traslada información a la CPAyC</strong>
+                <input type="text" th:field="*{paso6_2}" placeholder="Traslado a CPAyC">
+            </div>
+
+            <div class="field-group">
+                <strong>EA: toma de decisiones – Anexo VI</strong>
+                <input type="text" th:field="*{paso6_3}" placeholder="Decisiones tomadas por el EA">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>PASO 7 <span class="paso-badge">Anexo VII</span></h2>
+            <div class="field-group">
+                <strong>EA: Elaboración del Plan Individualizado – Anexo VII</strong>
+                <input type="text" th:field="*{paso7_1}" placeholder="Plan Individualizado">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>PASO 8 <span class="paso-badge">Anexo VIII</span></h2>
+            <div class="field-group">
+                <strong>EA: Plan de seguimiento – Anexo VIII</strong>
+                <input type="text" th:field="*{paso8_1}" placeholder="Plan de seguimiento">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>PASO 9</h2>
+            <div class="field-group">
+                <strong>Director/a informa a familias del Plan</strong>
+                <input type="text" th:field="*{paso9_1}" placeholder="Información del Plan a familias">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>PASO 10</h2>
+            <div class="field-group">
+                <strong>Seguimiento por parte de Inspección</strong>
+                <input type="text" th:field="*{paso10_1}" placeholder="Seguimiento de Inspección">
+            </div>
+        </div>
+
+        <div class="section paso-11">
+            <h2>PASO 11 – Cierre</h2>
+
+            <div class="field-group">
+                <strong>Director/a realiza acta de cierre</strong>
+                <input type="text" th:field="*{paso11_1}" placeholder="Acta de cierre">
+            </div>
+
+            <div class="field-group">
+                <strong>Se informa a Inspección</strong>
+                <input type="text" th:field="*{paso11_2}" placeholder="Confirmación a Inspección">
+            </div>
+
+            <div class="field-group">
+                <strong>Se informa a familia</strong>
+                <input type="text" th:field="*{paso11_3}" placeholder="Confirmación a familia">
+            </div>
+
+            <div class="field-group">
+                <strong>Se informa a profesorado</strong>
+                <input type="text" th:field="*{paso11_4}" placeholder="Confirmación a profesorado">
+            </div>
+        </div>
+
+
+        <div class="section observations">
+            <h2> Otras acciones / Observaciones</h2>
+            <div class="field-group">
+                <textarea th:field="*{observaciones}" placeholder="Escriba aquí cualquier observación adicional o acción relevante..."></textarea>
+            </div>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="button-group">
+            <button type="submit">💾 Guardar Registro</button>
+            <a href="/alumnado/listar" class="btn-back">↩️ Volver al Listado</a>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

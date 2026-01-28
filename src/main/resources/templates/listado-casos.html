@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Casos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 98%;
+            margin: 0 auto;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.5);
+        }
+
+        .table-wrapper {
+            background: white;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        /* Scrollbar personalizado */
+        .table-container::-webkit-scrollbar {
+            height: 12px;
+            width: 12px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        table {
+            width: max-content;
+            min-width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 15px 12px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            min-width: 140px;
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-size: 12px;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        td {
+            font-size: 13px;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            transform: scale(1.01);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .paso-group {
+            background: linear-gradient(135deg, #667eea 20%, #764ba2 100%) !important;
+        }
+
+        .actions {
+            min-width: 180px !important;
+            position: sticky;
+            right: 0;
+            background: white;
+            box-shadow: -4px 0 8px rgba(0,0,0,0.1);
+        }
+
+        tr:nth-child(even) .actions {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover .actions {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+        }
+
+        .actions a {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin: 0 5px;
+            padding: 6px 12px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .action-edit {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+
+        .action-delete {
+            background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+        }
+
+        .action-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        .action-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+        }
+
+        .id-col {
+            position: sticky;
+            left: 0;
+            background-color: white;
+            z-index: 5;
+            font-weight: 600;
+            box-shadow: 4px 0 8px rgba(0,0,0,0.1);
+        }
+
+        tr:nth-child(even) .id-col {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover .id-col {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+        }
+
+        th.id-col {
+            z-index: 15;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .empty-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .empty-text {
+            color: #666;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+
+        .stats-bar {
+            background: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .header-buttons {
+                width: 100%;
+            }
+
+            .btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            th, td {
+                min-width: 100px;
+                padding: 10px 8px;
+                font-size: 11px;
+            }
+        }
+
+        /* Tooltip mejorado */
+        [title] {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>📊 Listado de Casos de Seguimiento del Alumnado</h1>
+        <div class="header-buttons">
+            <a href="/alumnado/nuevo" class="btn">➕ Nuevo Caso</a>
+            <a href="/" class="btn btn-secondary">🏠 Menú Principal</a>
+        </div>
+    </div>
+
+    <!-- Mensaje vacío -->
+    <div th:if="${alumnos.isEmpty()}" class="empty-message">
+        <div class="empty-icon">📋</div>
+        <div class="empty-text">No hay casos registrados</div>
+        <a href="/alumnado/nuevo" class="btn">➕ Crear el primer caso</a>
+    </div>
+
+    <!-- Tabla de datos -->
+    <div class="table-wrapper" th:if="${!alumnos.isEmpty()}">
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <!-- Identificación -->
+                    <th class="id-col">ID</th>
+                    <th>ID Caso</th>
+                    <th>ID Doc</th>
+
+                    <!-- PASO 1 -->
+                    <th>PASO 1<br>Anexo I</th>
+
+                    <!-- PASO 2 -->
+                    <th class="paso-group">PASO 2<br>Constitución EA</th>
+                    <th class="paso-group">PASO 2<br>Acta medidas inmediatas</th>
+                    <th class="paso-group">PASO 2<br>Informar familia</th>
+                    <th class="paso-group">PASO 2<br>Informar Inspección</th>
+                    <th class="paso-group">PASO 2<br>Informar CPAyC</th>
+                    <th class="paso-group">PASO 2<br>Cronograma Anexo II</th>
+                    <th class="paso-group">PASO 2<br>Antiguo Anexo I</th>
+
+                    <!-- PASO 3 -->
+                    <th>PASO 3<br>EA: Acta medidas provisionales</th>
+
+                    <!-- PASO 4 -->
+                    <th>PASO 4<br>Director/a informa familia Anexo III</th>
+
+                    <!-- PASO 5 -->
+                    <th>PASO 5<br>EA: Síntesis Anexo IV</th>
+                    <th>PASO 5<br>EA: Ficha Anexo V</th>
+
+                    <!-- PASO 6 -->
+                    <th>PASO 6<br>Traslada info a Inspección</th>
+                    <th>PASO 6<br>Traslada info a CPAyC</th>
+                    <th>PASO 6<br>EA: Decisiones Anexo VI</th>
+
+                    <!-- PASO 7 -->
+                    <th>PASO 7<br>Plan Individualizado Anexo VII</th>
+
+                    <!-- PASO 8 -->
+                    <th>PASO 8<br>Plan seguimiento Anexo VIII</th>
+
+                    <!-- PASO 9 -->
+                    <th>PASO 9<br>Informa familias Plan</th>
+
+                    <!-- PASO 10 -->
+                    <th>PASO 10<br>Seguimiento Inspección</th>
+
+                    <!-- PASO 11 -->
+                    <th class="paso-group">PASO 11<br>Acta cierre</th>
+                    <th class="paso-group">PASO 11<br>Informa Inspección</th>
+                    <th class="paso-group">PASO 11<br>Informa familia</th>
+                    <th class="paso-group">PASO 11<br>Informa profesorado</th>
+
+                    <!-- OTRAS ACCIONES -->
+                    <th>OTRAS ACCIONES<br>Observaciones</th>
+
+                    <!-- Fechas y acciones -->
+                    <th>Fecha Creación</th>
+                    <th>Última Actualización</th>
+                    <th class="actions">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="alumno : ${alumnos}">
+                    <!-- Identificación -->
+                    <td class="id-col" th:text="${alumno.id}"></td>
+                    <td th:text="${alumno.idCaso}"></td>
+                    <td th:text="${alumno.idDocumento}"></td>
+
+                    <!-- PASO 1 -->
+                    <td th:text="${alumno.paso1_1}" th:title="${alumno.paso1_1}"></td>
+
+                    <!-- PASO 2 -->
+                    <td th:text="${alumno.paso2_1}" th:title="${alumno.paso2_1}"></td>
+                    <td th:text="${alumno.paso2_2}" th:title="${alumno.paso2_2}"></td>
+                    <td th:text="${alumno.paso2_3}" th:title="${alumno.paso2_3}"></td>
+                    <td th:text="${alumno.paso2_4}" th:title="${alumno.paso2_4}"></td>
+                    <td th:text="${alumno.paso2_5}" th:title="${alumno.paso2_5}"></td>
+                    <td th:text="${alumno.paso2_6}" th:title="${alumno.paso2_6}"></td>
+                    <td th:text="${alumno.paso2_7}" th:title="${alumno.paso2_7}"></td>
+
+                    <!-- PASO 3 -->
+                    <td th:text="${alumno.paso3_1}" th:title="${alumno.paso3_1}"></td>
+
+                    <!-- PASO 4 -->
+                    <td th:text="${alumno.paso4_1}" th:title="${alumno.paso4_1}"></td>
+
+                    <!-- PASO 5 -->
+                    <td th:text="${alumno.paso5_1}" th:title="${alumno.paso5_1}"></td>
+                    <td th:text="${alumno.paso5_2}" th:title="${alumno.paso5_2}"></td>
+
+                    <!-- PASO 6 -->
+                    <td th:text="${alumno.paso6_1}" th:title="${alumno.paso6_1}"></td>
+                    <td th:text="${alumno.paso6_2}" th:title="${alumno.paso6_2}"></td>
+                    <td th:text="${alumno.paso6_3}" th:title="${alumno.paso6_3}"></td>
+
+                    <!-- PASO 7 -->
+                    <td th:text="${alumno.paso7_1}" th:title="${alumno.paso7_1}"></td>
+
+                    <!-- PASO 8 -->
+                    <td th:text="${alumno.paso8_1}" th:title="${alumno.paso8_1}"></td>
+
+                    <!-- PASO 9 -->
+                    <td th:text="${alumno.paso9_1}" th:title="${alumno.paso9_1}"></td>
+
+                    <!-- PASO 10 -->
+                    <td th:text="${alumno.paso10_1}" th:title="${alumno.paso10_1}"></td>
+
+                    <!-- PASO 11 -->
+                    <td th:text="${alumno.paso11_1}" th:title="${alumno.paso11_1}"></td>
+                    <td th:text="${alumno.paso11_2}" th:title="${alumno.paso11_2}"></td>
+                    <td th:text="${alumno.paso11_3}" th:title="${alumno.paso11_3}"></td>
+                    <td th:text="${alumno.paso11_4}" th:title="${alumno.paso11_4}"></td>
+
+                    <!-- OTRAS ACCIONES -->
+                    <td th:text="${alumno.observaciones}" th:title="${alumno.observaciones}"></td>
+
+                    <!-- Fechas y acciones -->
+                    <td th:text="${#temporals.format(alumno.fechaCreacion, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${#temporals.format(alumno.fechaUltimaActualizacion, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td class="actions">
+                        <a th:href="@{/alumnado/editar/{id}(id=${alumno.id})}" class="action-edit">✏️ Editar</a>
+                        <a th:href="@{/alumnado/eliminar/{id}(id=${alumno.id})}" class="action-delete"
+                           onclick="return confirm('¿Está seguro de eliminar este caso?')">🗑️ Eliminar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Barra de estadísticas -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number" th:text="${alumnos.size()}">0</span>
+                <span class="stat-label">Total de Casos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">📊</span>
+                <span class="stat-label">Vista Completa</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">✅</span>
+                <span class="stat-label">Actualizado</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
