@@ -420,7 +420,11 @@
                     <td th:text="${alumno.idDocumento}"></td>
 
                     <!-- PASO 1 -->
-                    <td th:text="${alumno.paso1_1}" th:title="${alumno.paso1_1}"></td>
+                    <td th:title="'Código: ' + ${alumno.codigoAlumno} +
+               ' | Hechos: ' + ${alumno.detalleHechos}">
+                        <span th:text="'Cod: ' + ${alumno.codigoAlumno}"></span><br>
+                        <small th:text="${alumno.detalleHechos}"></small>
+                    </td>
 
                     <!-- PASO 2 -->
                     <td th:text="${alumno.paso2_1}" th:title="${alumno.paso2_1}"></td>

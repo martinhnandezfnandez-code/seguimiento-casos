@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import java.time.LocalDate;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +23,41 @@ public class Alumnado {
     private Integer idDocumento;  // Cambié a Integer para que pueda ser null
 
     // PASO 1
-    private String paso1_1;
+    // PASO 1 - ANEXO I REAL
+
+    @Column(name = "codigo_alumno")
+    private String codigoAlumno;
+
+    @Column(name = "p1_familia_comunica")
+    private Boolean familiaComunica;
+
+    @Column(name = "p1_companeros_comunican")
+    private Boolean companerosComunican;
+
+    @Column(name = "p1_alumno_comunica")
+    private Boolean alumnoComunica;
+
+    @Column(name = "p1_intento_previo")
+    private Boolean intentoPrevio;
+
+    @Column(name = "p1_conducta_autolesiva")
+    private Boolean conductaAutolesiva;
+
+    @Column(name = "p1_otros")
+    private Boolean otrosMotivo;
+
+    @Column(name = "p1_otros_detalle")
+    private String otrosDetalle;
+
+    @Column(name = "p1_detalle_hechos", length = 500)
+    private String detalleHechos;
+
+    @Column(name = "p1_fecha")
+    private LocalDate fechaRegistro;
+
+    @Column(name = "p1_firmas")
+    private String firmas;
+
 
     // PASO 2
     private String paso2_1;

@@ -26,13 +26,29 @@ public class AlumnadoController {
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute("alumnado") Alumnado alumnado) {
+
         System.out.println("=== GUARDANDO ALUMNADO ===");
         System.out.println("ID: " + alumnado.getId());
         System.out.println("ID Caso: " + alumnado.getIdCaso());
         System.out.println("ID Documento: " + alumnado.getIdDocumento());
-        System.out.println("Paso 1_1: " + alumnado.getPaso1_1());
+
+        // ===== PASO 1 - ANEXO I =====
+        System.out.println("Código Alumno: " + alumnado.getCodigoAlumno());
+        System.out.println("Familia comunica: " + alumnado.getFamiliaComunica());
+        System.out.println("Compañeros comunican: " + alumnado.getCompanerosComunican());
+        System.out.println("Alumno comunica: " + alumnado.getAlumnoComunica());
+        System.out.println("Intento previo: " + alumnado.getIntentoPrevio());
+        System.out.println("Conducta autolesiva: " + alumnado.getConductaAutolesiva());
+        System.out.println("Otros motivo: " + alumnado.getOtrosMotivo());
+        System.out.println("Otros detalle: " + alumnado.getOtrosDetalle());
+        System.out.println("Detalle hechos: " + alumnado.getDetalleHechos());
+        System.out.println("Fecha registro: " + alumnado.getFechaRegistro());
+        System.out.println("Firmas: " + alumnado.getFirmas());
+
+        // ===== OBSERVACIONES GENERALES =====
         System.out.println("Observaciones: " + alumnado.getObservaciones());
 
+        // ===== GUARDADO =====
         Alumnado guardado = alumnadoRepository.save(alumnado);
 
         System.out.println("✓ Guardado exitosamente con ID: " + guardado.getId());

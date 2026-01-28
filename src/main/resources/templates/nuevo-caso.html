@@ -264,12 +264,79 @@
 
 
         <div class="section">
-            <h2>📄 PASO 1 <span class="paso-badge">Anexo I</span></h2>
+            <h2>PASO 1 <span class="paso-badge">Anexo I</span></h2>
+
+            <p><strong>Anexo I:</strong> Modelo de registro y comunicación al Equipo Directivo de la detección de la conducta de riesgo.</p>
+
+            <!-- Identificador anónimo del alumno -->
             <div class="field-group">
-                <strong>Anexo I</strong>
-                <input type="text" th:field="*{paso1_1}" placeholder="Detalles del Anexo I">
+                <label>Código anonimizado del alumno/a:</label>
+                <input type="text" th:field="*{codigoAlumno}" placeholder="Ej: ALU-2024-001" required>
             </div>
+
+            <!-- Motivo de detección -->
+            <div class="field-group">
+                <label>La conducta de riesgo se detecta por:</label>
+
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" th:field="*{familiaComunica}">
+                        Comunicación por parte de la familia.
+                    </label>
+
+                    <label>
+                        <input type="checkbox" th:field="*{companerosComunican}">
+                        Comunicación por compañeros/as.
+                    </label>
+
+                    <label>
+                        <input type="checkbox" th:field="*{alumnoComunica}">
+                        El alumno/a comunica su sufrimiento o ideación.
+                    </label>
+
+                    <label>
+                        <input type="checkbox" th:field="*{intentoPrevio}">
+                        Intento autolítico previo y reincorporación al centro.
+                    </label>
+
+                    <label>
+                        <input type="checkbox" th:field="*{conductaAutolesiva}">
+                        Detección de conducta autolesiva por la comunidad educativa.
+                    </label>
+
+                    <label>
+                        <input type="checkbox" th:field="*{otrosMotivo}">
+                        Otras circunstancias.
+                    </label>
+                </div>
+            </div>
+
+            <!-- Campo adicional si se marca "otros" -->
+            <div class="field-group">
+                <label>Si marcó "Otras", especifique:</label>
+                <input type="text" th:field="*{otrosDetalle}" placeholder="Especificar otras circunstancias">
+            </div>
+
+            <!-- Detalle de los hechos -->
+            <div class="field-group">
+                <label>Detalle de los hechos (breve descripción):</label>
+                <textarea th:field="*{detalleHechos}" rows="4" placeholder="Describa brevemente la situación detectada" required></textarea>
+            </div>
+
+            <!-- Fecha -->
+            <div class="field-group">
+                <label>Fecha:</label>
+                <input type="date" th:field="*{fechaRegistro}" required>
+            </div>
+
+            <!-- Firma -->
+            <div class="field-group">
+                <label>Firma(s) del personal responsable:</label>
+                <input type="text" th:field="*{firmas}" placeholder="Nombre del personal responsable">
+            </div>
+
         </div>
+
 
         <div class="section paso-2">
             <h2>PASO 2 <span class="paso-badge">Múltiples Acciones</span></h2>
