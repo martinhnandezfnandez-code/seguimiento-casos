@@ -5,9 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "alumnado")
@@ -52,7 +56,7 @@ public class Alumnado {
     @Column(name = "p1_detalle_hechos", length = 500)
     private String detalleHechos;
 
-    @Column(name = "p1_fecha")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaRegistro;
 
     @Column(name = "p1_firmas")
@@ -65,7 +69,11 @@ public class Alumnado {
     private String paso2_3;
     private String paso2_4;
     private String paso2_5;
-    private String paso2_6;
+    @OneToMany(mappedBy = "alumnado",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Cronograma> cronograma = new ArrayList<>();
+
     private String paso2_7;
 
     // PASO 3

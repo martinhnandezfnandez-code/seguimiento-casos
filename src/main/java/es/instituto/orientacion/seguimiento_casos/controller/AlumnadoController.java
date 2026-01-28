@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -27,36 +28,21 @@ public class AlumnadoController {
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute("alumnado") Alumnado alumnado) {
 
-        System.out.println("=== GUARDANDO ALUMNADO ===");
-        System.out.println("ID: " + alumnado.getId());
-        System.out.println("ID Caso: " + alumnado.getIdCaso());
-        System.out.println("ID Documento: " + alumnado.getIdDocumento());
+        // Enlazar cronograma (Paso 2_6) con el alumnado
+        if (alumnado.getCronograma() != null) {
+            alumnado.getCronograma()
+                    .forEach(c -> c.setAlumnado(alumnado));
+        }
 
-        // ===== PASO 1 - ANEXO I =====
-        System.out.println("Código Alumno: " + alumnado.getCodigoAlumno());
-        System.out.println("Familia comunica: " + alumnado.getFamiliaComunica());
-        System.out.println("Compañeros comunican: " + alumnado.getCompanerosComunican());
-        System.out.println("Alumno comunica: " + alumnado.getAlumnoComunica());
-        System.out.println("Intento previo: " + alumnado.getIntentoPrevio());
-        System.out.println("Conducta autolesiva: " + alumnado.getConductaAutolesiva());
-        System.out.println("Otros motivo: " + alumnado.getOtrosMotivo());
-        System.out.println("Otros detalle: " + alumnado.getOtrosDetalle());
-        System.out.println("Detalle hechos: " + alumnado.getDetalleHechos());
-        System.out.println("Fecha registro: " + alumnado.getFechaRegistro());
-        System.out.println("Firmas: " + alumnado.getFirmas());
-
-        // ===== OBSERVACIONES GENERALES =====
-        System.out.println("Observaciones: " + alumnado.getObservaciones());
-
-        // ===== GUARDADO =====
-        Alumnado guardado = alumnadoRepository.save(alumnado);
-
-        System.out.println("✓ Guardado exitosamente con ID: " + guardado.getId());
-        System.out.println("Fecha creación: " + guardado.getFechaCreacion());
-        System.out.println("==========================");
+        // Guardado general (alumnado + cronograma en cascada)
+        alumnadoRepository.save(alumnado);
+        if (alumnado.getId() == null) {
+            alumnado.setFechaRegistro(LocalDate.now());
+        }
 
         return "redirect:/alumnado/listar";
     }
+
 
     @GetMapping("/listar")
     public String listar(Model model) {

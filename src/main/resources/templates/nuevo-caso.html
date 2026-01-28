@@ -5,6 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de seguimiento del alumnado</title>
     <style>
+        /* ===== INPUTS DENTRO DE TABLAS ===== */
+.input-tabla,
+.input-fecha-tabla {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 2px solid #e0e0e0;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    background: white;
+}
+
+.input-tabla:focus,
+.input-fecha-tabla:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 6px rgba(102, 126, 234, 0.3);
+}
+
+.input-tabla:hover,
+.input-fecha-tabla:hover {
+    border-color: #764ba2;
+}
+
+/* Ajuste específico para input date en tabla */
+.input-fecha-tabla {
+    min-width: 130px;
+    text-align: center;
+}
+        /* ===== CAMPO FECHA MEJORADO ===== */
+.fecha-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.fecha-group label {
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+.fecha-group input[type="date"] {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 2px solid #d0d7e2;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f9fbff;
+    color: #333;
+}
+
+.fecha-group input[type="date"]:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.4);
+    outline: none;
+    background: white;
+}
+
+.fecha-group input[type="date"]:hover {
+    border-color: #764ba2;
+    cursor: pointer;
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -232,6 +297,30 @@
         input[required]:valid {
             border-left: 4px solid #4caf50;
         }
+        /* ===== BOTÓN AÑADIR FILA CRONOGRAMA ===== */
+.btn-add-row {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-add-row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(102, 126, 234, 0.6);
+}
+
+.btn-add-row:active {
+    transform: translateY(-1px);
+}
     </style>
 </head>
 <body>
@@ -244,7 +333,7 @@
           method="post">
 
         <!-- Campo oculto para el ID (necesario para ediciones) -->
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}"/>
 
         <div class="section identification">
             <h2>🔍 Identificación</h2>
@@ -256,7 +345,8 @@
 
             <div class="field-group">
                 <label for="idDocumento">ID Documento físico: *</label>
-                <input type="number" th:field="*{idDocumento}" id="idDocumento" required placeholder="Número de documento físico">
+                <input type="number" th:field="*{idDocumento}" id="idDocumento" required
+                       placeholder="Número de documento físico">
             </div>
         </div>
 
@@ -266,7 +356,8 @@
         <div class="section">
             <h2>PASO 1 <span class="paso-badge">Anexo I</span></h2>
 
-            <p><strong>Anexo I:</strong> Modelo de registro y comunicación al Equipo Directivo de la detección de la conducta de riesgo.</p>
+            <p><strong>Anexo I:</strong> Modelo de registro y comunicación al Equipo Directivo de la detección de la
+                conducta de riesgo.</p>
 
             <!-- Identificador anónimo del alumno -->
             <div class="field-group">
@@ -320,14 +411,17 @@
             <!-- Detalle de los hechos -->
             <div class="field-group">
                 <label>Detalle de los hechos (breve descripción):</label>
-                <textarea th:field="*{detalleHechos}" rows="4" placeholder="Describa brevemente la situación detectada" required></textarea>
+                <textarea th:field="*{detalleHechos}" rows="4" placeholder="Describa brevemente la situación detectada"
+                          required></textarea>
             </div>
 
             <!-- Fecha -->
-            <div class="field-group">
-                <label>Fecha:</label>
+            <div class="field-group fecha-group">
+                <label>📅 Fecha de registro</label>
                 <input type="date" th:field="*{fechaRegistro}" required>
+
             </div>
+
 
             <!-- Firma -->
             <div class="field-group">
@@ -368,8 +462,58 @@
 
             <div class="field-group">
                 <strong>Cronograma – Anexo II</strong>
-                <input type="text" th:field="*{paso2_6}" placeholder="Cronograma establecido">
+                <p>(Cronograma de actuaciones durante todo el Protocolo)</p>
+
+                <table class="cronograma-table">
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Situación</th>
+                        <th>Actuación</th>
+                        <th>Documento generado</th>
+                        <th>Observaciones</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cronogramaBody">
+
+                    <!-- Filas ya existentes (al editar) -->
+                    <tr th:each="fila, stat : ${alumnado.cronograma}">
+                        <td><input type="date" th:field="*{cronograma[__${stat.index}__].fecha}"
+                                   class="input-fecha-tabla"></td>
+                        <td><input type="text" th:field="*{cronograma[__${stat.index}__].situacion}"
+                                   class="input-tabla"></td>
+                        <td><input type="text" th:field="*{cronograma[__${stat.index}__].actuacion}"
+                                   class="input-tabla"></td>
+                        <td><input type="text" th:field="*{cronograma[__${stat.index}__].documento}"
+                                   class="input-tabla"></td>
+                        <td><input type="text" th:field="*{cronograma[__${stat.index}__].observaciones}"
+                                   class="input-tabla"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn-add-row" onclick="agregarFila()">➕ Añadir fila</button>
+
             </div>
+
+            <script>
+                function agregarFila() {
+                    const tbody = document.getElementById("cronogramaBody");
+                    const index = tbody.rows.length;
+                    const row = tbody.insertRow();
+
+                    row.innerHTML = `
+    <td><input type="date" name="cronograma[${index}].fecha" class="input-fecha-tabla"></td>
+    <td><input type="text" name="cronograma[${index}].situacion" class="input-tabla"></td>
+    <td><input type="text" name="cronograma[${index}].actuacion" class="input-tabla"></td>
+    <td><input type="text" name="cronograma[${index}].documento" class="input-tabla"></td>
+    <td><input type="text" name="cronograma[${index}].observaciones" class="input-tabla"></td>
+`;
+
+                }
+            </script>
+
 
             <div class="field-group">
                 <strong>Antiguo Anexo I</strong>
@@ -487,7 +631,8 @@
         <div class="section observations">
             <h2> Otras acciones / Observaciones</h2>
             <div class="field-group">
-                <textarea th:field="*{observaciones}" placeholder="Escriba aquí cualquier observación adicional o acción relevante..."></textarea>
+                <textarea th:field="*{observaciones}"
+                          placeholder="Escriba aquí cualquier observación adicional o acción relevante..."></textarea>
             </div>
         </div>
 
