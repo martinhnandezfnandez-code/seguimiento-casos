@@ -1,43 +1,49 @@
 package es.instituto.orientacion.seguimiento_casos.controller;
 
 import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
-import es.instituto.orientacion.seguimiento_casos.interfaces.AlumnadoRepository;
+import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
+import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
+import es.instituto.orientacion.seguimiento_casos.entities.dto.CasosDTO;
+import es.instituto.orientacion.seguimiento_casos.repositories.AlumnadoRepository;
+import es.instituto.orientacion.seguimiento_casos.repositories.Paso1Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/alumnado")
 public class AlumnadoController {
 
     private final AlumnadoRepository alumnadoRepository;
+    private final Paso1Repository paso1Repository;
 
-    public AlumnadoController(AlumnadoRepository alumnadoRepository) {
+    public AlumnadoController(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository) {
         this.alumnadoRepository = alumnadoRepository;
+        this.paso1Repository = paso1Repository;
     }
 
     @GetMapping("/nuevo")
     public String nuevo(Model model) {
-        model.addAttribute("alumnado", new Alumnado());
+        model.addAttribute("formulario", new FormularioDTO());
         return "nuevo-caso";
     }
 
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute("alumnado") Alumnado alumnado) {
+    public String guardar(@ModelAttribute("formulario") FormularioDTO formularioDTO) {
 
-        // Enlazar cronograma (Paso 2_6) con el alumnado
-        if (alumnado.getCronograma() != null) {
-            alumnado.getCronograma()
-                    .forEach(c -> c.setAlumnado(alumnado));
+        if (formularioDTO.getCronograma() != null) {
+            formularioDTO.getCronograma()
+                    .forEach(c -> c.setAlumnado(new Alumnado(formularioDTO)));
         }
 
-        // Guardado general (alumnado + cronograma en cascada)
-        alumnadoRepository.save(alumnado);
-        if (alumnado.getId() == null) {
-            alumnado.setFechaRegistro(LocalDate.now());
+        alumnadoRepository.save(new Alumnado(formularioDTO));
+        if (formularioDTO.getId() == null) {
+            formularioDTO.setFechaRegistro(LocalDate.now());
         }
 
         return "redirect:/alumnado/listar";
@@ -46,11 +52,16 @@ public class AlumnadoController {
 
     @GetMapping("/listar")
     public String listar(Model model) {
+        List<CasosDTO> listado = new ArrayList<>();
         List<Alumnado> lista = alumnadoRepository.findAll();
-        System.out.println("Total de registros encontrados: " + lista.size());
-
-        // ESTO FALTABA - Añadir la lista al modelo para que Thymeleaf la pueda mostrar
-        model.addAttribute("alumnos", lista);
+        for (Alumnado alumno : lista) {
+            Optional<Paso1> paso1Optional = paso1Repository.findByAlumnadoId(alumno.getId());
+            if (paso1Optional.isPresent()) {
+                listado.add(new CasosDTO(alumno, paso1Optional.get()));
+            }
+        }
+        System.out.println("Total de registros encontrados: " + listado.size());
+        model.addAttribute("alumnos", listado);
 
         return "listado-casos";
     }
@@ -60,8 +71,8 @@ public class AlumnadoController {
     public String editar(@PathVariable String id, Model model) {
         Alumnado alumnado = alumnadoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
-        model.addAttribute("alumnado", alumnado);
-        return "nuevo-caso"; // Reutilizamos el mismo formulario
+        model.addAttribute("formulario", new FormularioDTO(alumnado, alumnado.getPaso1()));
+        return "nuevo-caso";
     }
 
     // OPCIONAL: Método para eliminar

@@ -16,18 +16,23 @@ public class Cronograma {
     private Long id;
 
     // Fecha de la actuación
+    @Column(name= "fecha")
     private LocalDate fecha;
 
     // Situación detectada o contexto
+    @Column(name= "situacion")
     private String situacion;
 
     // Actuación realizada
+    @Column(name= "actuacion")
     private String actuacion;
 
     // Documento generado (actas, informes, etc.)
+    @Column(name= "documento")
     private String documento;
 
     // Observaciones adicionales
+    @Column(name= "observaciones")
     private String observaciones;
 
     // Relación con el caso de alumnado
