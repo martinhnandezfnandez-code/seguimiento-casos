@@ -1,13 +1,15 @@
 package es.instituto.orientacion.seguimiento_casos.entities;
 
+import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import java.time.LocalDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "alumnado")
@@ -15,49 +17,19 @@ import java.time.LocalDateTime;
 @Setter
 public class Alumnado {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
+    @Column(name = "idCaso")
     private String idCaso;
-    private Integer idDocumento;  // Cambié a Integer para que pueda ser null
-
-    // PASO 1
-    // PASO 1 - ANEXO I REAL
-
-    @Column(name = "codigo_alumno")
-    private String codigoAlumno;
-
-    @Column(name = "p1_familia_comunica")
-    private Boolean familiaComunica;
-
-    @Column(name = "p1_companeros_comunican")
-    private Boolean companerosComunican;
-
-    @Column(name = "p1_alumno_comunica")
-    private Boolean alumnoComunica;
-
-    @Column(name = "p1_intento_previo")
-    private Boolean intentoPrevio;
-
-    @Column(name = "p1_conducta_autolesiva")
-    private Boolean conductaAutolesiva;
-
-    @Column(name = "p1_otros")
-    private Boolean otrosMotivo;
-
-    @Column(name = "p1_otros_detalle")
-    private String otrosDetalle;
-
-    @Column(name = "p1_detalle_hechos", length = 500)
-    private String detalleHechos;
-
-    @Column(name = "p1_fecha")
-    private LocalDate fechaRegistro;
-
-    @Column(name = "p1_firmas")
-    private String firmas;
-
+    @Column(name = "idDocumento")
+    private Integer idDocumento;
+    @OneToOne(mappedBy = "alumnado",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Paso1 paso1;
 
     // PASO 2
     private String paso2_1;
@@ -65,7 +37,11 @@ public class Alumnado {
     private String paso2_3;
     private String paso2_4;
     private String paso2_5;
-    private String paso2_6;
+    @OneToMany(mappedBy = "alumnado",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Cronograma> cronograma = new ArrayList<>();
+
     private String paso2_7;
 
     // PASO 3
@@ -110,7 +86,15 @@ public class Alumnado {
     @UpdateTimestamp  // Se actualiza automáticamente al modificar
     private LocalDateTime fechaUltimaActualizacion;
 
-    public Alumnado() {}
+    public Alumnado(FormularioDTO formularioDTO) {
+        this.id = formularioDTO.getId();
+        this.idCaso = formularioDTO.getIdCaso();
+        this.idDocumento = formularioDTO.getIdDocumento();
+        this.paso1 = new Paso1(formularioDTO);
+    }
+
+    public Alumnado() {
+    }
 }
 
 
