@@ -4,7 +4,6 @@ import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
 import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.CasosDTO;
-import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso1DTO;
 import es.instituto.orientacion.seguimiento_casos.repositories.AlumnadoRepository;
 import es.instituto.orientacion.seguimiento_casos.repositories.Paso1Repository;
 import es.instituto.orientacion.seguimiento_casos.services.GuardarService;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +40,7 @@ public class AlumnadoController {
         Alumnado alumnado;
         boolean result = false;
 
-        // CUANDO EDITO
+        // CUANDO EDITAMOS
         if (formularioDTO.getId() != null) {
             result = guardarService.editarAlumnado(formularioDTO);
 
@@ -55,6 +53,7 @@ public class AlumnadoController {
             return "redirect:/alumnado/fallo-guardar";
         }
         return "redirect:/alumnado/listar";
+
     }
     @GetMapping("/fallo-guardar")
     public String fallar(Model model) {
