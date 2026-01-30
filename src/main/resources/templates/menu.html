@@ -13,296 +13,180 @@
         }
 
         :root {
-            --color-primary: #8B7355;
-            --color-secondary: #A89B8C;
-            --color-accent: #B8A080;
-            --color-dark: #4A4A4A;
+            --color-primary: #8B7355;      /* Beige oscuro */
+            --color-secondary: #A89B8C;    /* Beige medio */
+            --color-accent: #CBBFAE;       /* Arena clara */
+            --color-dark: #3F3F3F;
             --color-light: #F5F3F0;
             --color-white: #FFFFFF;
-            --color-shadow: rgba(139, 115, 85, 0.2);
+            --color-border: rgba(139, 115, 85, 0.25);
+            --color-shadow: rgba(139, 115, 85, 0.25);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #F5F3F0 0%, #E8E4DE 100%);
+            background: linear-gradient(135deg, #F5F3F0 0%, #ECE8E2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            position: relative;
+            padding: 15px;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(45deg, rgba(139, 115, 85, 0.02) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(139, 115, 85, 0.02) 25%, transparent 25%);
-            background-size: 60px 60px;
-            z-index: 0;
-            pointer-events: none;
-        }
-
+        /* CONTENEDOR PRINCIPAL */
         .container {
             background: var(--color-white);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px var(--color-shadow);
-            padding: 50px;
+            border-radius: 18px;
+            box-shadow: 0 18px 45px var(--color-shadow);
+            padding: 30px 40px 45px;
             max-width: 1100px;
             width: 100%;
-            animation: fadeInUp 0.6s ease;
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(139, 115, 85, 0.1);
+            border: 1px solid var(--color-border);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* HEADER COMPACTO */
         .header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 3px solid var(--color-primary);
-        }
-
-        .logo-container {
-            margin-bottom: 25px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 18px;
+            margin-bottom: 35px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--color-accent);
         }
 
         .logo {
-            max-width: 280px;
+            max-width: 95px;
             height: auto;
-            filter: drop-shadow(0 4px 12px rgba(139, 115, 85, 0.15));
+            filter: drop-shadow(0 4px 10px rgba(139, 115, 85, 0.25));
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 1.9em;
             color: var(--color-primary);
-            margin-bottom: 15px;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            line-height: 1.1;
         }
 
         .subtitle {
+            font-size: 1em;
             color: var(--color-dark);
-            font-size: 1.1em;
-            font-weight: 400;
             opacity: 0.85;
+            margin-top: 3px;
         }
 
         .department-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            align-self: flex-start;
+            background: linear-gradient(
+                135deg,
+                var(--color-primary),
+                var(--color-secondary)
+            );
             color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9em;
+            padding: 5px 14px;
+            border-radius: 14px;
+            font-size: 0.8em;
             font-weight: 600;
-            margin-top: 15px;
-            letter-spacing: 0.5px;
+            margin-top: 6px;
         }
 
-
-
+        /* MENÚ */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 26px;
             margin-bottom: 40px;
         }
 
         .menu-card {
             background: var(--color-white);
-            border-radius: 16px;
-            padding: 35px;
+            border-radius: 14px;
+            padding: 32px;
             text-decoration: none;
             color: var(--color-dark);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid rgba(139, 115, 85, 0.15);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .menu-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 0;
-        }
-
-        .menu-card:hover::before {
-            opacity: 1;
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.08);
         }
 
         .menu-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px var(--color-shadow);
+            transform: translateY(-5px);
             border-color: var(--color-primary);
-        }
-
-        .menu-card:hover .card-content {
-            color: white;
-        }
-
-        .menu-card:hover .card-icon {
-            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 14px 30px var(--color-shadow);
         }
 
         .card-content {
-            position: relative;
-            z-index: 1;
-            transition: color 0.4s ease;
+            text-align: center;
         }
 
         .card-icon {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            display: block;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: grayscale(0.3);
-        }
-
-        .menu-card:hover .card-icon {
-            filter: grayscale(0);
+            font-size: 3em;
+            margin-bottom: 18px;
         }
 
         .card-title {
-            font-size: 1.5em;
+            font-size: 1.4em;
             font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
+            color: var(--color-primary);
+            margin-bottom: 10px;
         }
 
         .card-description {
             font-size: 0.95em;
+            line-height: 1.5;
             opacity: 0.85;
-            line-height: 1.6;
         }
 
+        /* FOOTER */
         .footer {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid rgba(139, 115, 85, 0.2);
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 1px solid var(--color-border);
         }
 
         .footer-info {
-            color: var(--color-dark);
             font-size: 0.9em;
-            opacity: 0.7;
+            color: var(--color-dark);
+            opacity: 0.75;
         }
 
-        .footer-info p {
-            margin: 5px 0;
-        }
-
-        .footer-logo {
-            max-width: 150px;
-            margin: 15px auto;
-            opacity: 0.6;
-        }
-
-        /* Versión alternativa del logo para el footer */
         .institution-name {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--color-primary);
-            font-size: 1.1em;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
             }
 
-            h1 {
-                font-size: 2em;
+            .department-badge {
+                align-self: center;
             }
 
             .logo {
-                max-width: 220px;
+                max-width: 120px;
             }
 
-            .menu-grid {
-                grid-template-columns: 1fr;
+            h1 {
+                font-size: 1.7em;
             }
-        }
 
-        /* Animación sutil de fondo */
-        @keyframes subtleFloat {
-            0%, 100% {
-                transform: translateY(0px);
+            .container {
+                padding: 25px 20px 40px;
             }
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        .logo-container {
-            animation: subtleFloat 6s ease-in-out infinite;
-        }
-
-        /* Decoración adicional */
-        .header::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-            margin: 20px auto 0;
-            border-radius: 2px;
-        }
-
-        /* Efecto de brillo al hover */
-        .menu-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
-            z-index: 2;
-        }
-
-        .menu-card:hover::after {
-            opacity: 1;
-            left: 100%;
         }
     </style>
+
 </head>
 <body>
 
