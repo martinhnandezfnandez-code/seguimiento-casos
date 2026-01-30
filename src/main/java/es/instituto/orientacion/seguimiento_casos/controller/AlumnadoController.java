@@ -7,6 +7,7 @@ import es.instituto.orientacion.seguimiento_casos.entities.dto.CasosDTO;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso1DTO;
 import es.instituto.orientacion.seguimiento_casos.repositories.AlumnadoRepository;
 import es.instituto.orientacion.seguimiento_casos.repositories.Paso1Repository;
+import es.instituto.orientacion.seguimiento_casos.services.GuardarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +20,12 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/alumnado")
 public class AlumnadoController {
-
+    private final GuardarService guardarService;
     private final AlumnadoRepository alumnadoRepository;
     private final Paso1Repository paso1Repository;
 
-    public AlumnadoController(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository) {
+    public AlumnadoController(GuardarService guardarService, AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository) {
+        this.guardarService = guardarService;
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
     }
@@ -38,51 +40,27 @@ public class AlumnadoController {
     public String guardar(@ModelAttribute("formulario") FormularioDTO formularioDTO) {
 
         Alumnado alumnado;
+        boolean result = false;
 
         // CUANDO EDITO
         if (formularioDTO.getId() != null) {
-            alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
-                    .orElseThrow();
-
-            Paso1 paso1 = alumnado.getPaso1();
-            if (paso1 == null) {
-                paso1 = new Paso1();
-                paso1.setAlumnado(alumnado);
-                alumnado.setPaso1(paso1);
-            }
-            Paso1DTO dto = formularioDTO.getPaso1DTO();
-            paso1.setCodigoAlumno(dto.getCodigoAlumno());
-            paso1.setAlumnoComunica(dto.getAlumnoComunica());
-            paso1.setCompanerosComunican(dto.getCompanerosComunican());
-            paso1.setFamiliaComunica(dto.getFamiliaComunica());
-            paso1.setIntentoPrevio(dto.getIntentoPrevio());
-            paso1.setConductaAutolesiva(dto.getConductaAutolesiva());
-            paso1.setOtrosDetalle(dto.getOtrosDetalle());
-            paso1.setDetalleHechos(dto.getDetalleHechos());
-            paso1.setFechaRegistro(dto.getFechaRegistro());
+            result = guardarService.editarAlumnado(formularioDTO);
 
         }
         // CUANDO REGISTRAMOS NUEVOS
         else {
-            alumnado = new Alumnado(formularioDTO);
-
-            if (alumnado.getPaso1() != null) {
-                alumnado.getPaso1().setAlumnado(alumnado);
-                alumnado.getPaso1().setFechaRegistro(LocalDate.now());
-            }
+           result = guardarService.crearAlumnado(formularioDTO);
         }
-
-        if (formularioDTO.getCronograma() != null) {
-            formularioDTO.getCronograma().forEach(c -> {
-                c.setAlumnado(alumnado);
-                alumnado.getCronograma().add(c);
-            });
+        if (!result){
+            return "redirect:/alumnado/fallo-guardar";
         }
-
-        alumnadoRepository.save(alumnado);
         return "redirect:/alumnado/listar";
     }
+    @GetMapping("/fallo-guardar")
+    public String fallar(Model model) {
 
+        return "fallo-guardar";
+    }
 
     @GetMapping("/listar")
     public String listar(Model model) {
