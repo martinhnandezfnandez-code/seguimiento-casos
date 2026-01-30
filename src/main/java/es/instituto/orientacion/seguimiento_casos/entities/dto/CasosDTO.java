@@ -11,10 +11,12 @@ import java.util.List;
 
 
 @Data
-public class CasosDTO extends Paso1DTO {
+public class CasosDTO{
     private Long id;
     private String idCaso;
     private Integer idDocumento;
+
+    private Paso1DTO paso1DTO;
 
     private String paso2_1;
     private String paso2_2;
@@ -58,7 +60,7 @@ public class CasosDTO extends Paso1DTO {
     private LocalDateTime fechaUltimaActualizacion;
 
     public CasosDTO(Alumnado alumno, Paso1 paso1) {
-        super(paso1);
+        this.paso1DTO = (paso1 != null) ? new Paso1DTO(paso1) : new Paso1DTO();
         this.id = alumno.getId();
         this.idCaso = alumno.getIdCaso();
         this.idDocumento = alumno.getIdDocumento();
@@ -67,5 +69,6 @@ public class CasosDTO extends Paso1DTO {
     }
     public CasosDTO(){
         super();
+        this.paso1DTO = new Paso1DTO();
     }
 }

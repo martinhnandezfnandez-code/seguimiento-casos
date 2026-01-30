@@ -90,7 +90,12 @@ public class Alumnado {
         this.id = formularioDTO.getId();
         this.idCaso = formularioDTO.getIdCaso();
         this.idDocumento = formularioDTO.getIdDocumento();
-        this.paso1 = new Paso1(formularioDTO);
+
+        if (formularioDTO.getPaso1DTO() != null) {
+            Paso1 paso1 = new Paso1(formularioDTO.getPaso1DTO());
+            paso1.setAlumnado(this);
+            this.paso1 = paso1;
+        }
     }
 
     public Alumnado() {
