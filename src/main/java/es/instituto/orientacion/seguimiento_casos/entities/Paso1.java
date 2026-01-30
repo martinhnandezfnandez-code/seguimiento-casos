@@ -63,6 +63,7 @@ public class Paso1 {
         this.conductaAutolesiva = paso1DTO.getConductaAutolesiva();
         this.otrosDetalle = paso1DTO.getOtrosDetalle();
         this.fechaRegistro = paso1DTO.getFechaRegistro();
+        this.firmas = paso1DTO.getFirmas();
 
     }
     public Paso1(){}

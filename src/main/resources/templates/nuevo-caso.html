@@ -362,7 +362,7 @@
             <!-- Identificador anónimo del alumno -->
             <div class="field-group">
                 <label>Código anonimizado del alumno/a:</label>
-                <input type="text" th:field="*{codigoAlumno}" placeholder="Ej: ALU-2024-001" required>
+                <input type="text" th:field="*{paso1DTO.codigoAlumno}" placeholder="Ej: ALU-2024-001" required>
             </div>
 
             <!-- Motivo de detección -->
@@ -371,32 +371,32 @@
 
                 <div class="checkbox-group">
                     <label>
-                        <input type="checkbox" th:field="*{familiaComunica}">
+                        <input type="checkbox" th:field="*{paso1DTO.familiaComunica}">
                         Comunicación por parte de la familia.
                     </label>
 
                     <label>
-                        <input type="checkbox" th:field="*{companerosComunican}">
+                        <input type="checkbox" th:field="*{paso1DTO.companerosComunican}">
                         Comunicación por compañeros/as.
                     </label>
 
                     <label>
-                        <input type="checkbox" th:field="*{alumnoComunica}">
+                        <input type="checkbox" th:field="*{paso1DTO.alumnoComunica}">
                         El alumno/a comunica su sufrimiento o ideación.
                     </label>
 
                     <label>
-                        <input type="checkbox" th:field="*{intentoPrevio}">
+                        <input type="checkbox" th:field="*{paso1DTO.intentoPrevio}">
                         Intento autolítico previo y reincorporación al centro.
                     </label>
 
                     <label>
-                        <input type="checkbox" th:field="*{conductaAutolesiva}">
+                        <input type="checkbox" th:field="*{paso1DTO.conductaAutolesiva}">
                         Detección de conducta autolesiva por la comunidad educativa.
                     </label>
 
                     <label>
-                        <input type="checkbox" th:field="*{otrosMotivo}">
+                        <input type="checkbox" th:field="*{paso1DTO.otrosMotivo}">
                         Otras circunstancias.
                     </label>
                 </div>
@@ -405,36 +405,28 @@
             <!-- Campo adicional si se marca "otros" -->
             <div class="field-group">
                 <label>Si marcó "Otras", especifique:</label>
-                <input type="text" th:field="*{otrosDetalle}" placeholder="Especificar otras circunstancias">
+                <input type="text" th:field="*{paso1DTO.otrosDetalle}" placeholder="Especificar otras circunstancias">
             </div>
 
             <!-- Detalle de los hechos -->
             <div class="field-group">
                 <label>Detalle de los hechos (breve descripción):</label>
-                <textarea th:field="*{detalleHechos}" rows="4" placeholder="Describa brevemente la situación detectada"
+                <textarea th:field="*{paso1DTO.detalleHechos}" rows="4" placeholder="Describa brevemente la situación detectada"
                           required></textarea>
             </div>
 
-            <!-- Fecha
-            <div class="field-group fecha-group">
-                <label>📅 Fecha de registro</label>
-                <input type="date" th:field="*{fechaRegistro}"
-                       th:value="${#temporals.format(formulario.fechaRegistro, 'yyyy-MM-dd')}" required>
-
-            </div>
-            -->
+            <!-- Fecha -->
             <div class="field-group fecha-group">
                 <label>📅 Fecha de registro</label>
                 <input type="date"
-                       name="fechaRegistro"
-                       th:value="${formulario.fechaRegistro}"
+                       th:field="*{paso1DTO.fechaRegistro}"
                        required>
             </div>
 
             <!-- Firma -->
             <div class="field-group">
                 <label>Firma(s) del personal responsable:</label>
-                <input type="text" th:field="*{firmas}" placeholder="Nombre del personal responsable">
+                <input type="text" th:field="*{paso1DTO.firmas}" placeholder="Nombre del personal responsable">
             </div>
 
         </div>

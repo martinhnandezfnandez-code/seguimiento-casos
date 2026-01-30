@@ -420,10 +420,10 @@
                     <td th:text="${alumno.idDocumento}"></td>
 
                     <!-- PASO 1 -->
-                    <td th:title="'Código: ' + ${alumno.codigoAlumno} +
-               ' | Hechos: ' + ${alumno.detalleHechos}">
-                        <span th:text="'Cod: ' + ${alumno.codigoAlumno}"></span><br>
-                        <small th:text="${alumno.detalleHechos}"></small>
+                    <td th:title="'Código: ' + ${alumno.paso1DTO.codigoAlumno} +
+       ' | Hechos: ' + ${alumno.paso1DTO.detalleHechos}">
+                        <span th:text="'Cod: ' + ${alumno.paso1DTO.codigoAlumno}"></span><br>
+                        <small th:text="${alumno.paso1DTO.detalleHechos}"></small>
                     </td>
 
                     <!-- PASO 2 -->
