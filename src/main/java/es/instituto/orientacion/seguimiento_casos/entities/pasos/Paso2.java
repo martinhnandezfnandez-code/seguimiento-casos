@@ -1,5 +1,7 @@
-package es.instituto.orientacion.seguimiento_casos.entities;
+package es.instituto.orientacion.seguimiento_casos.entities.pasos;
 
+import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso2DTO;
 import jakarta.persistence.*;
 import lombok.Data;

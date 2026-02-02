@@ -1,7 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
-import jakarta.persistence.*;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
 import lombok.Data;
 import java.time.LocalDate;
 

@@ -1,6 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.repositories;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Paso5;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso5;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 

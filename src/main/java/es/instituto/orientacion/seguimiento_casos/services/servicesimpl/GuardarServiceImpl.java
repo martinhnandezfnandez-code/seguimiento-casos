@@ -2,6 +2,13 @@ package es.instituto.orientacion.seguimiento_casos.services.servicesimpl;
 
 import es.instituto.orientacion.seguimiento_casos.entities.*;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.*;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso1;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso4;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso5;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Anexo4;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Anexo5;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
 import es.instituto.orientacion.seguimiento_casos.repositories.*;
 import es.instituto.orientacion.seguimiento_casos.services.GuardarService;
 import org.springframework.stereotype.Service;

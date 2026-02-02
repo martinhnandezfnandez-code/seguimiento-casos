@@ -1,7 +1,7 @@
 package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso2;
 import lombok.Data;
 
 import java.util.ArrayList;

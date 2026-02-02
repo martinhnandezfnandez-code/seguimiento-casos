@@ -1,11 +1,13 @@
 package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
 import es.instituto.orientacion.seguimiento_casos.entities.*;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso1;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso4;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso5;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Data

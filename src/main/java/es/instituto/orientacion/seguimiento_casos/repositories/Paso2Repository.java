@@ -1,7 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.repositories;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso2;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

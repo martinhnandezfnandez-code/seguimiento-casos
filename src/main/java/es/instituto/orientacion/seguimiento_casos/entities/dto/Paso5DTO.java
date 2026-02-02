@@ -1,9 +1,7 @@
 package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
 import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
-import es.instituto.orientacion.seguimiento_casos.entities.Anexo4;
-import es.instituto.orientacion.seguimiento_casos.entities.Anexo5;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso5;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso5;
 import lombok.Data;
 
 @Data

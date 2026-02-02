@@ -1,6 +1,7 @@
-package es.instituto.orientacion.seguimiento_casos.entities;
+package es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo;
 
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Anexo4DTO;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso5;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,8 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso4;
-import jakarta.persistence.*;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso4;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 

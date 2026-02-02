@@ -1,6 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Anexo5;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Anexo5;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
