@@ -3,6 +3,7 @@ package es.instituto.orientacion.seguimiento_casos.entities.dto;
 import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
 import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
 import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
+import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,16 +17,7 @@ public class FormularioDTO {
     private String idCaso;
     private Integer idDocumento;
     private Paso1DTO paso1DTO;
-
-    private String paso2_1;
-    private String paso2_2;
-    private String paso2_3;
-    private String paso2_4;
-    private String paso2_5;
-
-    private List<Cronograma> cronograma = new ArrayList<>();
-
-    private String paso2_7;
+    private Paso2DTO paso2DTO;
 
     private String paso3_1;
 
@@ -54,7 +46,7 @@ public class FormularioDTO {
     private String observaciones;
 
     // CONSTRUCTOR CORREGIDO - Ahora mapea TODOS los campos
-    public FormularioDTO(Alumnado alumno, Paso1 paso1) {
+    public FormularioDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2) {
         // Mapear Paso1 (con protección contra null)
         this.paso1DTO = new Paso1DTO(paso1);
 
@@ -63,14 +55,8 @@ public class FormularioDTO {
         this.idCaso = alumno.getIdCaso();
         this.idDocumento = alumno.getIdDocumento();
 
-        // Mapear PASO 2 - ESTOS CAMPOS FALTABAN
-        this.paso2_1 = alumno.getPaso2_1();
-        this.paso2_2 = alumno.getPaso2_2();
-        this.paso2_3 = alumno.getPaso2_3();
-        this.paso2_4 = alumno.getPaso2_4();
-        this.paso2_5 = alumno.getPaso2_5();
-        this.cronograma = (alumno.getCronograma() != null) ? alumno.getCronograma() : new ArrayList<>();
-        this.paso2_7 = alumno.getPaso2_7();
+        // Mapear PASO 2 (con protección contra null)
+       this.paso2DTO = new Paso2DTO(paso2);
 
         // Mapear PASO 3
         this.paso3_1 = alumno.getPaso3_1();
@@ -113,7 +99,8 @@ public class FormularioDTO {
     public FormularioDTO() {
         super();
         this.paso1DTO = new Paso1DTO();
-        this.cronograma = new ArrayList<>();
+        this.paso2DTO = new Paso2DTO();
+
     }
 
     public FormularioDTO(Alumnado alumnado) {
@@ -121,11 +108,24 @@ public class FormularioDTO {
         this.id = alumnado.getId();
         this.idCaso = alumnado.getIdCaso();
         this.idDocumento = alumnado.getIdDocumento();
+        this.paso3_1 = alumnado.getPaso3_1();
+        this.paso3_1 = alumnado.getPaso3_1();
+        this.paso4_1 = alumnado.getPaso4_1();
+        this.paso7_1 = alumnado.getPaso7_1();
+        this.paso8_1 = alumnado.getPaso8_1();
+        this.paso9_1 = alumnado.getPaso9_1();
+        this.paso10_1 = alumnado.getPaso10_1();
+        this.observaciones= alumnado.getObservaciones();
 
         if (alumnado.getPaso1() != null) {
             this.paso1DTO = new Paso1DTO(alumnado.getPaso1());
         } else {
             this.paso1DTO = new Paso1DTO();
+        }
+        if (alumnado.getPaso2() != null) {
+            this.paso2DTO = new Paso2DTO(alumnado.getPaso2());
+        } else {
+            this.paso2DTO = new Paso2DTO();
         }
     }
 }

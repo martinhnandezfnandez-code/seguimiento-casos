@@ -24,7 +24,6 @@ public class SeguimientoCasosApplication {
                 Desktop.getDesktop().browse(new URI(url));
                 System.out.println("Abriendo navegador en: " + url);
             } else {
-                // Fallback para sistemas sin Desktop API
                 String os = System.getProperty("os.name").toLowerCase();
                 Runtime runtime = Runtime.getRuntime();
 

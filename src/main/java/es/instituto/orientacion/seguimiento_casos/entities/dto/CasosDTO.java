@@ -3,6 +3,7 @@ package es.instituto.orientacion.seguimiento_casos.entities.dto;
 import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
 import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
 import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
+import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -18,15 +19,7 @@ public class CasosDTO{
 
     private Paso1DTO paso1DTO;
 
-    private String paso2_1;
-    private String paso2_2;
-    private String paso2_3;
-    private String paso2_4;
-    private String paso2_5;
-
-    private List<Cronograma> cronograma = new ArrayList<>();
-
-    private String paso2_7;
+  private  Paso2DTO paso2DTO;
 
 
     private String paso3_1;
@@ -59,16 +52,25 @@ public class CasosDTO{
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaUltimaActualizacion;
 
-    public CasosDTO(Alumnado alumno, Paso1 paso1) {
+    public CasosDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2) {
         this.paso1DTO = (paso1 != null) ? new Paso1DTO(paso1) : new Paso1DTO();
+        this.paso2DTO = (paso2 != null)? new Paso2DTO(paso2): new Paso2DTO();
         this.id = alumno.getId();
         this.idCaso = alumno.getIdCaso();
         this.idDocumento = alumno.getIdDocumento();
         this.fechaCreacion = alumno.getFechaCreacion();
         this.fechaUltimaActualizacion = alumno.getFechaUltimaActualizacion();
+        this.paso3_1 = alumno.getPaso3_1();
+        this.paso4_1 = alumno.getPaso4_1();
+        this.paso7_1 = alumno.getPaso7_1();
+        this.paso8_1 = alumno.getPaso8_1();
+        this.paso9_1 = alumno.getPaso9_1();
+        this.paso10_1 = alumno.getPaso10_1();
+        this.observaciones= alumno.getObservaciones();
     }
     public CasosDTO(){
         super();
         this.paso1DTO = new Paso1DTO();
+        this.paso2DTO = new Paso2DTO();
     }
 }
