@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Casos</title>
+    <link rel="icon" href="/logotipo.png">
     <style>
         * {
             margin: 0;
@@ -334,7 +335,16 @@
                     <td th:text="${alumno.paso3_1}" th:title="${alumno.paso3_1}"></td>
 
                     <!-- PASO 4 -->
-                    <td th:text="${alumno.paso4_1}" th:title="${alumno.paso4_1}"></td>
+                    <td>
+     <span th:if="${alumno.paso4DTO.fecha != null}"
+          style="color: green; font-weight: 600;">
+        ✔ Rellenado
+    </span>
+                        <span th:unless="${alumno.paso4DTO.fecha != null}"
+                              style="color: #b00; font-weight: 600;">
+        ✘ Pendiente
+    </span>
+                    </td>
 
                     <!-- PASO 5 -->
                     <td th:text="${alumno.paso5_1}" th:title="${alumno.paso5_1}"></td>

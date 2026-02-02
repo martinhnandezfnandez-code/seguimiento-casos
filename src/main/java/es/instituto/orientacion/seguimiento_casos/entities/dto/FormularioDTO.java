@@ -1,9 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
-import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,10 +15,9 @@ public class FormularioDTO {
     private Integer idDocumento;
     private Paso1DTO paso1DTO;
     private Paso2DTO paso2DTO;
+    private Paso4DTO paso4DTO;
 
     private String paso3_1;
-
-    private String paso4_1;
 
     private String paso5_1;
     private String paso5_2;
@@ -46,7 +42,7 @@ public class FormularioDTO {
     private String observaciones;
 
     // CONSTRUCTOR CORREGIDO - Ahora mapea TODOS los campos
-    public FormularioDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2) {
+    public FormularioDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso4 paso4) {
         // Mapear Paso1 (con protección contra null)
         this.paso1DTO = new Paso1DTO(paso1);
 
@@ -62,7 +58,7 @@ public class FormularioDTO {
         this.paso3_1 = alumno.getPaso3_1();
 
         // Mapear PASO 4
-        this.paso4_1 = alumno.getPaso4_1();
+        this.paso4DTO = new Paso4DTO(paso4);
 
         // Mapear PASO 5
         this.paso5_1 = alumno.getPaso5_1();
@@ -110,7 +106,6 @@ public class FormularioDTO {
         this.idDocumento = alumnado.getIdDocumento();
         this.paso3_1 = alumnado.getPaso3_1();
         this.paso3_1 = alumnado.getPaso3_1();
-        this.paso4_1 = alumnado.getPaso4_1();
         this.paso7_1 = alumnado.getPaso7_1();
         this.paso8_1 = alumnado.getPaso8_1();
         this.paso9_1 = alumnado.getPaso9_1();
@@ -126,6 +121,11 @@ public class FormularioDTO {
             this.paso2DTO = new Paso2DTO(alumnado.getPaso2());
         } else {
             this.paso2DTO = new Paso2DTO();
+        }
+        if (alumnado.getPaso4() != null) {
+            this.paso4DTO = new Paso4DTO(alumnado.getPaso4());
+        } else {
+            this.paso4DTO = new Paso4DTO();
         }
     }
 }

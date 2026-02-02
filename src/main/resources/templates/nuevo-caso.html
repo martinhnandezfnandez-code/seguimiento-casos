@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de seguimiento del alumnado</title>
+    <link rel="icon" href="/logotipo.png">
     <style>
         * {
             margin: 0;
@@ -393,14 +394,48 @@
                           placeholder="EA: acta con medidas provisionales adoptadas"></textarea>
             </div>
         </div>
+        <div class="section">
+            <h2>PASO 4 <span class="paso-badge">Anexo III</span></h2>
 
-                           <div class="section">
-                               <h2>PASO 4 <span class="paso-badge">Anexo III</span></h2>
-                               <div class="field-group">
-                                   <strong>Director/a informa a familia – Anexo III</strong>
-                                   <input type="text" th:field="*{paso4_1}" placeholder="Confirmación de información a familia">
-                               </div>
-                           </div>
+            <p>
+                <strong>Anexo III:</strong> Acta de la reunión del Director/a con la familia.
+            </p>
+
+            <!-- Asistentes -->
+            <div class="field-group">
+                <label>👥 Asistentes a la reunión</label>
+                <input type="text"
+                       th:field="*{paso4DTO.asistentes}"
+                       placeholder="Director/a, tutor/a, orientador/a, madre, padre…"
+                       required>
+            </div>
+
+            <!-- Fecha -->
+            <div class="field-group fecha-group">
+                <label>📅 Fecha de la reunión</label>
+                <input type="date"
+                       th:field="*{paso4DTO.fecha}"
+                       required>
+            </div>
+
+            <!-- Contenido tratado -->
+            <div class="field-group">
+                <label>📝 Contenido de la reunión</label>
+                <textarea
+                        th:field="*{paso4DTO.contenido}"
+                        placeholder="Información trasladada a la familia, situación del alumno/a, explicaciones dadas…"
+                        required></textarea>
+            </div>
+
+            <!-- Acuerdos alcanzados -->
+            <div class="field-group">
+                <label>✅ Acuerdos adoptados</label>
+                <textarea
+                        th:field="*{paso4DTO.acuerdos}"
+                        placeholder="Compromisos de la familia, medidas acordadas, seguimiento…"
+                        required></textarea>
+            </div>
+        </div>
         <!--
                                    <div class="section">
                                        <h2>PASO 5 <span class="paso-badge">Anexos IV y V</span></h2>

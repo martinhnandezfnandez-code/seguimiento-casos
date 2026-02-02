@@ -1,9 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
-import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,20 +9,19 @@ import java.util.List;
 
 
 @Data
-public class CasosDTO{
+public class CasosDTO {
     private Long id;
     private String idCaso;
     private Integer idDocumento;
 
     private Paso1DTO paso1DTO;
 
-  private  Paso2DTO paso2DTO;
+    private Paso2DTO paso2DTO;
+
+    private Paso4DTO paso4DTO;
 
 
     private String paso3_1;
-
-
-    private String paso4_1;
 
 
     private String paso5_1;
@@ -52,25 +48,27 @@ public class CasosDTO{
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaUltimaActualizacion;
 
-    public CasosDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2) {
+    public CasosDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso4 paso4) {
         this.paso1DTO = (paso1 != null) ? new Paso1DTO(paso1) : new Paso1DTO();
-        this.paso2DTO = (paso2 != null)? new Paso2DTO(paso2): new Paso2DTO();
+        this.paso2DTO = (paso2 != null) ? new Paso2DTO(paso2) : new Paso2DTO();
+        this.paso4DTO = (paso4 != null) ? new Paso4DTO(paso4) : new Paso4DTO();
         this.id = alumno.getId();
         this.idCaso = alumno.getIdCaso();
         this.idDocumento = alumno.getIdDocumento();
         this.fechaCreacion = alumno.getFechaCreacion();
         this.fechaUltimaActualizacion = alumno.getFechaUltimaActualizacion();
         this.paso3_1 = alumno.getPaso3_1();
-        this.paso4_1 = alumno.getPaso4_1();
         this.paso7_1 = alumno.getPaso7_1();
         this.paso8_1 = alumno.getPaso8_1();
         this.paso9_1 = alumno.getPaso9_1();
         this.paso10_1 = alumno.getPaso10_1();
-        this.observaciones= alumno.getObservaciones();
+        this.observaciones = alumno.getObservaciones();
     }
-    public CasosDTO(){
+
+    public CasosDTO() {
         super();
         this.paso1DTO = new Paso1DTO();
         this.paso2DTO = new Paso2DTO();
+        this.paso4DTO = new Paso4DTO();
     }
 }

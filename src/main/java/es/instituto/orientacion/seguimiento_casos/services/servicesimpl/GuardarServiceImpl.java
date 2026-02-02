@@ -1,12 +1,10 @@
 package es.instituto.orientacion.seguimiento_casos.services.servicesimpl;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
-import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.*;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso1DTO;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso2DTO;
+import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso4DTO;
 import es.instituto.orientacion.seguimiento_casos.repositories.AlumnadoRepository;
 import es.instituto.orientacion.seguimiento_casos.repositories.Paso1Repository;
 import es.instituto.orientacion.seguimiento_casos.repositories.Paso2Repository;
@@ -33,7 +31,6 @@ public class GuardarServiceImpl implements GuardarService {
 
         Alumnado alumnado = new Alumnado(formularioDTO);
         alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso4_1());
         alumnado.setPaso3_1(formularioDTO.getPaso7_1());
         alumnado.setPaso3_1(formularioDTO.getPaso8_1());
         alumnado.setPaso3_1(formularioDTO.getPaso9_1());
@@ -48,6 +45,19 @@ public class GuardarServiceImpl implements GuardarService {
             alumnado.getPaso2().setAlumnado(alumnado);
         }
         guardarCronograma(formularioDTO, alumnado.getPaso2());
+
+        Paso4 paso4 = alumnado.getPaso4();
+        if (paso4 == null) {
+            paso4 = new Paso4();
+            paso4.setAlumnado(alumnado);
+            alumnado.setPaso4(paso4);
+        }
+        Paso4DTO dto4 = formularioDTO.getPaso4DTO();
+        paso4.setContenido(dto4.getContenido());
+        paso4.setAcuerdos(dto4.getAcuerdos());
+        paso4.setAsistentes(dto4.getAsistentes());
+        paso4.setFecha(dto4.getFecha());
+
         Long idNuevo = alumnadoRepository.save(alumnado).getId();
         return idNuevo != null;
     }
@@ -58,7 +68,6 @@ public class GuardarServiceImpl implements GuardarService {
         alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
         alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso4_1());
         alumnado.setPaso3_1(formularioDTO.getPaso7_1());
         alumnado.setPaso3_1(formularioDTO.getPaso8_1());
         alumnado.setPaso3_1(formularioDTO.getPaso9_1());
@@ -97,6 +106,19 @@ public class GuardarServiceImpl implements GuardarService {
         paso2.setPaso2_7(dto2.getPaso2_7());
 
         guardarCronograma(formularioDTO, paso2);
+
+        Paso4 paso4 = alumnado.getPaso4();
+        if (paso4 == null) {
+            paso4 = new Paso4();
+            paso4.setAlumnado(alumnado);
+            alumnado.setPaso4(paso4);
+        }
+        Paso4DTO dto4 = formularioDTO.getPaso4DTO();
+        paso4.setContenido(dto4.getContenido());
+        paso4.setAcuerdos(dto4.getAcuerdos());
+        paso4.setAsistentes(dto4.getAsistentes());
+        paso4.setFecha(dto4.getFecha());
+
         alumnadoRepository.save(alumnado);
         return true;
     }
