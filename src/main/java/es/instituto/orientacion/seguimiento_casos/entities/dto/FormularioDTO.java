@@ -127,5 +127,10 @@ public class FormularioDTO {
         } else {
             this.paso4DTO = new Paso4DTO();
         }
+        if (alumnado.getPaso5() != null) {
+            this.paso5DTO = new Paso5DTO(alumnado.getPaso5());
+        } else {
+            this.paso5DTO = new Paso5DTO();
+        }
     }
 }

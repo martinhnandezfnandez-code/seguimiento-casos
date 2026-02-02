@@ -50,11 +50,11 @@ public class Paso2 {
         this.paso2_3 = paso2DTO.getPaso2_3();
         this.paso2_4 = paso2DTO.getPaso2_4();
         this.paso2_5 = paso2DTO.getPaso2_5();
-        System.out.println("creando cronograma");
-        //this.cronograma = paso2DTO.getCronograma();
-        this.cronograma = new ArrayList<>();
+        this.cronograma = paso2DTO.getCronograma();
         this.paso2_7 = paso2DTO.getPaso2_7();
     }
-   public Paso2(){}
+   public Paso2(){
+       this.cronograma = new ArrayList<>();
+   }
 
 }

@@ -1,5 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.entities;
 
+import es.instituto.orientacion.seguimiento_casos.entities.dto.Anexo5DTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -68,5 +69,24 @@ public class Anexo5 {
     private Paso5 paso5;
 
     public Anexo5() {
+    }
+    public Anexo5(Anexo5DTO dto) {
+        if (dto != null) {
+            this.expresaDeseoMorir = dto.getExpresaDeseoMorir();
+            this.amenazasVerbales = dto.getAmenazasVerbales();
+            this.comentariosCulpaInutilidad = dto.getComentariosCulpaInutilidad();
+            this.aislamientoSocial = dto.getAislamientoSocial();
+            this.abandonoActividades = dto.getAbandonoActividades();
+            this.conductasAutolesivas = dto.getConductasAutolesivas();
+            this.regalaPertenencias = dto.getRegalaPertenencias();
+            this.cambiosBruscosConducta = dto.getCambiosBruscosConducta();
+            this.tristezaIntensa = dto.getTristezaIntensa();
+            this.irritabilidad = dto.getIrritabilidad();
+            this.ansiedad = dto.getAnsiedad();
+            this.desesperanza = dto.getDesesperanza();
+            this.observaciones = dto.getObservaciones();
+            this.detectadoPor = dto.getDetectadoPor();
+            this.fechaDeteccion = dto.getFechaDeteccion();
+        }
     }
 }

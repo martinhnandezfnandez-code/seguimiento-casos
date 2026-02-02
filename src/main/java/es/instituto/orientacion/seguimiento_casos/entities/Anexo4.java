@@ -1,5 +1,6 @@
 package es.instituto.orientacion.seguimiento_casos.entities;
 
+import es.instituto.orientacion.seguimiento_casos.entities.dto.Anexo4DTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -41,5 +42,13 @@ public class Anexo4 {
     private Paso5 paso5;
 
     public Anexo4() {
+    }
+    public Anexo4(Anexo4DTO anexo4DTO) {
+        this.sintesisalumno = anexo4DTO.getSintesisalumno();
+        this.fechaalumno = anexo4DTO.getFechaalumno();
+        this.integrantesalumno = anexo4DTO.getIntegrantesalumno();
+        this.sintesisfamilia = anexo4DTO.getSintesisfamilia();
+        this.fechafamilia = anexo4DTO.getFechafamilia();
+        this.integrantesfamilia = anexo4DTO.getIntegrantesfamilia();
     }
 }

@@ -337,7 +337,7 @@
                     <!-- PASO 4 -->
                     <td>
      <span th:if="${alumno.paso4DTO.fecha != null}"
-          style="color: green; font-weight: 600;">
+           style="color: green; font-weight: 600;">
         ✔ Rellenado
     </span>
                         <span th:unless="${alumno.paso4DTO.fecha != null}"
@@ -345,36 +345,27 @@
         ✘ Pendiente
     </span>
                     </td>
-
-                    <!-- PASO 5 -->
+                    <!-- PASO 5 - Anexo 4 -->
                     <td>
-    <span th:if="${alumno.paso5DTO != null
-                  and alumno.paso5DTO.anexo4 != null
-                  and alumno.paso5DTO.anexo4.sintesisfamilia != null}"
+    <span th:if="${alumno.paso5DTO != null and alumno.paso5DTO.anexo4 != null and alumno.paso5DTO.anexo4.sintesisfamilia != null and !alumno.paso5DTO.anexo4.sintesisfamilia.isEmpty()}"
           style="color: green; font-weight: 600;">
-        ✔ Anexo IV relleno
+        ✔ Rellenado
     </span>
-
-                        <span th:unless="${alumno.paso5DTO != null
-                      and alumno.paso5DTO.anexo4 != null
-                      and alumno.paso5DTO.anexo4.sintesisfamilia != null}"
+                        <span th:unless="${alumno.paso5DTO != null and alumno.paso5DTO.anexo4 != null and alumno.paso5DTO.anexo4.sintesisfamilia != null and !alumno.paso5DTO.anexo4.sintesisfamilia.isEmpty()}"
                               style="color: #b00; font-weight: 600;">
-        ✘ Anexo IV pendiente
+        ✘ Pendiente
     </span>
                     </td>
-                    <td>
-    <span th:if="${alumno.paso5DTO != null
-                  and alumno.paso5DTO.anexo5 != null
-                  and alumno.paso5DTO.anexo5.fechaDeteccion != null}"
-          style="color: green; font-weight: 600;">
-        ✔ Anexo V relleno
-    </span>
 
-                        <span th:unless="${alumno.paso5DTO != null
-                      and alumno.paso5DTO.anexo5 != null
-                      and alumno.paso5DTO.anexo5.fechaDeteccion != null}"
+                    <td>
+                        <!-- PASO 5 - Anexo 5 -->
+                        <span th:if="${alumno.paso5DTO != null and alumno.paso5DTO.anexo5 != null and alumno.paso5DTO.anexo5.observaciones != null and !alumno.paso5DTO.anexo5.observaciones.isEmpty()}"
+                              style="color: green; font-weight: 600;">
+        ✔ Rellenado
+    </span>
+                        <span th:unless="${alumno.paso5DTO != null and alumno.paso5DTO.anexo5 != null and alumno.paso5DTO.anexo5.observaciones != null and !alumno.paso5DTO.anexo5.observaciones.isEmpty()}"
                               style="color: #b00; font-weight: 600;">
-        ✘ Anexo V pendiente
+        ✘ Pendiente
     </span>
                     </td>
                     <!-- PASO 6 -->

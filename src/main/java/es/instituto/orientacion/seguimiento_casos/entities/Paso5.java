@@ -1,5 +1,7 @@
 package es.instituto.orientacion.seguimiento_casos.entities;
 
+import es.instituto.orientacion.seguimiento_casos.entities.dto.Anexo4DTO;
+import es.instituto.orientacion.seguimiento_casos.entities.dto.Anexo5DTO;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso5DTO;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,9 +13,11 @@ public class Paso5 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @OneToOne
     @JoinColumn(name = "alumnado_id")
     private Alumnado alumnado;
+
     @OneToOne(mappedBy = "paso5",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
@@ -24,10 +28,26 @@ public class Paso5 {
             orphanRemoval = true)
     private Anexo5 anexo5;
 
-    public Paso5(Paso5DTO paso5DTO){
-        this.anexo4 = paso5DTO.getAnexo4();
-        this.anexo5 = paso5DTO.getAnexo5();
+    public Paso5(Paso5DTO paso5DTO) {
+        if (paso5DTO != null) {
+            this.alumnado = paso5DTO.getAlumnado();
+
+            if (paso5DTO.getAnexo4() != null) {
+                Anexo4 anexo4Entity = new Anexo4(paso5DTO.getAnexo4());
+                anexo4Entity.setPaso5(this);
+                this.anexo4 = anexo4Entity;
+            }
+
+
+            if (paso5DTO.getAnexo5() != null) {
+                Anexo5 anexo5Entity = new Anexo5(paso5DTO.getAnexo5());
+                anexo5Entity.setPaso5(this);
+                this.anexo5 = anexo5Entity;
+            }
+        }
     }
-    public Paso5(){}
+    public Paso5(){
+
+    }
 
 }
