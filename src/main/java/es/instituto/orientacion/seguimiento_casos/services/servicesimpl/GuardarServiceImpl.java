@@ -1,10 +1,7 @@
 package es.instituto.orientacion.seguimiento_casos.services.servicesimpl;
 
 import es.instituto.orientacion.seguimiento_casos.entities.*;
-import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
-import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso1DTO;
-import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso2DTO;
-import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso4DTO;
+import es.instituto.orientacion.seguimiento_casos.entities.dto.*;
 import es.instituto.orientacion.seguimiento_casos.repositories.AlumnadoRepository;
 import es.instituto.orientacion.seguimiento_casos.repositories.Paso1Repository;
 import es.instituto.orientacion.seguimiento_casos.repositories.Paso2Repository;
@@ -57,6 +54,17 @@ public class GuardarServiceImpl implements GuardarService {
         paso4.setAcuerdos(dto4.getAcuerdos());
         paso4.setAsistentes(dto4.getAsistentes());
         paso4.setFecha(dto4.getFecha());
+
+        Paso5 paso5 = alumnado.getPaso5();
+        if (paso5 == null) {
+            paso5 = new Paso5();
+            paso5.setAlumnado(alumnado);
+            alumnado.setPaso5(paso5);
+        }
+        Paso5DTO dto5 = formularioDTO.getPaso5DTO();
+        paso5.setAnexo4(dto5.getAnexo4());
+        paso5.setAnexo5(dto5.getAnexo5());
+
 
         Long idNuevo = alumnadoRepository.save(alumnado).getId();
         return idNuevo != null;
@@ -118,6 +126,16 @@ public class GuardarServiceImpl implements GuardarService {
         paso4.setAcuerdos(dto4.getAcuerdos());
         paso4.setAsistentes(dto4.getAsistentes());
         paso4.setFecha(dto4.getFecha());
+
+        Paso5 paso5 = alumnado.getPaso5();
+        if (paso5 == null) {
+            paso5 = new Paso5();
+            paso5.setAlumnado(alumnado);
+            alumnado.setPaso5(paso5);
+        }
+        Paso5DTO dto5 = formularioDTO.getPaso5DTO();
+        paso5.setAnexo4(dto5.getAnexo4());
+        paso5.setAnexo5(dto5.getAnexo5());
 
         alumnadoRepository.save(alumnado);
         return true;

@@ -436,40 +436,247 @@
                         required></textarea>
             </div>
         </div>
+        <div class="section">
+            <h2>PASO 5 <span class="paso-badge">Anexo IV – Síntesis</span></h2>
+
+            <p>
+                <strong>Anexo IV:</strong> Síntesis de las entrevistas mantenidas con la familia y con el alumno/a.
+            </p>
+
+            <!-- SÍNTESIS CON LA FAMILIA -->
+            <div class="field-group">
+                <label>📝 Síntesis de la entrevista con la familia</label>
+                <textarea
+                        th:field="*{paso5DTO.anexo4.sintesisfamilia}"
+                        placeholder="Resumen de la información aportada por la familia, valoración realizada, contexto…"
+                        required></textarea>
+            </div>
+
+            <div class="field-group">
+                <label>👥 Integrantes que participan (familia)</label>
+                <input type="text"
+                       th:field="*{paso5DTO.anexo4.integrantesfamilia}"
+                       placeholder="Madre, padre, tutor/a legal…"
+                       required>
+            </div>
+
+            <div class="field-group fecha-group">
+                <label>📅 Fecha de la entrevista con la familia</label>
+                <input type="date"
+                       th:field="*{paso5DTO.anexo4.fechafamilia}"
+                       required>
+            </div>
+
+            <hr>
+
+            <!-- SÍNTESIS CON EL ALUMNO -->
+            <div class="field-group">
+                <label>📝 Síntesis de la entrevista con el alumno/a</label>
+                <textarea
+                        th:field="*{paso5DTO.anexo4.sintesisalumno}"
+                        placeholder="Resumen de lo expresado por el alumno/a, estado emocional, percepción del problema…"
+                        required></textarea>
+            </div>
+
+            <div class="field-group">
+                <label>👥 Integrantes que participan (alumno/a)</label>
+                <input type="text"
+                       th:field="*{paso5DTO.anexo4.integrantesalumno}"
+                       placeholder="Alumno/a, orientador/a, tutor/a…"
+                       required>
+            </div>
+
+            <div class="field-group fecha-group">
+                <label>📅 Fecha de la entrevista con el alumno/a</label>
+                <input type="date"
+                       th:field="*{paso5DTO.anexo4.fechaalumno}"
+                       required>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h2>PASO 5 <span class="paso-badge">Anexo V – Señales de Alarma</span></h2>
+
+            <table style="width:100%; border-collapse: collapse;">
+                <thead>
+                <tr style="background:#eee;">
+                    <th style="padding:10px; text-align:left;">Señal de alarma</th>
+                    <th style="padding:10px; text-align:center;">Sí</th>
+                    <th style="padding:10px; text-align:center;">No</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <!-- SEÑALES VERBALES -->
+                <tr>
+                    <td>Expresa deseo de morir</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.expresaDeseoMorir}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.expresaDeseoMorir}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Amenazas verbales</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.amenazasVerbales}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.amenazasVerbales}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Comentarios de culpa o inutilidad</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.comentariosCulpaInutilidad}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.comentariosCulpaInutilidad}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                <!-- SEÑALES CONDUCTUALES -->
+                <tr>
+                    <td>Aislamiento social</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.aislamientoSocial}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.aislamientoSocial}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Conductas autolesivas</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.conductasAutolesivas}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.conductasAutolesivas}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Cambios bruscos de conducta</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.cambiosBruscosConducta}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.cambiosBruscosConducta}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                <!-- SEÑALES EMOCIONALES -->
+                <tr>
+                    <td>Tristeza intensa</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.tristezaIntensa}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.tristezaIntensa}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Ansiedad</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.ansiedad}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.ansiedad}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Desesperanza</td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.desesperanza}"
+                               th:value="true"/>
+                    </td>
+                    <td style="text-align:center">
+                        <input type="radio"
+                               th:field="*{paso5DTO.anexo5.desesperanza}"
+                               th:value="false"/>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <!-- OBSERVACIONES -->
+            <div class="field-group" style="margin-top:20px;">
+                <label>📝 Observaciones</label>
+                <textarea th:field="*{paso5DTO.anexo5.observaciones}"
+                          placeholder="Observaciones adicionales…"></textarea>
+            </div>
+
+            <!-- FECHA -->
+            <div class="field-group fecha-group">
+                <label>📅 Fecha de detección</label>
+                <input type="date"
+                       th:field="*{paso5DTO.anexo5.fechaDeteccion}">
+            </div>
+
+        </div>
+
         <!--
-                                   <div class="section">
-                                       <h2>PASO 5 <span class="paso-badge">Anexos IV y V</span></h2>
+                                           <div class="section">
+                                               <h2>PASO 6 <span class="paso-badge">Anexo VI</span></h2>
 
-                                       <div class="field-group">
-                                           <strong>EA: Síntesis – Anexo IV</strong>
-                                           <input type="text" th:field="*{paso5_1}" placeholder="Síntesis del EA">
-                                       </div>
+                                               <div class="field-group">
+                                                   <strong>Director/a traslada información a Inspección</strong>
+                                                   <input type="text" th:field="*{paso6_1}" placeholder="Traslado a Inspección">
+                                               </div>
 
-                                       <div class="field-group">
-                                           <strong>EA: Ficha – Anexo V</strong>
-                                           <input type="text" th:field="*{paso5_2}" placeholder="Ficha del EA">
-                                       </div>
-                                   </div>
+                                               <div class="field-group">
+                                                   <strong>Director/a traslada información a la CPAyC</strong>
+                                                   <input type="text" th:field="*{paso6_2}" placeholder="Traslado a CPAyC">
+                                               </div>
 
-                                   <div class="section">
-                                       <h2>PASO 6 <span class="paso-badge">Anexo VI</span></h2>
-
-                                       <div class="field-group">
-                                           <strong>Director/a traslada información a Inspección</strong>
-                                           <input type="text" th:field="*{paso6_1}" placeholder="Traslado a Inspección">
-                                       </div>
-
-                                       <div class="field-group">
-                                           <strong>Director/a traslada información a la CPAyC</strong>
-                                           <input type="text" th:field="*{paso6_2}" placeholder="Traslado a CPAyC">
-                                       </div>
-
-                                       <div class="field-group">
-                                           <strong>EA: toma de decisiones – Anexo VI</strong>
-                                           <input type="text" th:field="*{paso6_3}" placeholder="Decisiones tomadas por el EA">
-                                       </div>
-                                   </div>
--->
+                                               <div class="field-group">
+                                                   <strong>EA: toma de decisiones – Anexo VI</strong>
+                                                   <input type="text" th:field="*{paso6_3}" placeholder="Decisiones tomadas por el EA">
+                                               </div>
+                                           </div>
+        -->
                                    <div class="section">
 
 

@@ -347,9 +347,36 @@
                     </td>
 
                     <!-- PASO 5 -->
-                    <td th:text="${alumno.paso5_1}" th:title="${alumno.paso5_1}"></td>
-                    <td th:text="${alumno.paso5_2}" th:title="${alumno.paso5_2}"></td>
+                    <td>
+    <span th:if="${alumno.paso5DTO != null
+                  and alumno.paso5DTO.anexo4 != null
+                  and alumno.paso5DTO.anexo4.sintesisfamilia != null}"
+          style="color: green; font-weight: 600;">
+        ✔ Anexo IV relleno
+    </span>
 
+                        <span th:unless="${alumno.paso5DTO != null
+                      and alumno.paso5DTO.anexo4 != null
+                      and alumno.paso5DTO.anexo4.sintesisfamilia != null}"
+                              style="color: #b00; font-weight: 600;">
+        ✘ Anexo IV pendiente
+    </span>
+                    </td>
+                    <td>
+    <span th:if="${alumno.paso5DTO != null
+                  and alumno.paso5DTO.anexo5 != null
+                  and alumno.paso5DTO.anexo5.fechaDeteccion != null}"
+          style="color: green; font-weight: 600;">
+        ✔ Anexo V relleno
+    </span>
+
+                        <span th:unless="${alumno.paso5DTO != null
+                      and alumno.paso5DTO.anexo5 != null
+                      and alumno.paso5DTO.anexo5.fechaDeteccion != null}"
+                              style="color: #b00; font-weight: 600;">
+        ✘ Anexo V pendiente
+    </span>
+                    </td>
                     <!-- PASO 6 -->
                     <td th:text="${alumno.paso6_1}" th:title="${alumno.paso6_1}"></td>
                     <td th:text="${alumno.paso6_2}" th:title="${alumno.paso6_2}"></td>
