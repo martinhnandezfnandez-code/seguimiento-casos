@@ -3,6 +3,8 @@ package es.instituto.orientacion.seguimiento_casos.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 @Entity
@@ -16,8 +18,10 @@ public class Cronograma {
     private Long id;
 
     // Fecha de la actuación
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name= "fecha")
     private LocalDate fecha;
+
 
     // Situación detectada o contexto
     @Column(name= "situacion")
@@ -37,8 +41,8 @@ public class Cronograma {
 
     // Relación con el caso de alumnado
     @ManyToOne
-    @JoinColumn(name = "alumnado_id")
-    private Alumnado alumnado;
+    @JoinColumn(name = "paso2_id")
+    private Paso2 paso2;
 
     public Cronograma() {}
 }

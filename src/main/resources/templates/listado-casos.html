@@ -317,18 +317,18 @@
                     </td>
 
                     <!-- PASO 2 -->
-                    <td th:text="${alumno.paso2_1}" th:title="${alumno.paso2_1}"></td>
-                    <td th:text="${alumno.paso2_2}" th:title="${alumno.paso2_2}"></td>
-                    <td th:text="${alumno.paso2_3}" th:title="${alumno.paso2_3}"></td>
-                    <td th:text="${alumno.paso2_4}" th:title="${alumno.paso2_4}"></td>
-                    <td th:text="${alumno.paso2_5}" th:title="${alumno.paso2_5}"></td>
+                    <td th:text="${alumno.paso2DTO.paso2_1}" th:title="${alumno.paso2DTO.paso2_1}"></td>
+                    <td th:text="${alumno.paso2DTO.paso2_2}" th:title="${alumno.paso2DTO.paso2_2}"></td>
+                    <td th:text="${alumno.paso2DTO.paso2_3}" th:title="${alumno.paso2DTO.paso2_3}"></td>
+                    <td th:text="${alumno.paso2DTO.paso2_4}" th:title="${alumno.paso2DTO.paso2_4}"></td>
+                    <td th:text="${alumno.paso2DTO.paso2_5}" th:title="${alumno.paso2DTO.paso2_5}"></td>
                     <td>
-                        <span th:if="${#lists.isEmpty(alumno.cronograma)}">Sin actuaciones</span>
-                        <span th:if="${!#lists.isEmpty(alumno.cronograma)}"
-                              th:text="${alumno.cronograma.size()} + ' actuaciones registradas'">
+                        <span th:if="${#lists.isEmpty(alumno.paso2DTO.cronograma)}">Sin actuaciones</span>
+                        <span th:if="${!#lists.isEmpty(alumno.paso2DTO.cronograma)}"
+                              th:text="${alumno.paso2DTO.cronograma.size()} + ' actuaciones registradas'">
     </span>
                     </td>
-                    <td th:text="${alumno.paso2_7}" th:title="${alumno.paso2_7}"></td>
+                    <td th:text="${alumno.paso2DTO.paso2_7}" th:title="${alumno.paso2DTO.paso2_7}"></td>
 
                     <!-- PASO 3 -->
                     <td th:text="${alumno.paso3_1}" th:title="${alumno.paso3_1}"></td>

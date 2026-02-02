@@ -296,33 +296,33 @@
 
         </div>
 
-        <!--
+
                 <div class="section paso-2">
                     <h2>PASO 2 <span class="paso-badge">Múltiples Acciones</span></h2>
 
                     <div class="field-group">
                         <strong>Constitución del EA</strong>
-                        <input type="text" th:field="*{paso2_1}" placeholder="Detalles de la constitución del EA">
+                        <input type="text" th:field="*{paso2DTO.paso2_1}" placeholder="Detalles de la constitución del EA">
                     </div>
 
                     <div class="field-group">
                         <strong>Acta con medidas inmediatas</strong>
-                        <input type="text" th:field="*{paso2_2}" placeholder="Medidas inmediatas adoptadas">
+                        <input type="text" th:field="*{paso2DTO.paso2_2}" placeholder="Medidas inmediatas adoptadas">
                     </div>
 
                     <div class="field-group">
                         <strong>Informar a familia</strong>
-                        <input type="text" th:field="*{paso2_3}" placeholder="Fecha/Confirmación de información a familia">
+                        <input type="text" th:field="*{paso2DTO.paso2_3}" placeholder="Fecha/Confirmación de información a familia">
                     </div>
 
                     <div class="field-group">
                         <strong>Informar a Inspección</strong>
-                        <input type="text" th:field="*{paso2_4}" placeholder="Fecha/Confirmación de información a Inspección">
+                        <input type="text" th:field="*{paso2DTO.paso2_4}" placeholder="Fecha/Confirmación de información a Inspección">
                     </div>
 
                     <div class="field-group">
                         <strong>Informar a la CPAyC</strong>
-                        <input type="text" th:field="*{paso2_5}" placeholder="Fecha/Confirmación de información a CPAyC">
+                        <input type="text" th:field="*{paso2DTO.paso2_5}" placeholder="Fecha/Confirmación de información a CPAyC">
                     </div>
 
                     <div class="field-group">
@@ -342,16 +342,16 @@
                             <tbody id="cronogramaBody">
 
 
-                            <tr th:each="fila, stat : ${alumnado.cronograma}">
-                                <td><input type="date" th:field="*{cronograma[__${stat.index}__].fecha}"
+                            <tr th:each="fila, stat : *{paso2DTO.cronograma}">
+                                <td><input type="date" th:field="*{paso2DTO.cronograma[__${stat.index}__].fecha}"
                                            class="input-fecha-tabla"></td>
-                                <td><input type="text" th:field="*{cronograma[__${stat.index}__].situacion}"
+                                <td><input type="text" th:field="*{paso2DTO.cronograma[__${stat.index}__].situacion}"
                                            class="input-tabla"></td>
-                                <td><input type="text" th:field="*{cronograma[__${stat.index}__].actuacion}"
+                                <td><input type="text" th:field="*{paso2DTO.cronograma[__${stat.index}__].actuacion}"
                                            class="input-tabla"></td>
-                                <td><input type="text" th:field="*{cronograma[__${stat.index}__].documento}"
+                                <td><input type="text" th:field="*{paso2DTO.cronograma[__${stat.index}__].documento}"
                                            class="input-tabla"></td>
-                                <td><input type="text" th:field="*{cronograma[__${stat.index}__].observaciones}"
+                                <td><input type="text" th:field="*{paso2DTO.cronograma[__${stat.index}__].observaciones}"
                                            class="input-tabla"></td>
                             </tr>
 
@@ -369,130 +369,131 @@
                             const row = tbody.insertRow();
 
                             row.innerHTML = `
-            <td><input type="date" name="cronograma[${index}].fecha" class="input-fecha-tabla"></td>
-            <td><input type="text" name="cronograma[${index}].situacion" class="input-tabla"></td>
-            <td><input type="text" name="cronograma[${index}].actuacion" class="input-tabla"></td>
-            <td><input type="text" name="cronograma[${index}].documento" class="input-tabla"></td>
-            <td><input type="text" name="cronograma[${index}].observaciones" class="input-tabla"></td>
-        `;
-
+                    <td><input type="date" name="paso2DTO.cronograma[${index}].fecha" class="input-fecha-tabla"></td>
+                    <td><input type="text" name="paso2DTO.cronograma[${index}].situacion" class="input-tabla"></td>
+                    <td><input type="text" name="paso2DTO.cronograma[${index}].actuacion" class="input-tabla"></td>
+                    <td><input type="text" name="paso2DTO.cronograma[${index}].documento" class="input-tabla"></td>
+                    <td><input type="text" name="paso2DTO.cronograma[${index}].observaciones" class="input-tabla"></td>
+                    `;
                         }
                     </script>
 
 
                     <div class="field-group">
                         <strong>Antiguo Anexo I</strong>
-                        <input type="text" th:field="*{paso2_7}" placeholder="Referencia al antiguo Anexo I">
+                        <input type="text" th:field="*{paso2DTO.paso2_7}" placeholder="Referencia al antiguo Anexo I">
                     </div>
                 </div>
 
+                     <div class="section">
+            <h2>PASO 3</h2>
+            <div class="field-group">
+                <strong>EA: acta con medidas provisionales adoptadas</strong>
+                <textarea th:field="*{paso3_1}"
+                          placeholder="EA: acta con medidas provisionales adoptadas"></textarea>
+            </div>
+        </div>
 
-                <div class="section">
-                    <h2>PASO 3</h2>
-                    <div class="field-group">
-                        <strong>EA: acta con medidas provisionales adoptadas</strong>
-                        <input type="text" th:field="*{paso3_1}" placeholder="Medidas provisionales del EA">
-                    </div>
-                </div>
+                           <div class="section">
+                               <h2>PASO 4 <span class="paso-badge">Anexo III</span></h2>
+                               <div class="field-group">
+                                   <strong>Director/a informa a familia – Anexo III</strong>
+                                   <input type="text" th:field="*{paso4_1}" placeholder="Confirmación de información a familia">
+                               </div>
+                           </div>
+        <!--
+                                   <div class="section">
+                                       <h2>PASO 5 <span class="paso-badge">Anexos IV y V</span></h2>
 
-                <div class="section">
-                    <h2>PASO 4 <span class="paso-badge">Anexo III</span></h2>
-                    <div class="field-group">
-                        <strong>Director/a informa a familia – Anexo III</strong>
-                        <input type="text" th:field="*{paso4_1}" placeholder="Confirmación de información a familia">
-                    </div>
-                </div>
+                                       <div class="field-group">
+                                           <strong>EA: Síntesis – Anexo IV</strong>
+                                           <input type="text" th:field="*{paso5_1}" placeholder="Síntesis del EA">
+                                       </div>
 
-                <div class="section">
-                    <h2>PASO 5 <span class="paso-badge">Anexos IV y V</span></h2>
+                                       <div class="field-group">
+                                           <strong>EA: Ficha – Anexo V</strong>
+                                           <input type="text" th:field="*{paso5_2}" placeholder="Ficha del EA">
+                                       </div>
+                                   </div>
 
-                    <div class="field-group">
-                        <strong>EA: Síntesis – Anexo IV</strong>
-                        <input type="text" th:field="*{paso5_1}" placeholder="Síntesis del EA">
-                    </div>
+                                   <div class="section">
+                                       <h2>PASO 6 <span class="paso-badge">Anexo VI</span></h2>
 
-                    <div class="field-group">
-                        <strong>EA: Ficha – Anexo V</strong>
-                        <input type="text" th:field="*{paso5_2}" placeholder="Ficha del EA">
-                    </div>
-                </div>
+                                       <div class="field-group">
+                                           <strong>Director/a traslada información a Inspección</strong>
+                                           <input type="text" th:field="*{paso6_1}" placeholder="Traslado a Inspección">
+                                       </div>
 
-                <div class="section">
-                    <h2>PASO 6 <span class="paso-badge">Anexo VI</span></h2>
+                                       <div class="field-group">
+                                           <strong>Director/a traslada información a la CPAyC</strong>
+                                           <input type="text" th:field="*{paso6_2}" placeholder="Traslado a CPAyC">
+                                       </div>
 
-                    <div class="field-group">
-                        <strong>Director/a traslada información a Inspección</strong>
-                        <input type="text" th:field="*{paso6_1}" placeholder="Traslado a Inspección">
-                    </div>
+                                       <div class="field-group">
+                                           <strong>EA: toma de decisiones – Anexo VI</strong>
+                                           <input type="text" th:field="*{paso6_3}" placeholder="Decisiones tomadas por el EA">
+                                       </div>
+                                   </div>
+-->
+                                   <div class="section">
 
-                    <div class="field-group">
-                        <strong>Director/a traslada información a la CPAyC</strong>
-                        <input type="text" th:field="*{paso6_2}" placeholder="Traslado a CPAyC">
-                    </div>
 
-                    <div class="field-group">
-                        <strong>EA: toma de decisiones – Anexo VI</strong>
-                        <input type="text" th:field="*{paso6_3}" placeholder="Decisiones tomadas por el EA">
-                    </div>
-                </div>
+                                       <h2>PASO 7 <span class="paso-badge">Anexo VII</span></h2>
+                                       <div class="field-group">
+                                           <strong>EA: Elaboración del Plan Individualizado – Anexo VII</strong>
+                                           <input type="text" th:field="*{paso7_1}" placeholder="Plan Individualizado">
+                                       </div>
+                                   </div>
 
-                <div class="section">
-                    <h2>PASO 7 <span class="paso-badge">Anexo VII</span></h2>
-                    <div class="field-group">
-                        <strong>EA: Elaboración del Plan Individualizado – Anexo VII</strong>
-                        <input type="text" th:field="*{paso7_1}" placeholder="Plan Individualizado">
-                    </div>
-                </div>
+                                   <div class="section">
+                                       <h2>PASO 8 <span class="paso-badge">Anexo VIII</span></h2>
+                                       <div class="field-group">
+                                           <strong>EA: Plan de seguimiento – Anexo VIII</strong>
+                                           <input type="text" th:field="*{paso8_1}" placeholder="Plan de seguimiento">
+                                       </div>
+                                   </div>
 
-                <div class="section">
-                    <h2>PASO 8 <span class="paso-badge">Anexo VIII</span></h2>
-                    <div class="field-group">
-                        <strong>EA: Plan de seguimiento – Anexo VIII</strong>
-                        <input type="text" th:field="*{paso8_1}" placeholder="Plan de seguimiento">
-                    </div>
-                </div>
+                                   <div class="section">
+                                       <h2>PASO 9</h2>
+                                       <div class="field-group">
+                                           <strong>Director/a informa a familias del Plan</strong>
+                                           <input type="text" th:field="*{paso9_1}" placeholder="Información del Plan a familias">
+                                       </div>
+                                   </div>
 
-                <div class="section">
-                    <h2>PASO 9</h2>
-                    <div class="field-group">
-                        <strong>Director/a informa a familias del Plan</strong>
-                        <input type="text" th:field="*{paso9_1}" placeholder="Información del Plan a familias">
-                    </div>
-                </div>
+                                   <div class="section">
+                                       <h2>PASO 10</h2>
+                                       <div class="field-group">
+                                           <strong>Seguimiento por parte de Inspección</strong>
+                                           <input type="text" th:field="*{paso10_1}" placeholder="Seguimiento de Inspección">
+                                       </div>
+                                   </div>
+<!--
+                           <div class="section paso-11">
+                               <h2>PASO 11 – Cierre</h2>
 
-                <div class="section">
-                    <h2>PASO 10</h2>
-                    <div class="field-group">
-                        <strong>Seguimiento por parte de Inspección</strong>
-                        <input type="text" th:field="*{paso10_1}" placeholder="Seguimiento de Inspección">
-                    </div>
-                </div>
+                               <div class="field-group">
+                                   <strong>Director/a realiza acta de cierre</strong>
+                                   <input type="text" th:field="*{paso11_1}" placeholder="Acta de cierre">
+                               </div>
 
-                <div class="section paso-11">
-                    <h2>PASO 11 – Cierre</h2>
+                               <div class="field-group">
+                                   <strong>Se informa a Inspección</strong>
+                                   <input type="text" th:field="*{paso11_2}" placeholder="Confirmación a Inspección">
+                               </div>
 
-                    <div class="field-group">
-                        <strong>Director/a realiza acta de cierre</strong>
-                        <input type="text" th:field="*{paso11_1}" placeholder="Acta de cierre">
-                    </div>
+                               <div class="field-group">
+                                   <strong>Se informa a familia</strong>
+                                   <input type="text" th:field="*{paso11_3}" placeholder="Confirmación a familia">
+                               </div>
 
-                    <div class="field-group">
-                        <strong>Se informa a Inspección</strong>
-                        <input type="text" th:field="*{paso11_2}" placeholder="Confirmación a Inspección">
-                    </div>
+                               <div class="field-group">
+                                   <strong>Se informa a profesorado</strong>
+                                   <input type="text" th:field="*{paso11_4}" placeholder="Confirmación a profesorado">
+                               </div>
+                           </div>
 
-                    <div class="field-group">
-                        <strong>Se informa a familia</strong>
-                        <input type="text" th:field="*{paso11_3}" placeholder="Confirmación a familia">
-                    </div>
-
-                    <div class="field-group">
-                        <strong>Se informa a profesorado</strong>
-                        <input type="text" th:field="*{paso11_4}" placeholder="Confirmación a profesorado">
-                    </div>
-                </div>
-
-        -->
+                   -->
         <div class="section observations">
             <h2> Otras acciones / Observaciones</h2>
             <div class="field-group">

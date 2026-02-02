@@ -1,36 +1,53 @@
 package es.instituto.orientacion.seguimiento_casos.services.servicesimpl;
 
 import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
+import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
 import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
+import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso1DTO;
+import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso2DTO;
 import es.instituto.orientacion.seguimiento_casos.repositories.AlumnadoRepository;
 import es.instituto.orientacion.seguimiento_casos.repositories.Paso1Repository;
+import es.instituto.orientacion.seguimiento_casos.repositories.Paso2Repository;
 import es.instituto.orientacion.seguimiento_casos.services.GuardarService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Service
 public class GuardarServiceImpl implements GuardarService {
     private final AlumnadoRepository alumnadoRepository;
     private final Paso1Repository paso1Repository;
+    private final Paso2Repository paso2Repository;
 
-    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository) {
+    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository) {
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
+        this.paso2Repository = paso2Repository;
     }
 
     @Override
     public boolean crearAlumnado(FormularioDTO formularioDTO) {
 
         Alumnado alumnado = new Alumnado(formularioDTO);
+        alumnado.setPaso3_1(formularioDTO.getPaso3_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso4_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso7_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso8_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso9_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso10_1());
+        alumnado.setObservaciones(formularioDTO.getObservaciones());
 
         if (alumnado.getPaso1() != null) {
             alumnado.getPaso1().setAlumnado(alumnado);
             alumnado.getPaso1().setFechaRegistro(LocalDate.now());
         }
-        guardarCronograma(formularioDTO, alumnado);
+        if (alumnado.getPaso2() != null) {
+            alumnado.getPaso2().setAlumnado(alumnado);
+        }
+        guardarCronograma(formularioDTO, alumnado.getPaso2());
         Long idNuevo = alumnadoRepository.save(alumnado).getId();
         return idNuevo != null;
     }
@@ -40,6 +57,13 @@ public class GuardarServiceImpl implements GuardarService {
         Alumnado alumnado;
         alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
+        alumnado.setPaso3_1(formularioDTO.getPaso3_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso4_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso7_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso8_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso9_1());
+        alumnado.setPaso3_1(formularioDTO.getPaso10_1());
+        alumnado.setObservaciones(formularioDTO.getObservaciones());
 
         Paso1 paso1 = alumnado.getPaso1();
         if (paso1 == null) {
@@ -58,19 +82,72 @@ public class GuardarServiceImpl implements GuardarService {
         paso1.setDetalleHechos(dto.getDetalleHechos());
         paso1.setFechaRegistro(dto.getFechaRegistro());
         paso1.setFirmas(dto.getFirmas());
+        Paso2 paso2 = alumnado.getPaso2();
+        if (paso2 == null) {
+            paso2 = new Paso2();
+            paso2.setAlumnado(alumnado);
+            alumnado.setPaso2(paso2);
+        }
+        Paso2DTO dto2 = formularioDTO.getPaso2DTO();
+        paso2.setPaso2_1(dto2.getPaso2_1());
+        paso2.setPaso2_2(dto2.getPaso2_2());
+        paso2.setPaso2_3(dto2.getPaso2_3());
+        paso2.setPaso2_4(dto2.getPaso2_4());
+        paso2.setPaso2_5(dto2.getPaso2_5());
+        paso2.setPaso2_7(dto2.getPaso2_7());
 
-        guardarCronograma(formularioDTO, alumnado);
+        guardarCronograma(formularioDTO, paso2);
         alumnadoRepository.save(alumnado);
         return true;
     }
 
 
-    private static void guardarCronograma(FormularioDTO formularioDTO, Alumnado alumnado) {
-        if (formularioDTO.getCronograma() != null) {
-            formularioDTO.getCronograma().forEach(c -> {
-                c.setAlumnado(alumnado);
-                alumnado.getCronograma().add(c);
-            });
+    private static void guardarCronograma(FormularioDTO formularioDTO, Paso2 paso2) {
+        System.out.println("=== Guardando cronograma ===");
+        System.out.println("Paso2DTO completo: " + formularioDTO.getPaso2DTO());
+        System.out.println("Cronograma DTO: " + formularioDTO.getPaso2DTO().getCronograma());
+
+
+        if (formularioDTO.getPaso2DTO() == null ||
+                formularioDTO.getPaso2DTO().getCronograma() == null) {
+            System.out.println("No hay cronograma para guardar");
+            return;
         }
+
+        // Inicializar la colección si es null
+        if (paso2.getCronograma() == null) {
+            paso2.setCronograma(new ArrayList<>());
+        }
+
+        System.out.println("Cantidad de items recibidos: " + formularioDTO.getPaso2DTO().getCronograma().size());
+
+        // Limpiar elementos existentes
+        paso2.getCronograma().clear();
+
+        // Crear nuevos objetos Cronograma
+        formularioDTO.getPaso2DTO().getCronograma().forEach(cronogramaDTO -> {
+            System.out.println("Procesando item:");
+            System.out.println("  - Fecha: " + cronogramaDTO.getFecha());
+            System.out.println("  - Situacion: " + cronogramaDTO.getSituacion());
+            System.out.println("  - Actuacion: " + cronogramaDTO.getActuacion());
+
+            // Crear una NUEVA instancia de Cronograma
+            Cronograma nuevoCronograma = new Cronograma();
+            nuevoCronograma.setFecha(cronogramaDTO.getFecha());
+            nuevoCronograma.setSituacion(cronogramaDTO.getSituacion());
+            nuevoCronograma.setActuacion(cronogramaDTO.getActuacion());
+            nuevoCronograma.setDocumento(cronogramaDTO.getDocumento());
+            nuevoCronograma.setObservaciones(cronogramaDTO.getObservaciones());
+
+            // Establecer la relación bidireccional
+            nuevoCronograma.setPaso2(paso2);
+
+            // Añadir a la colección
+            paso2.getCronograma().add(nuevoCronograma);
+        });
+
+        System.out.println("Total items añadidos a paso2: " + paso2.getCronograma().size());
     }
-}
+    }
+
+
