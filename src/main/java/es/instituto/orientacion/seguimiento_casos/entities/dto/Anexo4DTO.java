@@ -12,12 +12,14 @@ public class Anexo4DTO {
     private String sintesisfamilia;
 
     private String integrantesfamilia;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechafamilia;
 
     private String sintesisalumno;
 
     private String integrantesalumno;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaalumno;
 
