@@ -2,10 +2,7 @@ package es.instituto.orientacion.seguimiento_casos.services.servicesimpl;
 
 import es.instituto.orientacion.seguimiento_casos.entities.*;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.*;
-import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso1;
-import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso2;
-import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso4;
-import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso5;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.*;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Anexo4;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Anexo5;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
@@ -38,7 +35,6 @@ public class GuardarServiceImpl implements GuardarService {
         Alumnado alumnado = new Alumnado(formularioDTO);
         alumnado.setPaso3_1(formularioDTO.getPaso3_1());
         alumnado.setPaso7_1(formularioDTO.getPaso7_1());
-        alumnado.setPaso8_1(formularioDTO.getPaso8_1());
         alumnado.setPaso9_1(formularioDTO.getPaso9_1());
         alumnado.setPaso10_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
@@ -86,6 +82,15 @@ public class GuardarServiceImpl implements GuardarService {
             paso5.setAnexo5(anexo5);
         }
 
+        Paso8 paso8 = alumnado.getPaso8();
+        if (paso8 == null) {
+            paso8 = new Paso8();
+            paso8.setAlumnado(alumnado);
+            alumnado.setPaso8(paso8);
+        }
+        Paso8DTO dto8 = formularioDTO.getPaso8DTO();
+        paso8.setOtrasMedidas(dto8.getOtrasMedidas());
+        paso8.setResponsableDireccion(dto8.getResponsableDireccion());
 
         Long idNuevo = alumnadoRepository.save(alumnado).getId();
         return idNuevo != null;
@@ -98,7 +103,6 @@ public class GuardarServiceImpl implements GuardarService {
                 .orElseThrow();
         alumnado.setPaso3_1(formularioDTO.getPaso3_1());
         alumnado.setPaso3_1(formularioDTO.getPaso7_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso8_1());
         alumnado.setPaso3_1(formularioDTO.getPaso9_1());
         alumnado.setPaso3_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
@@ -169,7 +173,15 @@ public class GuardarServiceImpl implements GuardarService {
             paso5.setAnexo5(anexo5);
         }
 
-
+        Paso8 paso8 = alumnado.getPaso8();
+        if (paso8 == null) {
+            paso8 = new Paso8();
+            paso8.setAlumnado(alumnado);
+            alumnado.setPaso8(paso8);
+        }
+        Paso8DTO dto8 = formularioDTO.getPaso8DTO();
+        paso8.setOtrasMedidas(dto8.getOtrasMedidas());
+        paso8.setResponsableDireccion(dto8.getResponsableDireccion());
 
         alumnadoRepository.save(alumnado);
         return true;

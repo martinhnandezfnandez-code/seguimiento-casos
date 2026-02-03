@@ -39,7 +39,6 @@ public class Paso5 {
                 this.anexo4 = anexo4Entity;
             }
 
-
             if (paso5DTO.getAnexo5() != null) {
                 Anexo5 anexo5Entity = new Anexo5(paso5DTO.getAnexo5());
                 anexo5Entity.setPaso5(this);

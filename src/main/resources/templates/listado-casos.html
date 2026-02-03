@@ -377,7 +377,16 @@
                     <td th:text="${alumno.paso7_1}" th:title="${alumno.paso7_1}"></td>
 
                     <!-- PASO 8 -->
-                    <td th:text="${alumno.paso8_1}" th:title="${alumno.paso8_1}"></td>
+                    <td>
+    <span th:if="${alumno.paso8DTO != null and alumno.paso8DTO.responsableDireccion != null}"
+          style="color: green; font-weight: 600;">
+        ✔ Rellenado
+    </span>
+                        <span th:unless="${alumno.paso8DTO != null and alumno.paso8DTO.responsableDireccion != null}"
+                              style="color: #b00; font-weight: 600;">
+        ✘ Pendiente
+    </span>
+                    </td>
 
                     <!-- PASO 9 -->
                     <td th:text="${alumno.paso9_1}" th:title="${alumno.paso9_1}"></td>
