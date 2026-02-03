@@ -1,5 +1,7 @@
-package es.instituto.orientacion.seguimiento_casos.entities;
+package es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo;
 
+import es.instituto.orientacion.seguimiento_casos.entities.dto.CronogramaDTO;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso2;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,5 +46,12 @@ public class Cronograma {
     @JoinColumn(name = "paso2_id")
     private Paso2 paso2;
 
-    public Cronograma() {}
+    public Cronograma(CronogramaDTO cronogramaDTO) {
+        this.actuacion= cronogramaDTO.getActuacion();
+        this.documento= cronogramaDTO.getDocumento();
+        this.fecha= cronogramaDTO.getFecha();
+        this.situacion= cronogramaDTO.getSituacion();
+        this.observaciones = cronogramaDTO.getObservaciones();
+    }
+    public Cronograma(){}
 }

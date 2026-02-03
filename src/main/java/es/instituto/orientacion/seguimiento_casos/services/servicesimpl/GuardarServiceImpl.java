@@ -1,15 +1,15 @@
 package es.instituto.orientacion.seguimiento_casos.services.servicesimpl;
 
-import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
-import es.instituto.orientacion.seguimiento_casos.entities.Cronograma;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso1;
-import es.instituto.orientacion.seguimiento_casos.entities.Paso2;
-import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
-import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso1DTO;
-import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso2DTO;
-import es.instituto.orientacion.seguimiento_casos.repositories.AlumnadoRepository;
-import es.instituto.orientacion.seguimiento_casos.repositories.Paso1Repository;
-import es.instituto.orientacion.seguimiento_casos.repositories.Paso2Repository;
+import es.instituto.orientacion.seguimiento_casos.entities.*;
+import es.instituto.orientacion.seguimiento_casos.entities.dto.*;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso1;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso4;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso5;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Anexo4;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Anexo5;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
+import es.instituto.orientacion.seguimiento_casos.repositories.*;
 import es.instituto.orientacion.seguimiento_casos.services.GuardarService;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +21,15 @@ public class GuardarServiceImpl implements GuardarService {
     private final AlumnadoRepository alumnadoRepository;
     private final Paso1Repository paso1Repository;
     private final Paso2Repository paso2Repository;
+    private final Paso4Repository paso4Repository;
+    private final Paso5Repository paso5Repository;
 
-    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository) {
+    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository) {
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
         this.paso2Repository = paso2Repository;
+        this.paso4Repository = paso4Repository;
+        this.paso5Repository = paso5Repository;
     }
 
     @Override
@@ -33,11 +37,10 @@ public class GuardarServiceImpl implements GuardarService {
 
         Alumnado alumnado = new Alumnado(formularioDTO);
         alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso4_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso7_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso8_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso9_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso10_1());
+        alumnado.setPaso7_1(formularioDTO.getPaso7_1());
+        alumnado.setPaso8_1(formularioDTO.getPaso8_1());
+        alumnado.setPaso9_1(formularioDTO.getPaso9_1());
+        alumnado.setPaso10_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
 
         if (alumnado.getPaso1() != null) {
@@ -48,6 +51,42 @@ public class GuardarServiceImpl implements GuardarService {
             alumnado.getPaso2().setAlumnado(alumnado);
         }
         guardarCronograma(formularioDTO, alumnado.getPaso2());
+
+
+        Paso4 paso4 = alumnado.getPaso4();
+        if (paso4 == null) {
+            paso4 = new Paso4();
+            paso4.setAlumnado(alumnado);
+            alumnado.setPaso4(paso4);
+        }
+        Paso4DTO dto4 = formularioDTO.getPaso4DTO();
+        paso4.setContenido(dto4.getContenido());
+        paso4.setAcuerdos(dto4.getAcuerdos());
+        paso4.setAsistentes(dto4.getAsistentes());
+        paso4.setFecha(dto4.getFecha());
+
+        Paso5 paso5 = alumnado.getPaso5();
+        if (paso5 == null) {
+            paso5 = new Paso5();
+            paso5.setAlumnado(alumnado);
+            alumnado.setPaso5(paso5);
+        }
+
+        Paso5DTO dto5 = formularioDTO.getPaso5DTO();
+
+        if (dto5.getAnexo4() != null) {
+            Anexo4 anexo4 = new Anexo4(dto5.getAnexo4());
+            anexo4.setPaso5(paso5);
+            paso5.setAnexo4(anexo4);
+        }
+
+        if (dto5.getAnexo5() != null) {
+            Anexo5 anexo5 = new Anexo5(dto5.getAnexo5());
+            anexo5.setPaso5(paso5);
+            paso5.setAnexo5(anexo5);
+        }
+
+
         Long idNuevo = alumnadoRepository.save(alumnado).getId();
         return idNuevo != null;
     }
@@ -58,7 +97,6 @@ public class GuardarServiceImpl implements GuardarService {
         alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
         alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso4_1());
         alumnado.setPaso3_1(formularioDTO.getPaso7_1());
         alumnado.setPaso3_1(formularioDTO.getPaso8_1());
         alumnado.setPaso3_1(formularioDTO.getPaso9_1());
@@ -97,6 +135,42 @@ public class GuardarServiceImpl implements GuardarService {
         paso2.setPaso2_7(dto2.getPaso2_7());
 
         guardarCronograma(formularioDTO, paso2);
+
+        Paso4 paso4 = alumnado.getPaso4();
+        if (paso4 == null) {
+            paso4 = new Paso4();
+            paso4.setAlumnado(alumnado);
+            alumnado.setPaso4(paso4);
+        }
+        Paso4DTO dto4 = formularioDTO.getPaso4DTO();
+        paso4.setContenido(dto4.getContenido());
+        paso4.setAcuerdos(dto4.getAcuerdos());
+        paso4.setAsistentes(dto4.getAsistentes());
+        paso4.setFecha(dto4.getFecha());
+
+        Paso5 paso5 = alumnado.getPaso5();
+        if (paso5 == null) {
+            paso5 = new Paso5();
+            paso5.setAlumnado(alumnado);
+            alumnado.setPaso5(paso5);
+        }
+
+        Paso5DTO dto5 = formularioDTO.getPaso5DTO();
+
+        if (dto5.getAnexo4() != null) {
+            Anexo4 anexo4 = new Anexo4(dto5.getAnexo4());
+            anexo4.setPaso5(paso5);
+            paso5.setAnexo4(anexo4);
+        }
+
+        if (dto5.getAnexo5() != null) {
+            Anexo5 anexo5 = new Anexo5(dto5.getAnexo5());
+            anexo5.setPaso5(paso5);
+            paso5.setAnexo5(anexo5);
+        }
+
+
+
         alumnadoRepository.save(alumnado);
         return true;
     }

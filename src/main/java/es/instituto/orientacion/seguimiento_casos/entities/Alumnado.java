@@ -1,6 +1,10 @@
 package es.instituto.orientacion.seguimiento_casos.entities;
 
 import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso1;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso2;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso4;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso5;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,8 +12,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "alumnado")
@@ -42,12 +44,16 @@ public class Alumnado {
     private String paso3_1;
 
     // PASO 4
-    @Column(name = "paso4")
-    private String paso4_1;
+    @OneToOne(mappedBy = "alumnado",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Paso4 paso4;
 
     // PASO 5
-    private String paso5_1;
-    private String paso5_2;
+    @OneToOne(mappedBy = "alumnado",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Paso5 paso5;
 
     // PASO 6
     private String paso6_1;
@@ -92,7 +98,7 @@ public class Alumnado {
         this.idCaso = formularioDTO.getIdCaso();
         this.idDocumento = formularioDTO.getIdDocumento();
         this.paso3_1 = formularioDTO.getPaso3_1();
-        this.paso4_1 = formularioDTO.getPaso4_1();
+
         this.paso7_1 = formularioDTO.getPaso7_1();
         this.paso8_1 = formularioDTO.getPaso8_1();
         this.paso9_1 = formularioDTO.getPaso9_1();
@@ -106,6 +112,16 @@ public class Alumnado {
             Paso2 paso2 = new Paso2(formularioDTO.getPaso2DTO());
             paso2.setAlumnado(this);
             this.paso2 = paso2;
+        }
+        if (formularioDTO.getPaso4DTO() != null) {
+            Paso4 paso4 = new Paso4(formularioDTO.getPaso4DTO());
+            paso4.setAlumnado(this);
+            this.paso4 = paso4;
+        }
+        if (formularioDTO.getPaso5DTO() != null) {
+            Paso5 paso5 = new Paso5(formularioDTO.getPaso5DTO());
+            paso5.setAlumnado(this);
+            this.paso5 = paso5;
         }
     }
 
