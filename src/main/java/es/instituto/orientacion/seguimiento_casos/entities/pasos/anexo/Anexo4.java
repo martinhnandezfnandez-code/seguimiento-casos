@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @Table(name = "anexo4")
-public class Anexo4 {
+public class    Anexo4 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

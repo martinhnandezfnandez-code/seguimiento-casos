@@ -495,166 +495,454 @@
         </div>
 
 
-        <div class="section">
-            <h2>PASO 5 <span class="paso-badge">Anexo V – Señales de Alarma</span></h2>
+        <h3 style="color: #d32f2f; border-bottom: 2px solid #d32f2f;">1.1 Señales de Alarma Directas</h3>
+        <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+            <tr style="background:#fce4ec;">
+                <th style="padding:10px; text-align:left;">Indicador</th>
+                <th style="padding:10px; text-align:center;">Sí</th>
+                <th style="padding:10px; text-align:center;">No</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Comunicación de bloqueo o dolor emocional</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionBloqueoDolor}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionBloqueoDolor}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Comunicación de desesperanza</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionDesesperanza}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionDesesperanza}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Desvinculación de proyectos de futuro</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionDesvinculacionProyectos}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionDesvinculacionProyectos}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Expresiones de no ser importante para nadie</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionNoSerImportante}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionNoSerImportante}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Sentimientos de ser una carga familiar</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionCargaFamiliar}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionCargaFamiliar}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Pensamientos aislados sobre la muerte</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionPensamientosAisladosMuerte}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionPensamientosAisladosMuerte}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Deseo explícito de suicidio</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionDeseoExplicitoSuicidio}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comunicacionDeseoExplicitoSuicidio}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Referencias a métodos de suicidio</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.referenciasMetodosSuicidio}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.referenciasMetodosSuicidio}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Plan de conducta suicida</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.planConductaSuicida}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.planConductaSuicida}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Búsqueda de formas de suicidio</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.busquedaFormasSuicidio}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.busquedaFormasSuicidio}" th:value="false"/></td>
+            </tr>
+            </tbody>
+        </table>
 
-            <table style="width:100%; border-collapse: collapse;">
-                <thead>
-                <tr style="background:#eee;">
-                    <th style="padding:10px; text-align:left;">Señal de alarma</th>
-                    <th style="padding:10px; text-align:center;">Sí</th>
-                    <th style="padding:10px; text-align:center;">No</th>
-                </tr>
-                </thead>
+        <h3 style="color: #d32f2f; border-bottom: 2px solid #d32f2f;">1.2 Señales de Alarma Indirectas</h3>
+        <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+            <tr style="background:#fce4ec;">
+                <th style="padding:10px; text-align:left;">Indicador</th>
+                <th style="padding:10px; text-align:center;">Sí</th>
+                <th style="padding:10px; text-align:center;">No</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Existencia de intento previo</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.existenciaIntentoPrevio}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.existenciaIntentoPrevio}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Conductas de riesgo o hacerse daño</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.conductasRiesgoHacerDano}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.conductasRiesgoHacerDano}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Cambios bruscos de comportamiento o carácter</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.cambiosComportamientoCaracter}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.cambiosComportamientoCaracter}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Comportamientos de angustia o irritación extrema</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comportamientosAngustiaIrritacion}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.comportamientosAngustiaIrritacion}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Abatimiento en actividades cotidianas</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.senalesAbatimientoActividades}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.senalesAbatimientoActividades}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Absentismo escolar</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.absentismoEscolar}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.absentismoEscolar}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Alteraciones en ritmos o patrones (sueño/comida)</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.alteracionesRitmosPatrones}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.alteracionesRitmosPatrones}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Cerrar temas pendientes o despedidas</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.conductasRelacionalesTemasPendientes}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.conductasRelacionalesTemasPendientes}" th:value="false"/></td>
+            </tr>
+            <tr>
+                <td>Inicio o aumento de consumo de sustancias</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.inicioConsumoSustancias}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.senalesAlarma.inicioConsumoSustancias}" th:value="false"/></td>
+            </tr>
+            </tbody>
+        </table>
 
-                <tbody>
+        <h3 style="color: #1976d2; border-bottom: 2px solid #1976d2;">2.1 Factores de Riesgo Personales</h3>
+        <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+            <tr style="background:#e3f2fd;">
+                <th style="padding:10px; text-align:left;">Indicador Personal</th>
+                <th style="padding:10px; text-align:center;">Sí</th>
+                <th style="padding:10px; text-align:center;">No</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>Intentos de suicidio previos</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.intentosSuicidioPrevios}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.intentosSuicidioPrevios}" th:value="false"/></td>
+            </tr>
+            <tr><td>Condición de discapacidad</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.condicionDiscapacidad}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.condicionDiscapacidad}" th:value="false"/></td>
+            </tr>
+            <tr><td>Enfermedad grave o dolor crónico</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.enfermedadGraveDolorCronico}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.enfermedadGraveDolorCronico}" th:value="false"/></td>
+            </tr>
+            <tr><td>Trastornos por consumo de sustancias</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.trastornosSustancias}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.trastornosSustancias}" th:value="false"/></td>
+            </tr>
+            <tr><td>Fácil acceso a medios letales</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.accesoMediosLetales}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.accesoMediosLetales}" th:value="false"/></td>
+            </tr>
+            <tr><td>Impulsividad, agresividad o pesimismo</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.impulsividadAgresividadPesimismo}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.impulsividadAgresividadPesimismo}" th:value="false"/></td>
+            </tr>
+            <tr><td>Historia de violencia o abuso</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.historiaViolenciaAbuso}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.historiaViolenciaAbuso}" th:value="false"/></td>
+            </tr>
+            <tr><td>Sucesos vitales estresantes</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.sucesosVitalesEstresantes}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.sucesosVitalesEstresantes}" th:value="false"/></td>
+            </tr>
+            <tr><td>Perfeccionismo excesivo</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.perfeccionismoExcesivo}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.perfeccionismoExcesivo}" th:value="false"/></td>
+            </tr>
+            <tr><td>Autolesiones</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.autolesiones}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.autolesiones}" th:value="false"/></td>
+            </tr>
+            <tr><td>Conductas de aislamiento o soledad</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.conductaAislamientoSoledad}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.conductaAislamientoSoledad}" th:value="false"/></td>
+            </tr>
+            <tr><td>Uso de servicios de salud mental</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.serviciosSaludMental}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.serviciosSaludMental}" th:value="false"/></td>
+            </tr>
+            <tr><td>Abandono de tratamiento</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.abandonoTratamiento}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.abandonoTratamiento}" th:value="false"/></td>
+            </tr>
+            <tr><td>No seguimiento de prescripciones médicas</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.noSeguirPrescripcion}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.noSeguirPrescripcion}" th:value="false"/></td>
+            </tr>
+            <tr><td>Personalidad influenciable</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.personalidadInfluyente}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.personalidadInfluyente}" th:value="false"/></td>
+            </tr>
+            <tr><td>Uso inadecuado de las TIC</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.usoInadecuadoTic}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.usoInadecuadoTic}" th:value="false"/></td>
+            </tr>
+            <tr><td>Rechazo imagen corporal / TCA</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.rechazoImagenCorporalTca}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.rechazoImagenCorporalTca}" th:value="false"/></td>
+            </tr>
+            <tr><td>Presencia de TEA, TDAH o Altas Capacidades</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.presenciaTeaTdahCapacidades}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.presenciaTeaTdahCapacidades}" th:value="false"/></td>
+            </tr>
+            </tbody>
+        </table>
 
-                <!-- SEÑALES VERBALES -->
-                <tr>
-                    <td>Expresa deseo de morir</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.expresaDeseoMorir}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.expresaDeseoMorir}"
-                               th:value="false"/>
-                    </td>
-                </tr>
+        <h3 style="color: #1976d2; border-bottom: 2px solid #1976d2;">2.2 Factores de Riesgo Familiares</h3>
+        <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+            <tr style="background:#e3f2fd;">
+                <th style="padding:10px; text-align:left;">Indicador Familiar</th>
+                <th style="padding:10px; text-align:center;">Sí</th>
+                <th style="padding:10px; text-align:center;">No</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>Pérdida grave reciente</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.perdidaGraveReciente}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.perdidaGraveReciente}" th:value="false"/></td>
+            </tr>
+            <tr><td>Historial familiar de suicidio</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.historialFamiliarSuicidio}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.historialFamiliarSuicidio}" th:value="false"/></td>
+            </tr>
+            <tr><td>Negligencia o estilos educativos inadecuados</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.negligenciaEstilosEducativos}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.negligenciaEstilosEducativos}" th:value="false"/></td>
+            </tr>
+            <tr><td>Abuso de sustancias o alcoholismo familiar</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.abusosSustanciasAlcoholismo}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.abusosSustanciasAlcoholismo}" th:value="false"/></td>
+            </tr>
+            <tr><td>Estresores por rupturas familiares</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.estresoresRupturasFamiliares}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.estresoresRupturasFamiliares}" th:value="false"/></td>
+            </tr>
+            <tr><td>Niveles altos de perfeccionismo familiar</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.familiaNivelesPerfeccionismo}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.familiaNivelesPerfeccionismo}" th:value="false"/></td>
+            </tr>
+            <tr><td>Desequilibrio en actividades domésticas</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.equilibrioActividadesDomesticas}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.equilibrioActividadesDomesticas}" th:value="false"/></td>
+            </tr>
+            </tbody>
+        </table>
 
-                <tr>
-                    <td>Amenazas verbales</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.amenazasVerbales}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.amenazasVerbales}"
-                               th:value="false"/>
-                    </td>
-                </tr>
+        <h3 style="color: #1976d2; border-bottom: 2px solid #1976d2;">2.3 Factores de Riesgo Sociales y Educativos</h3>
+        <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+            <tr style="background:#e3f2fd;">
+                <th style="padding:10px; text-align:left;">Indicador Social/Educativo</th>
+                <th style="padding:10px; text-align:center;">Sí</th>
+                <th style="padding:10px; text-align:center;">No</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>Falta o pérdida de red de apoyo</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.faltaPerdidaRedApoyo}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.faltaPerdidaRedApoyo}" th:value="false"/></td>
+            </tr>
+            <tr><td>Víctima de acoso o ciberacoso</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.victimaAcosoCiberacoso}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.victimaAcosoCiberacoso}" th:value="false"/></td>
+            </tr>
+            <tr><td>Rechazo social o maltrato</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.rechazoSocialMaltrato}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.rechazoSocialMaltrato}" th:value="false"/></td>
+            </tr>
+            <tr><td>Desarraigo cultural</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.desarraigoCultural}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.desarraigoCultural}" th:value="false"/></td>
+            </tr>
+            <tr><td>Estigma o exclusión del grupo</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.estigmaExclusionGrupo}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.estigmaExclusionGrupo}" th:value="false"/></td>
+            </tr>
+            <tr><td>Existencia de red de apoyo social</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.existenciaRedApoyoSocial}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.existenciaRedApoyoSocial}" th:value="false"/></td>
+            </tr>
+            <tr><td>Buenas relaciones con adultos</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.buenasRelacionesAdultas}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.buenasRelacionesAdultas}" th:value="false"/></td>
+            </tr>
+            <tr><td>Conflicto de confianza en situaciones</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.conflictoConfianzaSituaciones}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.conflictoConfianzaSituaciones}" th:value="false"/></td>
+            </tr>
+            <tr><td>Amigo social y cultural</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.amigoSocialCultural}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.amigoSocialCultural}" th:value="false"/></td>
+            </tr>
+            <tr><td>Existencia de proyecto social-educativo</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.existenciaProyectoSocialEducativo}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.existenciaProyectoSocialEducativo}" th:value="false"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <h3 style="color: #2e7d32; border-bottom: 2px solid #2e7d32;">3.1 Factores de Protección Personales</h3>
+        <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+            <tr style="background:#e8f5e9;">
+                <th style="padding:10px; text-align:left;">Indicador de Protección</th>
+                <th style="padding:10px; text-align:center;">Sí</th>
+                <th style="padding:10px; text-align:center;">No</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>Habilidades de gestión emocional</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.habilidadesGestionEmocional}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.habilidadesGestionEmocional}" th:value="false"/></td>
+            </tr>
+            <tr><td>Habilidades de comunicación y relación</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.habilidadesComunicacionRelacion}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.habilidadesComunicacionRelacion}" th:value="false"/></td>
+            </tr>
+            <tr><td>Autoconcepto y autoestima saludables</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.autoconceptoAutoestimaSaludables}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.autoconceptoAutoestimaSaludables}" th:value="false"/></td>
+            </tr>
+            <tr><td>Actitudes de relación interpersonal positiva</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.actitudesRelacionInterpersonal}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.actitudesRelacionInterpersonal}" th:value="false"/></td>
+            </tr>
+            <tr><td>Hábitos personales saludables</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.habitosPersonalesSaludables}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.habitosPersonalesSaludables}" th:value="false"/></td>
+            </tr>
+            <tr><td>Uso adecuado de las TIC</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.usoAdecuadoTic}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.usoAdecuadoTic}" th:value="false"/></td>
+            </tr>
+            <tr><td>Características personales de tranquilidad</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.caracteristicasPersonalesTranquilidad}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.caracteristicasPersonalesTranquilidad}" th:value="false"/></td>
+            </tr>
+            <tr><td>Rendimiento escolar adecuado</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.rendimientoEscolarAdecuado}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.rendimientoEscolarAdecuado}" th:value="false"/></td>
+            </tr>
+            <tr><td>Sentimiento positivo de pertenencia</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.sentimientoPositivoPertenencia}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.sentimientoPositivoPertenencia}" th:value="false"/></td>
+            </tr>
+            <tr><td>Vinculación a proyectos personales</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.vinculacionProyectosPersonales}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.vinculacionProyectosPersonales}" th:value="false"/></td>
+            </tr>
+            <tr><td>Relaciones familiares adecuadas</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.relacionesFamiliaresAdecuadas}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.relacionesFamiliaresAdecuadas}" th:value="false"/></td>
+            </tr>
+            <tr><td>Vínculos de apoyo estables</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.vinculosApoyoEstables}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.vinculosApoyoEstables}" th:value="false"/></td>
+            </tr>
+            <tr><td>Estilos educativos modulados</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.estilosEducativosModulados}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.estilosEducativosModulados}" th:value="false"/></td>
+            </tr>
+            </tbody>
+        </table>
 
-                <tr>
-                    <td>Comentarios de culpa o inutilidad</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.comentariosCulpaInutilidad}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.comentariosCulpaInutilidad}"
-                               th:value="false"/>
-                    </td>
-                </tr>
+        <h3 style="color: #2e7d32; border-bottom: 2px solid #2e7d32;">3.2 Factores de Protección Familiares</h3>
+        <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+            <tr style="background:#e8f5e9;">
+                <th style="padding:10px; text-align:left;">Indicador Familiar</th>
+                <th style="padding:10px; text-align:center;">Sí</th>
+                <th style="padding:10px; text-align:center;">No</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>Equilibrio en actividades relacionadas</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.equilibrioActividadesRelacionadas}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.equilibrioActividadesRelacionadas}" th:value="false"/></td>
+            </tr>
+            </tbody>
+        </table>
 
-                <!-- SEÑALES CONDUCTUALES -->
-                <tr>
-                    <td>Aislamiento social</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.aislamientoSocial}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.aislamientoSocial}"
-                               th:value="false"/>
-                    </td>
-                </tr>
+        <h3 style="color: #2e7d32; border-bottom: 2px solid #2e7d32;">3.3 Factores de Protección Sociales y Educativos</h3>
+        <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+            <tr style="background:#e8f5e9;">
+                <th style="padding:10px; text-align:left;">Indicador Social/Educativo</th>
+                <th style="padding:10px; text-align:center;">Sí</th>
+                <th style="padding:10px; text-align:center;">No</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>Existencia de red de apoyo social</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.existenciaRedApoyoSocial}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.existenciaRedApoyoSocial}" th:value="false"/></td>
+            </tr>
+            <tr><td>Buenas relaciones con personas adultas</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.buenasRelacionesAdultas}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.buenasRelacionesAdultas}" th:value="false"/></td>
+            </tr>
+            <tr><td>Contar con referentes de confianza</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.contarReferenciaConfianza}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.contarReferenciaConfianza}" th:value="false"/></td>
+            </tr>
+            <tr><td>Apoyo social y cultural</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.amigoSocialCultural}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.amigoSocialCultural}" th:value="false"/></td>
+            </tr>
+            <tr><td>Existencia de proyecto social-educativo</td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.existenciaProyectoSocialEducativo}" th:value="true"/></td>
+                <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresProteccion.existenciaProyectoSocialEducativo}" th:value="false"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <h3 style="color: #455a64; border-bottom: 2px solid #455a64; margin-top: 30px;">4. Observaciones y Datos de Detección</h3>
 
-                <tr>
-                    <td>Conductas autolesivas</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.conductasAutolesivas}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.conductasAutolesivas}"
-                               th:value="false"/>
-                    </td>
-                </tr>
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #dee2e6;">
 
-                <tr>
-                    <td>Cambios bruscos de conducta</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.cambiosBruscosConducta}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.cambiosBruscosConducta}"
-                               th:value="false"/>
-                    </td>
-                </tr>
-
-                <!-- SEÑALES EMOCIONALES -->
-                <tr>
-                    <td>Tristeza intensa</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.tristezaIntensa}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.tristezaIntensa}"
-                               th:value="false"/>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Ansiedad</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.ansiedad}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.ansiedad}"
-                               th:value="false"/>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Desesperanza</td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.desesperanza}"
-                               th:value="true"/>
-                    </td>
-                    <td style="text-align:center">
-                        <input type="radio"
-                               th:field="*{paso5DTO.anexo5.desesperanza}"
-                               th:value="false"/>
-                    </td>
-                </tr>
-
-                </tbody>
-            </table>
-
-            <!-- OBSERVACIONES -->
-            <div class="field-group" style="margin-top:20px;">
-                <label>📝 Observaciones</label>
+            <div class="field-group" style="margin-bottom: 20px;">
+                <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #37474f;">
+                    <i class="fas fa-comment-alt"></i> Observaciones Adicionales
+                </label>
                 <textarea th:field="*{paso5DTO.anexo5.observaciones}"
-                          placeholder="Observaciones adicionales…"></textarea>
+                          style="width: 100%; min-height: 120px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"
+                          placeholder="Escriba aquí cualquier detalle relevante, contexto o matices encontrados durante la valoración..."></textarea>
             </div>
 
-            <!-- FECHA -->
-            <div class="field-group fecha-group">
-                <label>📅 Fecha de detección</label>
-                <input type="date"
-                       th:field="*{paso5DTO.anexo5.fechaDeteccion}">
-            </div>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
 
+                <div class="field-group" style="flex: 1; min-width: 250px;">
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #37474f;">
+                        <i class="fas fa-user-check"></i> Detectado por
+                    </label>
+                    <input type="text"
+                           th:field="*{paso5DTO.anexo5.detectadoPor}"
+                           style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"
+                           placeholder="Nombre del profesional o informante"/>
+                </div>
+
+                <div class="field-group" style="flex: 1; min-width: 200px;">
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #37474f;">
+                        <i class="fas fa-calendar-alt"></i> Fecha de detección
+                    </label>
+                    <input type="date"
+                           th:field="*{paso5DTO.anexo5.fechaDeteccion}"
+                           style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"/>
+                </div>
+
+            </div>
         </div>
 
         <!--

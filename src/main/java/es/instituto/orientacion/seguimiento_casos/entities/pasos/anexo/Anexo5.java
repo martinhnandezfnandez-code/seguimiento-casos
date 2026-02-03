@@ -17,47 +17,6 @@ public class Anexo5 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Column(name = "expresa_deseo_morir")
-    private Boolean expresaDeseoMorir;
-
-    @Column(name = "amenazas_verbales")
-    private Boolean amenazasVerbales;
-
-    @Column(name = "comentarios_culpa_inutilidad")
-    private Boolean comentariosCulpaInutilidad;
-
-    @Column(name = "aislamiento_social")
-    private Boolean aislamientoSocial;
-
-    @Column(name = "abandono_actividades")
-    private Boolean abandonoActividades;
-
-    @Column(name = "conductas_autolesivas")
-    private Boolean conductasAutolesivas;
-
-    @Column(name = "regala_pertenencias")
-    private Boolean regalaPertenencias;
-
-    @Column(name = "cambios_bruscos_conducta")
-    private Boolean cambiosBruscosConducta;
-
-    @Column(name = "tristeza_intensa")
-    private Boolean tristezaIntensa;
-
-    @Column(name = "irritabilidad")
-    private Boolean irritabilidad;
-
-    @Column(name = "ansiedad")
-    private Boolean ansiedad;
-
-    @Column(name = "desesperanza")
-    private Boolean desesperanza;
-
-
-    @Column(name = "observaciones", length = 1000)
-    private String observaciones;
-
     @Column(name = "detectado_por")
     private String detectadoPor;
 
@@ -65,29 +24,46 @@ public class Anexo5 {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaDeteccion;
 
+    @Column(name = "observaciones", length = 2000)
+    private String observaciones;
+
     @OneToOne
     @JoinColumn(name = "paso5_id")
     private Paso5 paso5;
 
+    @OneToOne(mappedBy = "anexo5", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Anexo5SenalesAlarma senalesAlarma;
+
+    @OneToOne(mappedBy = "anexo5", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Anexo5FactoresRiesgo factoresRiesgo;
+
+    @OneToOne(mappedBy = "anexo5", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Anexo5FactoresProteccion factoresProteccion;
+
+
     public Anexo5() {
     }
+
     public Anexo5(Anexo5DTO dto) {
         if (dto != null) {
-            this.expresaDeseoMorir = dto.getExpresaDeseoMorir();
-            this.amenazasVerbales = dto.getAmenazasVerbales();
-            this.comentariosCulpaInutilidad = dto.getComentariosCulpaInutilidad();
-            this.aislamientoSocial = dto.getAislamientoSocial();
-            this.abandonoActividades = dto.getAbandonoActividades();
-            this.conductasAutolesivas = dto.getConductasAutolesivas();
-            this.regalaPertenencias = dto.getRegalaPertenencias();
-            this.cambiosBruscosConducta = dto.getCambiosBruscosConducta();
-            this.tristezaIntensa = dto.getTristezaIntensa();
-            this.irritabilidad = dto.getIrritabilidad();
-            this.ansiedad = dto.getAnsiedad();
-            this.desesperanza = dto.getDesesperanza();
-            this.observaciones = dto.getObservaciones();
             this.detectadoPor = dto.getDetectadoPor();
             this.fechaDeteccion = dto.getFechaDeteccion();
+            this.observaciones = dto.getObservaciones();
+            
+            if (dto.getSenalesAlarma() != null) {
+                this.senalesAlarma = new Anexo5SenalesAlarma(dto.getSenalesAlarma());
+                this.senalesAlarma.setAnexo5(this);
+            }
+            
+            if (dto.getFactoresRiesgo() != null) {
+                this.factoresRiesgo = new Anexo5FactoresRiesgo(dto.getFactoresRiesgo());
+                this.factoresRiesgo.setAnexo5(this);
+            }
+            
+            if (dto.getFactoresProteccion() != null) {
+                this.factoresProteccion = new Anexo5FactoresProteccion(dto.getFactoresProteccion());
+                this.factoresProteccion.setAnexo5(this);
+            }
         }
     }
 }

@@ -8,57 +8,50 @@ import java.time.LocalDate;
 
 @Data
 public class Anexo5DTO {
-    private Boolean expresaDeseoMorir;
 
-    private Boolean amenazasVerbales;
-
-    private Boolean comentariosCulpaInutilidad;
-
-    private Boolean aislamientoSocial;
-
-    private Boolean abandonoActividades;
-
-    private Boolean conductasAutolesivas;
-
-    private Boolean regalaPertenencias;
-
-    private Boolean cambiosBruscosConducta;
-
-    private Boolean tristezaIntensa;
-
-    private Boolean irritabilidad;
-
-    private Boolean ansiedad;
-
-    private Boolean desesperanza;
-
-    private String observaciones;
+    private Long id;
 
     private String detectadoPor;
+    
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaDeteccion;
+    
+    private String observaciones;
 
-    public Anexo5DTO(Anexo5 anexo5) {
-        if (anexo5 != null) {
-            this.expresaDeseoMorir = anexo5.getExpresaDeseoMorir();
-            this.amenazasVerbales = anexo5.getAmenazasVerbales();
-            this.comentariosCulpaInutilidad = anexo5.getComentariosCulpaInutilidad();
-            this.aislamientoSocial = anexo5.getAislamientoSocial();
-            this.abandonoActividades = anexo5.getAbandonoActividades();
-            this.conductasAutolesivas = anexo5.getConductasAutolesivas();
-            this.regalaPertenencias = anexo5.getRegalaPertenencias();
-            this.cambiosBruscosConducta = anexo5.getCambiosBruscosConducta();
-            this.tristezaIntensa = anexo5.getTristezaIntensa();
-            this.irritabilidad = anexo5.getIrritabilidad();
-            this.ansiedad = anexo5.getAnsiedad();
-            this.desesperanza = anexo5.getDesesperanza();
-            this.observaciones = anexo5.getObservaciones();
-            this.detectadoPor = anexo5.getDetectadoPor();
-            this.fechaDeteccion = anexo5.getFechaDeteccion();
-        }
-    }
+    private Long paso5Id;
+    
+    private Anexo5SenalesAlarmaDTO senalesAlarma;
 
+    private Anexo5FactoresRiesgoDTO factoresRiesgo;
+
+    private Anexo5FactoresProteccionDTO factoresProteccion;
+
+    
     public Anexo5DTO() {
     }
 
+    public Anexo5DTO(Anexo5 entity) {
+        if (entity != null) {
+            this.id = entity.getId();
+            this.detectadoPor = entity.getDetectadoPor();
+            this.fechaDeteccion = entity.getFechaDeteccion();
+            this.observaciones = entity.getObservaciones();
+            
+            if (entity.getPaso5() != null) {
+                this.paso5Id = entity.getPaso5().getId();
+            }
+            
+            if (entity.getSenalesAlarma() != null) {
+                this.senalesAlarma = new Anexo5SenalesAlarmaDTO(entity.getSenalesAlarma());
+            }
+            
+            if (entity.getFactoresRiesgo() != null) {
+                this.factoresRiesgo = new Anexo5FactoresRiesgoDTO(entity.getFactoresRiesgo());
+            }
+            
+            if (entity.getFactoresProteccion() != null) {
+                this.factoresProteccion = new Anexo5FactoresProteccionDTO(entity.getFactoresProteccion());
+            }
+        }
+    }
 }
