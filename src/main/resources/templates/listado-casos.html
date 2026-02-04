@@ -394,13 +394,48 @@
                     <!-- PASO 10 -->
                     <td th:text="${alumno.paso10_1}" th:title="${alumno.paso10_1}"></td>
 
-                    <!-- PASO 11 -->
-                    <td th:text="${alumno.paso11_1}" th:title="${alumno.paso11_1}"></td>
-                    <td th:text="${alumno.paso11_2}" th:title="${alumno.paso11_2}"></td>
-                    <td th:text="${alumno.paso11_3}" th:title="${alumno.paso11_3}"></td>
-                    <td th:text="${alumno.paso11_4}" th:title="${alumno.paso11_4}"></td>
+                    <!-- PASO 11.1 -->
+                    <td>
+    <span th:if="${alumno.paso11DTO != null and alumno.paso11DTO.fecchacierre != null}"
+          style="color: green; font-weight: 600;">
+        ✔ Rellenado
+    </span>
+                        <span th:unless="${alumno.paso11DTO != null and alumno.paso11DTO.fecchacierre != null}"
+                              style="color: #b00; font-weight: 600;">
+        ✘ Pendiente
+    </span>
+                        <!-- PASO 11.2 -->
+                    <td>
+    <span th:if="${alumno.paso11DTO != null and alumno.paso11DTO.fechaInspeccion != null}"
+          style="color: green; font-weight: 600;">
+        ✔ Rellenado
+    </span>
+                        <span th:unless="${alumno.paso11DTO != null and alumno.paso11DTO.fechaInspeccion != null}"
+                              style="color: #b00; font-weight: 600;">
+        ✘ Pendiente
+    </span>
+                        <!-- PASO 11.3 -->
+                    <td>
+    <span th:if="${alumno.paso11DTO != null and alumno.paso11DTO.fecchafamilia != null}"
+          style="color: green; font-weight: 600;">
+        ✔ Rellenado
+    </span>
+                        <span th:unless="${alumno.paso11DTO != null and alumno.paso11DTO.fecchafamilia != null}"
+                              style="color: #b00; font-weight: 600;">
+        ✘ Pendiente
+    </span>
+                        <!-- PASO 11.4 -->
+                    <td>
+    <span th:if="${alumno.paso11DTO != null and alumno.paso11DTO.fechaProfesorado != null}"
+          style="color: green; font-weight: 600;">
+        ✔ Rellenado
+    </span>
+                        <span th:unless="${alumno.paso11DTO != null and alumno.paso11DTO.fechaProfesorado != null}"
+                              style="color: #b00; font-weight: 600;">
+        ✘ Pendiente
+    </span>
 
-                    <!-- OTRAS ACCIONES -->
+                        <!-- OTRAS ACCIONES -->
                     <td th:text="${alumno.observaciones}" th:title="${alumno.observaciones}"></td>
 
                     <!-- Fechas y acciones -->

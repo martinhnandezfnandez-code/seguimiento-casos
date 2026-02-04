@@ -19,8 +19,6 @@ public class FormularioDTO {
 
     private String paso3_1;
 
-
-
     private String paso6_1;
     private String paso6_2;
     private String paso6_3;
@@ -31,15 +29,11 @@ public class FormularioDTO {
 
     private String paso10_1;
 
-    private String paso11_1;
-    private String paso11_2;
-    private String paso11_3;
-    private String paso11_4;
+    private Paso11DTO paso11DTO;
 
     private String observaciones;
 
-    // CONSTRUCTOR CORREGIDO - Ahora mapea TODOS los campos
-    public FormularioDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso4 paso4, Paso5 paso5, Paso8 paso8) {
+    public FormularioDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso4 paso4, Paso5 paso5, Paso8 paso8, Paso11 paso11) {
         // Mapear Paso1 (con protección contra null)
         this.paso1DTO = new Paso1DTO(paso1);
 
@@ -54,10 +48,11 @@ public class FormularioDTO {
         // Mapear PASO 3
         this.paso3_1 = alumno.getPaso3_1();
 
-        // Mapear PASO 4
+        // Mapear Paso 4 (con protección contra null)
         this.paso4DTO = new Paso4DTO(paso4);
 
-        // Mapear PASO 5
+        // Mapear Paso 5 (con protección contra null)
+
         this.paso5DTO = new Paso5DTO(paso5);
 
         // Mapear PASO 6
@@ -68,7 +63,7 @@ public class FormularioDTO {
         // Mapear PASO 7
         this.paso7_1 = alumno.getPaso7_1();
 
-        // Mapear PASO 8
+        // Mapear Paso 8 (con protección contra null)
         this.paso8DTO = new Paso8DTO(paso8);
 
         // Mapear PASO 9
@@ -77,11 +72,8 @@ public class FormularioDTO {
         // Mapear PASO 10
         this.paso10_1 = alumno.getPaso10_1();
 
-        // Mapear PASO 11
-        this.paso11_1 = alumno.getPaso11_1();
-        this.paso11_2 = alumno.getPaso11_2();
-        this.paso11_3 = alumno.getPaso11_3();
-        this.paso11_4 = alumno.getPaso11_4();
+        // Mapear Paso 11 (con protección contra null)
+        this.paso11DTO = new Paso11DTO(paso11);
 
         // Mapear observaciones
         this.observaciones = alumno.getObservaciones();
@@ -95,6 +87,7 @@ public class FormularioDTO {
         this.paso4DTO = new Paso4DTO();
         this.paso5DTO = new Paso5DTO();
         this.paso8DTO = new Paso8DTO();
+        this.paso11DTO = new Paso11DTO();
 
     }
 
@@ -134,6 +127,11 @@ public class FormularioDTO {
             this.paso8DTO = new Paso8DTO(alumnado.getPaso8());
         } else {
             this.paso8DTO = new Paso8DTO();
+        }
+        if (alumnado.getPaso11() != null) {
+            this.paso11DTO = new Paso11DTO(alumnado.getPaso11());
+        } else {
+            this.paso11DTO = new Paso11DTO();
         }
     }
 }

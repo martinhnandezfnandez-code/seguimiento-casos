@@ -13,7 +13,7 @@ public class Anexo5DTO {
 
     private String detectadoPor;
     
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+
     private LocalDate fechaDeteccion;
     
     private String observaciones;

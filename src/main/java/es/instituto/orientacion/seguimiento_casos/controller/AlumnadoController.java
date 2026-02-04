@@ -23,9 +23,12 @@ public class AlumnadoController {
     private final Paso4Repository paso4Repository;
     private final Paso5Repository paso5Repository;
     private final Paso8Repository paso8Repository;
+    private final Paso11Repository paso11Repository;
 
 
-    public AlumnadoController(GuardarService guardarService, AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso8Repository paso8Repository) {
+
+
+    public AlumnadoController(GuardarService guardarService, AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso8Repository paso8Repository, Paso11Repository paso11Repository) {
         this.guardarService = guardarService;
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
@@ -33,6 +36,7 @@ public class AlumnadoController {
         this.paso4Repository = paso4Repository;
         this.paso5Repository = paso5Repository;
         this.paso8Repository = paso8Repository;
+        this.paso11Repository = paso11Repository;
     }
 
     @GetMapping("/nuevo")
@@ -80,13 +84,15 @@ public class AlumnadoController {
             Optional<Paso4> paso4Optional = paso4Repository.findByAlumnadoId(alumno.getId());
             Optional<Paso5> paso5Optional = paso5Repository.findByAlumnadoId(alumno.getId());
             Optional<Paso8> paso8Optional = paso8Repository.findByAlumnadoId(alumno.getId());
+            Optional<Paso11> paso11Optional = paso11Repository.findByAlumnadoId(alumno.getId());
             Paso1 paso1 = paso1Optional.orElse(null);
             Paso2 paso2 = paso2Optional.orElse(null);
             Paso4 paso4 = paso4Optional.orElse(null);
             Paso5 paso5 = paso5Optional.orElse(null);
             Paso8 paso8 = paso8Optional.orElse(null);
+            Paso11 paso11 = paso11Optional.orElse(null);
 
-            listado.add(new CasosDTO(alumno, paso1, paso2, paso4, paso5, paso8));
+            listado.add(new CasosDTO(alumno, paso1, paso2, paso4, paso5, paso8, paso11));
         }
         System.out.println("Total de registros encontrados: " + listado.size());
         model.addAttribute("alumnos", listado);

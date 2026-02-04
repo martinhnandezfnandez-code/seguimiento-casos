@@ -20,13 +20,15 @@ public class GuardarServiceImpl implements GuardarService {
     private final Paso2Repository paso2Repository;
     private final Paso4Repository paso4Repository;
     private final Paso5Repository paso5Repository;
+    private final Paso11Repository paso11Repository;
 
-    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository) {
+    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso11Repository paso11Repository) {
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
         this.paso2Repository = paso2Repository;
         this.paso4Repository = paso4Repository;
         this.paso5Repository = paso5Repository;
+        this.paso11Repository = paso11Repository;
     }
 
     @Override
@@ -91,6 +93,22 @@ public class GuardarServiceImpl implements GuardarService {
         Paso8DTO dto8 = formularioDTO.getPaso8DTO();
         paso8.setOtrasMedidas(dto8.getOtrasMedidas());
         paso8.setResponsableDireccion(dto8.getResponsableDireccion());
+
+        Paso11 paso11 = alumnado.getPaso11();
+        if (paso11 == null) {
+            paso11 = new Paso11();
+            paso11.setAlumnado(alumnado);
+            alumnado.setPaso11(paso11);
+        }
+        Paso11DTO dto11 = formularioDTO.getPaso11DTO();
+        paso11.setFecchacierre(dto11.getFecchacierre());
+        paso11.setObservacionesFechaCierre(dto11.getObservacionesFechaCierre());
+        paso11.setFechaInspeccion(dto11.getFechaInspeccion());
+        paso11.setInspeccion(dto11.getInspeccion());
+        paso11.setFecchafamilia(dto11.getFecchafamilia());
+        paso11.setFamilia(dto11.getFamilia());
+        paso11.setFechaProfesorado(dto11.getFechaProfesorado());
+        paso11.setProfesorado(dto11.getProfesorado());
 
         Long idNuevo = alumnadoRepository.save(alumnado).getId();
         return idNuevo != null;
@@ -182,6 +200,22 @@ public class GuardarServiceImpl implements GuardarService {
         Paso8DTO dto8 = formularioDTO.getPaso8DTO();
         paso8.setOtrasMedidas(dto8.getOtrasMedidas());
         paso8.setResponsableDireccion(dto8.getResponsableDireccion());
+
+        Paso11 paso11 = alumnado.getPaso11();
+        if (paso11 == null) {
+            paso11 = new Paso11();
+            paso11.setAlumnado(alumnado);
+            alumnado.setPaso11(paso11);
+        }
+        Paso11DTO dto11 = formularioDTO.getPaso11DTO();
+        paso11.setFecchacierre(dto11.getFecchacierre());
+        paso11.setObservacionesFechaCierre(dto11.getObservacionesFechaCierre());
+        paso11.setFechaInspeccion(dto11.getFechaInspeccion());
+        paso11.setInspeccion(dto11.getInspeccion());
+        paso11.setFecchafamilia(dto11.getFecchafamilia());
+        paso11.setFamilia(dto11.getFamilia());
+        paso11.setFechaProfesorado(dto11.getFechaProfesorado());
+        paso11.setProfesorado(dto11.getProfesorado());
 
         alumnadoRepository.save(alumnado);
         return true;
