@@ -21,14 +21,16 @@ public class GuardarServiceImpl implements GuardarService {
     private final Paso4Repository paso4Repository;
     private final Paso5Repository paso5Repository;
     private final Paso11Repository paso11Repository;
+    private final CronogramaRepository cronogramaRepository;
 
-    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso11Repository paso11Repository) {
+    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso11Repository paso11Repository, CronogramaRepository cronogramaRepository) {
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
         this.paso2Repository = paso2Repository;
         this.paso4Repository = paso4Repository;
         this.paso5Repository = paso5Repository;
         this.paso11Repository = paso11Repository;
+        this.cronogramaRepository = cronogramaRepository;
     }
 
     @Override
@@ -148,6 +150,7 @@ public class GuardarServiceImpl implements GuardarService {
         paso1.setDetalleHechos(dto.getDetalleHechos());
         paso1.setFechaRegistro(dto.getFechaRegistro());
         paso1.setFirmas(dto.getFirmas());
+
         Paso2 paso2 = alumnado.getPaso2();
         if (paso2 == null) {
             paso2 = new Paso2();
@@ -238,14 +241,14 @@ public class GuardarServiceImpl implements GuardarService {
     }
 
 
-    private static void guardarCronograma(FormularioDTO formularioDTO, Paso2 paso2) {
+    private void guardarCronograma(FormularioDTO formularioDTO, Paso2 paso2) {
         System.out.println("=== Guardando cronograma ===");
         System.out.println("Paso2DTO completo: " + formularioDTO.getPaso2DTO());
-        System.out.println("Cronograma DTO: " + formularioDTO.getPaso2DTO().getCronograma());
+        System.out.println("Cronograma DTO: " + formularioDTO.getPaso2DTO().getCronogramaDTO());
 
 
         if (formularioDTO.getPaso2DTO() == null ||
-                formularioDTO.getPaso2DTO().getCronograma() == null) {
+                formularioDTO.getPaso2DTO().getCronogramaDTO() == null) {
             System.out.println("No hay cronograma para guardar");
             return;
         }
@@ -255,13 +258,13 @@ public class GuardarServiceImpl implements GuardarService {
             paso2.setCronograma(new ArrayList<>());
         }
 
-        System.out.println("Cantidad de items recibidos: " + formularioDTO.getPaso2DTO().getCronograma().size());
+        System.out.println("Cantidad de items recibidos: " + formularioDTO.getPaso2DTO().getCronogramaDTO().size());
 
         // Limpiar elementos existentes
         paso2.getCronograma().clear();
 
         // Crear nuevos objetos Cronograma
-        formularioDTO.getPaso2DTO().getCronograma().forEach(cronogramaDTO -> {
+        formularioDTO.getPaso2DTO().getCronogramaDTO().forEach(cronogramaDTO -> {
             System.out.println("Procesando item:");
             System.out.println("  - Fecha: " + cronogramaDTO.getFecha());
             System.out.println("  - Situacion: " + cronogramaDTO.getSituacion());

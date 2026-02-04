@@ -1,0 +1,17 @@
+
+<th:block th:fragment="paso8(alumno)">
+
+    <td>
+        <span th:if="${alumno.paso8DTO != null
+                      and alumno.paso8DTO.responsableDireccion != null}"
+              class="ok">
+            ✔ Rellenado
+        </span>
+        <span th:unless="${alumno.paso8DTO != null
+                          and alumno.paso8DTO.responsableDireccion != null}"
+              class="ko">
+            ✘ Pendiente
+        </span>
+    </td>
+
+</th:block>

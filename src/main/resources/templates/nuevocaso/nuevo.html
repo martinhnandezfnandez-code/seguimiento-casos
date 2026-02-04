@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Caso</title>
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+
+<body>
+
+<div class="container">
+    <h1>📝 Nuevo Caso</h1>
+
+    <!-- ✅ UN SOLO FORM -->
+    <form th:action="@{/alumnado/guardar}"
+          th:object="${formulario}"
+          method="post">
+
+        <div th:replace="~{nuevocaso/pasos/paso1 :: paso1}"></div>
+        <div th:replace="~{nuevocaso/pasos/paso2 :: paso2}"></div>
+        <div th:replace="~{nuevocaso/pasos/paso3 :: paso3}"></div>
+        <div th:replace="~{nuevocaso/pasos/paso4 :: paso4}"></div>
+        <div th:replace="~{nuevocaso/pasos/paso5 :: paso5}"></div>
+        <div th:replace="~{nuevocaso/pasos/paso8 :: paso8}"></div>
+        <div th:replace="~{nuevocaso/pasos/paso11 :: paso11}"></div>
+
+        <div class="button-group">
+            <button type="submit">💾 Guardar Registro</button>
+            <a th:href="@{/alumnado/listar}" class="btn-back">↩️ Volver</a>
+        </div>
+
+    </form>
+</div>
+
+<!-- ✅ SCRIPT FUERA DEL FORM -->
+<script>
+    function agregarFila() {
+        const tbody = document.getElementById("cronogramaBody");
+        if (!tbody) return;
+
+        const index = tbody.rows.length;
+        const row = tbody.insertRow();
+
+        row.innerHTML = `
+            <td><input type="date" name="paso2DTO.cronogramaDTO[${index}].fecha"></td>
+            <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].situacion"></td>
+            <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].actuacion"></td>
+            <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].documento"></td>
+            <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].observaciones"></td>
+        `;
+    }
+</script>
+
+</body>
+</html>

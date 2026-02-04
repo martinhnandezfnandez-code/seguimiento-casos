@@ -44,14 +44,13 @@ public class AlumnadoController {
     @GetMapping("/nuevo")
     public String nuevo(Model model) {
         model.addAttribute("formulario", new FormularioDTO());
-        return "nuevo-caso";
+        return "nuevocaso/nuevo";
     }
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute("formulario") FormularioDTO formularioDTO) {
 
-        Alumnado alumnado;
-        boolean result = false;
+        boolean result;
 
         // CUANDO EDITAMOS
         if (formularioDTO.getId() != null) {
@@ -101,7 +100,7 @@ public class AlumnadoController {
         System.out.println("Total de registros encontrados: " + listado.size());
         model.addAttribute("alumnos", listado);
 
-        return "listado-casos";
+        return "listados/listado";
     }
 
     // OPCIONAL: Método para editar un caso existente
@@ -111,7 +110,7 @@ public class AlumnadoController {
                 .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
         model.addAttribute("formulario",
                 new FormularioDTO(alumnado));
-        return "nuevo-caso";
+        return "nuevocaso/nuevo";
     }
 
     // OPCIONAL: Método para eliminar

@@ -1,0 +1,14 @@
+<th:block th:fragment="paso1">
+
+    <section class="paso">
+        <h2>Paso 1 · Identificación</h2>
+
+        <label>Código del alumno</label>
+        <input type="text" th:field="*{paso1DTO.codigoAlumno}">
+
+        <label>Detalle de los hechos</label>
+        <textarea th:field="*{paso1DTO.detalleHechos}"></textarea>
+
+    </section>
+
+</th:block>

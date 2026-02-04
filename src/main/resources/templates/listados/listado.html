@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Casos</title>
+
+    <link rel="icon" href="/logotipo.png">
+    <link rel="stylesheet" th:href="@{/css/listado.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>📊 Listado de Casos</h1>
+        <div class="header-buttons">
+            <a href="/alumnado/nuevo" class="btn">➕ Nuevo Caso</a>
+            <a href="/" class="btn btn-secondary">🏠 Menú</a>
+        </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="table-wrapper">
+        <div class="table-container">
+            <table>
+
+                <thead>
+                <tr>
+                    <th class="id-col">ID</th>
+                    <th>ID Caso</th>
+                    <th>ID Doc</th>
+                    <!-- aquí tus th de pasos -->
+                    <th class="actions">Acciones</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="alumno : ${alumnos}">
+
+                    <td class="id-col" th:text="${alumno.id}"></td>
+                    <td th:text="${alumno.idCaso}"></td>
+                    <td th:text="${alumno.idDocumento}"></td>
+
+                    <th:block th:insert="~{listados/pasos/paso1 :: paso1(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso2 :: paso2(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso3 :: paso3(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso4 :: paso4(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso5 :: paso5(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso7 :: paso7(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso8 :: paso8(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso11 :: paso11(${alumno})}"/>
+
+                    <td th:text="${alumno.observaciones}"></td>
+                    <td th:text="${#temporals.format(alumno.fechaCreacion,'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${#temporals.format(alumno.fechaUltimaActualizacion,'dd/MM/yyyy HH:mm')}"></td>
+
+                    <td class="actions">
+                        <a th:href="@{/alumnado/editar/{id}(id=${alumno.id})}" class="action-edit">✏️</a>
+                        <a th:href="@{/alumnado/eliminar/{id}(id=${alumno.id})}" class="action-delete">🗑️</a>
+                    </td>
+
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

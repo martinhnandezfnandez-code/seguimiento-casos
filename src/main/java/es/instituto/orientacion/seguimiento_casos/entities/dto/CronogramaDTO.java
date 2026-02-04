@@ -2,11 +2,13 @@ package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 @Data
 public class CronogramaDTO {
-
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fecha;
 
     private String situacion;
@@ -19,6 +21,7 @@ public class CronogramaDTO {
 
     public CronogramaDTO() {
     }
+
     public CronogramaDTO(Cronograma cronograma) {
         this.actuacion= cronograma.getActuacion();
         this.documento= cronograma.getDocumento();

@@ -347,16 +347,16 @@
                     <tbody id="cronogramaBody">
 
 
-                    <tr th:each="fila, stat : *{paso2DTO.cronograma}">
-                        <td><input type="date" th:field="*{paso2DTO.cronograma[__${stat.index}__].fecha}"
+                    <tr th:each="fila, stat : *{paso2DTO.cronogramaDTO}">
+                        <td><input type="date" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].fecha}"
                                    class="input-fecha-tabla"></td>
-                        <td><input type="text" th:field="*{paso2DTO.cronograma[__${stat.index}__].situacion}"
+                        <td><input type="text" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].situacion}"
                                    class="input-tabla"></td>
-                        <td><input type="text" th:field="*{paso2DTO.cronograma[__${stat.index}__].actuacion}"
+                        <td><input type="text" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].actuacion}"
                                    class="input-tabla"></td>
-                        <td><input type="text" th:field="*{paso2DTO.cronograma[__${stat.index}__].documento}"
+                        <td><input type="text" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].documento}"
                                    class="input-tabla"></td>
-                        <td><input type="text" th:field="*{paso2DTO.cronograma[__${stat.index}__].observaciones}"
+                        <td><input type="text" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].observaciones}"
                                    class="input-tabla"></td>
                     </tr>
 
@@ -369,18 +369,23 @@
 
             <script>
                 function agregarFila() {
-                    const tbody = document.getElementById("cronogramaBody");
-                    const index = tbody.rows.length;
-                    const row = tbody.insertRow();
+    const tbody = document.getElementById("cronogramaBody");
+    if (!tbody) {
+        console.error("No se encontró el elemento cronogramaBody");
+        return;
+    }
 
-                    row.innerHTML = `
-            <td><input type="date" name="paso2DTO.cronograma[${index}].fecha" class="input-fecha-tabla"></td>
-            <td><input type="text" name="paso2DTO.cronograma[${index}].situacion" class="input-tabla"></td>
-            <td><input type="text" name="paso2DTO.cronograma[${index}].actuacion" class="input-tabla"></td>
-            <td><input type="text" name="paso2DTO.cronograma[${index}].documento" class="input-tabla"></td>
-            <td><input type="text" name="paso2DTO.cronograma[${index}].observaciones" class="input-tabla"></td>
-            `;
-                }
+    const index = tbody.rows.length;
+    const row = tbody.insertRow();
+
+    row.innerHTML = `
+        <td><input type="date" name="paso2DTO.cronogramaDTO[${index}].fecha" class="input-fecha-tabla"></td>
+        <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].situacion" class="input-tabla"></td>
+        <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].actuacion" class="input-tabla"></td>
+        <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].documento" class="input-tabla"></td>
+        <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].observaciones" class="input-tabla"></td>
+    `;
+}
             </script>
 
 
