@@ -37,8 +37,10 @@ public class Alumnado {
     private Paso2 paso2;
 
     // PASO 3
-    @Column(name = "paso3")
-    private String paso3_1;
+    @OneToOne(mappedBy  = "alumnado",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Paso3 paso3;
 
     // PASO 4
     @OneToOne(mappedBy = "alumnado",
@@ -97,7 +99,6 @@ public class Alumnado {
         this.id = formularioDTO.getId();
         this.idCaso = formularioDTO.getIdCaso();
         this.idDocumento = formularioDTO.getIdDocumento();
-        this.paso3_1 = formularioDTO.getPaso3_1();
 
         this.paso7_1 = formularioDTO.getPaso7_1();
         this.paso9_1 = formularioDTO.getPaso9_1();
@@ -111,6 +112,11 @@ public class Alumnado {
             Paso2 paso2 = new Paso2(formularioDTO.getPaso2DTO());
             paso2.setAlumnado(this);
             this.paso2 = paso2;
+        }
+        if (formularioDTO.getPaso3DTO() != null) {
+            Paso3 paso3 = new Paso3(formularioDTO.getPaso3DTO());
+            paso3.setAlumnado(this);
+            this.paso3 = paso3;
         }
         if (formularioDTO.getPaso4DTO() != null) {
             Paso4 paso4 = new Paso4(formularioDTO.getPaso4DTO());

@@ -13,11 +13,10 @@ public class FormularioDTO {
     private Integer idDocumento;
     private Paso1DTO paso1DTO;
     private Paso2DTO paso2DTO;
+    private Paso3DTO paso3DTO;
     private Paso4DTO paso4DTO;
     private Paso5DTO paso5DTO;
     private Paso8DTO paso8DTO;
-
-    private String paso3_1;
 
     private String paso6_1;
     private String paso6_2;
@@ -33,7 +32,7 @@ public class FormularioDTO {
 
     private String observaciones;
 
-    public FormularioDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso4 paso4, Paso5 paso5, Paso8 paso8, Paso11 paso11) {
+    public FormularioDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso3 paso3, Paso4 paso4, Paso5 paso5, Paso8 paso8, Paso11 paso11) {
         // Mapear Paso1 (con protección contra null)
         this.paso1DTO = new Paso1DTO(paso1);
 
@@ -45,8 +44,8 @@ public class FormularioDTO {
         // Mapear PASO 2 (con protección contra null)
        this.paso2DTO = new Paso2DTO(paso2);
 
-        // Mapear PASO 3
-        this.paso3_1 = alumno.getPaso3_1();
+        // Mapear PASO 3 (con protección contra null)
+        this.paso3DTO = new Paso3DTO(paso3);
 
         // Mapear Paso 4 (con protección contra null)
         this.paso4DTO = new Paso4DTO(paso4);
@@ -84,6 +83,7 @@ public class FormularioDTO {
         super();
         this.paso1DTO = new Paso1DTO();
         this.paso2DTO = new Paso2DTO();
+        this.paso3DTO = new Paso3DTO();
         this.paso4DTO = new Paso4DTO();
         this.paso5DTO = new Paso5DTO();
         this.paso8DTO = new Paso8DTO();
@@ -96,9 +96,7 @@ public class FormularioDTO {
         this.id = alumnado.getId();
         this.idCaso = alumnado.getIdCaso();
         this.idDocumento = alumnado.getIdDocumento();
-        this.paso3_1 = alumnado.getPaso3_1();
         this.paso7_1 = alumnado.getPaso7_1();
-
         this.paso9_1 = alumnado.getPaso9_1();
         this.paso10_1 = alumnado.getPaso10_1();
         this.observaciones= alumnado.getObservaciones();
@@ -112,6 +110,11 @@ public class FormularioDTO {
             this.paso2DTO = new Paso2DTO(alumnado.getPaso2());
         } else {
             this.paso2DTO = new Paso2DTO();
+        }
+        if (alumnado.getPaso3() != null) {
+            this.paso3DTO = new Paso3DTO(alumnado.getPaso3());
+        } else {
+            this.paso3DTO = new Paso3DTO();
         }
         if (alumnado.getPaso4() != null) {
             this.paso4DTO = new Paso4DTO(alumnado.getPaso4());
