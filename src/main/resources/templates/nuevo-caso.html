@@ -498,7 +498,9 @@
             </div>
         </div>
 
+        <div class="section">
 
+        <h2>PASO 5 <span class="paso-badge">Anexo V – Señales de alarma, factores de protección y factores de riesgo.</span></h2>
         <h3 style="color: #d32f2f; border-bottom: 2px solid #d32f2f;">1.1 Señales de Alarma Directas</h3>
         <table class="valoracion-table" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
             <thead>
@@ -912,6 +914,7 @@
             </tr>
             </tbody>
         </table>
+        </div><!--
         <h3 style="color: #455a64; border-bottom: 2px solid #455a64; margin-top: 30px;">4. Observaciones y Datos de Detección</h3>
 
         <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #dee2e6;">
@@ -948,36 +951,142 @@
 
             </div>
         </div>
-
-        <!--
-                                           <div class="section">
-                                               <h2>PASO 6 <span class="paso-badge">Anexo VI</span></h2>
-
-                                               <div class="field-group">
-                                                   <strong>Director/a traslada información a Inspección</strong>
-                                                   <input type="text" th:field="*{paso6_1}" placeholder="Traslado a Inspección">
-                                               </div>
-
-                                               <div class="field-group">
-                                                   <strong>Director/a traslada información a la CPAyC</strong>
-                                                   <input type="text" th:field="*{paso6_2}" placeholder="Traslado a CPAyC">
-                                               </div>
-
-                                               <div class="field-group">
-                                                   <strong>EA: toma de decisiones – Anexo VI</strong>
-                                                   <input type="text" th:field="*{paso6_3}" placeholder="Decisiones tomadas por el EA">
-                                               </div>
-                                           </div>
-        -->
+        <tr><td>Abandono de tratamiento previo</td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.abandonoTratamiento}" th:value="true"/></td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.abandonoTratamiento}" th:value="false"/></td>
+        </tr>
+        <tr><td>No seguimiento de prescripciones médicas/psicológicas</td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.noSeguirPrescripcion}" th:value="true"/></td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.noSeguirPrescripcion}" th:value="false"/></td>
+        </tr>
+        <tr><td>Rasgos de personalidad influyentes</td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.personalidadInfluyente}" th:value="true"/></td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.personalidadInfluyente}" th:value="false"/></td>
+        </tr>
+        <tr><td>Uso inadecuado de las TIC</td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.usoInadecuadoTic}" th:value="true"/></td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.usoInadecuadoTic}" th:value="false"/></td>
+        </tr>
+        <tr><td>Rechazo de la imagen corporal o TCA</td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.rechazoImagenCorporalTca}" th:value="true"/></td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.rechazoImagenCorporalTca}" th:value="false"/></td>
+        </tr>
+        <tr><td>Presencia de TEA, TDAH o Altas Capacidades</td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.presenciaTeaTdahCapacidades}" th:value="true"/></td>
+            <td style="text-align:center"><input type="radio" th:field="*{paso5DTO.anexo5.factoresRiesgo.presenciaTeaTdahCapacidades}" th:value="false"/></td>
+        </tr>
+        </tbody>
+        </table>
+!-->
         <div class="section">
-
-
             <h2>PASO 7 <span class="paso-badge">Anexo VII</span></h2>
+            <p><strong>Plan de Prevención, Protección y Acompañamiento Personalizado.</strong></p>
+
             <div class="field-group">
-                <strong>EA: Elaboración del Plan Individualizado – Anexo VII</strong>
-                <input type="text" th:field="*{paso7_1}" placeholder="Plan Individualizado">
+                <label>Objetivo General del Plan:</label>
+                <textarea th:field="*{paso7DTO.objetivoGeneral}" placeholder="Defina el propósito principal del plan..."></textarea>
+            </div>
+
+            <div class="field-group">
+                <label>Objetivos Específicos:</label>
+                <textarea th:field="*{paso7DTO.objetivosEspecificos}" placeholder="Liste los objetivos concretos a alcanzar..."></textarea>
+            </div>
+
+            <div class="field-group">
+                <label>Equipo de Acompañamiento:</label>
+                <input type="text" th:field="*{paso7DTO.equipoAcompanamiento}" placeholder="Personas que integran el equipo">
+            </div>
+
+            <div class="field-group">
+                <label>Calendario de Seguimiento:</label>
+                <textarea th:field="*{paso7DTO.calendarioSeguimiento}" placeholder="Fechas previstas para revisiones..."></textarea>
+            </div>
+            <div class="field-group">
+                <label>Checklist de Formalización:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" th:field="*{paso7DTO.tieneRepositorioAntecedentes}"> Posee repositorio de antecedentes</label>
+                    <label><input type="checkbox" th:field="*{paso7DTO.tieneCronogramaFormalizado}"> Cronograma formalizado</label>
+                    <label><input type="checkbox" th:field="*{paso7DTO.esFormatoDigital}"> Formato digital disponible</label>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label><strong>Actuaciones en el Centro Educativo:</strong></label>
+                <div class="field-group">
+                    <label>1 Medidas de prevención general:</label>
+                    <textarea th:field="*{paso7DTO.medidasPrevencionGeneral}"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>1.1 Medidas de protección y seguridad:</label>
+                    <textarea th:field="*{paso7DTO.medidasProteccionSeguridad}"></textarea>
+                </div>
+            </div>
+            <div class="field-group">
+                <label>1.2 Medidas de Acompañamiento emocional:</label>
+                <textarea th:field="*{paso7DTO.medidasAcompanamientoEmocional}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>1.3 Otras medidas adoptadas:</label>
+                <textarea th:field="*{paso7DTO.otrasMedidasAdoptadas}"></textarea>
+            </div>
+                     <div class="field-group">
+                <label>2 Información aportada por el equipo docente:</label>
+                <textarea th:field="*{paso7DTO.informacionEquipoDocente}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>3 Planificación sobre la observación y atención al día a día:</label>
+                <textarea th:field="*{paso7DTO.planificacionObservacionAtencion}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>4.1 Acciones a desarrollar por el tutor:</label>
+                <textarea th:field="*{paso7DTO.accionesTutor}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>4.2 Intervención del equipo docente y método para notificación:</label>
+                <textarea th:field="*{paso7DTO.intervencionEquipoDocente}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>4.3 Intervención Específica del Orientador/a:</label>
+                <textarea th:field="*{paso7DTO.intervencionOrientacion}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>4.4 Intervención de no docentes del centro:</label>
+                <textarea th:field="*{paso7DTO.intervencionOtrosTrabajadores}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>5 Detalle sobre posibles medidas de acompañamiento:</label>
+                <textarea th:field="*{paso7DTO.acompanamientoCompaneros}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>6 Desarrollo de actividades de sensibilización e intervención con el grupo-aula:</label>
+                <textarea th:field="*{paso7DTO.actividadesSensibilizacionAula}"></textarea>
+            </div>
+            <div class="field-group">
+                <label>7 Desarrollo de actividades de sensibilización e intervención con el profesorado:</label>
+                <textarea th:field="*{paso7DTO.formacionProfesorado}"></textarea>
+            </div>
+
+            <div class="field-group">
+                <label>Actuaciones de coordinación con la Familia:</label>
+                <textarea th:field="*{paso7DTO.actuacionesFamilia}" placeholder="Acuerdos y acciones con el entorno familiar"></textarea>
+            </div>
+            <div class="field-group">
+                <label>Actuaciones de Servicios externos:</label>
+                <textarea th:field="*{paso7DTO.actuacionesServiciosExternos}" placeholder="Acuerdos y acciones con servicios externos"></textarea>
+            </div>
+
+            <div class="field-group fecha-group">
+                <label>📅 Fecha de Elaboración del Plan</label>
+                <input type="date" th:field="*{paso7DTO.fechaElaboracion}">
+            </div>
+
+            <div class="field-group">
+                <label>Elaborado por:</label>
+                <input type="text" th:field="*{paso7DTO.elaboradoPor}" placeholder="Nombre del responsable">
             </div>
         </div>
+
+
 
         <div class="section">
             <h2>PASO 8 <span class="paso-badge">Anexo VIII</span></h2>
@@ -1052,14 +1161,36 @@
                           placeholder="Escriba aquí cualquier observación adicional o acción relevante..."></textarea>
             </div>
         </div>
-
+</div>
         <!-- BOTONES -->
         <div class="button-group">
             <button type="submit">💾 Guardar Registro</button>
             <a href="/alumnado/listar" class="btn-back">↩️ Volver al Listado</a>
         </div>
-    </form>
+
 </div>
 
 </body>
+</form>
 </html>
+        <!--
+                                           <div class="section">
+                                               <h2>PASO 6 <span class="paso-badge">Anexo VI</span></h2>
+
+                                               <div class="field-group">
+                                                   <strong>Director/a traslada información a Inspección</strong>
+                                                   <input type="text" th:field="*{paso6_1}" placeholder="Traslado a Inspección">
+                                               </div>
+
+                                               <div class="field-group">
+                                                   <strong>Director/a traslada información a la CPAyC</strong>
+                                                   <input type="text" th:field="*{paso6_2}" placeholder="Traslado a CPAyC">
+                                               </div>
+
+                                               <div class="field-group">
+                                                   <strong>EA: toma de decisiones – Anexo VI</strong>
+                                                   <input type="text" th:field="*{paso6_3}" placeholder="Decisiones tomadas por el EA">
+                                               </div>
+                                           </div>
+        -->
+

@@ -57,7 +57,6 @@ public class CasosDTO {
         this.fechaCreacion = alumno.getFechaCreacion();
         this.fechaUltimaActualizacion = alumno.getFechaUltimaActualizacion();
         this.paso3_1 = alumno.getPaso3_1();
-        this.paso7_1 = alumno.getPaso7_1();
         this.paso9_1 = alumno.getPaso9_1();
         this.paso10_1 = alumno.getPaso10_1();
         this.observaciones = alumno.getObservaciones();

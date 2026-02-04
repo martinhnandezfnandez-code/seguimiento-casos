@@ -36,7 +36,6 @@ public class GuardarServiceImpl implements GuardarService {
 
         Alumnado alumnado = new Alumnado(formularioDTO);
         alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso7_1(formularioDTO.getPaso7_1());
         alumnado.setPaso9_1(formularioDTO.getPaso9_1());
         alumnado.setPaso10_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
@@ -120,7 +119,6 @@ public class GuardarServiceImpl implements GuardarService {
         alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
         alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso7_1());
         alumnado.setPaso3_1(formularioDTO.getPaso9_1());
         alumnado.setPaso3_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
