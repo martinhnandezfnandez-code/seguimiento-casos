@@ -35,7 +35,6 @@ public class GuardarServiceImpl implements GuardarService {
     public boolean crearAlumnado(FormularioDTO formularioDTO) {
 
         Alumnado alumnado = new Alumnado(formularioDTO);
-        alumnado.setPaso3_1(formularioDTO.getPaso3_1());
         alumnado.setPaso7_1(formularioDTO.getPaso7_1());
         alumnado.setPaso9_1(formularioDTO.getPaso9_1());
         alumnado.setPaso10_1(formularioDTO.getPaso10_1());
@@ -50,6 +49,14 @@ public class GuardarServiceImpl implements GuardarService {
         }
         guardarCronograma(formularioDTO, alumnado.getPaso2());
 
+        Paso3 paso3 = alumnado.getPaso3();
+        if (paso3 == null) {
+            paso3 = new Paso3();
+            paso3.setAlumnado(alumnado);
+            alumnado.setPaso3(paso3);
+        }
+        Paso3DTO dto3 = formularioDTO.getPaso3DTO();
+        paso3.setMedidasProvisionales(dto3.getMedidasProvisionales());
 
         Paso4 paso4 = alumnado.getPaso4();
         if (paso4 == null) {
@@ -119,10 +126,9 @@ public class GuardarServiceImpl implements GuardarService {
         Alumnado alumnado;
         alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
-        alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso7_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso9_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso10_1());
+        alumnado.setPaso7_1(formularioDTO.getPaso7_1());
+        alumnado.setPaso9_1(formularioDTO.getPaso9_1());
+        alumnado.setPaso10_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
 
         Paso1 paso1 = alumnado.getPaso1();
@@ -157,6 +163,16 @@ public class GuardarServiceImpl implements GuardarService {
         paso2.setPaso2_7(dto2.getPaso2_7());
 
         guardarCronograma(formularioDTO, paso2);
+
+        Paso3 paso3 = alumnado.getPaso3();
+        if (paso3 == null) {
+            paso3 = new Paso3();
+            paso3.setAlumnado(alumnado);
+            alumnado.setPaso3(paso3);
+        }
+        Paso3DTO dto3 = formularioDTO.getPaso3DTO();
+        paso3.setMedidasProvisionales(dto3.getMedidasProvisionales());
+
 
         Paso4 paso4 = alumnado.getPaso4();
         if (paso4 == null) {

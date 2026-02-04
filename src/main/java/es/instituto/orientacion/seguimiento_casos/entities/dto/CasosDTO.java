@@ -47,7 +47,7 @@ public class CasosDTO {
     public CasosDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso3 paso3,Paso4 paso4, Paso5 paso5, Paso8 paso8, Paso11 paso11) {
         this.paso1DTO = (paso1 != null) ? new Paso1DTO(paso1) : new Paso1DTO();
         this.paso2DTO = (paso2 != null) ? new Paso2DTO(paso2) : new Paso2DTO();
-        this.paso3DTO = (paso3 != null) ? new Paso3DTO(paso3) : new Paso4DTO();
+        this.paso3DTO = (paso3 != null) ? new Paso3DTO(paso3) : new Paso3DTO();
         this.paso4DTO = (paso4 != null) ? new Paso4DTO(paso4) : new Paso4DTO();
         this.paso5DTO = (paso5 != null) ? new Paso5DTO(paso5) : new Paso5DTO();
         this.paso8DTO = (paso8 != null) ? new Paso8DTO(paso8) : new Paso8DTO();
