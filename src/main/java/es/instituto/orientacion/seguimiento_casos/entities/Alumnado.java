@@ -2,6 +2,7 @@ package es.instituto.orientacion.seguimiento_casos.entities;
 
 import es.instituto.orientacion.seguimiento_casos.entities.dto.FormularioDTO;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.*;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso7;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -60,8 +61,10 @@ public class Alumnado {
     private String paso6_3;
 
     // PASO 7
-    @Column(name = "paso7")
-    private String paso7_1;
+    @OneToOne(mappedBy = "alumnado",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Paso7 paso7;
 
     // PASO 8
     @OneToOne(mappedBy = "alumnado",
@@ -100,7 +103,6 @@ public class Alumnado {
         this.idCaso = formularioDTO.getIdCaso();
         this.idDocumento = formularioDTO.getIdDocumento();
 
-        this.paso7_1 = formularioDTO.getPaso7_1();
         this.paso9_1 = formularioDTO.getPaso9_1();
         this.paso10_1 = formularioDTO.getPaso10_1();
         if (formularioDTO.getPaso1DTO() != null) {
@@ -127,6 +129,11 @@ public class Alumnado {
             Paso5 paso5 = new Paso5(formularioDTO.getPaso5DTO());
             paso5.setAlumnado(this);
             this.paso5 = paso5;
+        }
+        if (formularioDTO.getPaso7DTO() != null) {
+            Paso7 paso7 = new Paso7(formularioDTO.getPaso7DTO());
+            paso7.setAlumnado(this);
+            this.paso7 = paso7;
         }
         if (formularioDTO.getPaso8DTO() != null) {
             Paso8 paso8 = new Paso8(formularioDTO.getPaso8DTO());

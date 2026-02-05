@@ -2,6 +2,7 @@ package es.instituto.orientacion.seguimiento_casos.entities.dto;
 
 import es.instituto.orientacion.seguimiento_casos.entities.*;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.*;
+import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso7;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,13 +17,14 @@ public class FormularioDTO {
     private Paso3DTO paso3DTO;
     private Paso4DTO paso4DTO;
     private Paso5DTO paso5DTO;
+    private Paso7DTO paso7DTO;
     private Paso8DTO paso8DTO;
 
     private String paso6_1;
-    private String paso6_2;
-    private String paso6_3;
 
-    private String paso7_1;
+    private String paso6_2;
+
+    private String paso6_3;
 
     private String paso9_1;
 
@@ -32,6 +34,8 @@ public class FormularioDTO {
 
     private String observaciones;
 
+
+
     // Constructor vacío
     public FormularioDTO() {
         super();
@@ -40,6 +44,7 @@ public class FormularioDTO {
         this.paso3DTO = new Paso3DTO();
         this.paso4DTO = new Paso4DTO();
         this.paso5DTO = new Paso5DTO();
+        this.paso7DTO = new Paso7DTO();
         this.paso8DTO = new Paso8DTO();
         this.paso11DTO = new Paso11DTO();
 
@@ -50,6 +55,8 @@ public class FormularioDTO {
         this.id = alumnado.getId();
         this.idCaso = alumnado.getIdCaso();
         this.idDocumento = alumnado.getIdDocumento();
+        this.paso3_1 = alumnado.getPaso3_1();
+
         this.paso7_1 = alumnado.getPaso7_1();
         this.paso9_1 = alumnado.getPaso9_1();
         this.paso10_1 = alumnado.getPaso10_1();
@@ -79,6 +86,11 @@ public class FormularioDTO {
             this.paso5DTO = new Paso5DTO(alumnado.getPaso5());
         } else {
             this.paso5DTO = new Paso5DTO();
+        }
+        if (alumnado.getPaso7() != null) {
+            this.paso7DTO = new Paso7DTO(alumnado.getPaso7());
+        } else {
+            this.paso7DTO = new Paso7DTO();
         }
         if (alumnado.getPaso8() != null) {
             this.paso8DTO = new Paso8DTO(alumnado.getPaso8());
