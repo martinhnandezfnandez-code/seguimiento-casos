@@ -20,15 +20,17 @@ public class GuardarServiceImpl implements GuardarService {
     private final Paso2Repository paso2Repository;
     private final Paso4Repository paso4Repository;
     private final Paso5Repository paso5Repository;
+    private final Paso7Repository paso7Repository;
     private final Paso11Repository paso11Repository;
     private final CronogramaRepository cronogramaRepository;
 
-    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso11Repository paso11Repository, CronogramaRepository cronogramaRepository) {
+    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso7Repository paso7Repository, Paso11Repository paso11Repository, CronogramaRepository cronogramaRepository) {
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
         this.paso2Repository = paso2Repository;
         this.paso4Repository = paso4Repository;
         this.paso5Repository = paso5Repository;
+        this.paso7Repository = paso7Repository;
         this.paso11Repository = paso11Repository;
         this.cronogramaRepository = cronogramaRepository;
     }
@@ -37,8 +39,6 @@ public class GuardarServiceImpl implements GuardarService {
     public boolean crearAlumnado(FormularioDTO formularioDTO) {
 
         Alumnado alumnado = new Alumnado(formularioDTO);
-        alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso7_1(formularioDTO.getPaso7_1());
         alumnado.setPaso9_1(formularioDTO.getPaso9_1());
         alumnado.setPaso10_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
@@ -93,6 +93,50 @@ public class GuardarServiceImpl implements GuardarService {
             anexo5.setPaso5(paso5);
             paso5.setAnexo5(anexo5);
         }
+        if (dto5.getAnexo5() != null) {
+            Anexo5 anexo5 = new Anexo5(dto5.getAnexo5());
+            anexo5.setPaso5(paso5);
+            paso5.setAnexo5(anexo5);
+        }
+        Paso7 paso7 = alumnado.getPaso7();
+        if (paso7 == null) {
+            paso7 = new Paso7();
+            paso7.setAlumnado(alumnado);
+            alumnado.setPaso7(paso7);
+        }
+
+        Paso7DTO dto7 = formularioDTO.getPaso7DTO();
+
+        paso7.setCodigoAlumno(dto7.getCodigoAlumno());
+        paso7.setObjetivoGeneral(dto7.getObjetivoGeneral());
+        paso7.setObjetivosEspecificos(dto7.getObjetivosEspecificos());
+        paso7.setEquipoAcompanamiento(dto7.getEquipoAcompanamiento());
+        paso7.setCalendarioSeguimiento(dto7.getCalendarioSeguimiento());
+
+        paso7.setTieneRepositorioAntecedentes(dto7.getTieneRepositorioAntecedentes());
+        paso7.setTieneCronogramaFormalizado(dto7.getTieneCronogramaFormalizado());
+        paso7.setEsFormatoDigital(dto7.getEsFormatoDigital());
+
+        paso7.setMedidasPrevencionGeneral(dto7.getMedidasPrevencionGeneral());
+        paso7.setMedidasProteccionSeguridad(dto7.getMedidasProteccionSeguridad());
+        paso7.setMedidasAcompanamientoEmocional(dto7.getMedidasAcompanamientoEmocional());
+        paso7.setOtrasMedidasAdoptadas(dto7.getOtrasMedidasAdoptadas());
+        paso7.setInformacionEquipoDocente(dto7.getInformacionEquipoDocente());
+        paso7.setPlanificacionObservacionAtencion(dto7.getPlanificacionObservacionAtencion());
+
+        paso7.setAccionesTutor(dto7.getAccionesTutor());
+        paso7.setIntervencionEquipoDocente(dto7.getIntervencionEquipoDocente());
+        paso7.setIntervencionOrientacion(dto7.getIntervencionOrientacion());
+        paso7.setIntervencionOtrosTrabajadores(dto7.getIntervencionOtrosTrabajadores());
+        paso7.setAcompanamientoCompaneros(dto7.getAcompanamientoCompaneros());
+        paso7.setActividadesSensibilizacionAula(dto7.getActividadesSensibilizacionAula());
+        paso7.setFormacionProfesorado(dto7.getFormacionProfesorado());
+
+        paso7.setActuacionesFamilia(dto7.getActuacionesFamilia());
+        paso7.setActuacionesServiciosExternos(dto7.getActuacionesServiciosExternos());
+
+        paso7.setElaboradoPor(dto7.getElaboradoPor());
+        paso7.setFechaElaboracion(dto7.getFechaElaboracion());
 
         Paso8 paso8 = alumnado.getPaso8();
         if (paso8 == null) {
@@ -129,10 +173,6 @@ public class GuardarServiceImpl implements GuardarService {
         Alumnado alumnado;
         alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
-        alumnado.setPaso3_1(formularioDTO.getPaso3_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso9_1());
-        alumnado.setPaso3_1(formularioDTO.getPaso10_1());
-        alumnado.setPaso7_1(formularioDTO.getPaso7_1());
         alumnado.setPaso9_1(formularioDTO.getPaso9_1());
         alumnado.setPaso10_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
@@ -213,6 +253,46 @@ public class GuardarServiceImpl implements GuardarService {
             anexo5.setPaso5(paso5);
             paso5.setAnexo5(anexo5);
         }
+
+        Paso7 paso7 = alumnado.getPaso7();
+        if (paso7 == null) {
+            paso7 = new Paso7();
+            paso7.setAlumnado(alumnado);
+            alumnado.setPaso7(paso7);
+        }
+
+        Paso7DTO dto7 = formularioDTO.getPaso7DTO();
+
+        paso7.setCodigoAlumno(dto7.getCodigoAlumno());
+        paso7.setObjetivoGeneral(dto7.getObjetivoGeneral());
+        paso7.setObjetivosEspecificos(dto7.getObjetivosEspecificos());
+        paso7.setEquipoAcompanamiento(dto7.getEquipoAcompanamiento());
+        paso7.setCalendarioSeguimiento(dto7.getCalendarioSeguimiento());
+
+        paso7.setTieneRepositorioAntecedentes(dto7.getTieneRepositorioAntecedentes());
+        paso7.setTieneCronogramaFormalizado(dto7.getTieneCronogramaFormalizado());
+        paso7.setEsFormatoDigital(dto7.getEsFormatoDigital());
+
+        paso7.setMedidasPrevencionGeneral(dto7.getMedidasPrevencionGeneral());
+        paso7.setMedidasProteccionSeguridad(dto7.getMedidasProteccionSeguridad());
+        paso7.setMedidasAcompanamientoEmocional(dto7.getMedidasAcompanamientoEmocional());
+        paso7.setOtrasMedidasAdoptadas(dto7.getOtrasMedidasAdoptadas());
+        paso7.setInformacionEquipoDocente(dto7.getInformacionEquipoDocente());
+        paso7.setPlanificacionObservacionAtencion(dto7.getPlanificacionObservacionAtencion());
+
+        paso7.setAccionesTutor(dto7.getAccionesTutor());
+        paso7.setIntervencionEquipoDocente(dto7.getIntervencionEquipoDocente());
+        paso7.setIntervencionOrientacion(dto7.getIntervencionOrientacion());
+        paso7.setIntervencionOtrosTrabajadores(dto7.getIntervencionOtrosTrabajadores());
+        paso7.setAcompanamientoCompaneros(dto7.getAcompanamientoCompaneros());
+        paso7.setActividadesSensibilizacionAula(dto7.getActividadesSensibilizacionAula());
+        paso7.setFormacionProfesorado(dto7.getFormacionProfesorado());
+
+        paso7.setActuacionesFamilia(dto7.getActuacionesFamilia());
+        paso7.setActuacionesServiciosExternos(dto7.getActuacionesServiciosExternos());
+
+        paso7.setElaboradoPor(dto7.getElaboradoPor());
+        paso7.setFechaElaboracion(dto7.getFechaElaboracion());
 
         Paso8 paso8 = alumnado.getPaso8();
         if (paso8 == null) {

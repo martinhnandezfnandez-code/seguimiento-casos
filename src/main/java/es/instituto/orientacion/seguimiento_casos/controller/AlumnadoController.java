@@ -23,13 +23,14 @@ public class AlumnadoController {
     private final Paso3Repository paso3Repository;
     private final Paso4Repository paso4Repository;
     private final Paso5Repository paso5Repository;
+    private final Paso7Repository paso7Repository;
     private final Paso8Repository paso8Repository;
     private final Paso11Repository paso11Repository;
 
 
 
 
-    public AlumnadoController(GuardarService guardarService, AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso3Repository paso3Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso8Repository paso8Repository, Paso11Repository paso11Repository) {
+    public AlumnadoController(GuardarService guardarService, AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso3Repository paso3Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso7Repository paso7Repository, Paso8Repository paso8Repository, Paso11Repository paso11Repository) {
         this.guardarService = guardarService;
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
@@ -37,6 +38,7 @@ public class AlumnadoController {
         this.paso3Repository = paso3Repository;
         this.paso4Repository = paso4Repository;
         this.paso5Repository = paso5Repository;
+        this.paso7Repository = paso7Repository;
         this.paso8Repository = paso8Repository;
         this.paso11Repository = paso11Repository;
     }
@@ -85,6 +87,7 @@ public class AlumnadoController {
             Optional<Paso3> paso3Optional = paso3Repository.findByAlumnadoId(alumno.getId());
             Optional<Paso4> paso4Optional = paso4Repository.findByAlumnadoId(alumno.getId());
             Optional<Paso5> paso5Optional = paso5Repository.findByAlumnadoId(alumno.getId());
+            Optional<Paso7> paso7Optional = paso7Repository.findByAlumnadoId(alumno.getId());
             Optional<Paso8> paso8Optional = paso8Repository.findByAlumnadoId(alumno.getId());
             Optional<Paso11> paso11Optional = paso11Repository.findByAlumnadoId(alumno.getId());
             Paso1 paso1 = paso1Optional.orElse(null);
@@ -92,10 +95,11 @@ public class AlumnadoController {
             Paso3 paso3 = paso3Optional.orElse(null);
             Paso4 paso4 = paso4Optional.orElse(null);
             Paso5 paso5 = paso5Optional.orElse(null);
+            Paso7 paso7 = paso7Optional.orElse(null);
             Paso8 paso8 = paso8Optional.orElse(null);
             Paso11 paso11 = paso11Optional.orElse(null);
 
-            listado.add(new CasosDTO(alumno, paso1, paso2, paso3, paso4, paso5, paso8, paso11));
+            listado.add(new CasosDTO(alumno, paso1, paso2, paso3, paso4, paso5, paso7, paso8, paso11));
         }
         System.out.println("Total de registros encontrados: " + listado.size());
         model.addAttribute("alumnos", listado);

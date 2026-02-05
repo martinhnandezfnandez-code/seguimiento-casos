@@ -55,9 +55,6 @@ public class FormularioDTO {
         this.id = alumnado.getId();
         this.idCaso = alumnado.getIdCaso();
         this.idDocumento = alumnado.getIdDocumento();
-        this.paso3_1 = alumnado.getPaso3_1();
-
-        this.paso7_1 = alumnado.getPaso7_1();
         this.paso9_1 = alumnado.getPaso9_1();
         this.paso10_1 = alumnado.getPaso10_1();
         this.observaciones= alumnado.getObservaciones();
