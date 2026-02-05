@@ -1,0 +1,17 @@
+<th:block th:fragment="paso8">
+
+    <div class="section">
+        <h2>PASO 8 <span class="paso-badge">Anexo VIII</span></h2>
+        <div class="field-group">
+            <strong>Responsable de Dirección:</strong>
+            <input type="text" th:field="*{paso8DTO.responsableDireccion}"
+                   placeholder="Nombre del responsable de dirección">
+        </div>
+        <div class="field-group">
+            <strong>Otras medidas:</strong>
+            <textarea th:field="*{paso8DTO.otrasMedidas}"
+                      placeholder="Describe otras medidas del plan de seguimiento" rows="4"></textarea>
+        </div>
+    </div>
+
+</th:block>

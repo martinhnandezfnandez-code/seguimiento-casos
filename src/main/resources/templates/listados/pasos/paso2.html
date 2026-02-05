@@ -1,0 +1,20 @@
+<th:block th:fragment="paso2(alumno)">
+
+    <td th:text="${alumno.paso2DTO?.paso2_1}"></td>
+    <td th:text="${alumno.paso2DTO?.paso2_2}"></td>
+    <td th:text="${alumno.paso2DTO?.paso2_3}"></td>
+    <td th:text="${alumno.paso2DTO?.paso2_4}"></td>
+    <td th:text="${alumno.paso2DTO?.paso2_5}"></td>
+
+    <td>
+        <span th:if="${#lists.isEmpty(alumno.paso2DTO?.cronogramaDTO)}">
+            Sin actuaciones
+        </span>
+        <span th:if="${!#lists.isEmpty(alumno.paso2DTO?.cronogramaDTO)}"
+              th:text="${alumno.paso2DTO.cronogramaDTO.size()} + ' actuaciones'">
+        </span>
+    </td>
+
+    <td th:text="${alumno.paso2DTO?.paso2_7}"></td>
+
+</th:block>

@@ -324,15 +324,15 @@
                     <td th:text="${alumno.paso2DTO.paso2_4}" th:title="${alumno.paso2DTO.paso2_4}"></td>
                     <td th:text="${alumno.paso2DTO.paso2_5}" th:title="${alumno.paso2DTO.paso2_5}"></td>
                     <td>
-                        <span th:if="${#lists.isEmpty(alumno.paso2DTO.cronograma)}">Sin actuaciones</span>
-                        <span th:if="${!#lists.isEmpty(alumno.paso2DTO.cronograma)}"
-                              th:text="${alumno.paso2DTO.cronograma.size()} + ' actuaciones registradas'">
+                        <span th:if="${#lists.isEmpty(alumno.paso2DTO.cronogramaDTO)}">Sin actuaciones</span>
+                        <span th:if="${!#lists.isEmpty(alumno.paso2DTO.cronogramaDTO)}"
+                              th:text="${alumno.paso2DTO.cronogramaDTO.size()} + ' actuaciones registradas'">
     </span>
                     </td>
                     <td th:text="${alumno.paso2DTO.paso2_7}" th:title="${alumno.paso2DTO.paso2_7}"></td>
 
                     <!-- PASO 3 -->
-                    <td th:text="${alumno.paso3_1}" th:title="${alumno.paso3_1}"></td>
+                    <td th:text="${alumno.paso3DTO.medidasProvisionales}" th:title="${alumno.paso3DTO.medidasProvisionales}"></td>
 
                     <!-- PASO 4 -->
                     <td>

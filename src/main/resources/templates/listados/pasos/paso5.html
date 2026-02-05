@@ -1,0 +1,41 @@
+
+<th:block th:fragment="paso5(alumno)">
+
+    <!-- PASO 5 - Anexo IV -->
+    <td>
+        <span th:if="${alumno.paso5DTO != null
+                      and alumno.paso5DTO.anexo4 != null
+                      and alumno.paso5DTO.anexo4.sintesisfamilia != null
+                      and !alumno.paso5DTO.anexo4.sintesisfamilia.isEmpty()}"
+              style="color: green; font-weight: 600;">
+            ✔ Rellenado
+        </span>
+        <span th:unless="${alumno.paso5DTO != null
+                          and alumno.paso5DTO.anexo4 != null
+                          and alumno.paso5DTO.anexo4.sintesisfamilia != null
+                          and !alumno.paso5DTO.anexo4.sintesisfamilia.isEmpty()}"
+              style="color: #b00; font-weight: 600;">
+            ✘ Pendiente
+        </span>
+    </td>
+
+    <!-- PASO 5 - Anexo V -->
+    <td>
+        <span th:if="${alumno.paso5DTO != null
+                      and alumno.paso5DTO.anexo5 != null
+                      and alumno.paso5DTO.anexo5.observaciones != null
+                      and !alumno.paso5DTO.anexo5.observaciones.isEmpty()}"
+              style="color: green; font-weight: 600;">
+            ✔ Rellenado
+        </span>
+        <span th:unless="${alumno.paso5DTO != null
+                          and alumno.paso5DTO.anexo5 != null
+                          and alumno.paso5DTO.anexo5.observaciones != null
+                          and !alumno.paso5DTO.anexo5.observaciones.isEmpty()}"
+              style="color: #b00; font-weight: 600;">
+            ✘ Pendiente
+        </span>
+    </td>
+
+</th:block>
+

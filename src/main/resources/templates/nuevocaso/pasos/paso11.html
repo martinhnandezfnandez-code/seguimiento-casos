@@ -1,0 +1,39 @@
+<th:block th:fragment="paso11">
+
+    <div class="section paso-11">
+        <h2>PASO 11 – Cierre</h2>
+
+        <div class="field-group">
+            <strong>Director/a realiza acta de cierre</strong>
+            <label>Fecha de cierre:</label>
+            <input type="date" th:field="*{paso11DTO.fecchacierre}">
+            <label>Observaciones:</label>
+            <textarea th:field="*{paso11DTO.observacionesFechaCierre}" placeholder="Observaciones sobre el cierre" rows="3"></textarea>
+        </div>
+
+        <div class="field-group">
+            <strong>Se informa a Inspección</strong>
+            <label>Fecha de información:</label>
+            <input type="date" th:field="*{paso11DTO.fechaInspeccion}">
+            <label>Observaciones:</label>
+            <textarea th:field="*{paso11DTO.inspeccion}" placeholder="Detalles de la comunicación con Inspección" rows="3"></textarea>
+        </div>
+
+        <div class="field-group">
+            <strong>Se informa a familia</strong>
+            <label>Fecha de información:</label>
+            <input type="date" th:field="*{paso11DTO.fecchafamilia}">
+            <label>Observaciones:</label>
+            <textarea th:field="*{paso11DTO.familia}" placeholder="Detalles de la comunicación con la familia" rows="3"></textarea>
+        </div>
+
+        <div class="field-group">
+            <strong>Se informa a profesorado</strong>
+            <label>Fecha de información:</label>
+            <input type="date" th:field="*{paso11DTO.fechaProfesorado}">
+            <label>Observaciones:</label>
+            <textarea th:field="*{paso11DTO.profesorado}" placeholder="Detalles de la comunicación con el profesorado" rows="3"></textarea>
+        </div>
+    </div>
+
+</th:block>

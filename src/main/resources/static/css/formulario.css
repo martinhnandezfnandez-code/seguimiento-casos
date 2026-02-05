@@ -1,0 +1,181 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #8B7355;
+            --color-secondary: #A89B8C;
+            --color-accent: #B8A080;
+            --color-dark: #4A4A4A;
+            --color-light: #F5F3F0;
+            --color-white: #FFFFFF;
+            --color-shadow: rgba(139, 115, 85, 0.25);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #F5F3F0 0%, #E8E4DE 100%);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: var(--color-white);
+            border-radius: 22px;
+            box-shadow: 0 20px 60px var(--color-shadow);
+            padding: 40px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--color-primary);
+            font-size: 2.4em;
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            background: #FAF8F6;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+            border-left: 6px solid var(--color-primary);
+        }
+
+        .field-group {
+            margin-bottom: 20px;
+        }
+
+        label, strong {
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.15);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox-group label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .fecha-group input {
+            max-width: 220px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+
+        .paso-badge {
+            background: var(--color-accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        button[type="submit"],
+        .btn-back {
+            padding: 14px 38px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            box-shadow: 0 6px 16px var(--color-shadow);
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--color-shadow);
+        }
+
+        .btn-back {
+            background: #6b6b6b;
+            color: white;
+        }
+
+        .btn-back:hover {
+            background: #5a5a5a;
+        }
+
+        input[required] {
+            border-left: 4px solid #c49a6c;
+        }
+
+        input[required]:valid {
+            border-left: 4px solid #7aa874;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }

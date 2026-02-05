@@ -1,6 +1,7 @@
 package es.instituto.orientacion.seguimiento_casos.entities.pasos;
 
 import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
+import es.instituto.orientacion.seguimiento_casos.entities.dto.CronogramaDTO;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso2DTO;
 import jakarta.persistence.*;
@@ -37,7 +38,7 @@ public class Paso2 {
     @OneToMany(mappedBy = "paso2",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Cronograma> cronograma = new ArrayList<>();
+    private List<Cronograma> cronograma;
 
     @Column(name = "AntiguoAnexoI")
     private String paso2_7;
@@ -52,11 +53,16 @@ public class Paso2 {
         this.paso2_3 = paso2DTO.getPaso2_3();
         this.paso2_4 = paso2DTO.getPaso2_4();
         this.paso2_5 = paso2DTO.getPaso2_5();
-        this.cronograma = paso2DTO.getCronograma();
+        this.cronograma = new ArrayList<>();
+        for (CronogramaDTO cronogramaDTO : paso2DTO.getCronogramaDTO()) {
+
+            this.cronograma.add(new Cronograma(cronogramaDTO));
+        }
         this.paso2_7 = paso2DTO.getPaso2_7();
     }
-   public Paso2(){
-       this.cronograma = new ArrayList<>();
-   }
+
+    public Paso2() {
+        this.cronograma = new ArrayList<>();
+    }
 
 }

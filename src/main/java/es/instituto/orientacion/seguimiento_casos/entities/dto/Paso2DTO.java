@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
 public class Paso2DTO {
 
@@ -19,7 +20,7 @@ public class Paso2DTO {
 
     private String paso2_5;
 
-    private List<Cronograma> cronograma = new ArrayList<>();
+    private List<CronogramaDTO> cronogramaDTO;
 
     private String paso2_7;
 
@@ -29,11 +30,15 @@ public class Paso2DTO {
         this.paso2_3 = paso2.getPaso2_3();
         this.paso2_4 = paso2.getPaso2_4();
         this.paso2_5 = paso2.getPaso2_5();
-        this.cronograma = paso2.getCronograma();
+        this.cronogramaDTO = new ArrayList<>();
+        for (Cronograma cronograma : paso2.getCronograma()) {
+            this.cronogramaDTO.add(new CronogramaDTO(cronograma));
+        }
         this.paso2_7 = paso2.getPaso2_7();
     }
-    public Paso2DTO(){
-        this.cronograma = new ArrayList<>();
+
+    public Paso2DTO() {
+        this.cronogramaDTO = new ArrayList<>();
     }
 
 }
