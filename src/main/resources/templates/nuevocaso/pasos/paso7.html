@@ -1,111 +1,162 @@
 <th:block th:fragment="paso7">
 
+    <div class="section">
+        <h2>
+            PASO 7
+            <span class="paso-badge">Anexo VII</span>
+        </h2>
 
-<div class="section">
-    <h2>PASO 7 <span class="paso-badge">Anexo VII</span></h2>
-    <p><strong>Plan de Prevención, Protección y Acompañamiento Personalizado.</strong></p>
+        <p>
+            <strong>Plan de Prevención, Protección y Acompañamiento Personalizado.</strong>
+        </p>
 
-    <div class="field-group">
-        <label>Objetivo General del Plan:</label>
-        <textarea th:field="*{paso7DTO.objetivoGeneral}" placeholder="Defina el propósito principal del plan..."></textarea>
-    </div>
-
-    <div class="field-group">
-        <label>Objetivos Específicos:</label>
-        <textarea th:field="*{paso7DTO.objetivosEspecificos}" placeholder="Liste los objetivos concretos a alcanzar..."></textarea>
-    </div>
-
-    <div class="field-group">
-        <label>Equipo de Acompañamiento:</label>
-        <input type="text" th:field="*{paso7DTO.equipoAcompanamiento}" placeholder="Personas que integran el equipo">
-    </div>
-
-    <div class="field-group">
-        <label>Calendario de Seguimiento:</label>
-        <textarea th:field="*{paso7DTO.calendarioSeguimiento}" placeholder="Fechas previstas para revisiones..."></textarea>
-    </div>
-    <div class="field-group">
-        <label>Checklist de Formalización:</label>
-        <div class="checkbox-group">
-            <label><input type="checkbox" th:field="*{paso7DTO.tieneRepositorioAntecedentes}"> Posee repositorio de antecedentes</label>
-            <label><input type="checkbox" th:field="*{paso7DTO.tieneCronogramaFormalizado}"> Cronograma formalizado</label>
-            <label><input type="checkbox" th:field="*{paso7DTO.esFormatoDigital}"> Formato digital disponible</label>
-        </div>
-    </div>
-
-    <div class="field-group">
-        <label><strong>Actuaciones en el Centro Educativo:</strong></label>
+        <!-- OBJETIVOS -->
         <div class="field-group">
-            <label>1 Medidas de prevención general:</label>
+            <label>🎯 Objetivo general del plan</label>
+            <textarea th:field="*{paso7DTO.objetivoGeneral}"
+                      placeholder="Defina el propósito principal del plan..."
+                      required></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>🎯 Objetivos específicos</label>
+            <textarea th:field="*{paso7DTO.objetivosEspecificos}"
+                      placeholder="Liste los objetivos concretos a alcanzar..."></textarea>
+        </div>
+
+        <!-- EQUIPO Y CALENDARIO -->
+        <div class="field-group">
+            <label>👥 Equipo de acompañamiento</label>
+            <input type="text"
+                   th:field="*{paso7DTO.equipoAcompanamiento}"
+                   placeholder="Personas que integran el equipo">
+        </div>
+
+        <div class="field-group">
+            <label>🗓 Calendario de seguimiento</label>
+            <textarea th:field="*{paso7DTO.calendarioSeguimiento}"
+                      placeholder="Fechas previstas para revisiones..."></textarea>
+        </div>
+
+        <!-- CHECKLIST -->
+        <div class="field-group checkbox-group">
+            <label>
+                <input type="checkbox" th:field="*{paso7DTO.tieneRepositorioAntecedentes}">
+                Posee repositorio de antecedentes
+            </label>
+            <label>
+                <input type="checkbox" th:field="*{paso7DTO.tieneCronogramaFormalizado}">
+                Cronograma formalizado
+            </label>
+            <label>
+                <input type="checkbox" th:field="*{paso7DTO.esFormatoDigital}">
+                Formato digital disponible
+            </label>
+        </div>
+
+        <hr>
+
+        <!-- ACTUACIONES EN EL CENTRO -->
+        <h3>1. Actuaciones en el centro educativo</h3>
+
+        <div class="field-group">
+            <label>1. Medidas de prevención general</label>
             <textarea th:field="*{paso7DTO.medidasPrevencionGeneral}"></textarea>
         </div>
+
         <div class="field-group">
-            <label>1.1 Medidas de protección y seguridad:</label>
+            <label>1.1 Medidas de protección y seguridad</label>
             <textarea th:field="*{paso7DTO.medidasProteccionSeguridad}"></textarea>
         </div>
-    </div>
-    <div class="field-group">
-        <label>1.2 Medidas de Acompañamiento emocional:</label>
-        <textarea th:field="*{paso7DTO.medidasAcompanamientoEmocional}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>1.3 Otras medidas adoptadas:</label>
-        <textarea th:field="*{paso7DTO.otrasMedidasAdoptadas}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>2 Información aportada por el equipo docente:</label>
-        <textarea th:field="*{paso7DTO.informacionEquipoDocente}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>3 Planificación sobre la observación y atención al día a día:</label>
-        <textarea th:field="*{paso7DTO.planificacionObservacionAtencion}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>4.1 Acciones a desarrollar por el tutor:</label>
-        <textarea th:field="*{paso7DTO.accionesTutor}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>4.2 Intervención del equipo docente y método para notificación:</label>
-        <textarea th:field="*{paso7DTO.intervencionEquipoDocente}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>4.3 Intervención Específica del Orientador/a:</label>
-        <textarea th:field="*{paso7DTO.intervencionOrientacion}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>4.4 Intervención de no docentes del centro:</label>
-        <textarea th:field="*{paso7DTO.intervencionOtrosTrabajadores}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>5 Detalle sobre posibles medidas de acompañamiento:</label>
-        <textarea th:field="*{paso7DTO.acompanamientoCompaneros}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>6 Desarrollo de actividades de sensibilización e intervención con el grupo-aula:</label>
-        <textarea th:field="*{paso7DTO.actividadesSensibilizacionAula}"></textarea>
-    </div>
-    <div class="field-group">
-        <label>7 Desarrollo de actividades de sensibilización e intervención con el profesorado:</label>
-        <textarea th:field="*{paso7DTO.formacionProfesorado}"></textarea>
+
+        <div class="field-group">
+            <label>1.2 Medidas de acompañamiento emocional</label>
+            <textarea th:field="*{paso7DTO.medidasAcompanamientoEmocional}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>1.3 Otras medidas adoptadas</label>
+            <textarea th:field="*{paso7DTO.otrasMedidasAdoptadas}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>2. Información aportada por el equipo docente</label>
+            <textarea th:field="*{paso7DTO.informacionEquipoDocente}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>3. Planificación de la observación y atención diaria</label>
+            <textarea th:field="*{paso7DTO.planificacionObservacionAtencion}"></textarea>
+        </div>
+
+        <h3>4. Intervenciones específicas</h3>
+
+        <div class="field-group">
+            <label>4.1 Acciones a desarrollar por el tutor</label>
+            <textarea th:field="*{paso7DTO.accionesTutor}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>4.2 Intervención del equipo docente y método de notificación</label>
+            <textarea th:field="*{paso7DTO.intervencionEquipoDocente}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>4.3 Intervención específica del orientador/a</label>
+            <textarea th:field="*{paso7DTO.intervencionOrientacion}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>4.4 Intervención de otros profesionales del centro</label>
+            <textarea th:field="*{paso7DTO.intervencionOtrosTrabajadores}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>5. Medidas de acompañamiento con iguales</label>
+            <textarea th:field="*{paso7DTO.acompanamientoCompaneros}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>6. Actividades de sensibilización con el grupo-aula</label>
+            <textarea th:field="*{paso7DTO.actividadesSensibilizacionAula}"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>7. Actividades de sensibilización y formación del profesorado</label>
+            <textarea th:field="*{paso7DTO.formacionProfesorado}"></textarea>
+        </div>
+
+        <hr>
+
+        <!-- COORDINACIÓN EXTERNA -->
+        <div class="field-group">
+            <label>🤝 Actuaciones de coordinación con la familia</label>
+            <textarea th:field="*{paso7DTO.actuacionesFamilia}"
+                      placeholder="Acuerdos y acciones con el entorno familiar"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>🏥 Actuaciones con servicios externos</label>
+            <textarea th:field="*{paso7DTO.actuacionesServiciosExternos}"
+                      placeholder="Coordinación con recursos externos"></textarea>
+        </div>
+
+        <!-- FECHA Y RESPONSABLE -->
+        <div class="field-group fecha-group">
+            <label>📅 Fecha de elaboración del plan</label>
+            <input type="date"
+                   th:field="*{paso7DTO.fechaElaboracion}"
+                   required>
+        </div>
+
+        <div class="field-group">
+            <label>✍ Elaborado por</label>
+            <input type="text"
+                   th:field="*{paso7DTO.elaboradoPor}"
+                   placeholder="Nombre del responsable"
+                   required>
+        </div>
+
     </div>
 
-    <div class="field-group">
-        <label>Actuaciones de coordinación con la Familia:</label>
-        <textarea th:field="*{paso7DTO.actuacionesFamilia}" placeholder="Acuerdos y acciones con el entorno familiar"></textarea>
-    </div>
-    <div class="field-group">
-        <label>Actuaciones de Servicios externos:</label>
-        <textarea th:field="*{paso7DTO.actuacionesServiciosExternos}" placeholder="Acuerdos y acciones con servicios externos"></textarea>
-    </div>
-
-    <div class="field-group fecha-group">
-        <label>📅 Fecha de Elaboración del Plan</label>
-        <input type="date" th:field="*{paso7DTO.fechaElaboracion}">
-    </div>
-
-    <div class="field-group">
-        <label>Elaborado por:</label>
-        <input type="text" th:field="*{paso7DTO.elaboradoPor}" placeholder="Nombre del responsable">
-    </div>
-</div>
 </th:block>

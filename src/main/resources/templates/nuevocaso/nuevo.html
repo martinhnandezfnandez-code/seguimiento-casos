@@ -1,58 +1,313 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Nuevo Caso</title>
-    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento de Casos - Formulario Progresivo</title>
+    <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
+<!-- CONTAINER PRINCIPAL -->
 <div class="container">
-    <h1>📝 Nuevo Caso</h1>
+    <!-- HEADER CON BARRA DE PROGRESO -->
+    <div class="header">
+        <h1>📋 Seguimiento de Casos - Protocolo de 11 Pasos</h1>
 
-    <!-- ✅ UN SOLO FORM -->
-    <form th:action="@{/alumnado/guardar}"
-          th:object="${formulario}"
-          method="post">
-
-        <div th:replace="~{nuevocaso/pasos/paso1 :: paso1}"></div>
-        <div th:replace="~{nuevocaso/pasos/paso2 :: paso2}"></div>
-        <div th:replace="~{nuevocaso/pasos/paso3 :: paso3}"></div>
-        <div th:replace="~{nuevocaso/pasos/paso4 :: paso4}"></div>
-        <div th:replace="~{nuevocaso/pasos/paso5 :: paso5}"></div>
-        <div th:replace="~{nuevocaso/pasos/paso6 :: paso6}"></div>
-        <div th:replace="~{nuevocaso/pasos/paso7 :: paso7}"></div>
-        <div th:replace="~{nuevocaso/pasos/paso8 :: paso8}"></div>
-        <div th:replace="~{nuevocaso/pasos/paso11 :: paso11}"></div>
-
-
-        <div class="button-group">
-            <button type="submit">💾 Guardar Registro</button>
-            <a th:href="@{/alumnado/listar}" class="btn-back">↩️ Volver</a>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+        <div class="progress-text">
+            <span id="progressText">0 de 11 pasos completados</span>
         </div>
 
-    </form>
+        <!--<form id="mainForm" action="/alumnado/guardar" method="post">
+            <input type="hidden" id="modoFormulario" value="nuevo">
+
+            <div class="action-buttons">
+                <button type="button" class="btn btn-save" onclick="guardarFormulario()">
+                    💾 Guardar Progreso
+                </button>
+
+                <button type="button" class="btn btn-menu" onclick="volverMenu()">
+                    🏠 Volver al Menú
+                </button>
+
+                <button type="button" class="btn btn-export" onclick="exportarFormulario()">
+                    📄 Exportar Datos
+                </button>
+            </div>
+
+        </form> -->
+    </div>
+
+    <!-- CONTENIDO DEL FORMULARIO -->
+    <div class="form-content">
+        <form th:action="@{/alumnado/guardar}"
+              th:object="${formulario}"
+              method="post"
+              id="mainForm">
+
+            <!-- 🔹 MODO -->
+            <input type="hidden" id="modoFormulario" value="nuevo">
+
+            <!-- 🔹 BOTONES -->
+            <div class="action-buttons">
+                <button type="button" class="btn btn-save" onclick="guardarFormulario()">
+                    💾 Guardar Progreso
+                </button>
+
+                <button type="button" class="btn btn-menu" onclick="volverMenu()">
+                    🏠 Volver al Menú
+                </button>
+
+                <button type="button" class="btn btn-export" onclick="exportarFormulario()">
+                    📄 Exportar Datos
+                </button>
+            </div>
+
+            <!-- ==================== PASO 1 ==================== -->
+            <div class="paso-container active" data-paso="1">
+                <div class="paso-header" onclick="togglePaso(1)">
+                    <div class="paso-title">
+                        <span class="paso-number">1</span>
+                        <span>Identificación</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔓</span>
+                        <span class="status-text">En progreso</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso1 :: paso1}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 2 ==================== -->
+            <div class="paso-container locked" data-paso="2">
+                <div class="paso-header" onclick="togglePaso(2)">
+                    <div class="paso-title">
+                        <span class="paso-number">2</span>
+                        <span>Múltiples Acciones</span>
+                        <span class="paso-badge">Cronograma</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div th:replace="~{nuevocaso/pasos/paso2 :: paso2}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 3 ==================== -->
+            <div class="paso-container locked" data-paso="3">
+                <div class="paso-header" onclick="togglePaso(3)">
+                    <div class="paso-title">
+                        <span class="paso-number">3</span>
+                        <span>Medidas Provisionales</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div th:replace="~{nuevocaso/pasos/paso3 :: paso3}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 4 ==================== -->
+            <div class="paso-container locked" data-paso="4">
+                <div class="paso-header" onclick="togglePaso(4)">
+                    <div class="paso-title">
+                        <span class="paso-number">4</span>
+                        <span>Anexo III - Reunión con Familia</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div th:replace="~{nuevocaso/pasos/paso4 :: paso4}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 5 ==================== -->
+            <div class="paso-container locked" data-paso="5">
+                <div class="paso-header" onclick="togglePaso(5)">
+                    <div class="paso-title">
+                        <span class="paso-number">5</span>
+                        <span>Anexo IV - Síntesis de Entrevistas</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div th:replace="~{nuevocaso/pasos/paso5 :: paso5}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 6 ==================== -->
+            <div class="paso-container locked" data-paso="6">
+                <div class="paso-header" onclick="togglePaso(6)">
+                    <div class="paso-title">
+                        <span class="paso-number">6</span>
+                        <span>Apertura de Actuación</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div th:replace="~{nuevocaso/pasos/paso6 :: paso6}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 7 ==================== -->
+            <div class="paso-container locked" data-paso="7">
+                <div class="paso-header" onclick="togglePaso(7)">
+                    <div class="paso-title">
+                        <span class="paso-number">7</span>
+                        <span>Anexo VII - Plan de Prevención</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div th:replace="~{nuevocaso/pasos/paso7 :: paso7}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 8 ==================== -->
+            <div class="paso-container locked" data-paso="8">
+                <div class="paso-header" onclick="togglePaso(8)">
+                    <div class="paso-title">
+                        <span class="paso-number">8</span>
+                        <span>Anexo VIII - Seguimiento</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div th:replace="~{nuevocaso/pasos/paso8 :: paso8}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 9 ==================== -->
+            <div class="paso-container locked" data-paso="9">
+                <div class="paso-header" onclick="togglePaso(9)">
+                    <div class="paso-title">
+                        <span class="paso-number">9</span>
+                        <span>Paso 9</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div class="section">
+                        <h2>PASO 9</h2>
+                        <div class="field-group">
+                            <label>Contenido del Paso 9</label>
+                            <textarea name="paso9.contenido" rows="5" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 10 ==================== -->
+            <div class="paso-container locked" data-paso="10">
+                <div class="paso-header" onclick="togglePaso(10)">
+                    <div class="paso-title">
+                        <span class="paso-number">10</span>
+                        <span>Paso 10</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div class="section">
+                        <h2>PASO 10</h2>
+                        <div class="field-group">
+                            <label>Contenido del Paso 10</label>
+                            <textarea name="paso10.contenido" rows="5" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 11 ==================== -->
+            <div class="paso-container locked" data-paso="11">
+                <div class="paso-header" onclick="togglePaso(11)">
+                    <div class="paso-title">
+                        <span class="paso-number">11</span>
+                        <span>Cierre del Expediente</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">🔒</span>
+                        <span class="status-text">Bloqueado</span>
+                    </div>
+                </div>
+                <div class="paso-body">
+                    <div th:replace="~{nuevocaso/pasos/paso11 :: paso11}"></div>
+                </div>
+            </div>
+
+            <!-- NAVEGACIÓN INFERIOR -->
+            <div class="paso-navigation">
+                <button type="button" class="btn-prev" id="btnPrev" onclick="retrocederPaso()">
+                    ← Anterior
+                </button>
+                <button type="button" class="btn-next" id="btnNext" onclick="avanzarPaso()">
+                    Siguiente →
+                </button>
+            </div>
+
+        </form>
+    </div>
 </div>
 
-<!-- ✅ SCRIPT FUERA DEL FORM -->
-<script>
-    function agregarFila() {
-        const tbody = document.getElementById("cronogramaBody");
-        if (!tbody) return;
+<!-- Notificación de guardado -->
+<div id="saveNotification" style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 18px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    font-weight: 600;
+    font-size: 1.05em;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+">
+    <span id="notificationIcon">✓</span>
+    <span id="notificationText">Progreso guardado correctamente</span>
+</div>
 
-        const index = tbody.rows.length;
-        const row = tbody.insertRow();
-
-        row.innerHTML = `
-            <td><input type="date" name="paso2DTO.cronogramaDTO[${index}].fecha"></td>
-            <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].situacion"></td>
-            <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].actuacion"></td>
-            <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].documento"></td>
-            <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].observaciones"></td>
-        `;
-    }
-</script>
+<script src="/js/formulario.js"></script>
 
 </body>
 </html>
