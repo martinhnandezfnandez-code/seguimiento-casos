@@ -21,13 +21,9 @@ public class CasosDTO {
 
     private Paso4DTO paso4DTO;
 
-
-
     private Paso5DTO paso5DTO;
 
-    private String paso6_1;
-    private String paso6_2;
-    private String paso6_3;
+    private Paso6DTO paso6DTO;
 
     private Paso7DTO paso7DTO;
 
@@ -44,12 +40,13 @@ public class CasosDTO {
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaUltimaActualizacion;
 
-    public CasosDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso3 paso3,Paso4 paso4, Paso5 paso5, Paso7 paso7, Paso8 paso8, Paso11 paso11) {
+    public CasosDTO(Alumnado alumno, Paso1 paso1, Paso2 paso2, Paso3 paso3,Paso4 paso4, Paso5 paso5, Paso6 paso6, Paso7 paso7, Paso8 paso8, Paso11 paso11) {
         this.paso1DTO = (paso1 != null) ? new Paso1DTO(paso1) : new Paso1DTO();
         this.paso2DTO = (paso2 != null) ? new Paso2DTO(paso2) : new Paso2DTO();
         this.paso3DTO = (paso3 != null) ? new Paso3DTO(paso3) : new Paso3DTO();
         this.paso4DTO = (paso4 != null) ? new Paso4DTO(paso4) : new Paso4DTO();
         this.paso5DTO = (paso5 != null) ? new Paso5DTO(paso5) : new Paso5DTO();
+        this.paso6DTO = (paso6 != null) ? new Paso6DTO(paso6) : new Paso6DTO();
         this.paso7DTO = (paso7 != null) ? new Paso7DTO(paso7) : new Paso7DTO();
         this.paso8DTO = (paso8 != null) ? new Paso8DTO(paso8) : new Paso8DTO();
         this.paso11DTO = (paso11 != null) ? new Paso11DTO(paso11) : new Paso11DTO();
@@ -70,6 +67,7 @@ public class CasosDTO {
         this.paso3DTO = new Paso3DTO();
         this.paso4DTO = new Paso4DTO();
         this.paso5DTO = new Paso5DTO();
+        this.paso6DTO = new Paso6DTO();
         this.paso7DTO = new Paso7DTO();
         this.paso8DTO = new Paso8DTO();
         this.paso11DTO = new Paso11DTO();

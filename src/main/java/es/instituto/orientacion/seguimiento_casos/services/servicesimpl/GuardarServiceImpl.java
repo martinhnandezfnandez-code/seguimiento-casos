@@ -16,24 +16,11 @@ import java.util.ArrayList;
 @Service
 public class GuardarServiceImpl implements GuardarService {
     private final AlumnadoRepository alumnadoRepository;
-    private final Paso1Repository paso1Repository;
-    private final Paso2Repository paso2Repository;
-    private final Paso4Repository paso4Repository;
-    private final Paso5Repository paso5Repository;
-    private final Paso7Repository paso7Repository;
-    private final Paso11Repository paso11Repository;
-    private final CronogramaRepository cronogramaRepository;
 
-    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso7Repository paso7Repository, Paso11Repository paso11Repository, CronogramaRepository cronogramaRepository) {
+    public GuardarServiceImpl(AlumnadoRepository alumnadoRepository) {
         this.alumnadoRepository = alumnadoRepository;
-        this.paso1Repository = paso1Repository;
-        this.paso2Repository = paso2Repository;
-        this.paso4Repository = paso4Repository;
-        this.paso5Repository = paso5Repository;
-        this.paso7Repository = paso7Repository;
-        this.paso11Repository = paso11Repository;
-        this.cronogramaRepository = cronogramaRepository;
     }
+
 
     @Override
     public boolean crearAlumnado(FormularioDTO formularioDTO) {
@@ -52,26 +39,9 @@ public class GuardarServiceImpl implements GuardarService {
         }
         guardarCronograma(formularioDTO, alumnado.getPaso2());
 
-        Paso3 paso3 = alumnado.getPaso3();
-        if (paso3 == null) {
-            paso3 = new Paso3();
-            paso3.setAlumnado(alumnado);
-            alumnado.setPaso3(paso3);
-        }
-        Paso3DTO dto3 = formularioDTO.getPaso3DTO();
-        paso3.setMedidasProvisionales(dto3.getMedidasProvisionales());
+        guardarPaso3(formularioDTO, alumnado);
 
-        Paso4 paso4 = alumnado.getPaso4();
-        if (paso4 == null) {
-            paso4 = new Paso4();
-            paso4.setAlumnado(alumnado);
-            alumnado.setPaso4(paso4);
-        }
-        Paso4DTO dto4 = formularioDTO.getPaso4DTO();
-        paso4.setContenido(dto4.getContenido());
-        paso4.setAcuerdos(dto4.getAcuerdos());
-        paso4.setAsistentes(dto4.getAsistentes());
-        paso4.setFecha(dto4.getFecha());
+        guardarPaso4(formularioDTO, alumnado);
 
         Paso5 paso5 = alumnado.getPaso5();
         if (paso5 == null) {
@@ -93,11 +63,77 @@ public class GuardarServiceImpl implements GuardarService {
             anexo5.setPaso5(paso5);
             paso5.setAnexo5(anexo5);
         }
-        if (dto5.getAnexo5() != null) {
-            Anexo5 anexo5 = new Anexo5(dto5.getAnexo5());
-            anexo5.setPaso5(paso5);
-            paso5.setAnexo5(anexo5);
+
+        guardarPaso7(formularioDTO, alumnado);
+
+        guardarPaso8(formularioDTO, alumnado);
+
+        guardarPaso11(formularioDTO, alumnado);
+
+        Long idNuevo = alumnadoRepository.save(alumnado).getId();
+        return idNuevo != null;
+    }
+
+    @Override
+    public boolean editarAlumnado(FormularioDTO formularioDTO) {
+        Alumnado alumnado;
+        alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
+                .orElseThrow();
+        alumnado.setPaso9_1(formularioDTO.getPaso9_1());
+        alumnado.setPaso10_1(formularioDTO.getPaso10_1());
+        alumnado.setObservaciones(formularioDTO.getObservaciones());
+
+        guardarPaso1(formularioDTO, alumnado);
+
+        guardarPaso2(formularioDTO, alumnado);
+
+        guardarPaso3(formularioDTO, alumnado);
+
+        guardarPaso4(formularioDTO, alumnado);
+
+        guardarPaso5(formularioDTO, alumnado);
+
+        guardarPaso7(formularioDTO, alumnado);
+
+        guardarPaso8(formularioDTO, alumnado);
+
+        guardarPaso11(formularioDTO, alumnado);
+
+        alumnadoRepository.save(alumnado);
+        return true;
+    }
+
+    private static void guardarPaso11(FormularioDTO formularioDTO, Alumnado alumnado) {
+        Paso11 paso11 = alumnado.getPaso11();
+        if (paso11 == null) {
+            paso11 = new Paso11();
+            paso11.setAlumnado(alumnado);
+            alumnado.setPaso11(paso11);
         }
+        Paso11DTO dto11 = formularioDTO.getPaso11DTO();
+        paso11.setFecchacierre(dto11.getFecchacierre());
+        paso11.setObservacionesFechaCierre(dto11.getObservacionesFechaCierre());
+        paso11.setFechaInspeccion(dto11.getFechaInspeccion());
+        paso11.setInspeccion(dto11.getInspeccion());
+        paso11.setFecchafamilia(dto11.getFecchafamilia());
+        paso11.setFamilia(dto11.getFamilia());
+        paso11.setFechaProfesorado(dto11.getFechaProfesorado());
+        paso11.setProfesorado(dto11.getProfesorado());
+    }
+
+    private static void guardarPaso8(FormularioDTO formularioDTO, Alumnado alumnado) {
+        Paso8 paso8 = alumnado.getPaso8();
+        if (paso8 == null) {
+            paso8 = new Paso8();
+            paso8.setAlumnado(alumnado);
+            alumnado.setPaso8(paso8);
+        }
+        Paso8DTO dto8 = formularioDTO.getPaso8DTO();
+        paso8.setOtrasMedidas(dto8.getOtrasMedidas());
+        paso8.setResponsableDireccion(dto8.getResponsableDireccion());
+    }
+
+    private static void guardarPaso7(FormularioDTO formularioDTO, Alumnado alumnado) {
         Paso7 paso7 = alumnado.getPaso7();
         if (paso7 == null) {
             paso7 = new Paso7();
@@ -137,64 +173,78 @@ public class GuardarServiceImpl implements GuardarService {
 
         paso7.setElaboradoPor(dto7.getElaboradoPor());
         paso7.setFechaElaboracion(dto7.getFechaElaboracion());
-
-        Paso8 paso8 = alumnado.getPaso8();
-        if (paso8 == null) {
-            paso8 = new Paso8();
-            paso8.setAlumnado(alumnado);
-            alumnado.setPaso8(paso8);
+    }
+    private static void guardarPaso6(FormularioDTO formularioDTO, Alumnado alumnado) {
+        Paso6 paso6 = alumnado.getPaso6();
+        if (paso6 == null) {
+            paso6 = new Paso6();
+            paso6.setAlumnado(alumnado);
+            alumnado.setPaso6(paso6);
         }
-        Paso8DTO dto8 = formularioDTO.getPaso8DTO();
-        paso8.setOtrasMedidas(dto8.getOtrasMedidas());
-        paso8.setResponsableDireccion(dto8.getResponsableDireccion());
+        Paso6DTO dto6 = formularioDTO.getPaso6DTO();
+        paso6.setAbrir(dto6.getAbrir());
+        paso6.setAlumno(dto6.getAlumno());
+        paso6.setComision(dto6.getComision());
+        paso6.setInspeccion(dto6.getInspeccion());
+        paso6.setTutores(dto6.getTutores());
+        paso6.setServicios(dto6.getServicios());
+        paso6.setOtros(dto6.getOtros());
+        paso6.setOtrosespecificados(dto6.getOtrosespecificados());
+        paso6.setMotivacion(dto6.getMotivacion());
+        paso6.setFecha(dto6.getFecha());
 
-        Paso11 paso11 = alumnado.getPaso11();
-        if (paso11 == null) {
-            paso11 = new Paso11();
-            paso11.setAlumnado(alumnado);
-            alumnado.setPaso11(paso11);
-        }
-        Paso11DTO dto11 = formularioDTO.getPaso11DTO();
-        paso11.setFecchacierre(dto11.getFecchacierre());
-        paso11.setObservacionesFechaCierre(dto11.getObservacionesFechaCierre());
-        paso11.setFechaInspeccion(dto11.getFechaInspeccion());
-        paso11.setInspeccion(dto11.getInspeccion());
-        paso11.setFecchafamilia(dto11.getFecchafamilia());
-        paso11.setFamilia(dto11.getFamilia());
-        paso11.setFechaProfesorado(dto11.getFechaProfesorado());
-        paso11.setProfesorado(dto11.getProfesorado());
-
-        Long idNuevo = alumnadoRepository.save(alumnado).getId();
-        return idNuevo != null;
     }
 
-    @Override
-    public boolean editarAlumnado(FormularioDTO formularioDTO) {
-        Alumnado alumnado;
-        alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
-                .orElseThrow();
-        alumnado.setPaso9_1(formularioDTO.getPaso9_1());
-        alumnado.setPaso10_1(formularioDTO.getPaso10_1());
-        alumnado.setObservaciones(formularioDTO.getObservaciones());
-
-        Paso1 paso1 = alumnado.getPaso1();
-        if (paso1 == null) {
-            paso1 = new Paso1();
-            paso1.setAlumnado(alumnado);
-            alumnado.setPaso1(paso1);
+    private static void guardarPaso5(FormularioDTO formularioDTO, Alumnado alumnado) {
+        Paso5 paso5 = alumnado.getPaso5();
+        if (paso5 == null) {
+            paso5 = new Paso5();
+            paso5.setAlumnado(alumnado);
+            alumnado.setPaso5(paso5);
         }
-        Paso1DTO dto = formularioDTO.getPaso1DTO();
-        paso1.setCodigoAlumno(dto.getCodigoAlumno());
-        paso1.setAlumnoComunica(dto.getAlumnoComunica());
-        paso1.setCompanerosComunican(dto.getCompanerosComunican());
-        paso1.setFamiliaComunica(dto.getFamiliaComunica());
-        paso1.setIntentoPrevio(dto.getIntentoPrevio());
-        paso1.setConductaAutolesiva(dto.getConductaAutolesiva());
-        paso1.setOtrosDetalle(dto.getOtrosDetalle());
-        paso1.setDetalleHechos(dto.getDetalleHechos());
-        paso1.setFechaRegistro(dto.getFechaRegistro());
-        paso1.setFirmas(dto.getFirmas());
 
+        Paso5DTO dto5 = formularioDTO.getPaso5DTO();
+
+        if (dto5.getAnexo4() != null) {
+            Anexo4 anexo4 = new Anexo4(dto5.getAnexo4());
+            anexo4.setPaso5(paso5);
+            paso5.setAnexo4(anexo4);
+        }
+
+        if (dto5.getAnexo5() != null) {
+            Anexo5 anexo5 = new Anexo5(dto5.getAnexo5());
+            anexo5.setPaso5(paso5);
+            paso5.setAnexo5(anexo5);
+        }
+    }
+
+    private static void guardarPaso4(FormularioDTO formularioDTO, Alumnado alumnado) {
+        Paso4 paso4 = alumnado.getPaso4();
+        if (paso4 == null) {
+            paso4 = new Paso4();
+            paso4.setAlumnado(alumnado);
+            alumnado.setPaso4(paso4);
+        }
+        Paso4DTO dto4 = formularioDTO.getPaso4DTO();
+        paso4.setContenido(dto4.getContenido());
+        paso4.setAcuerdos(dto4.getAcuerdos());
+        paso4.setAsistentes(dto4.getAsistentes());
+        paso4.setFecha(dto4.getFecha());
+    }
+
+    private static void guardarPaso3(FormularioDTO formularioDTO, Alumnado alumnado) {
+        Paso3 paso3 = alumnado.getPaso3();
+        if (paso3 == null) {
+            paso3 = new Paso3();
+            paso3.setAlumnado(alumnado);
+            alumnado.setPaso3(paso3);
+        }
+        Paso3DTO dto3 = formularioDTO.getPaso3DTO();
+        paso3.setMedidasProvisionales(dto3.getMedidasProvisionales());
+    }
+
+
+    private  void guardarPaso2(FormularioDTO formularioDTO, Alumnado alumnado){
         Paso2 paso2 = alumnado.getPaso2();
         if (paso2 == null) {
             paso2 = new Paso2();
@@ -210,120 +260,28 @@ public class GuardarServiceImpl implements GuardarService {
         paso2.setPaso2_7(dto2.getPaso2_7());
 
         guardarCronograma(formularioDTO, paso2);
-
-        Paso3 paso3 = alumnado.getPaso3();
-        if (paso3 == null) {
-            paso3 = new Paso3();
-            paso3.setAlumnado(alumnado);
-            alumnado.setPaso3(paso3);
-        }
-        Paso3DTO dto3 = formularioDTO.getPaso3DTO();
-        paso3.setMedidasProvisionales(dto3.getMedidasProvisionales());
-
-
-        Paso4 paso4 = alumnado.getPaso4();
-        if (paso4 == null) {
-            paso4 = new Paso4();
-            paso4.setAlumnado(alumnado);
-            alumnado.setPaso4(paso4);
-        }
-        Paso4DTO dto4 = formularioDTO.getPaso4DTO();
-        paso4.setContenido(dto4.getContenido());
-        paso4.setAcuerdos(dto4.getAcuerdos());
-        paso4.setAsistentes(dto4.getAsistentes());
-        paso4.setFecha(dto4.getFecha());
-
-        Paso5 paso5 = alumnado.getPaso5();
-        if (paso5 == null) {
-            paso5 = new Paso5();
-            paso5.setAlumnado(alumnado);
-            alumnado.setPaso5(paso5);
-        }
-
-        Paso5DTO dto5 = formularioDTO.getPaso5DTO();
-
-        if (dto5.getAnexo4() != null) {
-            Anexo4 anexo4 = new Anexo4(dto5.getAnexo4());
-            anexo4.setPaso5(paso5);
-            paso5.setAnexo4(anexo4);
-        }
-
-        if (dto5.getAnexo5() != null) {
-            Anexo5 anexo5 = new Anexo5(dto5.getAnexo5());
-            anexo5.setPaso5(paso5);
-            paso5.setAnexo5(anexo5);
-        }
-
-        Paso7 paso7 = alumnado.getPaso7();
-        if (paso7 == null) {
-            paso7 = new Paso7();
-            paso7.setAlumnado(alumnado);
-            alumnado.setPaso7(paso7);
-        }
-
-        Paso7DTO dto7 = formularioDTO.getPaso7DTO();
-
-        paso7.setCodigoAlumno(dto7.getCodigoAlumno());
-        paso7.setObjetivoGeneral(dto7.getObjetivoGeneral());
-        paso7.setObjetivosEspecificos(dto7.getObjetivosEspecificos());
-        paso7.setEquipoAcompanamiento(dto7.getEquipoAcompanamiento());
-        paso7.setCalendarioSeguimiento(dto7.getCalendarioSeguimiento());
-
-        paso7.setTieneRepositorioAntecedentes(dto7.getTieneRepositorioAntecedentes());
-        paso7.setTieneCronogramaFormalizado(dto7.getTieneCronogramaFormalizado());
-        paso7.setEsFormatoDigital(dto7.getEsFormatoDigital());
-
-        paso7.setMedidasPrevencionGeneral(dto7.getMedidasPrevencionGeneral());
-        paso7.setMedidasProteccionSeguridad(dto7.getMedidasProteccionSeguridad());
-        paso7.setMedidasAcompanamientoEmocional(dto7.getMedidasAcompanamientoEmocional());
-        paso7.setOtrasMedidasAdoptadas(dto7.getOtrasMedidasAdoptadas());
-        paso7.setInformacionEquipoDocente(dto7.getInformacionEquipoDocente());
-        paso7.setPlanificacionObservacionAtencion(dto7.getPlanificacionObservacionAtencion());
-
-        paso7.setAccionesTutor(dto7.getAccionesTutor());
-        paso7.setIntervencionEquipoDocente(dto7.getIntervencionEquipoDocente());
-        paso7.setIntervencionOrientacion(dto7.getIntervencionOrientacion());
-        paso7.setIntervencionOtrosTrabajadores(dto7.getIntervencionOtrosTrabajadores());
-        paso7.setAcompanamientoCompaneros(dto7.getAcompanamientoCompaneros());
-        paso7.setActividadesSensibilizacionAula(dto7.getActividadesSensibilizacionAula());
-        paso7.setFormacionProfesorado(dto7.getFormacionProfesorado());
-
-        paso7.setActuacionesFamilia(dto7.getActuacionesFamilia());
-        paso7.setActuacionesServiciosExternos(dto7.getActuacionesServiciosExternos());
-
-        paso7.setElaboradoPor(dto7.getElaboradoPor());
-        paso7.setFechaElaboracion(dto7.getFechaElaboracion());
-
-        Paso8 paso8 = alumnado.getPaso8();
-        if (paso8 == null) {
-            paso8 = new Paso8();
-            paso8.setAlumnado(alumnado);
-            alumnado.setPaso8(paso8);
-        }
-        Paso8DTO dto8 = formularioDTO.getPaso8DTO();
-        paso8.setOtrasMedidas(dto8.getOtrasMedidas());
-        paso8.setResponsableDireccion(dto8.getResponsableDireccion());
-
-        Paso11 paso11 = alumnado.getPaso11();
-        if (paso11 == null) {
-            paso11 = new Paso11();
-            paso11.setAlumnado(alumnado);
-            alumnado.setPaso11(paso11);
-        }
-        Paso11DTO dto11 = formularioDTO.getPaso11DTO();
-        paso11.setFecchacierre(dto11.getFecchacierre());
-        paso11.setObservacionesFechaCierre(dto11.getObservacionesFechaCierre());
-        paso11.setFechaInspeccion(dto11.getFechaInspeccion());
-        paso11.setInspeccion(dto11.getInspeccion());
-        paso11.setFecchafamilia(dto11.getFecchafamilia());
-        paso11.setFamilia(dto11.getFamilia());
-        paso11.setFechaProfesorado(dto11.getFechaProfesorado());
-        paso11.setProfesorado(dto11.getProfesorado());
-
-        alumnadoRepository.save(alumnado);
-        return true;
     }
 
+private void guardarPaso1(FormularioDTO formularioDTO, Alumnado alumnado){
+    Paso1 paso1 = alumnado.getPaso1();
+    if (paso1 == null) {
+        paso1 = new Paso1();
+        paso1.setAlumnado(alumnado);
+        alumnado.setPaso1(paso1);
+    }
+    Paso1DTO dto = formularioDTO.getPaso1DTO();
+    paso1.setCodigoAlumno(dto.getCodigoAlumno());
+    paso1.setAlumnoComunica(dto.getAlumnoComunica());
+    paso1.setCompanerosComunican(dto.getCompanerosComunican());
+    paso1.setFamiliaComunica(dto.getFamiliaComunica());
+    paso1.setIntentoPrevio(dto.getIntentoPrevio());
+    paso1.setConductaAutolesiva(dto.getConductaAutolesiva());
+    paso1.setOtrosDetalle(dto.getOtrosDetalle());
+    paso1.setDetalleHechos(dto.getDetalleHechos());
+    paso1.setFechaRegistro(dto.getFechaRegistro());
+    paso1.setFirmas(dto.getFirmas());
+
+}
 
     private void guardarCronograma(FormularioDTO formularioDTO, Paso2 paso2) {
         System.out.println("=== Guardando cronograma ===");

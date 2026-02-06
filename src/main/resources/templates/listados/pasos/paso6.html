@@ -1,0 +1,16 @@
+
+<th:block th:fragment="paso6(alumno)">
+
+    <td>
+        <span th:if="${alumno.paso6DTO != null and alumno.paso6DTO.fecha != null}"
+              style="color: green; font-weight: 600;">
+            ✔ Rellenado
+        </span>
+        <span th:unless="${alumno.paso6DTO != null and alumno.paso6DTO.fecha != null}"
+              style="color: #b00; font-weight: 600;">
+            ✘ Pendiente
+        </span>
+    </td>
+
+</th:block>
+

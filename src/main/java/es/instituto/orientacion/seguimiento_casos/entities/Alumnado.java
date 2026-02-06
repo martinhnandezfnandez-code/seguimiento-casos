@@ -56,10 +56,10 @@ public class Alumnado {
     private Paso5 paso5;
 
     // PASO 6
-    private String paso6_1;
-    private String paso6_2;
-    private String paso6_3;
-
+    @OneToOne(mappedBy = "alumnado",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Paso6 paso6;
     // PASO 7
     @OneToOne(mappedBy = "alumnado",
             cascade = CascadeType.ALL,
@@ -129,6 +129,11 @@ public class Alumnado {
             Paso5 paso5 = new Paso5(formularioDTO.getPaso5DTO());
             paso5.setAlumnado(this);
             this.paso5 = paso5;
+        }
+        if (formularioDTO.getPaso6DTO() != null) {
+            Paso6 paso6 = new Paso6(formularioDTO.getPaso6DTO());
+            paso6.setAlumnado(this);
+            this.paso6 = paso6;
         }
         if (formularioDTO.getPaso7DTO() != null) {
             Paso7 paso7 = new Paso7(formularioDTO.getPaso7DTO());

@@ -17,14 +17,10 @@ public class FormularioDTO {
     private Paso3DTO paso3DTO;
     private Paso4DTO paso4DTO;
     private Paso5DTO paso5DTO;
+    private Paso6DTO paso6DTO;
     private Paso7DTO paso7DTO;
     private Paso8DTO paso8DTO;
 
-    private String paso6_1;
-
-    private String paso6_2;
-
-    private String paso6_3;
 
     private String paso9_1;
 
@@ -44,6 +40,7 @@ public class FormularioDTO {
         this.paso3DTO = new Paso3DTO();
         this.paso4DTO = new Paso4DTO();
         this.paso5DTO = new Paso5DTO();
+        this.paso6DTO = new Paso6DTO();
         this.paso7DTO = new Paso7DTO();
         this.paso8DTO = new Paso8DTO();
         this.paso11DTO = new Paso11DTO();
@@ -81,6 +78,11 @@ public class FormularioDTO {
         }
         if (alumnado.getPaso5() != null) {
             this.paso5DTO = new Paso5DTO(alumnado.getPaso5());
+        } else {
+            this.paso5DTO = new Paso5DTO();
+        }
+        if (alumnado.getPaso6() != null) {
+            this.paso6DTO = new Paso6DTO(alumnado.getPaso6());
         } else {
             this.paso5DTO = new Paso5DTO();
         }
