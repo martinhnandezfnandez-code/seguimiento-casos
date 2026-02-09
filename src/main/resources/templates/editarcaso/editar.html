@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Caso - Formulario Completo</title>
+    <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="stylesheet" href="/css/formulario-edicion.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- CONTAINER PRINCIPAL -->
+<div class="container">
+    <!-- HEADER -->
+    <div class="header">
+        <h1>
+            <img src="/virgen-del-carmen_512.webp" width="90px" alt="Colegio El Carmen - Carmelitas Descalzos" class="logo">
+            Editar Caso - Protocolo de 11 Pasos
+        </h1>
+
+        <div class="info-caso" th:if="${formulario.id}">
+            <span class="caso-id">Caso #<span th:text="${formulario.id}">001</span></span>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DEL FORMULARIO -->
+    <div class="form-content edit-mode">
+        <form th:action="@{/alumnado/guardar}"
+              th:object="${formulario}"
+              method="post"
+              id="mainForm">
+
+            <!-- 🔹 MODO EDICIÓN -->
+            <input type="hidden" id="modoFormulario" value="edicion">
+            <input type="hidden" th:field="*{id}" th:if="${formulario.id}">
+
+            <!-- 🔹 BOTONES -->
+            <div class="action-buttons sticky-buttons">
+                <button type="button" class="btn btn-save" onclick="guardarFormulario()">
+                    💾 Guardar Cambios
+                </button>
+
+                <button type="button" class="btn btn-menu" onclick="volverMenu()">
+                    🏠 Volver al Menú
+                </button>
+
+                <button type="button" class="btn btn-export" onclick="exportarFormulario()">
+                    📄 Exportar Datos
+                </button>
+
+                <button type="button" class="btn btn-delete" onclick="eliminarCaso()">
+                    🗑️ Eliminar Caso
+                </button>
+            </div>
+
+            <!-- ==================== PASO 1 ==================== -->
+            <div class="paso-container active unlocked" data-paso="1">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">1</span>
+                        <span>Identificación</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso1 :: paso1}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 2 ==================== -->
+            <div class="paso-container active unlocked" data-paso="2">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">2</span>
+                        <span>Múltiples Acciones</span>
+                        <span class="paso-badge">Cronograma</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso2 :: paso2}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 3 ==================== -->
+            <div class="paso-container active unlocked" data-paso="3">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">3</span>
+                        <span>Medidas Provisionales</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso3 :: paso3}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 4 ==================== -->
+            <div class="paso-container active unlocked" data-paso="4">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">4</span>
+                        <span>Anexo III - Reunión con Familia</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso4 :: paso4}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 5 ==================== -->
+            <div class="paso-container active unlocked" data-paso="5">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">5</span>
+                        <span>Anexo IV - Síntesis de Entrevistas</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso5 :: paso5}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 6 ==================== -->
+            <div class="paso-container active unlocked" data-paso="6">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">6</span>
+                        <span>Apertura de Actuación</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso6 :: paso6}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 7 ==================== -->
+            <div class="paso-container active unlocked" data-paso="7">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">7</span>
+                        <span>Anexo VII - Plan de Prevención</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso7 :: paso7}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 8 ==================== -->
+            <div class="paso-container active unlocked" data-paso="8">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">8</span>
+                        <span>Anexo VIII - Seguimiento</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso8 :: paso8}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 9 ==================== -->
+            <div class="paso-container active unlocked" data-paso="9">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">9</span>
+                        <span>Director/a informa a familias del Plan</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso9 :: paso9}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 10 ==================== -->
+            <div class="paso-container active unlocked" data-paso="10">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">10</span>
+                        <span>Seguimiento por parte de inspección</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso10 :: paso10}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== PASO 11 ==================== -->
+            <div class="paso-container active unlocked" data-paso="11">
+                <div class="paso-header">
+                    <div class="paso-title">
+                        <span class="paso-number">11</span>
+                        <span>Cierre del Expediente</span>
+                    </div>
+                    <div class="paso-status">
+                        <span class="status-icon">📝</span>
+                        <span class="status-text">Editable</span>
+                    </div>
+                </div>
+                <div class="paso-body expanded">
+                    <div th:replace="~{nuevocaso/pasos/paso11 :: paso11}"></div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- BOTÓN FLOTANTE PARA GUARDAR (opcional) -->
+<button type="button" class="btn-floating-save" onclick="guardarFormulario()" title="Guardar cambios">
+    💾
+</button>
+
+<!-- Notificación de guardado -->
+<div id="saveNotification" style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 18px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    font-weight: 600;
+    font-size: 1.05em;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+">
+    <span id="notificationIcon">✓</span>
+    <span id="notificationText">Cambios guardados correctamente</span>
+</div>
+
+<script src="/js/formulario.js"></script>
+<script src="/js/formulario-edicion.js"></script>
+
+</body>
+</html>

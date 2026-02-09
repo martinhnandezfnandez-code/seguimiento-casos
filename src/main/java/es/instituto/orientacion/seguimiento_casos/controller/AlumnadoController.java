@@ -60,7 +60,6 @@ public class AlumnadoController {
 
         boolean result;
 
-        // CUANDO EDITAMOS
         if (formularioDTO.getId() != null) {
             result = guardarService.editarAlumnado(formularioDTO);
 
@@ -126,7 +125,7 @@ public class AlumnadoController {
                 .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
         model.addAttribute("formulario",
                 new FormularioDTO(alumnado));
-        return "nuevocaso/nuevo";
+        return "editarcaso/editar";
     }
 
     // OPCIONAL: Método para eliminar

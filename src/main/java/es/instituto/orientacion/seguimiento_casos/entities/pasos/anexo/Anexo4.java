@@ -42,6 +42,15 @@ public class    Anexo4 {
     @JoinColumn(name = "paso5_id")
     private Paso5 paso5;
 
+    public void actualizarDesdeDTO(Anexo4DTO dto) {
+        this.sintesisalumno = dto.getSintesisalumno();
+        this.fechaalumno = dto.getFechaalumno();
+        this.integrantesalumno = dto.getIntegrantesalumno();
+        this.sintesisfamilia = dto.getSintesisfamilia();
+        this.fechafamilia = dto.getFechafamilia();
+        this.integrantesfamilia = dto.getIntegrantesfamilia();
+    }
+
     public Anexo4() {
     }
     public Anexo4(Anexo4DTO anexo4DTO) {

@@ -27,6 +27,7 @@ public class GuardarServiceImpl implements GuardarService {
 
         Alumnado alumnado = new Alumnado(formularioDTO);
         alumnado.setObservaciones(formularioDTO.getObservaciones());
+        alumnado.setCodigoAlumno(formularioDTO.getCodigoAlumno());
 
         if (alumnado.getPaso1() != null) {
             alumnado.getPaso1().setAlumnado(alumnado);
@@ -84,6 +85,7 @@ public class GuardarServiceImpl implements GuardarService {
         alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
         alumnado.setObservaciones(formularioDTO.getObservaciones());
+        alumnado.setCodigoAlumno(formularioDTO.getCodigoAlumno());
 
         guardarPaso1(formularioDTO, alumnado);
 
@@ -235,16 +237,28 @@ public class GuardarServiceImpl implements GuardarService {
 
         Paso5DTO dto5 = formularioDTO.getPaso5DTO();
 
+        // Lógica para Anexo 4
         if (dto5.getAnexo4() != null) {
-            Anexo4 anexo4 = new Anexo4(dto5.getAnexo4());
-            anexo4.setPaso5(paso5);
-            paso5.setAnexo4(anexo4);
+            if (paso5.getAnexo4() == null) {
+                // Si no existe, creamos uno nuevo como hacías antes
+                Anexo4 nuevoAnexo4 = new Anexo4(dto5.getAnexo4());
+                nuevoAnexo4.setPaso5(paso5);
+                paso5.setAnexo4(nuevoAnexo4);
+            } else {
+                // SI YA EXISTE, actualizamos la instancia que Hibernate ya conoce
+                paso5.getAnexo4().actualizarDesdeDTO(dto5.getAnexo4());
+            }
         }
 
+        // Lógica para Anexo 5 (deberías crear un método similar en Anexo5)
         if (dto5.getAnexo5() != null) {
-            Anexo5 anexo5 = new Anexo5(dto5.getAnexo5());
-            anexo5.setPaso5(paso5);
-            paso5.setAnexo5(anexo5);
+            if (paso5.getAnexo5() == null) {
+                Anexo5 nuevoAnexo5 = new Anexo5(dto5.getAnexo5());
+                nuevoAnexo5.setPaso5(paso5);
+                paso5.setAnexo5(nuevoAnexo5);
+            } else {
+                paso5.getAnexo5().actualizarDesdeDTO(dto5.getAnexo5());
+            }
         }
     }
 
@@ -300,7 +314,6 @@ private void guardarPaso1(FormularioDTO formularioDTO, Alumnado alumnado){
         alumnado.setPaso1(paso1);
     }
     Paso1DTO dto = formularioDTO.getPaso1DTO();
-    paso1.setCodigoAlumno(dto.getCodigoAlumno());
     paso1.setAlumnoComunica(dto.getAlumnoComunica());
     paso1.setCompanerosComunican(dto.getCompanerosComunican());
     paso1.setFamiliaComunica(dto.getFamiliaComunica());

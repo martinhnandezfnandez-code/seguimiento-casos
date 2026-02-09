@@ -26,6 +26,10 @@ public class Alumnado {
     private String idCaso;
     @Column(name = "idDocumento")
     private Integer idDocumento;
+
+    @Column(name = "codigo_alumno")
+    private String codigoAlumno;
+
     @OneToOne(mappedBy = "alumnado",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
@@ -106,6 +110,7 @@ public class Alumnado {
         this.id = formularioDTO.getId();
         this.idCaso = formularioDTO.getIdCaso();
         this.idDocumento = formularioDTO.getIdDocumento();
+        this.codigoAlumno = formularioDTO.getCodigoAlumno();
 
 
         if (formularioDTO.getPaso1DTO() != null) {

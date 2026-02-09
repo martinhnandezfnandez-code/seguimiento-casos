@@ -1,0 +1,32 @@
+<th:block th:fragment="paso8">
+
+    <div class="section">
+        <h2>
+            PASO 8
+            <span class="paso-badge">Anexo VIII</span>
+        </h2>
+
+        <p>
+            <strong>Seguimiento y cierre de actuaciones.</strong>
+        </p>
+
+        <!-- RESPONSABLE -->
+        <div class="field-group">
+            <label>👤 Responsable de Dirección</label>
+            <input type="text"
+                   th:field="*{paso8DTO.responsableDireccion}"
+                   placeholder="Nombre del responsable de dirección"
+                   required>
+        </div>
+
+        <!-- OTRAS MEDIDAS -->
+        <div class="field-group">
+            <label>📝 Otras medidas adoptadas</label>
+            <textarea th:field="*{paso8DTO.otrasMedidas}"
+                      placeholder="Describa otras medidas del plan de seguimiento"
+                      rows="4"></textarea>
+        </div>
+
+    </div>
+
+</th:block>

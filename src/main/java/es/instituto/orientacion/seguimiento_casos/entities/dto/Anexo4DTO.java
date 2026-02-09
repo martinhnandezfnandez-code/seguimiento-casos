@@ -34,6 +34,7 @@ public class Anexo4DTO {
             this.sintesisfamilia = anexo4.getSintesisfamilia();
             this.fechafamilia = anexo4.getFechafamilia();
             this.integrantesfamilia = anexo4.getIntegrantesfamilia();
+
         }
     }
 

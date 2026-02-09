@@ -1,0 +1,79 @@
+<th:block th:fragment="paso6">
+
+    <div class="section">
+        <h2>
+            PASO 6
+            <span class="paso-badge">Apertura de actuación</span>
+        </h2>
+
+        <p>
+            <strong>Indique quién solicita o motiva la apertura de la actuación:</strong>
+        </p>
+
+        <!-- CHECKBOXES -->
+        <div class="field-group checkbox-group">
+            <label>
+                <input type="checkbox" th:field="*{paso6DTO.tutores}">
+                Tutores legales
+            </label>
+
+            <label>
+                <input type="checkbox" th:field="*{paso6DTO.alumno}">
+                Alumno/a
+            </label>
+
+            <label>
+                <input type="checkbox" th:field="*{paso6DTO.comision}">
+                Comisión
+            </label>
+
+            <label>
+                <input type="checkbox" th:field="*{paso6DTO.inspeccion}">
+                Inspección
+            </label>
+
+            <label>
+                <input type="checkbox" th:field="*{paso6DTO.servicios}">
+                Servicios externos
+            </label>
+
+            <label>
+                <input type="checkbox" th:field="*{paso6DTO.otros}">
+                Otros
+            </label>
+        </div>
+
+        <!-- OTROS ESPECIFICADOS -->
+        <div class="field-group">
+            <label>📝 Otros (especificar)</label>
+            <input type="text"
+                   th:field="*{paso6DTO.otrosespecificados}"
+                   placeholder="Especifique otros agentes o motivos si procede">
+        </div>
+
+        <hr>
+
+        <!-- APERTURA Y MOTIVACIÓN -->
+        <div class="field-group checkbox-group">
+            <label>
+                <input type="checkbox" th:field="*{paso6DTO.abrir}">
+                Se acuerda la apertura de la actuación
+            </label>
+
+            <label>
+                <input type="checkbox" th:field="*{paso6DTO.motivacion}">
+                Existe motivación suficiente para la apertura
+            </label>
+        </div>
+
+        <!-- FECHA -->
+        <div class="field-group fecha-group">
+            <label>📅 Fecha</label>
+            <input type="date"
+                   th:field="*{paso6DTO.fecha}"
+                   required>
+        </div>
+
+    </div>
+
+</th:block>

@@ -12,6 +12,7 @@ public class CasosDTO {
     private Long id;
     private String idCaso;
     private Integer idDocumento;
+    private String codigoAlumno;
 
     private Paso1DTO paso1DTO;
 
@@ -57,6 +58,7 @@ public class CasosDTO {
         this.fechaCreacion = alumno.getFechaCreacion();
         this.fechaUltimaActualizacion = alumno.getFechaUltimaActualizacion();
         this.observaciones = alumno.getObservaciones();
+        this.codigoAlumno = alumno.getCodigoAlumno();
     }
 
     public CasosDTO() {

@@ -3,6 +3,7 @@ package es.instituto.orientacion.seguimiento_casos.entities.dto;
 import es.instituto.orientacion.seguimiento_casos.entities.*;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.*;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.Paso7;
+import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,6 +13,8 @@ public class FormularioDTO {
     private Long id;
     private String idCaso;
     private Integer idDocumento;
+
+    private String codigoAlumno;
 
     private Paso1DTO paso1DTO;
 
@@ -62,6 +65,7 @@ public class FormularioDTO {
         this.idCaso = alumnado.getIdCaso();
         this.idDocumento = alumnado.getIdDocumento();
         this.observaciones= alumnado.getObservaciones();
+        this.codigoAlumno = alumnado.getCodigoAlumno();
 
         if (alumnado.getPaso1() != null) {
             this.paso1DTO = new Paso1DTO(alumnado.getPaso1());

@@ -1,0 +1,95 @@
+/* Estilos específicos para el modo edición */
+
+.edit-mode .paso-container {
+    margin-bottom: 20px;
+}
+
+.edit-mode .paso-body.expanded {
+    max-height: none !important;
+    padding: 25px;
+}
+
+.edit-mode .paso-header {
+    cursor: default;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.edit-mode .paso-container.active {
+    border-left: 4px solid #667eea;
+}
+
+/* Info del caso */
+.info-caso {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 8px;
+    font-size: 0.95em;
+}
+
+.caso-id {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.caso-fecha {
+    color: #666;
+}
+
+/* Botones sticky */
+.sticky-buttons {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    background: white;
+    padding: 15px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+/* Botón eliminar */
+.btn-delete {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* Botón flotante para guardar */
+.btn-floating-save {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.btn-floating-save:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+}
+
+/* Ocultar navegación paso a paso */
+.paso-navigation {
+    display: none;
+}
+
+/* Quitar interactividad de los headers en modo edición */
+.edit-mode .paso-header:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}

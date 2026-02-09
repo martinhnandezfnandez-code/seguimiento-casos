@@ -1,0 +1,106 @@
+<th:block th:fragment="paso2">
+
+    <div class="section">
+        <h2>PASO 2 <span class="paso-badge">Múltiples Acciones</span></h2>
+
+        <div class="field-group">
+            <strong>Constitución del EA</strong>
+            <input type="text"
+                   th:field="*{paso2DTO.paso2_1}"
+                   placeholder="Detalles de la constitución del EA">
+        </div>
+
+        <div class="field-group">
+            <strong>Acta con medidas inmediatas</strong>
+            <input type="text"
+                   th:field="*{paso2DTO.paso2_2}"
+                   placeholder="Medidas inmediatas adoptadas">
+        </div>
+
+        <div class="field-group">
+            <strong>Informar a familia</strong>
+            <input type="text"
+                   th:field="*{paso2DTO.paso2_3}"
+                   placeholder="Fecha/Confirmación de información a familia">
+        </div>
+
+        <div class="field-group">
+            <strong>Informar a Inspección</strong>
+            <input type="text"
+                   th:field="*{paso2DTO.paso2_4}"
+                   placeholder="Fecha/Confirmación de información a Inspección">
+        </div>
+
+        <div class="field-group">
+            <strong>Informar a la CPAyC</strong>
+            <input type="text"
+                   th:field="*{paso2DTO.paso2_5}"
+                   placeholder="Fecha/Confirmación de información a CPAyC">
+        </div>
+
+        <!-- CRONOGRAMA -->
+        <div class="field-group">
+            <strong>Cronograma – Anexo II</strong>
+            <p>(Cronograma de actuaciones durante todo el Protocolo)</p>
+
+            <table class="cronograma-table">
+                <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Situación</th>
+                    <th>Actuación</th>
+                    <th>Documento generado</th>
+                    <th>Observaciones</th>
+                </tr>
+                </thead>
+                <tbody id="cronogramaBody">
+
+
+                <tr th:each="fila, stat : *{paso2DTO.cronogramaDTO}">
+                    <td><input type="date" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].fecha}"
+                               class="input-fecha-tabla"></td>
+                    <td><input type="text" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].situacion}"
+                               class="input-tabla"></td>
+                    <td><input type="text" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].actuacion}"
+                               class="input-tabla"></td>
+                    <td><input type="text" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].documento}"
+                               class="input-tabla"></td>
+                    <td><input type="text" th:field="*{paso2DTO.cronogramaDTO[__${stat.index}__].observaciones}"
+                               class="input-tabla"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <button type="button" class="btn-add-row" onclick="agregarFila()">➕ Añadir fila</button>
+
+        </div>
+
+
+        <div class="field-group">
+            <strong>Antiguo Anexo I</strong>
+            <input type="text"
+                   th:field="*{paso2DTO.paso2_7}"
+                   placeholder="Referencia al antiguo Anexo I"
+                   required>
+        </div>
+    </div>
+
+    <script>
+        function agregarFila() {
+            const tbody = document.getElementById("cronogramaBody");
+            if (!tbody) return;
+
+            const index = tbody.rows.length;
+            const row = tbody.insertRow();
+
+            row.innerHTML = `
+                <td><input type="date" name="paso2DTO.cronogramaDTO[${index}].fecha"></td>
+                <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].situacion"></td>
+                <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].actuacion"></td>
+                <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].documento"></td>
+                <td><input type="text" name="paso2DTO.cronogramaDTO[${index}].observaciones"></td>
+            `;
+        }
+    </script>
+</th:block>

@@ -16,9 +16,6 @@ public class Paso1 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo_alumno")
-    private String codigoAlumno;
-
     @Column(name = "p1_familia_comunica")
     private Boolean familiaComunica;
 
@@ -55,7 +52,6 @@ public class Paso1 {
 
     public Paso1(Paso1DTO paso1DTO) {
         this.alumnoComunica = paso1DTO.getAlumnoComunica();
-        this.codigoAlumno = paso1DTO.getCodigoAlumno();
         this.companerosComunican = paso1DTO.getCompanerosComunican();
         this.detalleHechos = paso1DTO.getDetalleHechos();
         this.intentoPrevio = paso1DTO.getIntentoPrevio();

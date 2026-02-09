@@ -15,6 +15,7 @@ public class Paso5DTO {
         this.anexo5 = new Anexo5DTO(paso5.getAnexo5());
         this.alumnado = paso5.getAlumnado();
     }
+
     public Paso5DTO(){
         this.anexo4 = new Anexo4DTO();
         this.anexo5 = new Anexo5DTO();

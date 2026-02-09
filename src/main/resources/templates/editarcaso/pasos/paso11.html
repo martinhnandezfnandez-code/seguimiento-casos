@@ -1,0 +1,74 @@
+<th:block th:fragment="paso11">
+
+    <div class="section">
+        <h2>
+            PASO 11
+            <span class="paso-badge">Cierre del expediente</span>
+        </h2>
+
+        <!-- ACTA DE CIERRE -->
+        <div class="field-group">
+            <strong>📄 Acta de cierre realizada por Dirección</strong>
+
+            <label>📅 Fecha de cierre</label>
+            <input type="date"
+                   th:field="*{paso11DTO.fecchacierre}"
+                   required>
+
+            <label>📝 Observaciones</label>
+            <textarea th:field="*{paso11DTO.observacionesFechaCierre}"
+                      placeholder="Observaciones sobre el cierre del expediente"
+                      rows="3"></textarea>
+        </div>
+
+        <hr>
+
+        <!-- INSPECCIÓN -->
+        <div class="field-group">
+            <strong>🏛 Comunicación a Inspección</strong>
+
+            <label>📅 Fecha de comunicación</label>
+            <input type="date"
+                   th:field="*{paso11DTO.fechaInspeccion}">
+
+            <label>📝 Observaciones</label>
+            <textarea th:field="*{paso11DTO.inspeccion}"
+                      placeholder="Detalles de la comunicación con Inspección"
+                      rows="3"></textarea>
+        </div>
+
+        <hr>
+
+        <!-- FAMILIA -->
+        <div class="field-group">
+            <strong>👨‍👩‍👧 Comunicación a la familia</strong>
+
+            <label>📅 Fecha de comunicación</label>
+            <input type="date"
+                   th:field="*{paso11DTO.fecchafamilia}">
+
+            <label>📝 Observaciones</label>
+            <textarea th:field="*{paso11DTO.familia}"
+                      placeholder="Detalles de la comunicación con la familia"
+                      rows="3"></textarea>
+        </div>
+
+        <hr>
+
+        <!-- PROFESORADO -->
+        <div class="field-group">
+            <strong>👩‍🏫 Comunicación al profesorado</strong>
+
+            <label>📅 Fecha de comunicación</label>
+            <input type="date"
+                   th:field="*{paso11DTO.fechaProfesorado}">
+
+            <label>📝 Observaciones</label>
+            <textarea th:field="*{paso11DTO.profesorado}"
+                      placeholder="Detalles de la comunicación con el profesorado"
+                      rows="3"></textarea>
+        </div>
+
+    </div>
+
+</th:block>
