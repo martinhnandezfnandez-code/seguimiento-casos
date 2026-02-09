@@ -14,7 +14,7 @@
 
     <!-- HEADER -->
     <div class="header">
-        <h1>📊 Listado de Casos</h1>
+        <h1> <img src="/virgen-del-carmen_512.webp" width="90px" alt="Colegio El Carmen - Carmelitas Descalzos" class="logo"> Listado de Casos</h1>
         <div class="header-buttons">
             <a href="/alumnado/nuevo" class="btn">➕ Nuevo Caso</a>
             <a href="/" class="btn btn-secondary">🏠 Menú</a>
@@ -31,7 +31,29 @@
                     <th class="id-col">ID</th>
                     <th>ID Caso</th>
                     <th>ID Doc</th>
-                    <!-- aquí tus th de pasos -->
+                    <th>Paso 1: Anexo I</th>
+                    <th>Paso 2: Constitución del EA</th>
+                    <th>Paso 2: Acta con medidas inmediatas</th>
+                    <th>Paso 2: Informar a familia</th>
+                    <th>Paso 2: Informar a Inspección</th>
+                    <th>Paso 2: Informar a la CPAyC</th>
+                    <th>Paso 2: Cronograma Anexo II</th>
+                    <th>Paso 2: Antiguo Anexo I</th>
+                    <th>Paso 3: Acta</th>
+                    <th>Paso 4: Anexo III</th>
+                    <th>Paso 5: Anexo IV</th>
+                    <th>Paso 5: Anexo V</th>
+                    <th>Paso 6: Anexo VI</th>
+                    <th>Paso 7: Anexo VII</th>
+                    <th>Paso 8: Anexo VIII</th>
+                    <th>Paso 9: Director/a informa a las Familias del plan</th>
+                    <th>Paso 10: Seguimiento inspeccion</th>
+                    <th>Paso 11: Acta de cierre</th>
+                    <th>Paso 11: Se informa a Inspección</th>
+                    <th>Paso 11: Se informa a familia</th>
+                    <th>Paso 11: Se informa a profesorado</th>
+
+
                     <th class="actions">Acciones</th>
                 </tr>
                 </thead>
@@ -43,6 +65,7 @@
                     <td th:text="${alumno.idCaso}"></td>
                     <td th:text="${alumno.idDocumento}"></td>
 
+
                     <th:block th:insert="~{listados/pasos/paso1 :: paso1(${alumno})}"/>
                     <th:block th:insert="~{listados/pasos/paso2 :: paso2(${alumno})}"/>
                     <th:block th:insert="~{listados/pasos/paso3 :: paso3(${alumno})}"/>
@@ -51,6 +74,8 @@
                     <th:block th:insert="~{listados/pasos/paso6 :: paso6(${alumno})}"/>
                     <th:block th:insert="~{listados/pasos/paso7 :: paso7(${alumno})}"/>
                     <th:block th:insert="~{listados/pasos/paso8 :: paso8(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso9 :: paso9(${alumno})}"/>
+                    <th:block th:insert="~{listados/pasos/paso10 :: paso10(${alumno})}"/>
                     <th:block th:insert="~{listados/pasos/paso11 :: paso11(${alumno})}"/>
 
                     <td th:text="${alumno.observaciones}"></td>

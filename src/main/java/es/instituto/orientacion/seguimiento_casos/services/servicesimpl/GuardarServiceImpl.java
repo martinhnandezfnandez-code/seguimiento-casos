@@ -26,8 +26,6 @@ public class GuardarServiceImpl implements GuardarService {
     public boolean crearAlumnado(FormularioDTO formularioDTO) {
 
         Alumnado alumnado = new Alumnado(formularioDTO);
-        alumnado.setPaso9_1(formularioDTO.getPaso9_1());
-        alumnado.setPaso10_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
 
         if (alumnado.getPaso1() != null) {
@@ -64,9 +62,15 @@ public class GuardarServiceImpl implements GuardarService {
             paso5.setAnexo5(anexo5);
         }
 
+        guardarPaso6(formularioDTO, alumnado);
+
         guardarPaso7(formularioDTO, alumnado);
 
         guardarPaso8(formularioDTO, alumnado);
+
+        guardarPaso9(formularioDTO, alumnado);
+
+        guardarPaso10(formularioDTO,alumnado);
 
         guardarPaso11(formularioDTO, alumnado);
 
@@ -79,8 +83,6 @@ public class GuardarServiceImpl implements GuardarService {
         Alumnado alumnado;
         alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
-        alumnado.setPaso9_1(formularioDTO.getPaso9_1());
-        alumnado.setPaso10_1(formularioDTO.getPaso10_1());
         alumnado.setObservaciones(formularioDTO.getObservaciones());
 
         guardarPaso1(formularioDTO, alumnado);
@@ -93,9 +95,15 @@ public class GuardarServiceImpl implements GuardarService {
 
         guardarPaso5(formularioDTO, alumnado);
 
+        guardarPaso6(formularioDTO, alumnado);
+
         guardarPaso7(formularioDTO, alumnado);
 
         guardarPaso8(formularioDTO, alumnado);
+
+        guardarPaso9(formularioDTO, alumnado);
+
+        guardarPaso10(formularioDTO,alumnado);
 
         guardarPaso11(formularioDTO, alumnado);
 
@@ -119,6 +127,28 @@ public class GuardarServiceImpl implements GuardarService {
         paso11.setFamilia(dto11.getFamilia());
         paso11.setFechaProfesorado(dto11.getFechaProfesorado());
         paso11.setProfesorado(dto11.getProfesorado());
+    }
+
+    private static void guardarPaso9(FormularioDTO formularioDTO, Alumnado alumnado) {
+        Paso9 paso9 = alumnado.getPaso9();
+        if (paso9 == null) {
+            paso9 = new Paso9();
+            paso9.setAlumnado(alumnado);
+            alumnado.setPaso9(paso9);
+        }
+        Paso9DTO dto9 = formularioDTO.getPaso9DTO();
+        paso9.setDirectorinforma(dto9.getDirectorinforma());
+    }
+
+    private static void guardarPaso10(FormularioDTO formularioDTO, Alumnado alumnado) {
+        Paso10 paso10 = alumnado.getPaso10();
+        if (paso10 == null) {
+            paso10 = new Paso10();
+            paso10.setAlumnado(alumnado);
+            alumnado.setPaso10(paso10);
+        }
+        Paso10DTO dto10 = formularioDTO.getPaso10DTO();
+        paso10.setSeguiminetoInspeccion(dto10.getSeguiminetoInspeccion());
     }
 
     private static void guardarPaso8(FormularioDTO formularioDTO, Alumnado alumnado) {

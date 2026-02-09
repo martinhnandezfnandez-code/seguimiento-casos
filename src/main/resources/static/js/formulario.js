@@ -227,12 +227,16 @@ function actualizarBotones() {
     if (btnNext) {
         if (pasoActual === TOTAL_PASOS) {
             btnNext.textContent = '✓ Finalizar y Enviar';
-            btnNext.type = 'submit';
-            btnNext.onclick = null;
+            btnNext.type = 'button'; // Mantener como button para controlar el submit
+            btnNext.onclick = function() {
+                finalizarFormulario();
+            };
         } else {
             btnNext.textContent = 'Siguiente →';
             btnNext.type = 'button';
-            btnNext.onclick = avanzarPaso;
+            btnNext.onclick = function() {
+                avanzarPaso();
+            };
         }
     }
 }
@@ -249,6 +253,44 @@ function actualizarEstadoPaso(numPaso, estado) {
         pasoContainer.classList.remove('active', 'completed', 'locked');
         pasoContainer.classList.add(estado);
     }
+}
+
+// ================================================================
+// FINALIZACIÓN DEL FORMULARIO
+// ================================================================
+
+function finalizarFormulario() {
+    // Validar el último paso
+    if (!validarPasoActual()) {
+        mostrarNotificacion('⚠️ Por favor, completa todos los campos requeridos', 'warning');
+        return;
+    }
+
+    // Marcar último paso como completado
+    pasosCompletados.add(pasoActual);
+
+    // Guardar progreso final
+    guardarProgreso();
+
+    // Mostrar notificación
+    mostrarNotificacion('✓ Guardando formulario...', 'info');
+
+    // Pequeña pausa para que el usuario vea la notificación
+    setTimeout(() => {
+        const form = document.getElementById('mainForm');
+
+        if (!form) {
+            mostrarNotificacion('❌ Error: No se encontró el formulario', 'error');
+            return;
+        }
+
+        // Limpiar localStorage después de enviar exitosamente
+        localStorage.removeItem('seguimiento_progreso');
+        localStorage.removeItem('seguimiento_datos');
+
+        // Enviar el formulario al servidor
+        form.submit();
+    }, 500);
 }
 
 // ================================================================
@@ -321,19 +363,24 @@ function guardarFormulario() {
     const form = document.getElementById('mainForm');
 
     if (!form) {
-        alert('No se encontró el formulario');
+        mostrarNotificacion('❌ No se encontró el formulario', 'error');
         return;
     }
 
+    mostrarNotificacion('💾 Guardando borrador...', 'info');
+
     // ENVÍA AL CONTROLADOR @PostMapping("/guardar")
-    form.submit();
+    setTimeout(() => {
+        form.submit();
+    }, 500);
 }
 
 function volverMenu() {
     if (confirm('¿Deseas guardar el progreso antes de volver al menú?')) {
         guardarProgreso();
     }
-    window.location.href = '/';
+    // Ajusta esta ruta según tu estructura de URLs
+    window.location.href = '/seguimiento/listado'; // o la ruta que corresponda
 }
 
 function exportarFormulario() {

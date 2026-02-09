@@ -15,7 +15,7 @@
 <div class="container">
     <!-- HEADER CON BARRA DE PROGRESO -->
     <div class="header">
-        <h1>📋 Seguimiento de Casos - Protocolo de 11 Pasos</h1>
+        <h1><img src="/virgen-del-carmen_512.webp" width="90px" alt="Colegio El Carmen - Carmelitas Descalzos" class="logo"> Seguimiento de Casos - Protocolo de 11 Pasos</h1>
 
         <div class="progress-container">
             <div class="progress-bar" id="progressBar">0%</div>
@@ -23,25 +23,6 @@
         <div class="progress-text">
             <span id="progressText">0 de 11 pasos completados</span>
         </div>
-
-        <!--<form id="mainForm" action="/alumnado/guardar" method="post">
-            <input type="hidden" id="modoFormulario" value="nuevo">
-
-            <div class="action-buttons">
-                <button type="button" class="btn btn-save" onclick="guardarFormulario()">
-                    💾 Guardar Progreso
-                </button>
-
-                <button type="button" class="btn btn-menu" onclick="volverMenu()">
-                    🏠 Volver al Menú
-                </button>
-
-                <button type="button" class="btn btn-export" onclick="exportarFormulario()">
-                    📄 Exportar Datos
-                </button>
-            </div>
-
-        </form> -->
     </div>
 
     <!-- CONTENIDO DEL FORMULARIO -->
@@ -211,7 +192,7 @@
                 <div class="paso-header" onclick="togglePaso(9)">
                     <div class="paso-title">
                         <span class="paso-number">9</span>
-                        <span>Paso 9</span>
+                        <span>Director/a informa a familias del Plan</span>
                     </div>
                     <div class="paso-status">
                         <span class="status-icon">🔒</span>
@@ -219,13 +200,7 @@
                     </div>
                 </div>
                 <div class="paso-body">
-                    <div class="section">
-                        <h2>PASO 9</h2>
-                        <div class="field-group">
-                            <label>Contenido del Paso 9</label>
-                            <textarea name="paso9.contenido" rows="5" required></textarea>
-                        </div>
-                    </div>
+                    <div th:replace="~{nuevocaso/pasos/paso9 :: paso9}"></div>
                 </div>
             </div>
 
@@ -234,7 +209,7 @@
                 <div class="paso-header" onclick="togglePaso(10)">
                     <div class="paso-title">
                         <span class="paso-number">10</span>
-                        <span>Paso 10</span>
+                        <span>Seguimiento por parte de inspección</span>
                     </div>
                     <div class="paso-status">
                         <span class="status-icon">🔒</span>
@@ -242,16 +217,9 @@
                     </div>
                 </div>
                 <div class="paso-body">
-                    <div class="section">
-                        <h2>PASO 10</h2>
-                        <div class="field-group">
-                            <label>Contenido del Paso 10</label>
-                            <textarea name="paso10.contenido" rows="5" required></textarea>
-                        </div>
-                    </div>
+                    <div th:replace="~{nuevocaso/pasos/paso10 :: paso10}"></div>
                 </div>
             </div>
-
             <!-- ==================== PASO 11 ==================== -->
             <div class="paso-container locked" data-paso="11">
                 <div class="paso-header" onclick="togglePaso(11)">
@@ -269,20 +237,20 @@
                 </div>
             </div>
 
-            <!-- NAVEGACIÓN INFERIOR -->
-            <div class="paso-navigation">
-                <button type="button" class="btn-prev" id="btnPrev" onclick="retrocederPaso()">
-                    ← Anterior
-                </button>
-                <button type="button" class="btn-next" id="btnNext" onclick="avanzarPaso()">
-                    Siguiente →
-                </button>
-            </div>
+
 
         </form>
     </div>
 </div>
-
+<!-- NAVEGACIÓN INFERIOR -->
+<div class="paso-navigation">
+    <button type="button" class="btn-prev" id="btnPrev" onclick="retrocederPaso()">
+        ← Anterior
+    </button>
+    <button type="button" class="btn-next" id="btnNext" onclick="avanzarPaso()">
+        Siguiente →
+    </button>
+</div>
 <!-- Notificación de guardado -->
 <div id="saveNotification" style="
     position: fixed;

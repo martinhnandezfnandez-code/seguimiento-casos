@@ -12,19 +12,26 @@ public class FormularioDTO {
     private Long id;
     private String idCaso;
     private Integer idDocumento;
+
     private Paso1DTO paso1DTO;
+
     private Paso2DTO paso2DTO;
+
     private Paso3DTO paso3DTO;
+
     private Paso4DTO paso4DTO;
+
     private Paso5DTO paso5DTO;
+
     private Paso6DTO paso6DTO;
+
     private Paso7DTO paso7DTO;
+
     private Paso8DTO paso8DTO;
 
+    private Paso9DTO paso9DTO;
 
-    private String paso9_1;
-
-    private String paso10_1;
+    private Paso10DTO paso10DTO;
 
     private Paso11DTO paso11DTO;
 
@@ -43,6 +50,8 @@ public class FormularioDTO {
         this.paso6DTO = new Paso6DTO();
         this.paso7DTO = new Paso7DTO();
         this.paso8DTO = new Paso8DTO();
+        this.paso9DTO = new Paso9DTO();
+        this.paso10DTO = new Paso10DTO();
         this.paso11DTO = new Paso11DTO();
 
     }
@@ -52,8 +61,6 @@ public class FormularioDTO {
         this.id = alumnado.getId();
         this.idCaso = alumnado.getIdCaso();
         this.idDocumento = alumnado.getIdDocumento();
-        this.paso9_1 = alumnado.getPaso9_1();
-        this.paso10_1 = alumnado.getPaso10_1();
         this.observaciones= alumnado.getObservaciones();
 
         if (alumnado.getPaso1() != null) {
@@ -95,6 +102,16 @@ public class FormularioDTO {
             this.paso8DTO = new Paso8DTO(alumnado.getPaso8());
         } else {
             this.paso8DTO = new Paso8DTO();
+        }
+        if (alumnado.getPaso9() != null) {
+            this.paso9DTO = new Paso9DTO(alumnado.getPaso9());
+        } else {
+            this.paso9DTO = new Paso9DTO();
+        }
+        if (alumnado.getPaso10() != null) {
+            this.paso10DTO = new Paso10DTO(alumnado.getPaso10());
+        } else {
+            this.paso10DTO = new Paso10DTO();
         }
         if (alumnado.getPaso11() != null) {
             this.paso11DTO = new Paso11DTO(alumnado.getPaso11());
