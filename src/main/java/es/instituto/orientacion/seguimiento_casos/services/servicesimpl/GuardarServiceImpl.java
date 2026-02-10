@@ -356,15 +356,7 @@ private void guardarPaso1(FormularioDTO formularioDTO, Alumnado alumnado){
             System.out.println("  - Actuacion: " + cronogramaDTO.getActuacion());
 
             // Crear una NUEVA instancia de Cronograma
-            Cronograma nuevoCronograma = new Cronograma();
-            nuevoCronograma.setFecha(cronogramaDTO.getFecha());
-            nuevoCronograma.setSituacion(cronogramaDTO.getSituacion());
-            nuevoCronograma.setActuacion(cronogramaDTO.getActuacion());
-            nuevoCronograma.setDocumento(cronogramaDTO.getDocumento());
-            nuevoCronograma.setObservaciones(cronogramaDTO.getObservaciones());
-
-            // Establecer la relación bidireccional
-            nuevoCronograma.setPaso2(paso2);
+            Cronograma nuevoCronograma = getCronograma(paso2, cronogramaDTO);
 
             // Añadir a la colección
             paso2.getCronograma().add(nuevoCronograma);
@@ -372,6 +364,19 @@ private void guardarPaso1(FormularioDTO formularioDTO, Alumnado alumnado){
 
         System.out.println("Total items añadidos a paso2: " + paso2.getCronograma().size());
     }
+
+    private static Cronograma getCronograma(Paso2 paso2, CronogramaDTO cronogramaDTO) {
+        Cronograma nuevoCronograma = new Cronograma();
+        nuevoCronograma.setFecha(cronogramaDTO.getFecha());
+        nuevoCronograma.setSituacion(cronogramaDTO.getSituacion());
+        nuevoCronograma.setActuacion(cronogramaDTO.getActuacion());
+        nuevoCronograma.setDocumento(cronogramaDTO.getDocumento());
+        nuevoCronograma.setObservaciones(cronogramaDTO.getObservaciones());
+
+        // Establecer la relación bidireccional
+        nuevoCronograma.setPaso2(paso2);
+        return nuevoCronograma;
     }
+}
 
 
