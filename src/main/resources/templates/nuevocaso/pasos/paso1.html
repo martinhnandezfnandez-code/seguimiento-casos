@@ -3,18 +3,152 @@
     <div class="section">
         <h2>PASO 1 · Identificación</h2>
 
+        <!-- Código del alumno -->
         <div class="field-group">
-            <label>Código del alumno anonimizado</label>
+            <label for="codigoAlumno">Código del alumno anonimizado *</label>
             <input type="text"
+                   id="codigoAlumno"
                    th:field="*{codigoAlumno}"
+                   placeholder="Ej: ALU-2024-001"
                    required>
         </div>
 
+        <!-- Fecha de registro -->
         <div class="field-group">
-            <label>Detalle de los hechos</label>
-            <textarea th:field="*{paso1DTO.detalleHechos}"
-                      required></textarea>
+            <label for="fechaRegistro">Fecha de registro *</label>
+            <input type="date"
+                   id="fechaRegistro"
+                   th:field="*{paso1DTO.fechaRegistro}"
+                   required>
         </div>
+
+        <!-- Quién comunica -->
+        <div class="field-group">
+            <label>¿Quién comunica la situación?</label>
+            <div class="checkbox-group">
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="familiaComunica"
+                           th:field="*{paso1DTO.familiaComunica}">
+                    <label class="form-check-label" for="familiaComunica">
+                        Familia comunica
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="companerosComunican"
+                           th:field="*{paso1DTO.companerosComunican}">
+                    <label class="form-check-label" for="companerosComunican">
+                        Compañeros/as comunican
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="alumnoComunica"
+                           th:field="*{paso1DTO.alumnoComunica}">
+                    <label class="form-check-label" for="alumnoComunica">
+                        El/la alumno/a comunica
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicadores de riesgo -->
+        <div class="field-group">
+            <label>Indicadores de riesgo</label>
+            <div class="checkbox-group">
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="intentoPrevio"
+                           th:field="*{paso1DTO.intentoPrevio}">
+                    <label class="form-check-label" for="intentoPrevio">
+                        <span class="text-warning">⚠️</span> Intento previo de suicidio
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="conductaAutolesiva"
+                           th:field="*{paso1DTO.conductaAutolesiva}">
+                    <label class="form-check-label" for="conductaAutolesiva">
+                        <span class="text-warning">⚠️</span> Conducta autolesiva
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Otros motivos -->
+        <div class="field-group">
+            <div class="form-check mb-2">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="otrosMotivo"
+                       th:field="*{paso1DTO.otrosMotivo}"
+                       onclick="toggleOtrosDetalle()">
+                <label class="form-check-label" for="otrosMotivo">
+                    Otros motivos
+                </label>
+            </div>
+            <div id="otrosDetalleContainer" style="display: none;">
+                <label for="otrosDetalle">Especificar otros motivos</label>
+                <textarea id="otrosDetalle"
+                          th:field="*{paso1DTO.otrosDetalle}"
+                          rows="3"
+                          placeholder="Describa otros motivos relevantes..."></textarea>
+            </div>
+        </div>
+
+        <!-- Detalle de los hechos -->
+        <div class="field-group">
+            <label for="detalleHechos">Detalle de los hechos *</label>
+            <textarea id="detalleHechos"
+                      th:field="*{paso1DTO.detalleHechos}"
+                      rows="6"
+                      maxlength="500"
+                      placeholder="Describa de manera clara y objetiva los hechos que motivan este registro..."
+                      required></textarea>
+            <small class="text-muted">Máximo 500 caracteres</small>
+        </div>
+
+        <!-- Firmas -->
+        <div class="field-group">
+            <label for="firmas">Firmas de los profesionales que intervienen</label>
+            <textarea id="firmas"
+                      th:field="*{paso1DTO.firmas}"
+                      rows="3"
+                      placeholder="Nombre y cargo de los profesionales que participan en la identificación..."></textarea>
+            <small class="text-muted">Ej: Juan Pérez - Orientador/a, María García - Tutor/a</small>
+        </div>
+
     </div>
+
+    <script th:inline="javascript">
+        // Mostrar/ocultar campo "Otros detalles"
+        function toggleOtrosDetalle() {
+            const checkbox = document.getElementById('otrosMotivo');
+            const container = document.getElementById('otrosDetalleContainer');
+            const textarea = document.getElementById('otrosDetalle');
+
+            if (checkbox.checked) {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+                textarea.value = '';
+            }
+        }
+
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si ya está marcado (por ejemplo, en caso de error de validación)
+            const otrosMotivo = document.getElementById('otrosMotivo');
+            if (otrosMotivo && otrosMotivo.checked) {
+                document.getElementById('otrosDetalleContainer').style.display = 'block';
+            }
+        });
+    </script>
 
 </th:block>

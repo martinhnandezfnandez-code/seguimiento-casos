@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Anexo I</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm 2cm 2cm 2cm;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0 0 40px 0; /* Espacio para el footer */
+            line-height: 1.4;
+            color: #000;
+            font-size: 11pt;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Logo y header en la misma línea */
+        .top-section {
+            display: table;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .logo-container {
+            display: table-cell;
+            width: 80px;
+            vertical-align: middle;
+        }
+
+        .logo {
+            width: 70px;
+            height: auto;
+            display: block;
+        }
+
+        .header {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            padding-left: 20px;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            letter-spacing: 3px;
+        }
+
+        .header p {
+            font-size: 11pt;
+            font-weight: bold;
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        .datos-alumno {
+            border: 1.5pt solid #000;
+            padding: 8px 10px;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+
+        .datos-alumno strong {
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-size: 11pt;
+            margin: 15px 0 6px 0;
+            font-weight: normal;
+        }
+
+        .table-check {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+            font-size: 10pt;
+        }
+
+        .table-check td {
+            border: 1pt solid #000;
+            padding: 6px 8px;
+            vertical-align: top;
+            line-height: 1.3;
+        }
+
+        .checkbox {
+            width: 28px;
+            text-align: center;
+            padding: 6px 5px;
+        }
+
+        /* Estilo para círculo vacío */
+        .circle-empty {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border: 2px solid #000;
+            border-radius: 50%;
+        }
+
+        /* Estilo para círculo lleno */
+        .circle-filled {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            background-color: #000;
+            border: 2px solid #000;
+            border-radius: 50%;
+        }
+
+        .table-check td:not(.checkbox) {
+            text-align: justify;
+        }
+
+        .fecha-firma {
+            margin-top: 18px;
+            margin-bottom: 15px;
+            font-size: 11pt;
+        }
+
+        .detalle-titulo {
+            font-size: 11pt;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .box-facts {
+            border: 1pt solid #000;
+            min-height: 140px;
+            padding: 8px;
+            font-size: 10pt;
+            background-color: #fff;
+            text-align: justify;
+            line-height: 1.3;
+        }
+
+        /* Footer fijo en la parte inferior */
+        .footer {
+            position: running(footer);
+            font-size: 9pt;
+            color: #555;
+            width: 100%;
+        }
+
+        .footer-content {
+            border-top: 1pt solid #ddd;
+            padding-top: 8px;
+            text-align: left;
+        }
+
+        .page-number {
+            float: right;
+        }
+
+        @page {
+            @bottom-center {
+                content: element(footer);
+            }
+        }
+
+        /* Alternativa más compatible */
+        .footer-fixed {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            padding: 0 2cm;
+            font-size: 9pt;
+            color: #555;
+        }
+
+        .footer-fixed .footer-line {
+            border-top: 1pt solid #ddd;
+            padding-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Logo y Encabezado en la misma línea -->
+<div class="top-section">
+    <div class="logo-container">
+        <img th:if="${logoBase64 != null and !logoBase64.isEmpty()}"
+             th:src="${logoBase64}"
+             alt="Logo Junta de Andalucía"
+             class="logo"/>
+    </div>
+
+    <div class="header">
+        <h1>ANEXOS</h1>
+        <p>Anexo I: Modelo de registro y comunicación al Equipo Directivo de la<br/>
+            detección de la conducta de riesgo.</p>
+    </div>
+</div>
+
+<!-- Datos del alumno -->
+<div class="datos-alumno">
+    Datos del alumno o la alumna (sistema anonimizado o código asignado por el centro):
+    <strong><span th:text="${alumnado.codigoAlumno}">alu-233</span></strong>
+</div>
+
+<!-- Tabla de detección -->
+<div class="section-title">La conducta de riesgo se detecta...</div>
+
+<table class="table-check">
+    <tr>
+        <td class="checkbox">
+            <span th:if="${p1.familiaComunica}" class="circle-filled"></span>
+            <span th:unless="${p1.familiaComunica}" class="circle-empty"></span>
+        </td>
+        <td>Comunicación por parte de la familia de un alumno o una alumna que alerta al centro educativo de circunstancias que pueden ser compatibles con la situación de riesgo de ideación de conducta suicida o de conducta autolesiva de su hijo o hija<strong>.</strong></td>
+    </tr>
+    <tr>
+        <td class="checkbox">
+            <span th:if="${p1.companerosComunican}" class="circle-filled"></span>
+            <span th:unless="${p1.companerosComunican}" class="circle-empty"></span>
+        </td>
+        <td>La comunicación al centro educativo de la posible situación de riesgo proviene de compañeros de un alumno o alumna<strong>.</strong></td>
+    </tr>
+    <tr>
+        <td class="checkbox">
+            <span th:if="${p1.alumnoComunica}" class="circle-filled"></span>
+            <span th:unless="${p1.alumnoComunica}" class="circle-empty"></span>
+        </td>
+        <td>Un alumno o una alumna comunica, a través de cualquier medio de expresión, canal y persona de contacto, su sufrimiento con la situación personal que está viviendo y la aparición de la idea de la muerte como una posible solución o la explícita manifestación de querer acabar con su vi- da<strong>.</strong></td>
+    </tr>
+    <tr>
+        <td class="checkbox">
+            <span th:if="${p1.intentoPrevio}" class="circle-filled"></span>
+            <span th:unless="${p1.intentoPrevio}" class="circle-empty"></span>
+        </td>
+        <td>El alumno o alumna ha tenido intento autolítico y, tras la intervención de los servicios sanitarios, vuelve a acudir al centro tras el suceso<strong>.</strong></td>
+    </tr>
+    <tr>
+        <td class="checkbox">
+            <span th:if="${p1.conductaAutolesiva}" class="circle-filled"></span>
+            <span th:unless="${p1.conductaAutolesiva}" class="circle-empty"></span>
+        </td>
+        <td>Se detecta por parte de miembros de la comunidad educativa la conducta autolesiva del alumno o alumna<strong>.</strong></td>
+    </tr>
+    <tr>
+        <td class="checkbox">
+            <span class="circle-empty"></span>
+        </td>
+        <td>Otras (especificar):</td>
+    </tr>
+</table>
+
+<!-- Fecha y firma -->
+<div class="fecha-firma">
+    Fecha y firma(s):
+    <span th:if="${p1.fechaRegistro != null}"
+          th:text="${#temporals.format(p1.fechaRegistro, 'dd/MM/yyyy')}"></span>
+</div>
+
+<!-- Detalle de hechos -->
+<div class="detalle-titulo">Detalle de los hechos (breve descripción)</div>
+<div class="box-facts">
+    <span th:if="${p1.detalleHechos != null and !p1.detalleHechos.isEmpty()}"
+          th:text="${p1.detalleHechos}"></span>
+</div>
+
+<!-- Pie de página fijo en la parte inferior -->
+<div class="footer-fixed">
+    <div class="footer-line">
+        Guía para la prevención del riesgo de conductas suicidas y autolesiones del alumnado
+        <span class="page-number">23</span>
+    </div>
+</div>
+
+</body>
+</html>

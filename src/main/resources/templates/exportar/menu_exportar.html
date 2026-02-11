@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exportar Informes - PCCS</title>
+    <link rel="stylesheet" th:href="@{/css/exportar.css}">
+</head>
+<body>
+<div class="container">
+    <!-- Logo y Header -->
+    <div class="top-banner">
+        <div class="logo-section">
+            <img src="/images/virgen-del-carmen_512.webp" alt="Logo" class="logo" width="130px">
+        </div>
+        <div class="header-content">
+            <h1> Exportar Documentación</h1>
+            <p class="subtitle">Sistema de Prevención de Conductas de Riesgo</p>
+        </div>
+    </div>
+
+    <!-- Formulario de exportación -->
+    <div class="form-export">
+        <div class="form-section">
+            <div class="input-group">
+                <label for="alumnoSelect">
+                    <span class="label-icon">👤</span>
+                    Seleccionar Alumno
+                </label>
+                <div class="select-wrapper">
+                    <select id="alumnoSelect" required>
+                        <option value="">-- Selecciona un alumno --</option>
+                        <option th:each="al : ${alumnos}"
+                                th:value="${al.id}"
+                                th:text="${al.codigoAlumno}">Alumno</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="pasoSelect">
+                    <span class="label-icon">📋</span>
+                    Seleccionar Documento
+                </label>
+                <div class="select-wrapper">
+                    <select id="pasoSelect" required>
+                        <option value="">-- Selecciona un documento --</option>
+                        <option value="1">Paso 1 - Anexo I (Detección)</option>
+                        <option value="2">Paso 2 - Cronograma</option>
+                        <option value="3">Paso 3 - Plan de Actuación</option>
+                        <option value="4">Paso 4 - Seguimiento</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <span class="info-icon">ℹ️</span>
+                <p>Los documentos se generarán en formato PDF listo para imprimir o compartir.</p>
+            </div>
+
+            <button type="button" class="btn-generate" onclick="generarPDF()">
+                <span class="btn-icon">📥</span>
+                Generar PDF
+            </button>
+
+            <a href="/" class="btn-back">
+                <span class="back-icon">←</span>
+                Volver al menú principal
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-info">
+        <p>© 2026 Sistema de Seguimiento de Casos - Orientación Educativa</p>
+    </div>
+</div>
+
+<script>
+    function generarPDF() {
+        const alumnoId = document.getElementById('alumnoSelect').value;
+        const pasoId = document.getElementById('pasoSelect').value;
+
+        // Validaciones
+        if (!alumnoId) {
+            mostrarAlerta("Por favor, selecciona un alumno", "warning");
+            return;
+        }
+
+        if (!pasoId) {
+            mostrarAlerta("Por favor, selecciona un documento", "warning");
+            return;
+        }
+
+        // Mostrar loader
+        const btn = document.querySelector('.btn-generate');
+        btn.innerHTML = '<span class="loader"></span> Generando PDF...';
+        btn.disabled = true;
+
+        // Redireccionar según el paso seleccionado
+        setTimeout(() => {
+            if (pasoId === "1") {
+                window.location.href = '/alumnado/pdf/paso1/' + alumnoId;
+            } else if (pasoId === "2") {
+                window.location.href = '/alumnado/pdf/paso2/' + alumnoId;
+            } else {
+                mostrarAlerta("El PDF para este paso aún no está implementado", "info");
+                btn.innerHTML = '<span class="btn-icon">📥</span> Generar PDF';
+                btn.disabled = false;
+            }
+        }, 500);
+    }
+
+    function mostrarAlerta(mensaje, tipo) {
+        // Sistema de alertas simple
+        const alerta = document.createElement('div');
+        alerta.className = `alerta alerta-${tipo}`;
+        alerta.textContent = mensaje;
+        document.body.appendChild(alerta);
+
+        setTimeout(() => {
+            alerta.classList.add('show');
+        }, 10);
+
+        setTimeout(() => {
+            alerta.classList.remove('show');
+            setTimeout(() => alerta.remove(), 300);
+        }, 3000);
+    }
+
+    // Animación al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('.form-export').classList.add('loaded');
+    });
+</script>
+</body>
+</html>

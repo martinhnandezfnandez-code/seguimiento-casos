@@ -5,8 +5,6 @@ import es.instituto.orientacion.seguimiento_casos.entities.Alumnado;
 import es.instituto.orientacion.seguimiento_casos.entities.dto.Paso6DTO;
 import jakarta.persistence.*;
 import lombok.Data;
-
-
 import java.time.LocalDate;
 
 @Table(name = "anexo6")

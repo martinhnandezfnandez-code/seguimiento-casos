@@ -1,19 +1,19 @@
 <th:block th:fragment="paso1" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <div class="section">
-        <h2>PASO 1 · Identificación</h2>
-
-        <div class="field-group">
-            <label>Código del alumno anonimizado</label>
-            <input type="text"
-                   th:field="*{codigoAlumno}"
-                   required>
+    <div class="info-caso">
+        <!-- Código del alumno -->
+        <div class="caso-id">
+            <span th:text="'Código: ' + ${codigoAlumno ?: 'Sin asignar'}"></span>
         </div>
 
-        <div class="field-group">
-            <label>Detalle de los hechos</label>
-            <textarea th:field="*{paso1DTO.detalleHechos}"
-                      required></textarea>
+        <!-- Estado del Paso 1 -->
+        <div class="caso-fecha">
+            <span th:if="${paso1DTO.fechaRegistro != null}" class="badge bg-success">
+                ✓ Completado - <span th:text="${#temporals.format(paso1DTO.fechaRegistro, 'dd/MM/yyyy')}"></span>
+            </span>
+            <span th:if="${paso1DTO.fechaRegistro == null}" class="badge bg-warning text-dark">
+                ⏳ Pendiente
+            </span>
         </div>
     </div>
 

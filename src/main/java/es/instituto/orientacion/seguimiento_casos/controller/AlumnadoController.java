@@ -6,6 +6,11 @@ import es.instituto.orientacion.seguimiento_casos.entities.dto.CasosDTO;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.*;
 import es.instituto.orientacion.seguimiento_casos.repositories.*;
 import es.instituto.orientacion.seguimiento_casos.services.GuardarService;
+import es.instituto.orientacion.seguimiento_casos.services.PdfService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +34,12 @@ public class AlumnadoController {
     private final Paso9Repository paso9Repository;
     private final Paso10Repository paso10Repository;
     private final Paso11Repository paso11Repository;
+    private final PdfService pdfService;
 
 
 
 
-    public AlumnadoController(GuardarService guardarService, AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso3Repository paso3Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso6Repository paso6Repository, Paso7Repository paso7Repository, Paso8Repository paso8Repository, Paso9Repository paso9Repository, Paso10Repository paso10Repository, Paso11Repository paso11Repository) {
+    public AlumnadoController(GuardarService guardarService, AlumnadoRepository alumnadoRepository, Paso1Repository paso1Repository, Paso2Repository paso2Repository, Paso3Repository paso3Repository, Paso4Repository paso4Repository, Paso5Repository paso5Repository, Paso6Repository paso6Repository, Paso7Repository paso7Repository, Paso8Repository paso8Repository, Paso9Repository paso9Repository, Paso10Repository paso10Repository, Paso11Repository paso11Repository, PdfService pdfService) {
         this.guardarService = guardarService;
         this.alumnadoRepository = alumnadoRepository;
         this.paso1Repository = paso1Repository;
@@ -47,6 +53,7 @@ public class AlumnadoController {
         this.paso9Repository = paso9Repository;
         this.paso10Repository = paso10Repository;
         this.paso11Repository = paso11Repository;
+        this.pdfService = pdfService;
     }
 
     @GetMapping("/nuevo")
@@ -133,5 +140,38 @@ public class AlumnadoController {
     public String eliminar(@PathVariable String id) {
         alumnadoRepository.deleteById(id);
         return "redirect:/alumnado/listar";
+    }
+    @GetMapping("/exportar")
+    public String mostrarMenuExportar(Model model) {
+        // Pasamos la lista de todos los alumnos para el desplegable
+        model.addAttribute("alumnos", alumnadoRepository.findAll());
+        return "exportar/menu_exportar";
+    }
+
+    @GetMapping("/pdf/paso1/{id}")
+    public ResponseEntity<byte[]> descargarPaso1(@PathVariable Long id) {
+        Alumnado alumnado = alumnadoRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+
+        byte[] pdfBytes = pdfService.generarPdfAnexo1(alumnado);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "Anexo1_" + alumnado.getCodigoAlumno() + ".pdf");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+    @GetMapping("/pdf/paso2/{id}")
+    public ResponseEntity<byte[]> descargarPaso2(@PathVariable Long id) {
+        Alumnado alumnado = alumnadoRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+
+        byte[] pdfBytes = pdfService.generarPdfAnexo2(alumnado);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "Anexo2_Cronograma_" + alumnado.getCodigoAlumno() + ".pdf");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
 }

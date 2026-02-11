@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Anexo II - Cronograma</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0 0 40px 0;
+            line-height: 1.4;
+            color: #000;
+            font-size: 10pt;
+        }
+
+        /* Reutilizamos la cabecera del Anexo I para consistencia */
+        .top-section {
+            display: table;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .logo-container {
+            display: table-cell;
+            width: 80px;
+            vertical-align: middle;
+        }
+
+        .logo {
+            width: 70px;
+            height: auto;
+        }
+
+        .header {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            padding-left: 20px;
+        }
+
+        .header h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 10pt;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .sub-header {
+            font-size: 9pt;
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Tabla del Cronograma */
+        .table-cronograma {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .table-cronograma th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: center;
+            border: 1pt solid #000;
+            padding: 8px;
+            font-size: 9pt;
+        }
+
+        .table-cronograma td {
+            border: 1pt solid #000;
+            padding: 8px;
+            vertical-align: top;
+            font-size: 9pt;
+            word-wrap: break-word;
+        }
+
+        .col-fecha { width: 12%; text-align: center; }
+        .col-situacion { width: 20%; }
+        .col-actuacion { width: 20%; }
+        .col-documento { width: 23%; }
+        .col-obs { width: 25%; }
+
+        /* Footer */
+        .footer-fixed {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            padding: 0 2cm;
+            font-size: 9pt;
+            color: #555;
+        }
+
+        .footer-line {
+            border-top: 1pt solid #ddd;
+            padding-top: 8px;
+        }
+
+        .page-number { float: right; }
+    </style>
+</head>
+<body>
+
+<div class="top-section">
+    <div class="logo-container">
+        <img th:if="${logoBase64 != null}" th:src="${logoBase64}" class="logo"/>
+    </div>
+    <div class="header">
+        <h1>ANEXOS</h1>
+        <p>Anexo II: Cronograma de actuaciones durante todo el Protocolo.</p>
+    </div>
+</div>
+
+<div class="sub-header">
+    (Incluidas actuaciones o incidencias singulares en el centro y actuaciones de coordinación con la familia y los servicios externos especializados).
+</div>
+
+<table class="table-cronograma">
+    <thead>
+    <tr>
+        <th class="col-fecha">Fecha</th>
+        <th class="col-situacion">Situación</th>
+        <th class="col-actuacion">Actuación</th>
+        <th class="col-documento">Documento generado (actas, informes, ...)</th>
+        <th class="col-obs">Observaciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${p2.cronogramaDTO}">
+        <td class="col-fecha" th:text="${item.fecha != null ? #temporals.format(item.fecha, 'dd/MM/yyyy') : ''}"></td>
+        <td class="col-situacion" th:text="${item.situacion}"></td>
+        <td class="col-actuacion" th:text="${item.actuacion}"></td>
+        <td class="col-documento" th:text="${item.documento}"></td>
+        <td class="col-obs" th:text="${item.observaciones}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(p2.cronogramaDTO)}">
+        <td colspan="5" style="text-align: center; padding: 20px;">No hay actuaciones registradas en el cronograma.</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="footer-fixed">
+    <div class="footer-line">
+        Guía para la prevención del riesgo de conductas suicidas y autolesiones del alumnado
+        <span class="page-number">24</span>
+    </div>
+</div>
+
+</body>
+</html>
