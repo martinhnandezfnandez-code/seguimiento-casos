@@ -1,72 +1,180 @@
 <th:block th:fragment="paso5">
-
     <div class="section">
-        <h2>
-            PASO 5
-            <span class="paso-badge">Anexo IV – Síntesis</span>
-        </h2>
+        <div class="anexo-iv-section">
+            <h2>PASO 5 <span class="paso-badge">Anexo IV – Síntesis de Entrevistas</span></h2>
 
-        <p>
-            <strong>Anexo IV:</strong>
-            Síntesis de las entrevistas mantenidas con la familia y con el alumno/a.
-        </p>
+            <p class="instrucciones">Información complementaria obtenida en las entrevistas con la familia y el alumno/a.</p>
 
-        <!-- ================= ANEXO IV ================= -->
+            <div class="box-entrevista">
+                <h3 class="subtitulo-anexo">4.1 Entrevista con la Familia</h3>
+                <div class="field-group">
+                    <label>📝 Síntesis de la entrevista</label>
+                    <textarea th:field="*{paso5DTO.anexo4.sintesisfamilia}" class="form-control" rows="3" placeholder="Resumen de la información aportada por la familia..."></textarea>
+                </div>
+                <div class="field-row">
+                    <div class="field-group">
+                        <label>👥 Integrantes participantes</label>
+                        <input type="text" th:field="*{paso5DTO.anexo4.integrantesfamilia}" class="form-control" placeholder="Madre, padre, tutores...">
+                    </div>
+                    <div class="field-group fecha-group">
+                        <label>📅 Fecha</label>
+                        <input type="date" th:field="*{paso5DTO.anexo4.fechafamilia}" class="form-control">
+                    </div>
+                </div>
+            </div>
 
-        <!-- SÍNTESIS CON LA FAMILIA -->
-        <div class="field-group">
-            <label>📝 Síntesis de la entrevista con la familia</label>
-            <textarea th:field="*{paso5DTO.anexo4.sintesisfamilia}"
-                      placeholder="Resumen de la información aportada por la familia, valoración realizada, contexto…"
-                      required></textarea>
+            <hr class="separador-anexos">
+
+            <div class="box-entrevista">
+                <h3 class="subtitulo-anexo">4.2 Entrevista con el Alumno/a</h3>
+                <div class="field-group">
+                    <label>📝 Síntesis de la entrevista</label>
+                    <textarea th:field="*{paso5DTO.anexo4.sintesisalumno}" class="form-control" rows="3" placeholder="Estado emocional, percepción del problema..."></textarea>
+                </div>
+                <div class="field-row">
+                    <div class="field-group">
+                        <label>👥 Participantes</label>
+                        <input type="text" th:field="*{paso5DTO.anexo4.integrantesalumno}" class="form-control" placeholder="Alumno/a, orientador/a...">
+                    </div>
+                    <div class="field-group fecha-group">
+                        <label>📅 Fecha</label>
+                        <input type="date" th:field="*{paso5DTO.anexo4.fechaalumno}" class="form-control">
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="field-group">
-            <label>👥 Integrantes que participan (familia)</label>
-            <input type="text"
-                   th:field="*{paso5DTO.anexo4.integrantesfamilia}"
-                   placeholder="Madre, padre, tutor/a legal…"
-                   required>
+        <div class="espaciador-grande"></div>
+
+        <div class="anexo-v-section">
+            <h2 class="titulo-separador">Anexo V – Ficha de Análisis del Caso</h2>
+
+            <h3 class="titulo-bloque alarma">1. SEÑALES DE ALARMA</h3>
+            <div class="anexo-grid">
+                <div class="anexo-subtitulo">1.1 Señales Directas</div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.comunicacionBloqueoDolor', label='Comunicación de bloqueo o dolor insoportable')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.comunicacionDesesperanza', label='Comunicación de desesperanza o falta de salida')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.comunicacionDesvinculacionProyectos', label='Desvinculación de proyectos personales')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.comunicacionNoSerImportante', label='Sentimiento de no ser importante para nadie')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.comunicacionCargaFamiliar', label='Sentimiento de ser una carga para la familia')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.comunicacionPensamientosAisladosMuerte', label='Comunicación de pensamientos aislados de muerte')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.comunicacionDeseoExplicitoSuicidio', label='Comunicación de deseo explícito de suicidio')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.referenciasMetodosSuicidio', label='Referencias a métodos de suicidio')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.planConductaSuicida', label='Planificación de conducta suicida')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.busquedaFormasSuicidio', label='Búsqueda activa de formas de suicidio')}"></div>
+
+                <div class="anexo-subtitulo">1.2 Señales Indirectas</div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.existenciaIntentoPrevio', label='Existencia de intento previo de suicidio')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.conductasRiesgoHacerDano', label='Conductas de riesgo o de hacerse daño')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.cambiosComportamientoCaracter', label='Cambios marcados en comportamiento o carácter')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.comportamientosAngustiaIrritacion', label='Comportamientos de angustia o irritación extrema')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.senalesAbatimientoActividades', label='Señales de abatimiento en actividades habituales')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.absentismoEscolar', label='Absentismo escolar injustificado o repentino')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.alteracionesRitmosPatrones', label='Alteraciones de sueño o alimentación')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.conductasRelacionalesTemasPendientes', label='Conductas de cierre de temas pendientes (despedidas)')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.senalesAlarma.inicioConsumoSustancias', label='Inicio o aumento de consumo de sustancias')}"></div>
+            </div>
+
+            <h3 class="titulo-bloque riesgo">2. FACTORES DE RIESGO</h3>
+            <div class="anexo-grid">
+                <div class="anexo-subtitulo">2.1 Personales</div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.intentosSuicidioPrevios', label='Intentos de suicidio previos')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.condicionDiscapacidad', label='Condición de discapacidad')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.enfermedadGraveDolorCronico', label='Enfermedad grave o dolor crónico')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.trastornosSustancias', label='Trastornos por uso de sustancias')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.accesoMediosLetales', label='Acceso a medios letales')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.impulsividadAgresividadPesimismo', label='Impulsividad, agresividad o pesimismo')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.historiaViolenciaAbuso', label='Historia de violencia o abuso')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.sucesosVitalesEstresantes', label='Sucesos vitales estresantes recientes')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.perfeccionismoExcesivo', label='Perfeccionismo excesivo')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.autolesiones', label='Autolesiones')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.conductaAislamientoSoledad', label='Conducta de aislamiento o soledad')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.serviciosSaludMental', label='Uso de servicios de salud mental')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.abandonoTratamiento', label='Abandono de tratamiento')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.noSeguirPrescripcion', label='No seguir prescripción médica')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.personalidadInfluyente', label='Influencia de personalidad pública/redes')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.usoInadecuadoTic', label='Uso inadecuado de las TIC')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.rechazoImagenCorporalTca', label='Rechazo imagen corporal / TCA')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.presenciaTeaTdahCapacidades', label='Presencia de TEA, TDAH o Altas Capacidades')}"></div>
+
+                <div class="anexo-subtitulo">2.2 Familiares</div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.perdidaGraveReciente', label='Pérdida grave reciente en la familia')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.historialFamiliarSuicidio', label='Historial familiar de suicidio')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.negligenciaEstilosEducativos', label='Negligencia o estilos educativos autoritarios')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.abusosSustanciasAlcoholismo', label='Abuso de sustancias / Alcoholismo en familia')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.estresoresRupturasFamiliares', label='Estresores por conflictos o rupturas familiares')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.familiaNivelesPerfeccionismo', label='Altos niveles de exigencia/perfeccionismo familiar')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.equilibrioActividadesDomesticas', label='Desequilibrio en actividades domésticas')}"></div>
+
+                <div class="anexo-subtitulo">2.3 Sociales y Educativos</div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.faltaPerdidaRedApoyo', label='Falta o pérdida de red de apoyo')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.victimaAcosoCiberacoso', label='Víctima de acoso o ciberacoso')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.rechazoSocialMaltrato', label='Rechazo social o maltrato por iguales')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.desarraigoCultural', label='Desarraigo cultural')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.estigmaExclusionGrupo', label='Estigma o exclusión del grupo')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.existenciaRedApoyoSocial', label='Problemas con la red de apoyo social (Riesgo)')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.buenasRelacionesAdultas', label='Dificultades en relaciones con adultos (Riesgo)')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.conflictoConfianzaSituaciones', label='Conflictos de confianza en situaciones difíciles')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.amigoSocialCultural', label='Dificultades de arraigo social/cultural (Riesgo)')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresRiesgo.existenciaProyectoSocialEducativo', label='Falta de proyecto social/educativo (Riesgo)')}"></div>
+            </div>
+
+            <h3 class="titulo-bloque proteccion">3. FACTORES DE PROTECCIÓN</h3>
+            <div class="anexo-grid">
+                <div class="anexo-subtitulo">3.1 Personales</div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.habilidadesGestionEmocional', label='Habilidades de gestión emocional')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.habilidadesComunicacionRelacion', label='Habilidades de comunicación y relación')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.autoconceptoAutoestimaSaludables', label='Autoconcepto y autoestima saludables')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.actitudesRelacionInterpersonal', label='Actitudes positivas de relación interpersonal')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.habitosPersonalesSaludables', label='Hábitos personales saludables')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.usoAdecuadoTic', label='Uso adecuado de las TIC')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.caracteristicasPersonalesTranquilidad', label='Flexibilidad y tranquilidad personal')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.rendimientoEscolarAdecuado', label='Rendimiento escolar adecuado')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.sentimientoPositivoPertenencia', label='Sentimiento positivo de pertenencia')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.vinculacionProyectosPersonales', label='Vinculación con proyectos personales')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.relacionesFamiliaresAdecuadas', label='Relaciones familiares adecuadas')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.vinculosApoyoEstables', label='Vínculos de apoyo estables')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.estilosEducativosModulados', label='Estilos educativos modulados')}"></div>
+
+                <div class="anexo-subtitulo">3.2 Familiares, Sociales y Educativos</div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.equilibrioActividadesRelacionadas', label='Equilibrio en actividades familiares/ocio')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.existenciaRedApoyoSocial', label='Existencia de red de apoyo social (Protección)')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.buenasRelacionesAdultas', label='Buenas relaciones con adultos (Protección)')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.contarReferenciaConfianza', label='Contar con referente de confianza')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.amigoSocialCultural', label='Arraigo social y cultural (Protección)')}"></div>
+                <div th:replace="~{::radioRow(field='paso5DTO.anexo5.factoresProteccion.existenciaProyectoSocialEducativo', label='Existencia de proyecto social/educativo (Protección)')}"></div>
+            </div>
         </div>
 
-        <div class="field-group fecha-group">
-            <label>📅 Fecha de la entrevista con la familia</label>
-            <input type="date"
-                   th:field="*{paso5DTO.anexo4.fechafamilia}"
-                   required>
+        <h3 class="titulo-bloque observaciones">4. Conclusiones y Datos del Registro</h3>
+        <div class="box-observaciones">
+            <div class="field-group">
+                <label>🗒 Síntesis final y conclusiones de la valoración cualitativa</label>
+                <textarea th:field="*{paso5DTO.anexo5.observaciones}" class="form-control" rows="4"
+                          placeholder="Escriba aquí la valoración global de la situación..."></textarea>
+            </div>
+
+            <div class="field-row">
+                <div class="field-group">
+                    <label>👤 Detectado por</label>
+                    <input type="text" th:field="*{paso5DTO.anexo5.detectadoPor}" class="form-control" placeholder="Nombre del profesional">
+                </div>
+                <div class="field-group fecha-group">
+                    <label>📅 Fecha de detección</label>
+                    <input type="date" th:field="*{paso5DTO.anexo5.fechaDeteccion}" class="form-control">
+                </div>
+            </div>
         </div>
+    </div>
+</th:block>
 
-        <hr>
-
-        <!-- SÍNTESIS CON EL ALUMNO -->
-        <div class="field-group">
-            <label>📝 Síntesis de la entrevista con el alumno/a</label>
-            <textarea th:field="*{paso5DTO.anexo4.sintesisalumno}"
-                      placeholder="Resumen de lo expresado por el alumno/a, estado emocional, percepción del problema…"
-                      required></textarea>
-        </div>
-
-        <div class="field-group">
-            <label>👥 Integrantes que participan (alumno/a)</label>
-            <input type="text"
-                   th:field="*{paso5DTO.anexo4.integrantesalumno}"
-                   placeholder="Alumno/a, orientador/a, tutor/a…"
-                   required>
-        </div>
-
-        <div class="field-group fecha-group">
-            <label>📅 Fecha de la entrevista con el alumno/a</label>
-            <input type="date"
-                   th:field="*{paso5DTO.anexo4.fechaalumno}"
-                   required>
-        </div>
-
-        <!-- ================= ANEXO V ================= -->
-
-        <h3 class="titulo-bloque alarma">1.1 Señales de Alarma Directas</h3>
-        <!-- (TABLA TAL CUAL, SIN CAMBIOS) -->
-        <!-- … todas las tablas de señales, riesgo y protección … -->
-        <!-- NO se tocan porque están bien -->
+<div th:fragment="radioRow(field, label)" class="radio-row">
+    <label class="radio-label" th:text="${label}">Etiqueta</label>
+    <div class="radio-options">
+        <label><input type="radio" th:field="*{__${field}__}" value="true"> Sí</label>
+        <label><input type="radio" th:field="*{__${field}__}" value="false"> No</label>
+    </div>
+</div>
 
         <!-- ================= OBSERVACIONES ================= -->
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Anexo VI - Resolución de Toma de Decisiones</title>
+    <style>
+        @page { size: A4; margin: 2cm; }
+        body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #000; }
+        .header-section { display: table; width: 100%; margin-bottom: 20px; }
+        .logo-box { display: table-cell; width: 80px; vertical-align: middle; }
+        .title-box { display: table-cell; text-align: center; vertical-align: middle; }
+        h1 { font-size: 16pt; margin: 0; text-transform: uppercase; }
+        .anexo-title { font-weight: bold; margin-top: 5px; font-size: 12pt; }
+
+        .intro-text { margin: 20px 0; text-align: justify; }
+        .section-label { font-weight: bold; margin-top: 15px; display: block; }
+
+        .check-list { list-style: none; padding-left: 10px; margin: 10px 0; }
+        .check-item { margin-bottom: 8px; }
+
+        /* Estilo para los checkboxes simulados */
+        .box { display: inline-block; width: 12px; height: 12px; border: 1pt solid #000; vertical-align: middle; margin-right: 8px; text-align: center; line-height: 12px; font-size: 10pt; font-weight: bold; }
+
+        .decision-box { border: 1pt solid #000; padding: 15px; margin: 15px 0; }
+        .motivacion-box { border: 1pt solid #000; padding: 10px; min-height: 100px; margin-top: 5px; text-align: justify; white-space: pre-wrap; }
+
+        .signatures { margin-top: 40px; width: 100%; border-collapse: collapse; }
+        .signature-cell { text-align: center; padding-top: 50px; width: 50%; }
+
+        .footer { position: fixed; bottom: 0; width: 100%; font-size: 9pt; border-top: 1pt solid #ccc; padding-top: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="header-section">
+    <div class="logo-box">
+        <img th:if="${logoBase64 != null}" th:src="${logoBase64}" width="70"/>
+    </div>
+    <div class="title-box">
+        <h1>ANEXOS</h1>
+        <div class="anexo-title">Anexo VI: Resolución de toma de decisiones sobre apertura del Plan Individualizado de Prevención y Protección.</div>
+    </div>
+</div>
+
+<div class="intro-text">
+    Reunidos los abajo firmantes, analizada la situación derivada de la detección y conocimiento de posible situación de riesgo de conducta suicida o autolesiones del alumno o alumna del centro.
+</div>
+
+<span class="section-label">Consultados:</span>
+<ul class="check-list">
+    <li class="check-item"><span class="box" th:text="${p6.tutores ? 'X' : ''}"></span> Padre, madre o persona que ejerza la tutela legal.</li>
+    <li class="check-item"><span class="box" th:text="${p6.alumno ? 'X' : ''}"></span> Alumno o alumna.</li>
+    <li class="check-item"><span class="box" th:text="${p6.inspeccion ? 'X' : ''}"></span> Servicio de Inspección.</li>
+    <li class="check-item"><span class="box" th:text="${p6.comision ? 'X' : ''}"></span> Comisión Provincial de Asesoramiento y Coordinación.</li>
+    <li class="check-item"><span class="box" th:text="${p6.servicios ? 'X' : ''}"></span> Servicios externos especializados (especificar cuál o cuáles).</li>
+    <li class="check-item" style="padding-left: 25px; font-style: italic;" th:if="${p6.servicios}" th:text="${p6.otrosespecificados}"></li>
+    <li class="check-item"><span class="box" th:text="${p6.otros ? 'X' : ''}"></span> Otros: <span th:if="${p6.otros}" th:text="${p6.otrosespecificados}"></span></li>
+</ul>
+
+<span class="section-label">Se acuerda:</span>
+<div class="decision-box">
+    <div class="check-item"><span class="box" th:text="${p6.abrir ? 'X' : ''}"></span> Abrir el Plan Individualizado de Prevención y Protección.</div>
+    <div class="check-item"><span class="box" th:text="${!p6.abrir ? 'X' : ''}"></span> No abrir el Plan Individualizado de Prevención y Protección.</div>
+</div>
+
+<span class="section-label">Motivación de la decisión adoptada:</span>
+<div class="motivacion-box" th:text="${p6.motivacion ? 'Existe motivación suficiente para la apertura. ' + (p6.otrosespecificados != null ? p6.otrosespecificados : '') : 'No se aprecia motivación suficiente para la apertura del plan.'}"></div>
+
+<p style="margin-top: 20px;">
+    <strong>Lugar y fecha:</strong>
+    <span th:if="${p6.fecha != null}"
+          th:text="${#temporals.format(p6.fecha, 'dd/MM/yyyy')}"></span>
+</p>
+
+<table class="signatures">
+    <tr>
+        <td class="signature-cell">Firmas:</td>
+        <td class="signature-cell"></td>
+    </tr>
+</table>
+
+<div class="footer">
+    Guía para la prevención del riesgo de conductas suicidas y autolesiones del alumnado
+    <span style="float: right;">31</span>
+</div>
+
+</body>
+</html>

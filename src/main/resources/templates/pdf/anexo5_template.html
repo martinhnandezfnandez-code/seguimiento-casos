@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Anexo V - Ficha de análisis del caso</title>
+    <style>
+        @page { size: A4; margin: 1.5cm; }
+        body { font-family: Arial, sans-serif; font-size: 8.5pt; line-height: 1.2; color: #000; }
+        .header-section { display: table; width: 100%; margin-bottom: 10px; }
+        .logo-box { display: table-cell; width: 60px; vertical-align: middle; }
+        .title-box { display: table-cell; text-align: center; vertical-align: middle; }
+        h1 { font-size: 13pt; margin: 0; text-transform: uppercase; }
+        .anexo-title { font-weight: bold; font-size: 10pt; margin-top: 5px; }
+
+        .intro { font-size: 8pt; text-align: justify; margin: 10px 0; border: 0.5pt solid #ccc; padding: 8px; background: #f9f9f9; }
+
+        table { width: 100%; border-collapse: collapse; margin-bottom: 10px; table-layout: fixed; }
+        th, td { border: 0.5pt solid #000; padding: 4px 6px; vertical-align: middle; }
+        th { background-color: #e0e0e0; font-weight: bold; text-align: left; font-size: 9pt; }
+        .col-check { width: 35px; text-align: center; font-weight: bold; font-size: 10pt; }
+        .category-row { background-color: #f2f2f2; font-weight: bold; font-size: 8.5pt; }
+
+        .page-break { page-break-before: always; }
+
+        .footer { position: fixed; bottom: 0; width: 100%; font-size: 7.5pt; border-top: 0.5pt solid #ccc; padding-top: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="header-section">
+    <div class="logo-box"><img th:if="${logoBase64 != null}" th:src="${logoBase64}" width="50"/></div>
+    <div class="title-box">
+        <h1>ANEXOS</h1>
+        <div class="anexo-title">Anexo V: Ficha de análisis del caso: señales de alarma, factores de riesgo y de protección.</div>
+    </div>
+</div>
+
+<div class="intro">
+    Este Anexo facilita el chequeo y análisis de aquellas circunstancias sobre las que con anterioridad hemos podido obtener datos o tenemos información expresa. No supone la realización de una entrevista específica para chequear cada indicador.
+    La dirección del centro delegará en el Coordinador o la Coordinadora de Bienestar o en Profesionales de la Orientación el desarrollo y coordinación de estas acciones de cotejo y chequeo de información.
+    El análisis que se plantea en este momento del proceso tiene una naturaleza básicamente cualitativa. Los factores que se detallan pueden tener incidencia relevante en la consideración estimada y global de cada situación, aportando luz a la toma de decisiones sobre la apertura o no del Plan Individualizado de Prevención y Protección.
+    No es objetivo de este proceso la estimación de un nivel de riesgo del caso, que sería en todo caso, responsabilidad de especialistas, sino el análisis y valoración cualitativos de la situación en la que se encuentra el alumno o la alumna, a los efectos de una adecuada toma de decisiones y planificación posterior de acciones facilitadoras de bienestar y protección en el entorno educativo.
+    En este sentido, es importante tomar en consideración tanto las señales de alarma como los factores de riesgo como los de protección, de manera que las decisiones adoptadas se ajusten de la manera más precisa a las necesidades del alumnado y su situación concreta.
+
+    <br/><strong>Código Alumno/a:</strong> <span th:text="${alumnado.codigoAlumno}"></span>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>1. SEÑALES DE ALARMA</th>
+        <th class="col-check">SÍ</th>
+        <th class="col-check">NO</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="category-row"><td colspan="3">1.1 Señales de Alarma Directas</td></tr>
+    <tr>
+        <td>Comunicación de sentimientos de bloqueo, dolor insoportable</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionBloqueoDolor == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionBloqueoDolor == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Comunicación de sentimientos de desesperanza o de falta de salida</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionDesesperanza == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionDesesperanza == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Comunicación de desvinculación de proyectos vitales</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionDesvinculacionProyectos == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionDesvinculacionProyectos == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Comunicación de sentimientos de no ser importante para nadie</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionNoSerImportante == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionNoSerImportante == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Comunicación de sentimientos de ser una carga para la familia</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionCargaFamiliar == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionCargaFamiliar == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Comunicación de pensamientos aislados de muerte</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionPensamientosAisladosMuerte == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionPensamientosAisladosMuerte == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Comunicación de deseo explícito de suicidio</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionDeseoExplicitoSuicidio == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comunicacionDeseoExplicitoSuicidio == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Referencias a métodos de suicidio</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.referenciasMetodosSuicidio == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.referenciasMetodosSuicidio == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Planificación de conducta suicida</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.planConductaSuicida == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.planConductaSuicida == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Búsqueda de formas de suicidio (Internet, redes, etc.)</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.busquedaFormasSuicidio == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.busquedaFormasSuicidio == false ? 'X' : ''}"></td>
+    </tr>
+
+    <tr class="category-row"><td colspan="3">1.2 Señales de Alarma Indirectas</td></tr>
+    <tr>
+        <td>Existencia de un intento previo de suicidio</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.existenciaIntentoPrevio == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.existenciaIntentoPrevio == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Conductas de riesgo o de hacerse daño</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.conductasRiesgoHacerDano == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.conductasRiesgoHacerDano == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Cambios marcados en el comportamiento o carácter</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.cambiosComportamientoCaracter == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.cambiosComportamientoCaracter == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Comportamientos de angustia, irritación o impulsividad</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comportamientosAngustiaIrritacion == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.comportamientosAngustiaIrritacion == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Señales de abatimiento o falta de interés en actividades</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.senalesAbatimientoActividades == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.senalesAbatimientoActividades == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Absentismo escolar injustificado o repentino</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.absentismoEscolar == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.absentismoEscolar == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Alteraciones de ritmos y patrones (sueño, alimentación...)</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.alteracionesRitmosPatrones == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.alteracionesRitmosPatrones == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Conductas relacionales de despedida o cierre</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.conductasRelacionalesTemasPendientes == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.conductasRelacionalesTemasPendientes == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Inicio de consumo de sustancias</td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.inicioConsumoSustancias == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.senalesAlarma.inicioConsumoSustancias == false ? 'X' : ''}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<table>
+    <thead>
+    <tr>
+        <th>2. FACTORES DE RIESGO</th>
+        <th class="col-check">SÍ</th>
+        <th class="col-check">NO</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="category-row"><td colspan="3">2.1 Factores de Riesgo Personales</td></tr>
+    <tr>
+        <td>Intentos de suicidio previos</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.intentosSuicidioPrevios == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.intentosSuicidioPrevios == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Condición de discapacidad</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.condicionDiscapacidad == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.condicionDiscapacidad == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Presencia de enfermedad física grave o dolor crónico</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.enfermedadGraveDolorCronico == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.enfermedadGraveDolorCronico == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Trastornos por consumo de sustancias</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.trastornosSustancias == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.trastornosSustancias == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Fácil acceso a medios letales</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.accesoMediosLetales == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.accesoMediosLetales == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Impulsividad, agresividad o pesimismo</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.impulsividadAgresividadPesimismo == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.impulsividadAgresividadPesimismo == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Historia de violencia o abuso</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.historiaViolenciaAbuso == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.historiaViolenciaAbuso == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Sucesos vitales estresantes recientes</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.sucesosVitalesEstresantes == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.sucesosVitalesEstresantes == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Perfeccionismo excesivo o autocrítica feroz</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.perfeccionismoExcesivo == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.perfeccionismoExcesivo == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Autolesiones actuales</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.autolesiones == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.autolesiones == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Conducta de aislamiento y soledad</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.conductaAislamientoSoledad == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.conductaAislamientoSoledad == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>En seguimiento por Servicios de Salud Mental</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.serviciosSaludMental == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.serviciosSaludMental == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Abandono de tratamiento previo</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.abandonoTratamiento == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.abandonoTratamiento == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>No seguir prescripción farmacológica</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.noSeguirPrescripcion == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.noSeguirPrescripcion == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Personalidad muy influyente o vulnerable</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.personalidadInfluyente == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.personalidadInfluyente == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Uso inadecuado de las TIC</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.usoInadecuadoTic == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.usoInadecuadoTic == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Rechazo de imagen corporal o presencia de TCA</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.rechazoImagenCorporalTca == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.rechazoImagenCorporalTca == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Presencia de TEA, TDAH o Altas Capacidades</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.presenciaTeaTdahCapacidades == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.presenciaTeaTdahCapacidades == false ? 'X' : ''}"></td>
+    </tr>
+
+    <tr class="category-row"><td colspan="3">2.2 Factores de Riesgo Familiares</td></tr>
+    <tr>
+        <td>Pérdida grave reciente en el núcleo familiar</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.perdidaGraveReciente == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.perdidaGraveReciente == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Historial familiar de suicidio o trastornos mentales</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.historialFamiliarSuicidio == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.historialFamiliarSuicidio == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Negligencia o estilos educativos extremos</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.negligenciaEstilosEducativos == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.negligenciaEstilosEducativos == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Abuso de sustancias o alcoholismo en la familia</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.abusosSustanciasAlcoholismo == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.abusosSustanciasAlcoholismo == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Estresores por rupturas familiares conflictivas</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.estresoresRupturasFamiliares == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.estresoresRupturasFamiliares == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Familia con altos niveles de perfeccionismo</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.familiaNivelesPerfeccionismo == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.familiaNivelesPerfeccionismo == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Falta de equilibrio en actividades domésticas/ocio</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.equilibrioActividadesDomesticas == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.equilibrioActividadesDomesticas == false ? 'X' : ''}"></td>
+    </tr>
+
+    <tr class="category-row"><td colspan="3">2.3 Factores de Riesgo Sociales y Educativos</td></tr>
+    <tr>
+        <td>Falta o pérdida de red de apoyo social</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.faltaPerdidaRedApoyo == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.faltaPerdidaRedApoyo == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Víctima de acoso o ciberacoso</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.victimaAcosoCiberacoso == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.victimaAcosoCiberacoso == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Rechazo social o maltrato por el grupo de iguales</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.rechazoSocialMaltrato == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.rechazoSocialMaltrato == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Desarraigo cultural en el entorno próximo</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.desarraigoCultural == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.desarraigoCultural == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Estigma o exclusión del grupo de referencia</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.estigmaExclusionGrupo == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.estigmaExclusionGrupo == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Conflicto de confianza ante situaciones de problemática</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.conflictoConfianzaSituaciones == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresRiesgo.conflictoConfianzaSituaciones == false ? 'X' : ''}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<table>
+    <thead>
+    <tr>
+        <th>3. FACTORES DE PROTECCIÓN</th>
+        <th class="col-check">SÍ</th>
+        <th class="col-check">NO</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="category-row"><td colspan="3">3.1 Factores de Protección Personales</td></tr>
+    <tr>
+        <td>Habilidades de gestión emocional y resolución de conflictos</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.habilidadesGestionEmocional == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.habilidadesGestionEmocional == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Habilidades de comunicación y relación interpersonal</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.habilidadesComunicacionRelacion == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.habilidadesComunicacionRelacion == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Autoconcepto y autoestima saludables</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.autoconceptoAutoestimaSaludables == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.autoconceptoAutoestimaSaludables == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Actitudes positivas en la relación interpersonal</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.actitudesRelacionInterpersonal == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.actitudesRelacionInterpersonal == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Hábitos personales saludables</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.habitosPersonalesSaludables == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.habitosPersonalesSaludables == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Uso adecuado de las TIC (tiempo y contenidos)</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.usoAdecuadoTic == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.usoAdecuadoTic == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Flexibilidad y tranquilidad ante adversidades</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.caracteristicasPersonalesTranquilidad == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.caracteristicasPersonalesTranquilidad == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Rendimiento escolar adecuado</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.rendimientoEscolarAdecuado == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.rendimientoEscolarAdecuado == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Sentimiento positivo de pertenencia a grupos</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.sentimientoPositivoPertenencia == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.sentimientoPositivoPertenencia == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Vinculación con proyectos personales</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.vinculacionProyectosPersonales == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.vinculacionProyectosPersonales == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Relaciones familiares adecuadas y satisfactorias</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.relacionesFamiliaresAdecuadas == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.relacionesFamiliaresAdecuadas == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Vínculos de apego estables</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.vinculosApoyoEstables == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.vinculosApoyoEstables == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Estilos educativos y modelos adecuados</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.estilosEducativosModulados == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.estilosEducativosModulados == false ? 'X' : ''}"></td>
+    </tr>
+
+    <tr class="category-row"><td colspan="3">3.2 Factores de Protección Familiares</td></tr>
+    <tr>
+        <td>Equilibrio en actividades familiares de ocio y tareas</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.equilibrioActividadesRelacionadas == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.equilibrioActividadesRelacionadas == false ? 'X' : ''}"></td>
+    </tr>
+
+    <tr class="category-row"><td colspan="3">3.3 Factores Sociales y Educativos</td></tr>
+    <tr>
+        <td>Existencia de red de apoyo social (amigos/as)</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.existenciaRedApoyoSocial == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.existenciaRedApoyoSocial == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Buenas relaciones con personas adultas de referencia</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.buenasRelacionesAdultas == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.buenasRelacionesAdultas == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Contar con personas adultas de confianza</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.contarReferenciaConfianza == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.contarReferenciaConfianza == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Arraigo social y cultural en el entorno próximo</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.amigoSocialCultural == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.amigoSocialCultural == false ? 'X' : ''}"></td>
+    </tr>
+    <tr>
+        <td>Existencia de proyecto social y educativo</td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.existenciaProyectoSocialEducativo == true ? 'X' : ''}"></td>
+        <td class="col-check" th:text="${p5.anexo5.factoresProteccion.existenciaProyectoSocialEducativo == false ? 'X' : ''}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div style="margin-top: 15px; border: 1pt solid #000; padding: 10px;">
+    <strong>SÍNTESIS FINAL Y CONCLUSIONES:</strong><br/>
+    <p th:text="${p5.anexo5.observaciones}" style="min-height: 40px; text-align: justify; margin: 5px 0;"></p>
+    <br/>
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 50%;">
+            <strong>Lugar y fecha:</strong> <span th:text="${#temporals.format(p5.anexo5.fechaDeteccion, 'dd/MM/yyyy')}"></span>
+        </div>
+        <div style="display: table-cell; width: 50%;">
+            <strong>Detectado por:</strong> <span th:text="${p5.anexo5.detectadoPor}"></span>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    Guía para la prevención del riesgo de conductas suicidas y autolesiones del alumnado
+    <span style="float: right;">Págs 27-30</span>
+</div>
+
+</body>
+</html>

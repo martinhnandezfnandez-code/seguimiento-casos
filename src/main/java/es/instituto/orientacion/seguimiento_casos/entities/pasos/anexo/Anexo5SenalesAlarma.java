@@ -105,4 +105,28 @@ public class Anexo5SenalesAlarma {
             this.inicioConsumoSustancias = dto.getInicioConsumoSustancias();
         }
     }
+    public void actualizarDesdeDTO(Anexo5SenalesAlarmaDTO dto) {
+        // Señales Directas
+        this.comunicacionBloqueoDolor = dto.getComunicacionBloqueoDolor();
+        this.comunicacionDesesperanza = dto.getComunicacionDesesperanza();
+        this.comunicacionDesvinculacionProyectos = dto.getComunicacionDesvinculacionProyectos();
+        this.comunicacionNoSerImportante = dto.getComunicacionNoSerImportante();
+        this.comunicacionCargaFamiliar = dto.getComunicacionCargaFamiliar();
+        this.comunicacionPensamientosAisladosMuerte = dto.getComunicacionPensamientosAisladosMuerte();
+        this.comunicacionDeseoExplicitoSuicidio = dto.getComunicacionDeseoExplicitoSuicidio();
+        this.referenciasMetodosSuicidio = dto.getReferenciasMetodosSuicidio();
+        this.planConductaSuicida = dto.getPlanConductaSuicida();
+        this.busquedaFormasSuicidio = dto.getBusquedaFormasSuicidio();
+
+        // Señales Indirectas
+        this.existenciaIntentoPrevio = dto.getExistenciaIntentoPrevio();
+        this.conductasRiesgoHacerDano = dto.getConductasRiesgoHacerDano();
+        this.cambiosComportamientoCaracter = dto.getCambiosComportamientoCaracter();
+        this.comportamientosAngustiaIrritacion = dto.getComportamientosAngustiaIrritacion();
+        this.senalesAbatimientoActividades = dto.getSenalesAbatimientoActividades();
+        this.absentismoEscolar = dto.getAbsentismoEscolar();
+        this.alteracionesRitmosPatrones = dto.getAlteracionesRitmosPatrones();
+        this.conductasRelacionalesTemasPendientes = dto.getConductasRelacionalesTemasPendientes();
+        this.inicioConsumoSustancias = dto.getInicioConsumoSustancias();
+    }
 }

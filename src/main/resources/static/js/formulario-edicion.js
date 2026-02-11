@@ -26,7 +26,7 @@ function eliminarCaso() {
             if (response.ok) {
                 mostrarNotificacion('✓ Caso eliminado correctamente', 'success');
                 setTimeout(() => {
-                    window.location.href = '/seguimiento/listado';
+                    window.location.href = '/alumnado/listar';
                 }, 1500);
             } else {
                 mostrarNotificacion('❌ Error al eliminar el caso', 'error');
@@ -78,7 +78,7 @@ function volverMenu() {
         }
     }
 
-    window.location.href = '/seguimiento/listado';
+    window.location.href = '/alumnado/listar';
 }
 
 // Sobrescribir exportarFormulario para modo edición

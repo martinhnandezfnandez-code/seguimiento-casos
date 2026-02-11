@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Anexo VIII - Plan de Seguimiento</title>
+    <style>
+        @page { size: A4; margin: 2cm; }
+        body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.4; color: #000; }
+        .header { width: 100%; margin-bottom: 20px; }
+        .logo { width: 60px; }
+        .main-title { font-size: 14pt; font-weight: bold; margin-bottom: 30px; }
+        .data-block { margin-bottom: 20px; }
+        .label { font-weight: normal; }
+        .value { border-bottom: 1px dotted #000; padding: 5px; min-height: 20px; margin-bottom: 15px; }
+        .section-title { margin-top: 25px; }
+        .content-area { border: 1px solid #000; padding: 10px; min-height: 150px; text-align: justify; margin-top: 5px; }
+        .signature-section { margin-top: 50px; }
+        .footer { position: fixed; bottom: 1cm; width: 100%; font-size: 9pt; border-top: 1px solid #000; padding-top: 5px; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <img th:if="${logoBase64 != null}" th:src="${logoBase64}" class="logo" alt="Logo"/>
+</div>
+
+<div class="main-title">Anexo VIII: Plan de seguimiento.</div>
+
+<div class="data-block">
+    <div class="label">Código del Alumno/a:</div>
+    <div class="value" th:text="${alumnado.codigoAlumno}">-</div>
+</div>
+
+<div class="section-title">En su caso, otras medidas aplicadas:</div>
+<div class="content-area">
+    <p th:text="${p8.otrasMedidas != null and !p8.otrasMedidas.isEmpty() ? p8.otrasMedidas : ''}"></p>
+</div>
+
+<div class="signature-section">
+    <p>Firmas:</p>
+    <div style="margin-top: 40px;">
+        <div>Responsable de dirección:</div>
+        <div class="value" style="width: 300px;" th:text="${p8.responsableDireccion}"></div>
+        <div style="margin-top: 10px;">Sello del Centro Educativo</div>
+    </div>
+</div>
+
+<div class="footer">
+    Guía para la prevención del riesgo de conductas suicidas y autolesiones del alumnado
+    <span style="float: right;">37</span>
+</div>
+</body>
+</html>

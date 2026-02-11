@@ -28,6 +28,9 @@ public class Anexo5DTO {
 
     
     public Anexo5DTO() {
+        this.senalesAlarma = new Anexo5SenalesAlarmaDTO();
+        this.factoresRiesgo = new Anexo5FactoresRiesgoDTO();
+        this.factoresProteccion = new Anexo5FactoresProteccionDTO();
     }
 
     public Anexo5DTO(Anexo5 entity) {
@@ -54,4 +57,5 @@ public class Anexo5DTO {
             }
         }
     }
+
 }

@@ -379,8 +379,8 @@ function volverMenu() {
     if (confirm('¿Deseas guardar el progreso antes de volver al menú?')) {
         guardarProgreso();
     }
-    // Ajusta esta ruta según tu estructura de URLs
-    window.location.href = '/seguimiento/listado'; // o la ruta que corresponda
+
+    window.location.href = '/';
 }
 
 function exportarFormulario() {

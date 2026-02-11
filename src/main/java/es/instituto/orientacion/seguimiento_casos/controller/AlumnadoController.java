@@ -174,4 +174,85 @@ public class AlumnadoController {
 
         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
+
+    @GetMapping("/pdf/paso4/{id}")
+    public ResponseEntity<byte[]> descargarPaso4(@PathVariable Long id) {
+        Alumnado alumnado = alumnadoRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+
+        byte[] pdfBytes = pdfService.generarPdfAnexo3(alumnado);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "Anexo3_ActaFamilia_" + alumnado.getCodigoAlumno() + ".pdf");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/pdf/paso5_anexo4/{id}")
+    public ResponseEntity<byte[]> descargarAnexo4(@PathVariable Long id) {
+        Alumnado alumnado = alumnadoRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+
+        byte[] pdfBytes = pdfService.generarPdfAnexo4(alumnado);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "Anexo4_Sintesis_" + alumnado.getCodigoAlumno() + ".pdf");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+    @GetMapping("/pdf/paso5_anexo5/{id}")
+    public ResponseEntity<byte[]> descargarAnexo5(@PathVariable Long id) {
+        Alumnado alumnado = alumnadoRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+
+        byte[] pdfBytes = pdfService.generarPdfAnexo5(alumnado);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "Anexo5_AnalisisCaso_" + alumnado.getCodigoAlumno() + ".pdf");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/pdf/paso6/{id}")
+    public ResponseEntity<byte[]> descargarPaso6(@PathVariable Long id) {
+        Alumnado alumnado = alumnadoRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+
+        byte[] pdfBytes = pdfService.generarPdfAnexo6(alumnado);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "Anexo6_Resolucion_" + alumnado.getCodigoAlumno() + ".pdf");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+    @GetMapping("/pdf/paso7/{id}")
+    public ResponseEntity<byte[]> descargarPaso7(@PathVariable Long id) {
+        Alumnado alumnado = alumnadoRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+
+        byte[] pdfBytes = pdfService.generarPdfAnexo7(alumnado);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "Anexo7_Plan_individualizado_" + alumnado.getCodigoAlumno() + ".pdf");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+    @GetMapping("/pdf/paso8/{id}")
+    public ResponseEntity<byte[]> descargarPaso8(@PathVariable Long id) {
+        Alumnado alumnado = alumnadoRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+
+        byte[] pdfBytes = pdfService.generarPdfAnexo8(alumnado);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "Anexo8_Seguimiento_" + alumnado.getCodigoAlumno() + ".pdf");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
 }

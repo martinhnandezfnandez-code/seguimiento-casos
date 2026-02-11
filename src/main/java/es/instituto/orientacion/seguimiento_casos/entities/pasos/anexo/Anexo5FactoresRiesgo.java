@@ -172,4 +172,44 @@ public class Anexo5FactoresRiesgo {
             this.existenciaProyectoSocialEducativo = dto.getExistenciaProyectoSocialEducativo();
         }
     }
+    public void actualizarDesdeDTO(Anexo5FactoresRiesgoDTO dto) {
+        // Factores Personales
+        this.intentosSuicidioPrevios = dto.getIntentosSuicidioPrevios();
+        this.condicionDiscapacidad = dto.getCondicionDiscapacidad();
+        this.enfermedadGraveDolorCronico = dto.getEnfermedadGraveDolorCronico();
+        this.trastornosSustancias = dto.getTrastornosSustancias();
+        this.accesoMediosLetales = dto.getAccesoMediosLetales();
+        this.impulsividadAgresividadPesimismo = dto.getImpulsividadAgresividadPesimismo();
+        this.historiaViolenciaAbuso = dto.getHistoriaViolenciaAbuso();
+        this.sucesosVitalesEstresantes = dto.getSucesosVitalesEstresantes();
+        this.perfeccionismoExcesivo = dto.getPerfeccionismoExcesivo();
+        this.autolesiones = dto.getAutolesiones();
+        this.conductaAislamientoSoledad = dto.getConductaAislamientoSoledad();
+        this.serviciosSaludMental = dto.getServiciosSaludMental();
+        this.abandonoTratamiento = dto.getAbandonoTratamiento();
+        this.noSeguirPrescripcion = dto.getNoSeguirPrescripcion();
+        this.personalidadInfluyente = dto.getPersonalidadInfluyente();
+        this.usoInadecuadoTic = dto.getUsoInadecuadoTic();
+        this.rechazoImagenCorporalTca = dto.getRechazoImagenCorporalTca();
+        this.presenciaTeaTdahCapacidades = dto.getPresenciaTeaTdahCapacidades();
+
+        // Factores Familiares
+        this.perdidaGraveReciente = dto.getPerdidaGraveReciente();
+        this.historialFamiliarSuicidio = dto.getHistorialFamiliarSuicidio();
+        this.negligenciaEstilosEducativos = dto.getNegligenciaEstilosEducativos();
+        this.abusosSustanciasAlcoholismo = dto.getAbusosSustanciasAlcoholismo();
+        this.estresoresRupturasFamiliares = dto.getEstresoresRupturasFamiliares();
+        this.familiaNivelesPerfeccionismo = dto.getFamiliaNivelesPerfeccionismo();
+        this.equilibrioActividadesDomesticas = dto.getEquilibrioActividadesDomesticas();
+
+        // Factores Sociales y Educativos
+        this.faltaPerdidaRedApoyo = dto.getFaltaPerdidaRedApoyo();
+        this.victimaAcosoCiberacoso = dto.getVictimaAcosoCiberacoso();
+        this.rechazoSocialMaltrato = dto.getRechazoSocialMaltrato();
+        this.desarraigoCultural = dto.getDesarraigoCultural();
+        this.estigmaExclusionGrupo = dto.getEstigmaExclusionGrupo();
+        this.existenciaRedApoyoSocial = dto.getExistenciaRedApoyoSocial();
+        this.buenasRelacionesAdultas = dto.getBuenasRelacionesAdultas();
+        this.conflictoConfianzaSituaciones = dto.getConflictoConfianzaSituaciones();
+    }
 }

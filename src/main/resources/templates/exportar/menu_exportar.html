@@ -45,10 +45,16 @@
                 <div class="select-wrapper">
                     <select id="pasoSelect" required>
                         <option value="">-- Selecciona un documento --</option>
-                        <option value="1">Paso 1 - Anexo I (Detección)</option>
-                        <option value="2">Paso 2 - Cronograma</option>
-                        <option value="3">Paso 3 - Plan de Actuación</option>
-                        <option value="4">Paso 4 - Seguimiento</option>
+                        <option value="1">Anexo 1 - Modelo Registro</option>
+                        <option value="2">Anexo 2 - Cronograma de actuación</option>
+                        <option value="3">Anexo 3 - Acta de reunion con familiares</option>
+                        <option value="4">Anexo 4 - Sintesis entrevistas</option>
+                        <option value="5">Anexo 5 - Ficha anàlisis</option>
+                        <option value="6">Anexo 6 - Resolución de toma de decisiones</option>
+                        <option value="7">Anexo 7 - Plan individualizado de prevención y protección</option>
+                        <option value="8">Anexo 8 - Plan de seguimiento</option>
+
+
                     </select>
                 </div>
             </div>
@@ -78,38 +84,62 @@
 
 <script>
     function generarPDF() {
-        const alumnoId = document.getElementById('alumnoSelect').value;
-        const pasoId = document.getElementById('pasoSelect').value;
+    const alumnoId = document.getElementById('alumnoSelect').value;
+    const pasoId = document.getElementById('pasoSelect').value;
 
-        // Validaciones
-        if (!alumnoId) {
-            mostrarAlerta("Por favor, selecciona un alumno", "warning");
-            return;
-        }
-
-        if (!pasoId) {
-            mostrarAlerta("Por favor, selecciona un documento", "warning");
-            return;
-        }
-
-        // Mostrar loader
-        const btn = document.querySelector('.btn-generate');
-        btn.innerHTML = '<span class="loader"></span> Generando PDF...';
-        btn.disabled = true;
-
-        // Redireccionar según el paso seleccionado
-        setTimeout(() => {
-            if (pasoId === "1") {
-                window.location.href = '/alumnado/pdf/paso1/' + alumnoId;
-            } else if (pasoId === "2") {
-                window.location.href = '/alumnado/pdf/paso2/' + alumnoId;
-            } else {
-                mostrarAlerta("El PDF para este paso aún no está implementado", "info");
-                btn.innerHTML = '<span class="btn-icon">📥</span> Generar PDF';
-                btn.disabled = false;
-            }
-        }, 500);
+    // Validaciones
+    if (!alumnoId) {
+        mostrarAlerta("Por favor, selecciona un alumno", "warning");
+        return;
     }
+
+    if (!pasoId) {
+        mostrarAlerta("Por favor, selecciona un documento", "warning");
+        return;
+    }
+
+    // 1. Guardar el contenido original y preparar el botón
+    const btn = document.querySelector('.btn-generate');
+    const originalContent = btn.innerHTML;
+
+    btn.innerHTML = '<span class="loader"></span> Generando PDF...';
+    btn.disabled = true;
+
+    // 2. Ejecutar la lógica de redirección
+    setTimeout(() => {
+        let error = false;
+
+        if (pasoId === "1") {
+            window.location.href = '/alumnado/pdf/paso1/' + alumnoId;
+        } else if (pasoId === "2") {
+            window.location.href = '/alumnado/pdf/paso2/' + alumnoId;
+        } else if (pasoId === "3") {
+            window.location.href = '/alumnado/pdf/paso4/' + alumnoId;
+        } else if (pasoId === "4") {
+            window.location.href = '/alumnado/pdf/paso5_anexo4/' + alumnoId;
+        } else if (pasoId === "5") {
+            window.location.href = '/alumnado/pdf/paso5_anexo5/' + alumnoId;
+        } else if (pasoId === "6") {
+            window.location.href = '/alumnado/pdf/paso6/' + alumnoId;
+        }  else if (pasoId === "7") {
+            window.location.href = '/alumnado/pdf/paso7/' + alumnoId;
+        } else if (pasoId === "8") {
+            window.location.href = '/alumnado/pdf/paso8/' + alumnoId;
+        } else {
+            mostrarAlerta("El PDF para este paso aún no está implementado", "info");
+            error = true;
+        }
+
+        // 3. REHABILITAR EL BOTÓN
+        // Si hubo error o si fue una descarga (location.href), esperamos 2-3 segundos
+        // para que el usuario vea que "algo pasó" y luego restauramos el botón.
+        setTimeout(() => {
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+        }, 2000);
+
+    }, 500);
+}
 
     function mostrarAlerta(mensaje, tipo) {
         // Sistema de alertas simple

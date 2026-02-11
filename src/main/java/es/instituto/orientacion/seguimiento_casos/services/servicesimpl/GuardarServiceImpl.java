@@ -199,10 +199,8 @@ public class GuardarServiceImpl implements GuardarService {
         paso7.setAcompanamientoCompaneros(dto7.getAcompanamientoCompaneros());
         paso7.setActividadesSensibilizacionAula(dto7.getActividadesSensibilizacionAula());
         paso7.setFormacionProfesorado(dto7.getFormacionProfesorado());
-
         paso7.setActuacionesFamilia(dto7.getActuacionesFamilia());
         paso7.setActuacionesServiciosExternos(dto7.getActuacionesServiciosExternos());
-
         paso7.setElaboradoPor(dto7.getElaboradoPor());
         paso7.setFechaElaboracion(dto7.getFechaElaboracion());
     }

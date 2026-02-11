@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Anexo VII - Plan Individualizado de Prevención y Protección</title>
+    <style>
+        @page { size: A4; margin: 1.5cm; }
+        body { font-family: Arial, sans-serif; font-size: 9pt; line-height: 1.3; color: #000; }
+
+        /* Encabezado */
+        .header-section { display: table; width: 100%; margin-bottom: 15px; border-bottom: 1pt solid #000; padding-bottom: 10px; }
+        .logo-box { display: table-cell; width: 60px; vertical-align: middle; }
+        .title-box { display: table-cell; text-align: center; vertical-align: middle; }
+        h1 { font-size: 12pt; margin: 0; text-transform: uppercase; }
+        .anexo-title { font-weight: bold; font-size: 10pt; margin-top: 5px; }
+
+        /* Estructura de Secciones */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 10px; table-layout: fixed; }
+        th, td { border: 0.5pt solid #000; padding: 6px; vertical-align: top; }
+        th { background-color: #e0e0e0; font-weight: bold; text-align: left; }
+
+        .section-header { background-color: #f2f2f2; font-weight: bold; padding: 5px; border: 0.5pt solid #000; margin-top: 10px; }
+
+        .data-label { font-weight: bold; background-color: #f9f9f9; width: 30%; }
+        .checkbox-cell { width: 25px; text-align: center; font-weight: bold; }
+
+        .content-box { border: 0.5pt solid #000; padding: 8px; min-height: 40px; margin-bottom: 10px; text-align: justify; }
+        .field-title { font-weight: bold; text-decoration: underline; margin-bottom: 4px; display: block; }
+
+        .footer { position: fixed; bottom: 0; width: 100%; font-size: 7.5pt; text-align: center; border-top: 0.5pt solid #ccc; padding-top: 5px; }
+        .page-break { page-break-before: always; }
+    </style>
+</head>
+<body>
+
+<div class="header-section">
+    <div class="logo-box"><img th:if="${logoBase64 != null}" th:src="${logoBase64}" width="50"/></div>
+    <div class="title-box">
+        <h1>ANEXOS</h1>
+        <div class="anexo-title">Anexo VII: Plan Individualizado de Prevención y Protección</div>
+    </div>
+</div>
+
+<div class="section-header">1. DATOS IDENTIFICATIVOS</div>
+<table>
+    <tr>
+        <td class="data-label">Código Alumno/a:</td>
+        <td th:text="${alumnado.codigoAlumno}"></td>
+    </tr>
+    <tr>
+        <td class="data-label">Elaborado por:</td>
+        <td th:text="${p7.elaboradoPor}"></td>
+    </tr>
+    <tr>
+        <td class="data-label">Fecha de elaboración:</td>
+        <span th:if="${p7.fechaElaboracion != null}"
+              th:text="${#temporals.format(p7.fechaElaboracion, 'dd/MM/yyyy')}"></span>
+    </tr>
+</table>
+
+<div class="section-header">2. OBJETIVOS DEL PLAN</div>
+<div class="content-box">
+    <span class="field-title">2.1 Objetivo General:</span>
+    <p th:text="${p7.objetivoGeneral}"></p>
+</div>
+<div class="content-box">
+    <span class="field-title">2.2 Objetivos Específicos:</span>
+    <p th:text="${p7.objetivosEspecificos}"></p>
+</div>
+
+<div class="section-header">3. EQUIPO DE ACOMPAÑAMIENTO Y SEGUIMIENTO</div>
+<table>
+    <tr>
+        <td class="data-label">Equipo de Acompañamiento:</td>
+        <td th:text="${p7.equipoAcompanamiento}"></td>
+    </tr>
+    <tr>
+        <td class="data-label">Calendario de Seguimiento:</td>
+        <td th:text="${p7.calendarioSeguimiento}"></td>
+    </tr>
+</table>
+
+<div class="section-header">5. FORMALIZACIÓN DE LA DOCUMENTACIÓN</div>
+<table>
+    <tr>
+        <td>¿Se ha creado repositorio de "Antecedentes"?</td>
+        <td class="checkbox-cell" th:text="${p7.tieneRepositorioAntecedentes ? 'SÍ' : 'NO'}"></td>
+    </tr>
+    <tr>
+        <td>¿Se ha formalizado cronograma de actuaciones?</td>
+        <td class="checkbox-cell" th:text="${p7.tieneCronogramaFormalizado ? 'SÍ' : 'NO'}"></td>
+    </tr>
+    <tr>
+        <td>Formato de recopilación de documentación:</td>
+        <td th:text="${p7.esFormatoDigital ? 'Digital' : 'Físico'}"></td>
+    </tr>
+</table>
+
+<div class="page-break"></div>
+
+<div class="section-header">ACTUACIONES EN EL CENTRO EDUCATIVO</div>
+
+<div class="content-box">
+    <span class="field-title">1. Medidas de prevención de carácter general adoptadas:</span>
+    <p th:text="${p7.medidasPrevencionGeneral}"></p>
+</div>
+
+<div class="content-box">
+    <span class="field-title">1.1 Medidas de protección y seguridad:</span>
+    <p th:text="${p7.medidasProteccionSeguridad}"></p>
+</div>
+
+<div class="content-box">
+    <span class="field-title">1.2 Medidas de acompañamiento emocional:</span>
+    <p th:text="${p7.medidasAcompanamientoEmocional}"></p>
+</div>
+
+<div class="content-box">
+    <span class="field-title">2. Información aportada al equipo docente:</span>
+    <p th:text="${p7.informacionEquipoDocente}"></p>
+</div>
+
+<div class="content-box">
+    <span class="field-title">3. Planificación sobre la observación y atención diaria:</span>
+    <p th:text="${p7.planificacionObservacionAtencion}"></p>
+</div>
+
+<div class="section-header">4. INTERVENCIONES ESPECÍFICAS</div>
+
+<table>
+    <tr>
+        <th>Ámbito de Intervención</th>
+        <th>Detalle de Actuaciones</th>
+    </tr>
+    <tr>
+        <td class="data-label">4.1 Tutor/a</td>
+        <td th:text="${p7.accionesTutor}"></td>
+    </tr>
+    <tr>
+        <td class="data-label">4.2 Equipo Docente</td>
+        <td th:text="${p7.intervencionEquipoDocente}"></td>
+    </tr>
+    <tr>
+        <td class="data-label">4.3 Orientación Educativa</td>
+        <td th:text="${p7.intervencionOrientacion}"></td>
+    </tr>
+    <tr>
+        <td class="data-label">4.4 Otros profesionales</td>
+        <td th:text="${p7.intervencionOtrosTrabajadores}"></td>
+    </tr>
+</table>
+
+<div class="content-box">
+    <span class="field-title">5. Medidas de acompañamiento de alumnado/compañeros:</span>
+    <p th:text="${p7.acompanamientoCompaneros}"></p>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section-header">6. SENSIBILIZACIÓN Y COORDINACIÓN EXTERNA</div>
+
+<div class="content-box">
+    <span class="field-title">6. Actividades con el grupo-aula:</span>
+    <p th:text="${p7.actividadesSensibilizacionAula}"></p>
+</div>
+
+<div class="content-box">
+    <span class="field-title">7. Formación del profesorado:</span>
+    <p th:text="${p7.formacionProfesorado}"></p>
+</div>
+
+<div class="content-box">
+    <span class="field-title">🤝 Actuaciones de coordinación con la familia:</span>
+    <p th:text="${p7.actuacionesFamilia}"></p>
+</div>
+
+<div class="content-box">
+    <span class="field-title">🏥 Actuaciones con servicios externos especializados:</span>
+    <p th:text="${p7.actuacionesServiciosExternos}"></p>
+</div>
+
+<div style="margin-top: 50px;">
+    <table style="border: none;">
+        <tr>
+            <td style="border: none; text-align: center;">
+                <br/><br/>
+                ___________________________________<br/>
+                Firma Responsable del Plan<br/>
+                (Sello del Centro)
+            </td>
+            <td style="border: none; text-align: center;">
+                <br/><br/>
+                ___________________________________<br/>
+                Firma Dirección / Jefatura de Estudios
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="footer">
+    Guía para la prevención del riesgo de conductas suicidas y autolesiones del alumnado - Páginas 32-36
+</div>
+
+</body>
+</html>

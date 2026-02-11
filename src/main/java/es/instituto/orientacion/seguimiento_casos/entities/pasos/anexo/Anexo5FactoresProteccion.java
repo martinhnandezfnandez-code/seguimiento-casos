@@ -108,4 +108,30 @@ public class    Anexo5FactoresProteccion {
             this.existenciaProyectoSocialEducativo = dto.getExistenciaProyectoSocialEducativo();
         }
     }
+    public void actualizarDesdeDTO(Anexo5FactoresProteccionDTO dto) {
+        // Personales
+        this.habilidadesGestionEmocional = dto.getHabilidadesGestionEmocional();
+        this.habilidadesComunicacionRelacion = dto.getHabilidadesComunicacionRelacion();
+        this.autoconceptoAutoestimaSaludables = dto.getAutoconceptoAutoestimaSaludables();
+        this.actitudesRelacionInterpersonal = dto.getActitudesRelacionInterpersonal();
+        this.habitosPersonalesSaludables = dto.getHabitosPersonalesSaludables();
+        this.usoAdecuadoTic = dto.getUsoAdecuadoTic();
+        this.caracteristicasPersonalesTranquilidad = dto.getCaracteristicasPersonalesTranquilidad();
+        this.rendimientoEscolarAdecuado = dto.getRendimientoEscolarAdecuado();
+        this.sentimientoPositivoPertenencia = dto.getSentimientoPositivoPertenencia();
+        this.vinculacionProyectosPersonales = dto.getVinculacionProyectosPersonales();
+        this.relacionesFamiliaresAdecuadas = dto.getRelacionesFamiliaresAdecuadas();
+        this.vinculosApoyoEstables = dto.getVinculosApoyoEstables();
+        this.estilosEducativosModulados = dto.getEstilosEducativosModulados();
+
+        // Familiares
+        this.equilibrioActividadesRelacionadas = dto.getEquilibrioActividadesRelacionadas();
+
+        // Sociales y educativos
+        this.existenciaRedApoyoSocial = dto.getExistenciaRedApoyoSocial();
+        this.buenasRelacionesAdultas = dto.getBuenasRelacionesAdultas();
+        this.contarReferenciaConfianza = dto.getContarReferenciaConfianza();
+        this.amigoSocialCultural = dto.getAmigoSocialCultural();
+        this.existenciaProyectoSocialEducativo = dto.getExistenciaProyectoSocialEducativo();
+    }
 }

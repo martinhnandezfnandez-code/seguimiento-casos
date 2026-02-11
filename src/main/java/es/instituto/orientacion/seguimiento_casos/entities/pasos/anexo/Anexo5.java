@@ -40,28 +40,6 @@ public class Anexo5 {
 
     @OneToOne(mappedBy = "anexo5", cascade = CascadeType.ALL, orphanRemoval = true)
     private Anexo5FactoresProteccion factoresProteccion;
-    public void actualizarDesdeDTO(Anexo5DTO dto) {
-        if (dto != null) {
-            this.detectadoPor = dto.getDetectadoPor();
-            this.fechaDeteccion = dto.getFechaDeteccion();
-            this.observaciones = dto.getObservaciones();
-
-            if (dto.getSenalesAlarma() != null) {
-                this.senalesAlarma = new Anexo5SenalesAlarma(dto.getSenalesAlarma());
-                this.senalesAlarma.setAnexo5(this);
-            }
-
-            if (dto.getFactoresRiesgo() != null) {
-                this.factoresRiesgo = new Anexo5FactoresRiesgo(dto.getFactoresRiesgo());
-                this.factoresRiesgo.setAnexo5(this);
-            }
-
-            if (dto.getFactoresProteccion() != null) {
-                this.factoresProteccion = new Anexo5FactoresProteccion(dto.getFactoresProteccion());
-                this.factoresProteccion.setAnexo5(this);
-            }
-        }
-    }
 
     public Anexo5() {
     }
@@ -85,6 +63,38 @@ public class Anexo5 {
             if (dto.getFactoresProteccion() != null) {
                 this.factoresProteccion = new Anexo5FactoresProteccion(dto.getFactoresProteccion());
                 this.factoresProteccion.setAnexo5(this);
+            }
+        }
+    }
+    public void actualizarDesdeDTO(Anexo5DTO dto) {
+        this.detectadoPor = dto.getDetectadoPor();
+        this.fechaDeteccion = dto.getFechaDeteccion();
+        this.observaciones = dto.getObservaciones();
+
+        if (dto.getSenalesAlarma() != null) {
+            if (this.senalesAlarma == null) {
+                this.senalesAlarma = new Anexo5SenalesAlarma(dto.getSenalesAlarma());
+                this.senalesAlarma.setAnexo5(this);
+            } else {
+                this.senalesAlarma.actualizarDesdeDTO(dto.getSenalesAlarma());
+            }
+        }
+
+        if (dto.getFactoresRiesgo() != null) {
+            if (this.factoresRiesgo == null) {
+                this.factoresRiesgo = new Anexo5FactoresRiesgo(dto.getFactoresRiesgo());
+                this.factoresRiesgo.setAnexo5(this);
+            } else {
+                this.factoresRiesgo.actualizarDesdeDTO(dto.getFactoresRiesgo());
+            }
+        }
+
+        if (dto.getFactoresProteccion() != null) {
+            if (this.factoresProteccion == null) {
+                this.factoresProteccion = new Anexo5FactoresProteccion(dto.getFactoresProteccion());
+                this.factoresProteccion.setAnexo5(this);
+            } else {
+                this.factoresProteccion.actualizarDesdeDTO(dto.getFactoresProteccion());
             }
         }
     }
