@@ -67,19 +67,21 @@ function guardarFormulario() {
     }, 500);
 }
 
-// Sobrescribir volverMenu para modo edición
-function volverMenu() {
-    const cambiosRealizados = detectarCambios();
+window.volverMenu = function() {
+    console.log("Navegando hacia la lista de alumnos...");
 
-    if (cambiosRealizados) {
+    const cambios = detectarCambios(); // Función que ya tienes en tu JS de edición
+
+    if (cambios) {
         if (confirm('⚠️ Tienes cambios sin guardar.\n\n¿Deseas guardar antes de salir?')) {
             guardarFormulario();
-            return;
+            return; // Detenemos la salida para que se ejecute el guardado
         }
     }
 
-    window.location.href = '/alumnado/listar';
-}
+    // Usamos la URL absoluta para evitar errores de ruta relativa
+    window.location.href = window.location.origin + '/alumnado/listar';
+};
 
 // Sobrescribir exportarFormulario para modo edición
 function exportarFormulario() {
@@ -312,3 +314,14 @@ console.log(`
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
 `);
+
+window.addEventListener('scroll', function () {
+    const bar = document.getElementById('bottomBar');
+    if (!bar) return;
+
+    if (window.scrollY > 150) {
+        bar.classList.add('visible');
+    } else {
+        bar.classList.remove('visible');
+    }
+});

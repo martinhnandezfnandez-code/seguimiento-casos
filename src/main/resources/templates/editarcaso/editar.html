@@ -5,10 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Caso - Formulario Completo</title>
     <link rel="stylesheet" href="/css/formulario.css">
-    <link rel="stylesheet" href="/css/formulario-edicion.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-top: 2px solid #ccc;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            z-index: 99999;
+        }
+
+        .bottom-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background: green;
+            color: white;
+        }
+
+        .top-btn {
+            background: brown;
+            color: white;
+        }
+
+        body {
+            padding-bottom: 100px;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -43,8 +80,8 @@
                     💾 Guardar Cambios
                 </button>
 
-                <button type="button" class="btn btn-menu" onclick="volverMenu()">
-                    🏠 Volver al Menú
+                <button type="button" class="btn btn-menu">
+                    <a href="/alumnado/listar" class="btn btn-secondary">🏠 Menú</a>
                 </button>
 
                 <button type="button" class="btn btn-delete" onclick="eliminarCaso()">
@@ -244,11 +281,6 @@
     </div>
 </div>
 
-<!-- BOTÓN FLOTANTE PARA GUARDAR (opcional) -->
-<button type="button" class="btn-floating-save" onclick="guardarFormulario()" title="Guardar cambios">
-    💾
-</button>
-
 <!-- Notificación de guardado -->
 <div id="saveNotification" style="
     position: fixed;
@@ -273,8 +305,20 @@
     <span id="notificationText">Cambios guardados correctamente</span>
 </div>
 
+<div id="bottomBar" class="bottom-bar">
+    <button type="button" class="bottom-btn save-btn" onclick="guardarFormulario()">
+        💾 Guardar
+    </button>
+
+    <button type="button" class="bottom-btn top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑ Subir
+    </button>
+</div>
+
+
 <script src="/js/formulario.js"></script>
 <script src="/js/formulario-edicion.js"></script>
+
 
 </body>
 </html>

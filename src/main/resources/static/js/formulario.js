@@ -375,13 +375,25 @@ function guardarFormulario() {
     }, 500);
 }
 
-function volverMenu() {
-    if (confirm('¿Deseas guardar el progreso antes de volver al menú?')) {
-        guardarProgreso();
-    }
+window.volverMenu = function () {
+    console.log("Navegando hacia la lista de alumnos...");
 
-    window.location.href = '/';
-}
+    const cambios = detectarCambios(); // Función que ya tienes en tu JS de edición
+
+    if (cambios) {
+        const confirmarSalida = confirm(
+            '⚠️ Tienes cambios sin guardar.\n\n¿Deseas guardar antes de salir?'
+        );
+
+        if (confirmarSalida) {
+            guardarFormulario();
+            return; // Detenemos la navegación para que primero se ejecute el guardado
+        }
+    }
+    // Redirige al menú principal usando URL absoluta
+    window.location.href = window.location.origin + '/';
+};
+
 
 function exportarFormulario() {
     const datosGuardados = localStorage.getItem('seguimiento_datos');
@@ -727,3 +739,51 @@ console.log(`
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
 `);
+
+/* ================================================================
+   BOTONES FLOTANTES (Guardar y Volver Arriba)
+   ================================================================ */
+
+.btn-floating-save, .btn-floating-top {
+    position: fixed;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+/* Botón Guardar (Verde) */
+.btn-floating-save {
+    bottom: 30px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+/* Botón Volver Arriba (Marrón institucional) */
+.btn-floating-top {
+    bottom: 105px; /* Encima del de guardar */
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    opacity: 0; /* Empezamos invisible */
+    visibility: hidden;
+}
+
+/* Efectos Hover */
+.btn-floating-save:hover, .btn-floating-top:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* Clase para mostrar el botón de arriba al hacer scroll */
+.btn-floating-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
