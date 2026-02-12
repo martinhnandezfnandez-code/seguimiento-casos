@@ -1,20 +1,170 @@
 <th:block th:fragment="paso1" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <div class="info-caso">
+    <div class="section">
+        <h2>📋 ANEXO I: Modelo de registro y comunicación</h2>
+        <p class="section-subtitle">Detección de la conducta de riesgo</p>
+
         <!-- Código del alumno -->
-        <div class="caso-id">
-            <span th:text="'Código: ' + ${codigoAlumno ?: 'Sin asignar'}"></span>
+        <div class="field-group">
+            <label for="codigoAlumno">
+                <strong>Datos del alumno o la alumna</strong>
+                (sistema anonimizado o código asignado por el centro) *
+            </label>
+            <input type="text"
+                   id="codigoAlumno"
+                   th:field="*{codigoAlumno}"
+                   placeholder="Ej: ALU-2024-001"
+                   required>
+            <small class="help-text">Introduce un código único para identificar al estudiante</small>
         </div>
 
-        <!-- Estado del Paso 1 -->
-        <div class="caso-fecha">
-            <span th:if="${paso1DTO.fechaRegistro != null}" class="badge bg-success">
-                ✓ Completado - <span th:text="${#temporals.format(paso1DTO.fechaRegistro, 'dd/MM/yyyy')}"></span>
-            </span>
-            <span th:if="${paso1DTO.fechaRegistro == null}" class="badge bg-warning text-dark">
-                ⏳ Pendiente
-            </span>
+        <!-- Fecha de registro -->
+        <div class="field-group">
+            <label for="fechaRegistro">Fecha de registro *</label>
+            <input type="date"
+                   id="fechaRegistro"
+                   th:field="*{paso1DTO.fechaRegistro}"
+                   required>
         </div>
+
+        <hr class="section-divider">
+
+        <!-- Cómo se detecta la conducta de riesgo -->
+        <div class="field-group">
+            <label class="section-label">La conducta de riesgo se detecta...</label>
+            <p class="help-text">Marca todas las opciones que apliquen:</p>
+
+            <div class="checkbox-list">
+                <label class="checkbox-item">
+                    <input type="checkbox"
+                           id="familiaComunica"
+                           th:field="*{paso1DTO.familiaComunica}">
+                    <span class="checkbox-text">
+                    Comunicación por parte de la familia de un alumno o una alumna que alerta al centro educativo de circunstancias que pueden ser compatibles con la situación de riesgo de ideación de conducta suicida o de conducta autolesiva de su hijo o hija.
+                    </span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox"
+                           id="companerosComunican"
+                           th:field="*{paso1DTO.companerosComunican}">
+                    <span class="checkbox-text">
+                        La comunicación al centro educativo de la posible situación de riesgo proviene de compañeros de un alumno o alumna.
+                    </span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox"
+                           id="alumnoComunica"
+                           th:field="*{paso1DTO.alumnoComunica}">
+                    <span class="checkbox-text">
+                       Un alumno o una alumna comunica, a través de cualquier medio de expresión, canal y persona de contacto, su sufrimiento con la situación personal que está viviendo y la aparición de la idea de la muerte como una posible solución o la explícita manifestación de querer acabar con su vida.
+                    </span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox"
+                           id="intentoPrevio"
+                           th:field="*{paso1DTO.intentoPrevio}">
+                    <span class="checkbox-text">
+                        El alumno o alumna ha tenido intento autolítico y, tras la intervención de los servicios sanitarios, vuelve a acudir al centro tras el suceso.
+                    </span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox"
+                           id="conductaAutolesiva"
+                           th:field="*{paso1DTO.conductaAutolesiva}">
+                    <span class="checkbox-text">
+                        Se detecta por parte de miembros de la comunidad educativa la conducta autolesiva del alumno o alumna.
+                    </span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox"
+                           id="otrosMotivo"
+                           th:field="*{paso1DTO.otrosMotivo}"
+                           onclick="toggleOtrosDetalle()">
+                    <span class="checkbox-text">
+                         Otras (especificar):
+                    </span>
+                </label>
+            </div>
+
+            <!-- Campo condicional para "Otras" -->
+            <div id="otrosDetalleContainer" style="display: none; margin-top: 15px;">
+                <textarea id="otrosDetalle"
+                          th:field="*{paso1DTO.otrosDetalle}"
+                          rows="3"
+                          placeholder="Especifique otras formas de detección..."></textarea>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Fecha y firma -->
+        <div class="field-group">
+            <label for="firmas">Fecha y firma(s):</label>
+            <textarea id="firmas"
+                      th:field="*{paso1DTO.firmas}"
+                      rows="2"
+                      placeholder="Nombre y cargo de los profesionales que participan..."></textarea>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Detalle de los hechos -->
+        <div class="field-group">
+            <label for="detalleHechos">Detalle de los hechos (breve descripción) *</label>
+            <textarea id="detalleHechos"
+                      th:field="*{paso1DTO.detalleHechos}"
+                      rows="8"
+                      maxlength="500"
+                      placeholder="Describa de manera clara, objetiva y concisa los hechos que motivan este registro..."
+                      required></textarea>
+        </div>
+
     </div>
+
+    <script th:inline="javascript">
+        // Mostrar/ocultar campo "Otros detalles"
+        function toggleOtrosDetalle() {
+            const checkbox = document.getElementById('otrosMotivo');
+            const container = document.getElementById('otrosDetalleContainer');
+            const textarea = document.getElementById('otrosDetalle');
+
+            if (checkbox.checked) {
+                container.style.display = 'block';
+                container.style.animation = 'slideDown 0.3s ease';
+            } else {
+                container.style.display = 'none';
+                textarea.value = '';
+            }
+        }
+
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const otrosMotivo = document.getElementById('otrosMotivo');
+            if (otrosMotivo && otrosMotivo.checked) {
+                document.getElementById('otrosDetalleContainer').style.display = 'block';
+            }
+        });
+
+        // Animación de deslizamiento
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    max-height: 0;
+                }
+                to {
+                    opacity: 1;
+                    max-height: 200px;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 
 </th:block>

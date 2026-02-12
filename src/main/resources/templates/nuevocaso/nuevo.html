@@ -15,7 +15,10 @@
 <div class="container">
     <!-- HEADER CON BARRA DE PROGRESO -->
     <div class="header">
-        <h1><img src="/virgen-del-carmen_512.webp" width="90px" alt="Colegio El Carmen - Carmelitas Descalzos" class="logo"> Seguimiento de Casos - Protocolo de 11 Pasos</h1>
+        <h1>
+            <img src="/images/virgen-del-carmen_512.webp" width="90px" alt="Colegio El Carmen - Carmelitas Descalzos" class="logo">
+            Seguimiento de Casos - Protocolo de 11 Pasos
+        </h1>
 
         <div class="progress-container">
             <div class="progress-bar" id="progressBar">0%</div>
@@ -27,24 +30,33 @@
 
     <!-- CONTENIDO DEL FORMULARIO -->
     <div class="form-content">
+        <!--
+            ⚠️ IMPORTANTE:
+            - Para CREAR nuevo caso: action="/alumnado/guardar" + sin campo id
+            - Para EDITAR caso existente: action="/alumnado/guardar" + con campo id hidden
+        -->
         <form th:action="@{/alumnado/guardar}"
               th:object="${formulario}"
               method="post"
               id="mainForm">
 
-            <!-- 🔹 MODO -->
-            <input type="hidden" id="modoFormulario" value="nuevo">
+            <!-- Campo ID (solo presente en modo edición) -->
+            <input type="hidden" th:field="*{id}" th:if="${formulario.id != null}">
 
-            <!-- 🔹 BOTONES -->
+            <!-- Modo del formulario (nuevo o editar) -->
+            <input type="hidden"
+                   id="modoFormulario"
+                   th:value="${formulario.id != null ? 'editar' : 'nuevo'}">
+
+            <!-- BOTONES DE ACCIÓN -->
             <div class="action-buttons">
                 <button type="button" class="btn btn-save" onclick="guardarFormulario()">
                     💾 Guardar Progreso
                 </button>
 
-                <button type="button" class="btn btn-menu">
-                    <a href="/" class="btn btn-secondary">🏠 Menú</a>
+                <button type="button" class="btn btn-menu" onclick="volverMenu()">
+                    🏠 Volver al Menú
                 </button>
-
             </div>
 
             <!-- ==================== PASO 1 ==================== -->
@@ -217,6 +229,7 @@
                     <div th:replace="~{nuevocaso/pasos/paso10 :: paso10}"></div>
                 </div>
             </div>
+
             <!-- ==================== PASO 11 ==================== -->
             <div class="paso-container locked" data-paso="11">
                 <div class="paso-header" onclick="togglePaso(11)">
@@ -234,11 +247,10 @@
                 </div>
             </div>
 
-
-
         </form>
     </div>
 </div>
+
 <!-- NAVEGACIÓN INFERIOR -->
 <div class="paso-navigation">
     <button type="button" class="btn-prev" id="btnPrev" onclick="retrocederPaso()">
@@ -248,7 +260,8 @@
         Siguiente →
     </button>
 </div>
-<!-- Notificación de guardado -->
+
+<!-- NOTIFICACIÓN DE GUARDADO -->
 <div id="saveNotification" style="
     position: fixed;
     bottom: 30px;
