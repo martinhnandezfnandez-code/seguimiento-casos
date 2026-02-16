@@ -11,7 +11,6 @@
 </head>
 <body>
 
-<!-- CONTAINER PRINCIPAL -->
 <div class="container">
     <!-- HEADER CON BARRA DE PROGRESO -->
     <div class="header">
@@ -30,11 +29,7 @@
 
     <!-- CONTENIDO DEL FORMULARIO -->
     <div class="form-content">
-        <!--
-            ⚠️ IMPORTANTE:
-            - Para CREAR nuevo caso: action="/alumnado/guardar" + sin campo id
-            - Para EDITAR caso existente: action="/alumnado/guardar" + con campo id hidden
-        -->
+
         <form th:action="@{/alumnado/guardar}"
               th:object="${formulario}"
               method="post"
@@ -246,9 +241,19 @@
                     <div th:replace="~{nuevocaso/pasos/paso11 :: paso11}"></div>
                 </div>
             </div>
-
+            <!-- =========== OBservaciones ============= -->
+            <div class="field-group">
+                <label for="observaciones">Detalle de los hechos (breve descripción) *</label>
+                <textarea id="observaciones"
+                          th:field="*{observaciones}"
+                          rows="8"
+                          maxlength="500"
+                          placeholder="Observaciones sobre el caso..."
+                          required></textarea>
+            </div>
         </form>
     </div>
+
 </div>
 
 <!-- NAVEGACIÓN INFERIOR -->

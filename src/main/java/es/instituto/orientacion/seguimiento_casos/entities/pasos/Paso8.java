@@ -23,10 +23,18 @@ public class Paso8 {
     @OneToOne
     @JoinColumn(name = "alumnado_id")
     private Alumnado alumnado;
-
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Paso8() {
     }
-
+    /**
+     * Constructor de clase de paso8
+     * @param paso8DTO datos no sensibles del alumno correspondientes al paso 8*/
     public Paso8(Paso8DTO paso8DTO) {
         this.otrasMedidas = paso8DTO.getOtrasMedidas();
         this.responsableDireccion = paso8DTO.getResponsableDireccion();

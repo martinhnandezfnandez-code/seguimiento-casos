@@ -42,7 +42,9 @@ public class Paso11 {
 
     @Column(name = "profesorado")
     private String profesorado;
-
+    /**
+     * Constructor de clase de paso11
+     * @param paso11DTO datos no sensibles del alumno correspondientes al paso 11*/
     public Paso11(Paso11DTO paso11DTO) {
         this.fecchacierre = paso11DTO.getFecchacierre();
         this.observacionesFechaCierre = paso11DTO.getObservacionesFechaCierre();
@@ -53,6 +55,13 @@ public class Paso11 {
         this.fechaProfesorado = paso11DTO.getFechaProfesorado();
         this.profesorado = paso11DTO.getProfesorado();
     }
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Paso11() {
     }
 

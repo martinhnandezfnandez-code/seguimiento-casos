@@ -103,9 +103,17 @@ public class Paso7 {
     @Column(name = "fecha_elaboracion")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaElaboracion;
-
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Paso7() {}
-
+    /**
+     * Constructor de clase de paso7
+     * @param paso7DTO datos no sensibles del alumno correspondientes al paso 7*/
     public Paso7(Paso7DTO paso7DTO) {
         if (paso7DTO != null) {
             this.id = paso7DTO.getId();

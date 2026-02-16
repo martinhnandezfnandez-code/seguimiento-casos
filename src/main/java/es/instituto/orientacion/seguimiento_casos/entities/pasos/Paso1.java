@@ -49,7 +49,9 @@ public class Paso1 {
     @OneToOne
     @JoinColumn(name = "alumnado_id")
     private Alumnado alumnado;
-
+/**
+ * Constructor de clase de paso1
+ * @param paso1DTO datos no sensibles del alumno correspondientes al paso 1*/
     public Paso1(Paso1DTO paso1DTO) {
         this.alumnoComunica = paso1DTO.getAlumnoComunica();
         this.companerosComunican = paso1DTO.getCompanerosComunican();
@@ -62,5 +64,12 @@ public class Paso1 {
         this.firmas = paso1DTO.getFirmas();
 
     }
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Paso1(){}
 }

@@ -8,13 +8,44 @@ import org.springframework.context.event.EventListener;
 import java.awt.Desktop;
 import java.net.URI;
 
+/**
+ * Punto de entrada principal de la aplicación de Seguimiento de Casos.
+ * <p>
+ * Esta clase inicializa el contexto de Spring Boot, configura el autowiring
+ * y arranca el servidor embebido. Además, incluye un escuchador de eventos
+ * para facilitar el acceso al usuario abriendo automáticamente el navegador
+ * una vez que el sistema está listo.
+ * </p>
+ *
+ * @author Departamento de Orientación
+ * @version 1.0
+ */
 @SpringBootApplication
 public class SeguimientoCasosApplication {
 
+    /**
+     * Método de inicio que lanza la aplicación Spring Boot.
+     * * @param args Argumentos de línea de comandos (opcionales).
+     */
     public static void main(String[] args) {
         SpringApplication.run(SeguimientoCasosApplication.class, args);
     }
 
+    /**
+     * Escucha el evento {@link ApplicationReadyEvent} para abrir el navegador automáticamente.
+     * <p>
+     * Una vez que el servidor Tomcat está levantado y la aplicación está lista para recibir peticiones,
+     * este método intenta abrir la URL local {@code http://localhost:8080}.
+     * El método es compatible con:
+     * </p>
+     * <ul>
+     * <li>Sistemas con soporte nativo de la clase {@link Desktop}.</li>
+     * <li>Windows (vía rundll32).</li>
+     * <li>macOS (vía comando open).</li>
+     * <li>Linux/Unix (vía xdg-open).</li>
+     * </ul>
+     * * @see ApplicationReadyEvent
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void openBrowser() {
         try {

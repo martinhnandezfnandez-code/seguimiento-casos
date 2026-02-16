@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name= "Paso5")
+@Table(name = "Paso5")
 public class Paso5 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,9 @@ public class Paso5 {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private Anexo5 anexo5;
-
+    /**
+     * Constructor de clase de paso5
+     * @param paso5DTO datos no sensibles del alumno correspondientes al paso 5*/
     public Paso5(Paso5DTO paso5DTO) {
         if (paso5DTO != null) {
             this.alumnado = paso5DTO.getAlumnado();
@@ -46,7 +48,15 @@ public class Paso5 {
             }
         }
     }
-    public Paso5(){
+
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
+    public Paso5() {
 
     }
 

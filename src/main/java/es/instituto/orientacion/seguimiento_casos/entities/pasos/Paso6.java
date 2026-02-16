@@ -49,9 +49,18 @@ public class Paso6 {
 
     @Column(name = "fecha")
     private LocalDate fecha;
-
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Paso6() {
     }
+    /**
+     * Constructor de clase de paso6
+     * @param paso6DTO datos no sensibles del alumno correspondientes al paso 6*/
     public Paso6(Paso6DTO paso6DTO) {
         this.tutores = paso6DTO.getTutores();
         this.abrir = paso6DTO.getAbrir();

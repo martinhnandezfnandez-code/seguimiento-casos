@@ -46,6 +46,9 @@ public class Cronograma {
     @JoinColumn(name = "paso2_id")
     private Paso2 paso2;
 
+    /**
+     * Constructor de clase cronograma para el paso2
+     * @param cronogramaDTO */
     public Cronograma(CronogramaDTO cronogramaDTO) {
         this.actuacion= cronogramaDTO.getActuacion();
         this.documento= cronogramaDTO.getDocumento();
@@ -53,5 +56,12 @@ public class Cronograma {
         this.situacion= cronogramaDTO.getSituacion();
         this.observaciones = cronogramaDTO.getObservaciones();
     }
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Cronograma(){}
 }

@@ -124,7 +124,13 @@ public class Anexo5FactoresRiesgo {
     @OneToOne
     @JoinColumn(name = "anexo5_id")
     private Anexo5 anexo5;
-
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Anexo5FactoresRiesgo() {
     }
 

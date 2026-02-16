@@ -12,12 +12,38 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Base64;
 
+/**
+ * Servicio para la generación de documentos PDF.
+ * <p>
+ * Este servicio es responsable de generar todos los anexos PDF del protocolo de
+ * seguimiento de casos de alumnado. Utiliza Thymeleaf para procesar plantillas HTML
+ * y OpenHTMLtoPDF para convertirlas en documentos PDF.
+ * </p>
+ * <p>
+ * Cada método de generación carga los datos del alumno y del paso correspondiente,
+ * procesa una plantilla Thymeleaf específica e incluye el logo institucional embebido
+ * en formato Base64.
+ * </p>
+ *
+ * @author Instituto de Orientación
+ * @version 1.0
+ */
 @Service
 public class PdfService {
 
     @Autowired
     private TemplateEngine templateEngine;
 
+    /**
+     * Genera el PDF del Anexo 1 del protocolo de seguimiento.
+     * <p>
+     * Este anexo contiene la información inicial del alumno y los datos del Paso 1.
+     * </p>
+     *
+     * @param alumnado entidad del alumno con sus datos completos
+     * @return array de bytes con el contenido del PDF generado
+     * @throws RuntimeException si ocurre un error durante la generación del PDF
+     */
     public byte[] generarPdfAnexo1(Alumnado alumnado) {
         Context context = new Context();
 
@@ -42,6 +68,18 @@ public class PdfService {
             throw new RuntimeException("Error al generar PDF: " + e.getMessage(), e);
         }
     }
+
+    /**
+     * Genera el PDF del Anexo 2 (Cronograma) del protocolo de seguimiento.
+     * <p>
+     * Este anexo contiene el cronograma de actuaciones planificadas para el alumno.
+     * Utiliza un DTO para facilitar el manejo de la lista de actividades cronogramadas.
+     * </p>
+     *
+     * @param alumnado entidad del alumno con sus datos completos
+     * @return array de bytes con el contenido del PDF generado
+     * @throws RuntimeException si ocurre un error durante la generación del PDF
+     */
     public byte[] generarPdfAnexo2(Alumnado alumnado) {
         Context context = new Context();
         context.setVariable("alumnado", alumnado);
@@ -71,6 +109,17 @@ public class PdfService {
         }
     }
 
+    /**
+     * Genera el PDF del Anexo 3 (Acta de Reunión con la Familia) del protocolo de seguimiento.
+     * <p>
+     * Este anexo documenta las reuniones mantenidas con la familia del alumno
+     * y los acuerdos alcanzados.
+     * </p>
+     *
+     * @param alumnado entidad del alumno con sus datos completos
+     * @return array de bytes con el contenido del PDF generado
+     * @throws RuntimeException si ocurre un error durante la generación del PDF
+     */
     public byte[] generarPdfAnexo3(Alumnado alumnado) {
         Context context = new Context();
         context.setVariable("alumnado", alumnado);
@@ -96,8 +145,19 @@ public class PdfService {
         } catch (Exception e) {
             throw new RuntimeException("Error en PDF Anexo 3: " + e.getMessage());
         }
-
     }
+
+    /**
+     * Genera el PDF del Anexo 4 (Síntesis de la Valoración) del protocolo de seguimiento.
+     * <p>
+     * Este anexo presenta un resumen de la valoración realizada al alumno.
+     * Los datos provienen del Paso 5 del protocolo.
+     * </p>
+     *
+     * @param alumnado entidad del alumno con sus datos completos
+     * @return array de bytes con el contenido del PDF generado
+     * @throws RuntimeException si ocurre un error durante la generación del PDF
+     */
     public byte[] generarPdfAnexo4(Alumnado alumnado) {
         Context context = new Context();
         context.setVariable("alumnado", alumnado);
@@ -125,6 +185,19 @@ public class PdfService {
             throw new RuntimeException("Error al generar PDF Anexo 4: " + e.getMessage());
         }
     }
+
+    /**
+     * Genera el PDF del Anexo 5 (Análisis del Caso) del protocolo de seguimiento.
+     * <p>
+     * Este anexo contiene un análisis detallado del caso del alumno, incluyendo
+     * tres listas de indicadores que permiten evaluar diferentes aspectos de su situación.
+     * Los datos provienen del Paso 5 del protocolo.
+     * </p>
+     *
+     * @param alumnado entidad del alumno con sus datos completos
+     * @return array de bytes con el contenido del PDF generado
+     * @throws RuntimeException si ocurre un error durante la generación del PDF
+     */
     public byte[] generarPdfAnexo5(Alumnado alumnado) {
         Context context = new Context();
         context.setVariable("alumnado", alumnado);
@@ -152,6 +225,18 @@ public class PdfService {
             throw new RuntimeException("Error al generar PDF Anexo 5: " + e.getMessage());
         }
     }
+
+    /**
+     * Genera el PDF del Anexo 6 (Resolución) del protocolo de seguimiento.
+     * <p>
+     * Este anexo documenta la resolución adoptada para el caso del alumno
+     * tras el análisis y valoración realizados.
+     * </p>
+     *
+     * @param alumnado entidad del alumno con sus datos completos
+     * @return array de bytes con el contenido del PDF generado
+     * @throws RuntimeException si ocurre un error durante la generación del PDF
+     */
     public byte[] generarPdfAnexo6(Alumnado alumnado) {
         Context context = new Context();
         context.setVariable("alumnado", alumnado);
@@ -175,6 +260,18 @@ public class PdfService {
             throw new RuntimeException("Error al generar PDF Anexo 6: " + e.getMessage());
         }
     }
+
+    /**
+     * Genera el PDF del Anexo 7 (Plan Individualizado) del protocolo de seguimiento.
+     * <p>
+     * Este anexo contiene el plan de intervención individualizado diseñado
+     * específicamente para atender las necesidades del alumno.
+     * </p>
+     *
+     * @param alumnado entidad del alumno con sus datos completos
+     * @return array de bytes con el contenido del PDF generado
+     * @throws RuntimeException si ocurre un error durante la generación del PDF
+     */
     public byte[] generarPdfAnexo7(Alumnado alumnado) {
         Context context = new Context();
         context.setVariable("alumnado", alumnado);
@@ -198,15 +295,26 @@ public class PdfService {
             throw new RuntimeException("Error al generar PDF Anexo 7: " + e.getMessage());
         }
     }
+
+    /**
+     * Genera el PDF del Anexo 8 (Seguimiento) del protocolo de seguimiento.
+     * <p>
+     * Este anexo documenta el proceso de seguimiento de las actuaciones
+     * y medidas implementadas con el alumno, permitiendo evaluar su efectividad
+     * y realizar ajustes cuando sea necesario.
+     * </p>
+     *
+     * @param alumnado entidad del alumno con sus datos completos
+     * @return array de bytes con el contenido del PDF generado
+     * @throws RuntimeException si ocurre un error durante la generación del PDF
+     */
     public byte[] generarPdfAnexo8(Alumnado alumnado) {
         Context context = new Context();
         context.setVariable("alumnado", alumnado);
         context.setVariable("p8", alumnado.getPaso8() != null ? new Paso8DTO(alumnado.getPaso8()) : new Paso8DTO());
 
-        // 1. Cargar el logo usando el nombre correcto: logo-junta.png
+        // Cargar el logo institucional
         String logoBase64 = cargarImagenComoBase64("static/images/logo-junta.png");
-
-        // 2. Pasarlo al contexto para que el HTML lo vea
         context.setVariable("logoBase64", logoBase64);
 
         String htmlContent = templateEngine.process("pdf/anexo8_template", context);
@@ -225,9 +333,16 @@ public class PdfService {
     }
 
     /**
-     * Carga una imagen desde el classpath y la convierte a Base64
-     * @param rutaImagen Ruta relativa desde resources/ (ejemplo: "static/images/logo.png")
-     * @return String con el data URI completo (data:image/png;base64,...)
+     * Carga una imagen desde el classpath y la convierte a formato Base64.
+     * <p>
+     * Este método permite embeber imágenes directamente en el HTML que se convertirá
+     * a PDF, utilizando Data URIs. Esto evita problemas de rutas y referencias externas.
+     * </p>
+     *
+     * @param rutaImagen ruta relativa desde el directorio resources/
+     *                   (ejemplo: "static/images/logo.png")
+     * @return String con el data URI completo (formato: data:image/png;base64,...)
+     *         o cadena vacía si la imagen no se encuentra o hay un error
      */
     private String cargarImagenComoBase64(String rutaImagen) {
         try {
@@ -256,7 +371,14 @@ public class PdfService {
     }
 
     /**
-     * Determina el tipo MIME de la imagen según su extensión
+     * Determina el tipo MIME de una imagen según su extensión de archivo.
+     * <p>
+     * Este método es utilizado para construir correctamente el Data URI
+     * al embeber imágenes en Base64.
+     * </p>
+     *
+     * @param rutaImagen ruta de la imagen (se extrae la extensión del nombre de archivo)
+     * @return tipo MIME correspondiente (por defecto "image/png" si la extensión no es reconocida)
      */
     private String obtenerMimeType(String rutaImagen) {
         String extension = rutaImagen.substring(rutaImagen.lastIndexOf('.') + 1).toLowerCase();

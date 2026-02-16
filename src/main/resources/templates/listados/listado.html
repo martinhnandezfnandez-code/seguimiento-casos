@@ -19,6 +19,16 @@
             <a href="/alumnado/nuevo" class="btn">➕ Nuevo Caso</a>
             <a href="/" class="btn btn-secondary">🏠 Menú</a>
         </div>
+        <div class="buscador">
+            <label for="buscarCodigo">Buscar por código de alumno:</label>
+            <input type="text"
+                   id="buscarCodigo"
+                   placeholder="Ej: ALU-001"
+                   onkeyup="filtrarPorCodigo()">
+            <button onclick="limpiarFiltro()" class="btn-clear">✖ Limpiar</button>
+            <span id="resultadosCount"></span>
+        </div>
+    </div>
     </div>
 
     <!-- TABLA -->
@@ -52,6 +62,9 @@
                     <th>Paso 11: Se informa a Inspección</th>
                     <th>Paso 11: Se informa a familia</th>
                     <th>Paso 11: Se informa a profesorado</th>
+                    <th>Observaciones</th>
+                    <th>Fecha de creacion</th>
+                    <th>Fecha de modificacion</th>
 
 
                     <th class="actions">Acciones</th>
@@ -95,6 +108,67 @@
     </div>
 
 </div>
+<script>
+function filtrarPorCodigo() {
+const input = document.getElementById('buscarCodigo');
+const filtro = input.value.toUpperCase().trim();
+const tabla = document.getElementById('tablaCasos');
+const filas = tabla.getElementsByClassName('fila-caso');
+const noResults = document.getElementById('noResults');
+const resultadosCount = document.getElementById('resultadosCount');
 
+let casosVisibles = 0;
+
+for (let i = 0; i < filas.length; i++) {
+const fila = filas[i];
+// Buscar el código en la columna Paso 1 (índice 3, después de ID, ID Caso, ID Doc)
+const columnaPaso1 = fila.getElementsByTagName('td')[3];
+
+if (columnaPaso1) {
+const textoCodigo = columnaPaso1.textContent || columnaPaso1.innerText;
+
+// Extraer el código del texto "Código: XXX"
+const codigoMatch = textoCodigo.match(/Código:\s*(.+?)(?:\s|$)/);
+const codigo = codigoMatch ? codigoMatch[1].trim() : '';
+
+if (filtro === '' || codigo.toUpperCase().indexOf(filtro) > -1) {
+fila.style.display = '';
+casosVisibles++;
+} else {
+fila.style.display = 'none';
+}
+}
+}
+
+// Mostrar/ocultar mensaje de sin resultados
+if (casosVisibles === 0 && filtro !== '') {
+noResults.style.display = 'block';
+} else {
+noResults.style.display = 'none';
+}
+
+// Mostrar contador de resultados
+if (filtro !== '') {
+resultadosCount.textContent = `(${casosVisibles} caso${casosVisibles !== 1 ? 's' : ''} encontrado${casosVisibles !== 1 ? 's' : ''})`;
+resultadosCount.style.color = '#666';
+resultadosCount.style.fontStyle = 'italic';
+} else {
+resultadosCount.textContent = '';
+}
+}
+
+function limpiarFiltro() {
+document.getElementById('buscarCodigo').value = '';
+filtrarPorCodigo();
+}
+
+// Permitir buscar al presionar Enter
+document.getElementById('buscarCodigo').addEventListener('keypress', function(event) {
+if (event.key === 'Enter') {
+event.preventDefault();
+filtrarPorCodigo();
+}
+});
+</script>
 </body>
 </html>

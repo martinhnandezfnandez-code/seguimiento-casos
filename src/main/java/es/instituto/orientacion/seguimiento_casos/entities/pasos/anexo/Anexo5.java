@@ -41,31 +41,44 @@ public class Anexo5 {
     @OneToOne(mappedBy = "anexo5", cascade = CascadeType.ALL, orphanRemoval = true)
     private Anexo5FactoresProteccion factoresProteccion;
 
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Anexo5() {
     }
 
+    /**
+     * Constructor de clase de anexo 5
+     *
+     * @param dto DTO del anexo5
+     */
     public Anexo5(Anexo5DTO dto) {
         if (dto != null) {
             this.detectadoPor = dto.getDetectadoPor();
             this.fechaDeteccion = dto.getFechaDeteccion();
             this.observaciones = dto.getObservaciones();
-            
+
             if (dto.getSenalesAlarma() != null) {
                 this.senalesAlarma = new Anexo5SenalesAlarma(dto.getSenalesAlarma());
                 this.senalesAlarma.setAnexo5(this);
             }
-            
+
             if (dto.getFactoresRiesgo() != null) {
                 this.factoresRiesgo = new Anexo5FactoresRiesgo(dto.getFactoresRiesgo());
                 this.factoresRiesgo.setAnexo5(this);
             }
-            
+
             if (dto.getFactoresProteccion() != null) {
                 this.factoresProteccion = new Anexo5FactoresProteccion(dto.getFactoresProteccion());
                 this.factoresProteccion.setAnexo5(this);
             }
         }
     }
+
     public void actualizarDesdeDTO(Anexo5DTO dto) {
         this.detectadoPor = dto.getDetectadoPor();
         this.fechaDeteccion = dto.getFechaDeteccion();

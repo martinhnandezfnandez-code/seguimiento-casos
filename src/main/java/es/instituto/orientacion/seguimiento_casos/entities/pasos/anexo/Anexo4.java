@@ -50,7 +50,13 @@ public class    Anexo4 {
         this.fechafamilia = dto.getFechafamilia();
         this.integrantesfamilia = dto.getIntegrantesfamilia();
     }
-
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Anexo4() {
     }
     public Anexo4(Anexo4DTO anexo4DTO) {

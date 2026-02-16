@@ -32,7 +32,9 @@ public class Paso4 {
     @OneToOne
     @JoinColumn(name = "alumnado_id")
     private Alumnado alumnado;
-
+    /**
+     * Constructor de clase de paso 4
+     * @param paso4DTO datos no sensibles del alumno correspondientes al paso 4*/
     public Paso4(Paso4DTO paso4DTO){
         this.acuerdos = paso4DTO.getAcuerdos();
         this.asistentes = paso4DTO.getAsistentes();
@@ -40,5 +42,12 @@ public class Paso4 {
         this.contenido = paso4DTO.getContenido();
 
     }
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Paso4(){}
 }

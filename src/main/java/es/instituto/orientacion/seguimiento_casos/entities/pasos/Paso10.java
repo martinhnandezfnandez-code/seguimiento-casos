@@ -20,10 +20,18 @@ public class Paso10 {
 
     @Column(name = "medidasprovisionales")
     private String seguiminetoInspeccion;
-
+    /**
+     * Constructor por defecto requerido por JPA.
+     * <p>
+     * Este constructor vacío es necesario para que Hibernate pueda instanciar
+     * la entidad al recuperar datos de la base de datos.
+     * </p>
+     */
     public Paso10() {
     }
-
+    /**
+     * Constructor de clase de paso10
+     * @param paso10DTO datos no sensibles del alumno correspondientes al paso 10*/
     public Paso10(Paso10DTO paso10DTO) {
         this.seguiminetoInspeccion = paso10DTO.getSeguiminetoInspeccion();
     }
