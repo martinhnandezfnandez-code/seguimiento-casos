@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Listado de Casos</title>
-
     <link rel="icon" href="/logotipo.png">
     <link rel="stylesheet" th:href="@{/css/listado.css}">
 </head>
@@ -14,7 +13,10 @@
 
     <!-- HEADER -->
     <div class="header">
-        <h1> <img src="/images/virgen-del-carmen_512.webp" width="90px" alt="Colegio El Carmen - Carmelitas Descalzos" class="logo"> Listado de Casos</h1>
+        <h1>
+            <img src="/images/virgen-del-carmen_512.webp" width="90px" alt="Colegio El Carmen - Carmelitas Descalzos" class="logo">
+            Listado de Casos
+        </h1>
         <div class="header-buttons">
             <a href="/alumnado/nuevo" class="btn">➕ Nuevo Caso</a>
             <a href="/" class="btn btn-secondary">🏠 Menú</a>
@@ -29,13 +31,11 @@
             <span id="resultadosCount"></span>
         </div>
     </div>
-    </div>
 
     <!-- TABLA -->
     <div class="table-wrapper">
         <div class="table-container">
-            <table>
-
+            <table id="tablaCasos">
                 <thead>
                 <tr>
                     <th class="id-col">ID</th>
@@ -65,19 +65,15 @@
                     <th>Observaciones</th>
                     <th>Fecha de creacion</th>
                     <th>Fecha de modificacion</th>
-
-
                     <th class="actions">Acciones</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr th:each="alumno : ${alumnos}">
-
+                <tr class="fila-caso" th:each="alumno : ${alumnos}">
                     <td class="id-col" th:text="${alumno.id}"></td>
                     <td th:text="${alumno.idCaso}"></td>
                     <td th:text="${alumno.idDocumento}"></td>
-
 
                     <th:block th:insert="~{listados/pasos/paso1 :: paso1(${alumno})}"/>
                     <th:block th:insert="~{listados/pasos/paso2 :: paso2(${alumno})}"/>
@@ -99,76 +95,51 @@
                         <a th:href="@{/alumnado/editar/{id}(id=${alumno.id})}" class="action-edit">✏️</a>
                         <a th:href="@{/alumnado/eliminar/{id}(id=${alumno.id})}" class="action-delete">🗑️</a>
                     </td>
-
                 </tr>
                 </tbody>
-
             </table>
         </div>
     </div>
 
 </div>
+
 <script>
-function filtrarPorCodigo() {
-const input = document.getElementById('buscarCodigo');
-const filtro = input.value.toUpperCase().trim();
-const tabla = document.getElementById('tablaCasos');
-const filas = tabla.getElementsByClassName('fila-caso');
-const noResults = document.getElementById('noResults');
-const resultadosCount = document.getElementById('resultadosCount');
+    function filtrarPorCodigo() {
+        const filtro = document.getElementById('buscarCodigo').value.toUpperCase().trim();
+        const filas = document.querySelectorAll('#tablaCasos .fila-caso');
+        const resultadosCount = document.getElementById('resultadosCount');
+        let casosVisibles = 0;
 
-let casosVisibles = 0;
+        filas.forEach(function(fila) {
+            const textoFila = fila.textContent || fila.innerText;
+            if (filtro === '' || textoFila.toUpperCase().includes(filtro)) {
+                fila.style.display = '';
+                casosVisibles++;
+            } else {
+                fila.style.display = 'none';
+            }
+        });
 
-for (let i = 0; i < filas.length; i++) {
-const fila = filas[i];
-// Buscar el código en la columna Paso 1 (índice 3, después de ID, ID Caso, ID Doc)
-const columnaPaso1 = fila.getElementsByTagName('td')[3];
+        if (filtro !== '') {
+            resultadosCount.textContent = '(' + casosVisibles + ' caso' + (casosVisibles !== 1 ? 's' : '') + ' encontrado' + (casosVisibles !== 1 ? 's' : '') + ')';
+            resultadosCount.style.color = '#666';
+            resultadosCount.style.fontStyle = 'italic';
+        } else {
+            resultadosCount.textContent = '';
+        }
+    }
 
-if (columnaPaso1) {
-const textoCodigo = columnaPaso1.textContent || columnaPaso1.innerText;
+    function limpiarFiltro() {
+        document.getElementById('buscarCodigo').value = '';
+        filtrarPorCodigo();
+    }
 
-// Extraer el código del texto "Código: XXX"
-const codigoMatch = textoCodigo.match(/Código:\s*(.+?)(?:\s|$)/);
-const codigo = codigoMatch ? codigoMatch[1].trim() : '';
-
-if (filtro === '' || codigo.toUpperCase().indexOf(filtro) > -1) {
-fila.style.display = '';
-casosVisibles++;
-} else {
-fila.style.display = 'none';
-}
-}
-}
-
-// Mostrar/ocultar mensaje de sin resultados
-if (casosVisibles === 0 && filtro !== '') {
-noResults.style.display = 'block';
-} else {
-noResults.style.display = 'none';
-}
-
-// Mostrar contador de resultados
-if (filtro !== '') {
-resultadosCount.textContent = `(${casosVisibles} caso${casosVisibles !== 1 ? 's' : ''} encontrado${casosVisibles !== 1 ? 's' : ''})`;
-resultadosCount.style.color = '#666';
-resultadosCount.style.fontStyle = 'italic';
-} else {
-resultadosCount.textContent = '';
-}
-}
-
-function limpiarFiltro() {
-document.getElementById('buscarCodigo').value = '';
-filtrarPorCodigo();
-}
-
-// Permitir buscar al presionar Enter
-document.getElementById('buscarCodigo').addEventListener('keypress', function(event) {
-if (event.key === 'Enter') {
-event.preventDefault();
-filtrarPorCodigo();
-}
-});
+    document.getElementById('buscarCodigo').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            filtrarPorCodigo();
+        }
+    });
 </script>
 </body>
 </html>
