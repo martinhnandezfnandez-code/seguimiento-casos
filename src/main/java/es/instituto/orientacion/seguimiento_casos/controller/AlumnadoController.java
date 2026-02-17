@@ -7,6 +7,8 @@ import es.instituto.orientacion.seguimiento_casos.entities.pasos.*;
 import es.instituto.orientacion.seguimiento_casos.repositories.*;
 import es.instituto.orientacion.seguimiento_casos.services.GuardarService;
 import es.instituto.orientacion.seguimiento_casos.services.PdfService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -399,4 +401,5 @@ public class AlumnadoController {
 
         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
+
 }

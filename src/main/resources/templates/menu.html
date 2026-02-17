@@ -13,9 +13,9 @@
         }
 
         :root {
-            --color-primary: #8B7355;      /* Beige oscuro */
-            --color-secondary: #A89B8C;    /* Beige medio */
-            --color-accent: #CBBFAE;       /* Arena clara */
+            --color-primary: #8B7355;
+            --color-secondary: #A89B8C;
+            --color-accent: #CBBFAE;
             --color-dark: #3F3F3F;
             --color-light: #F5F3F0;
             --color-white: #FFFFFF;
@@ -33,7 +33,6 @@
             padding: 15px;
         }
 
-        /* CONTENEDOR PRINCIPAL */
         .container {
             background: var(--color-white);
             border-radius: 18px;
@@ -44,7 +43,6 @@
             border: 1px solid var(--color-border);
         }
 
-        /* HEADER COMPACTO */
         .header {
             display: flex;
             align-items: center;
@@ -81,11 +79,7 @@
 
         .department-badge {
             align-self: flex-start;
-            background: linear-gradient(
-                135deg,
-                var(--color-primary),
-                var(--color-secondary)
-            );
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
             color: white;
             padding: 5px 14px;
             border-radius: 14px;
@@ -94,7 +88,6 @@
             margin-top: 6px;
         }
 
-        /* MENÚ */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -161,6 +154,53 @@
             margin-bottom: 6px;
         }
 
+        /* BOTÓN CERRAR */
+        .btn-cerrar {
+            margin-top: 22px;
+            background: transparent;
+            border: 1.5px solid rgba(139, 115, 85, 0.4);
+            color: var(--color-primary);
+            padding: 9px 22px;
+            border-radius: 10px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            opacity: 0.7;
+        }
+
+        .btn-cerrar:hover {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #dc2626;
+            opacity: 1;
+        }
+
+        /* PANTALLA DE CIERRE */
+        .pantalla-cierre {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+            gap: 12px;
+            color: var(--color-primary);
+        }
+
+        .pantalla-cierre .icono {
+            font-size: 3.5em;
+        }
+
+        .pantalla-cierre p {
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .pantalla-cierre small {
+            opacity: 0.6;
+            font-size: 0.9em;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .header {
@@ -186,12 +226,12 @@
             }
         }
     </style>
-
 </head>
 <body>
 
 <div class="container">
-    <!-- Header con Logo -->
+
+    <!-- Header -->
     <div class="header">
         <div class="logo-container">
             <img src="/images/virgen-del-carmen_512.webp" alt="Colegio El Carmen - Carmelitas Descalzos" class="logo">
@@ -202,51 +242,79 @@
     </div>
 
     <!-- Menú Principal -->
-    <div class="menu-grid">
-        <!-- Crear Nuevo Registro -->
-        <a href="/alumnado/nuevo" class="menu-card">
-            <div class="card-content">
-                <span class="card-icon">📝</span>
-                <div class="card-title">Nuevo Registro</div>
-                <div class="card-description">
-                    Crear un nuevo caso de seguimiento del alumnado en el sistema
+    <div id="contenido-principal">
+        <div class="menu-grid">
+            <a href="/alumnado/nuevo" class="menu-card">
+                <div class="card-content">
+                    <span class="card-icon">📝</span>
+                    <div class="card-title">Nuevo Registro</div>
+                    <div class="card-description">
+                        Crear un nuevo caso de seguimiento del alumnado en el sistema
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
 
-        <!-- Ver Lista de Casos -->
-        <a href="/alumnado/listar" class="menu-card">
-            <div class="card-content">
-                <span class="card-icon">📊</span>
-                <div class="card-title">Lista de Casos</div>
-                <div class="card-description">
-                    Consultar y gestionar todos los casos registrados en el sistema
+            <a href="/alumnado/listar" class="menu-card">
+                <div class="card-content">
+                    <span class="card-icon">📊</span>
+                    <div class="card-title">Lista de Casos</div>
+                    <div class="card-description">
+                        Consultar y gestionar todos los casos registrados en el sistema
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
 
-        <!-- Exportar Datos -->
-        <a th:href="@{/alumnado/exportar}" class="menu-card">
-            <div class="card-content">
-                <span class="card-icon">📥</span>
-                <div class="card-title">Exportar Datos</div>
-                <div class="card-description">
-                    Exportar informes y datos a Excel o PDF para análisis
+            <a th:href="@{/alumnado/exportar}" class="menu-card">
+                <div class="card-content">
+                    <span class="card-icon">📥</span>
+                    <div class="card-title">Exportar Datos</div>
+                    <div class="card-description">
+                        Exportar informes y datos a Excel o PDF para análisis
+                    </div>
                 </div>
-            </div>
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <div class="footer-info">
-            <p class="institution-name">Colegio El Carmen - Carmelitas Descalzos</p>
-            <p>Sistema de Control y Seguimiento PCCS</p>
-            <p style="margin-top: 10px; font-size: 0.85em;">Departamento de Orientación | Córdoba, Andalucía</p>
-            <p style="margin-top: 15px; opacity: 0.6; font-size: 0.8em;">Desarrollado por Manu y Martín</p>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-info">
+                <p class="institution-name">Colegio El Carmen - Carmelitas Descalzos</p>
+                <p>Sistema de Control y Seguimiento PCCS</p>
+                <p style="margin-top: 10px; font-size: 0.85em;">Departamento de Orientación | Córdoba, Andalucía</p>
+                <p style="margin-top: 15px; opacity: 0.6; font-size: 0.8em;">Desarrollado por Manu y Martín</p>
+            </div>
+
+            <!-- Botón cerrar -->
+            <button onclick="confirmarCierre()" class="btn-cerrar">
+                🔴 Cerrar Aplicación
+            </button>
         </div>
     </div>
+
+    <!-- Pantalla de confirmación de cierre -->
+    <div class="pantalla-cierre" id="pantalla-cierre">
+        <span class="icono">✅</span>
+        <p>Aplicación cerrada correctamente</p>
+        <small>Puedes cerrar esta ventana</small>
+    </div>
+
 </div>
+
+<script>
+    function confirmarCierre() {
+        if (confirm('¿Seguro que quieres cerrar la aplicación?')) {
+            fetch('/shutdown', { method: 'POST' })
+                .then(() => mostrarPantallaCierre())
+                .catch(() => mostrarPantallaCierre()); // El servidor cierra antes de responder, ambos casos son válidos
+        }
+    }
+
+    function mostrarPantallaCierre() {
+        document.getElementById('contenido-principal').style.display = 'none';
+        const pantalla = document.getElementById('pantalla-cierre');
+        pantalla.style.display = 'flex';
+    }
+</script>
 
 </body>
 </html>
