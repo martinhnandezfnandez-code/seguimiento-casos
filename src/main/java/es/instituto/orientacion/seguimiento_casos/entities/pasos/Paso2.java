@@ -46,6 +46,8 @@ public class Paso2 {
     @OneToOne
     @JoinColumn(name = "alumnado_id")
     private Alumnado alumnado;
+
+
     /**Constructor de clase del paso 2
      * @param paso2DTO datos no senbiles del paso 2*/
     public Paso2(Paso2DTO paso2DTO) {

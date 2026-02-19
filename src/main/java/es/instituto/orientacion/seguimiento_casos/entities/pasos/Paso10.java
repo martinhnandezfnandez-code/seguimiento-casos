@@ -20,6 +20,8 @@ public class Paso10 {
 
     @Column(name = "medidasprovisionales")
     private String seguiminetoInspeccion;
+
+
     /**
      * Constructor por defecto requerido por JPA.
      * <p>

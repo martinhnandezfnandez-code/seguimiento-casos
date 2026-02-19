@@ -19,6 +19,9 @@ public class Paso3 {
 
     @Column(name = "medidasprovisionales")
     private String medidasProvisionales;
+
+
+
     /**
      * Constructor por defecto requerido por JPA.
      * <p>

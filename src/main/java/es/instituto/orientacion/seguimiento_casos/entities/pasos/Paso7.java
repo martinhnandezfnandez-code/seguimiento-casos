@@ -103,6 +103,9 @@ public class Paso7 {
     @Column(name = "fecha_elaboracion")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaElaboracion;
+
+
+
     /**
      * Constructor por defecto requerido por JPA.
      * <p>

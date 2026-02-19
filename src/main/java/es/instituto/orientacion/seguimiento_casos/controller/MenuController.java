@@ -5,9 +5,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
-    @GetMapping("/login")
-    public String login() {
-        return "login"; // renombra login.html a login.html
+@RequestMapping("/admin")
+public class MenuController {
+    /**
+     * Procesa el entrado al menú principal
+     *
+     * @return direccion al menú
+     */
+    @GetMapping("/menu")
+    public String menu() {
+        return "menu";
     }
-    }
+
+}

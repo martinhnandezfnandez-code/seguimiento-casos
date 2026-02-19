@@ -49,7 +49,7 @@ public class SeguimientoCasosApplication {
     @EventListener(ApplicationReadyEvent.class)
     public void openBrowser() {
         try {
-            String url = "http://localhost:8080";
+            String url = "http://localhost:8080/public";
 
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 Desktop.getDesktop().browse(new URI(url));

@@ -218,6 +218,8 @@ public class Alumnado {
     @UpdateTimestamp
     private LocalDateTime fechaUltimaActualizacion;
 
+    @Version
+    private Long version;
     /**
      * Constructor que crea una entidad Alumnado a partir de un FormularioDTO.
      * <p>

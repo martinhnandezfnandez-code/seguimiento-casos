@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso | Control PCCS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        :root {
+            --brown-deep: #4A3728;
+            --brown-mid: #7B5E47;
+            --brown-warm: #A67C5B;
+            --brown-light: #C4A882;
+            --brown-pale: #E8D5BE;
+            --cream: #F5EDE0;
+            --cream-light: #FBF7F2;
+            --text-dark: #2C1F14;
+            --text-mid: #6B5040;
+            --text-light: #9B8070;
+            --error-bg: #FEF0EE;
+            --error-border: #E8A090;
+            --error-text: #8B2015;
+            --success-bg: #EEF5EE;
+            --success-border: #9AC09A;
+            --success-text: #1A5C1A;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fondo decorativo con patrón */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(198, 158, 108, 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 70% at 85% 90%, rgba(122, 88, 65, 0.15) 0%, transparent 55%),
+                radial-gradient(ellipse 40% 40% at 60% 40%, rgba(230, 208, 180, 0.25) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Líneas decorativas de fondo */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(139, 115, 85, 0.04) 40px,
+                    rgba(139, 115, 85, 0.04) 41px
+                );
+            pointer-events: none;
+        }
+
+        .wrapper {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            min-height: 560px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow:
+                0 30px 80px rgba(74, 55, 40, 0.22),
+                0 8px 24px rgba(74, 55, 40, 0.12),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Panel izquierdo decorativo */
+        .panel-left {
+            width: 42%;
+            background: linear-gradient(160deg, var(--brown-deep) 0%, var(--brown-mid) 60%, var(--brown-warm) 100%);
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel-left::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .panel-left::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; left: -40px;
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .panel-left-top {
+            position: relative; z-index: 1;
+        }
+
+        .school-logo {
+            width: 72px;
+            height: 72px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+        }
+
+        .school-logo img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+        }
+
+        .panel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .panel-desc {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .panel-left-bottom {
+            position: relative; z-index: 1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            color: rgba(255,255,255,0.85);
+            padding: 7px 14px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .panel-footer-text {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.5;
+        }
+
+        .panel-footer-text strong {
+            color: rgba(255,255,255,0.65);
+            font-weight: 500;
+        }
+
+        /* Panel derecho - formulario */
+        .panel-right {
+            flex: 1;
+            background: var(--cream-light);
+            padding: 52px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            margin-bottom: 36px;
+        }
+
+        .form-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--brown-warm);
+            margin-bottom: 8px;
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .form-subtitle {
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        /* Alertas */
+        .alert {
+            padding: 11px 14px;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: slideIn 0.35s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert-error {
+            background: var(--error-bg);
+            border: 1px solid var(--error-border);
+            color: var(--error-text);
+        }
+
+        .alert-success {
+            background: var(--success-bg);
+            border: 1px solid var(--success-border);
+            color: var(--success-text);
+        }
+
+        /* Campos */
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-mid);
+            margin-bottom: 7px;
+            letter-spacing: 0.02em;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--brown-light);
+            font-size: 1rem;
+            pointer-events: none;
+            transition: color 0.2s;
+        }
+
+        input {
+            width: 100%;
+            background: var(--cream);
+            border: 1.5px solid var(--brown-pale);
+            border-radius: 11px;
+            padding: 0.7rem 0.9rem 0.7rem 2.6rem;
+            font-size: 0.9rem;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dark);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        input::placeholder {
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        input:focus {
+            border-color: var(--brown-warm);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(166, 124, 91, 0.12);
+        }
+
+        input:focus + .focus-line {
+            width: 100%;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--brown-deep) 0%, var(--brown-mid) 100%);
+            color: #fff;
+            border: none;
+            padding: 0.78rem 1rem;
+            border-radius: 11px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.03em;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 16px rgba(74, 55, 40, 0.25);
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(74, 55, 40, 0.32);
+        }
+
+        .btn-submit:hover::before {
+            opacity: 1;
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 680px) {
+            .panel-left { display: none; }
+            .panel-right { padding: 40px 32px; }
+            .wrapper { max-width: 420px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- Panel izquierdo -->
+    <div class="panel-left">
+        <div class="panel-left-top">
+            <div class="school-logo">
+                <img src="/images/virgen-del-carmen_512.webp" alt="Colegio El Carmen">
+            </div>
+            <h1 class="panel-title">Control<br>PCCS</h1>
+            <p class="panel-desc">Sistema de Gestión y Seguimiento del Alumnado del Departamento de Orientación.</p>
+        </div>
+        <div class="panel-left-bottom">
+            <div class="badge">
+                📍 Departamento de Orientación
+            </div>
+            <p class="panel-footer-text">
+                <strong>Colegio El Carmen</strong><br>
+                Carmelitas Descalzos · Córdoba, Andalucía<br><br>
+                Desarrollado por Manu y Martín
+            </p>
+        </div>
+    </div>
+
+    <!-- Panel derecho -->
+    <div class="panel-right">
+        <div class="form-header">
+            <p class="form-eyebrow">Bienvenido</p>
+            <h2 class="form-title">Iniciar Sesión</h2>
+            <p class="form-subtitle">Accede con tus credenciales de orientación</p>
+        </div>
+
+        <div th:if="${param.error}" class="alert alert-error">
+            ⚠️ Usuario o contraseña incorrectos.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+            ✅ Has cerrado sesión correctamente.
+        </div>
+
+        <form th:action="@{/login-process}" method="post">
+            <div class="field">
+                <label for="username">Usuario</label>
+                <div class="input-wrap">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="username" name="username"
+                           placeholder="Introduce tu usuario" required autocomplete="username"/>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="password">Contraseña</label>
+                <div class="input-wrap">
+                    <span class="input-icon">🔑</span>
+                    <input type="password" id="password" name="password"
+                           placeholder="Introduce tu contraseña" required autocomplete="current-password"/>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Iniciar Sesión →</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

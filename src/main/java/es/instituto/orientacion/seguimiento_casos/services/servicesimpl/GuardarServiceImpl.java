@@ -8,6 +8,7 @@ import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Anexo5;
 import es.instituto.orientacion.seguimiento_casos.entities.pasos.anexo.Cronograma;
 import es.instituto.orientacion.seguimiento_casos.repositories.*;
 import es.instituto.orientacion.seguimiento_casos.services.GuardarService;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -50,6 +51,7 @@ public class GuardarServiceImpl implements GuardarService {
      */
     @Override
     public boolean crearAlumnado(FormularioDTO formularioDTO) {
+        try {
         Alumnado alumnado = new Alumnado(formularioDTO);
         alumnado.setObservaciones(formularioDTO.getObservaciones());
         alumnado.setCodigoAlumno(formularioDTO.getCodigoAlumno());
@@ -96,6 +98,11 @@ public class GuardarServiceImpl implements GuardarService {
 
         Long idNuevo = alumnadoRepository.save(alumnado).getId();
         return idNuevo != null;
+        } catch (OptimisticLockingFailureException e) {
+            // Otro usuario guardó este registro al mismo tiempo
+            System.err.println("Conflicto al crear alumnado: " + e.getMessage());
+            return false;
+        }
     }
 
     /**
@@ -107,6 +114,7 @@ public class GuardarServiceImpl implements GuardarService {
      */
     @Override
     public boolean editarAlumnado(FormularioDTO formularioDTO) {
+        try{
         Alumnado alumnado = alumnadoRepository.findById(String.valueOf(formularioDTO.getId()))
                 .orElseThrow();
         alumnado.setObservaciones(formularioDTO.getObservaciones());
@@ -126,6 +134,11 @@ public class GuardarServiceImpl implements GuardarService {
 
         alumnadoRepository.save(alumnado);
         return true;
+        } catch (OptimisticLockingFailureException e) {
+            // Otro usuario editó este registro al mismo tiempo
+            System.err.println("Conflicto al crear alumnado: " + e.getMessage());
+            return false;
+        }
     }
 
     /**

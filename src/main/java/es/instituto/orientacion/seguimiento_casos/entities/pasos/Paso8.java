@@ -23,6 +23,9 @@ public class Paso8 {
     @OneToOne
     @JoinColumn(name = "alumnado_id")
     private Alumnado alumnado;
+
+
+
     /**
      * Constructor por defecto requerido por JPA.
      * <p>

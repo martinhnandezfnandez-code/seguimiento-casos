@@ -303,7 +303,7 @@
 <script>
     function confirmarCierre() {
         if (confirm('¿Seguro que quieres cerrar la aplicación?')) {
-            fetch('/shutdown', { method: 'POST' })
+            fetch('/admin/shutdown', { method: 'POST' })
                 .then(() => mostrarPantallaCierre())
                 .catch(() => mostrarPantallaCierre()); // El servidor cierra antes de responder, ambos casos son válidos
         }

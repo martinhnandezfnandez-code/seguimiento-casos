@@ -46,6 +46,8 @@ public class Cronograma {
     @JoinColumn(name = "paso2_id")
     private Paso2 paso2;
 
+
+
     /**
      * Constructor de clase cronograma para el paso2
      * @param cronogramaDTO */

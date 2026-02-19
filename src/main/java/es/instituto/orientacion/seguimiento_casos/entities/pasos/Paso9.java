@@ -21,6 +21,8 @@ public class Paso9 {
 
     @Column(name = "directorinforma")
     private String directorinforma;
+
+
     /**
      * Constructor por defecto requerido por JPA.
      * <p>

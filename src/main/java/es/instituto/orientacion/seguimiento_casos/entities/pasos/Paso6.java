@@ -49,6 +49,9 @@ public class Paso6 {
 
     @Column(name = "fecha")
     private LocalDate fecha;
+
+
+
     /**
      * Constructor por defecto requerido por JPA.
      * <p>

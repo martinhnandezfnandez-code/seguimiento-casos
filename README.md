@@ -54,7 +54,7 @@ Este trabajo se realiza como **proyecto de prácticas de 1º Desarrollo de Aplic
 
 El sistema utiliza **MySQL** para almacenar:
 
-- Usuarios del sistema.
+- UsuariosRepository del sistema.
 - Registros de estudiantes.
 - Documentos generados.
 - Historial de operaciones.

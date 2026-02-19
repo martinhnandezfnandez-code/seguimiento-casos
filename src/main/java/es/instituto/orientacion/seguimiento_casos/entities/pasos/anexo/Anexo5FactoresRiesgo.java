@@ -124,6 +124,9 @@ public class Anexo5FactoresRiesgo {
     @OneToOne
     @JoinColumn(name = "anexo5_id")
     private Anexo5 anexo5;
+
+
+
     /**
      * Constructor por defecto requerido por JPA.
      * <p>

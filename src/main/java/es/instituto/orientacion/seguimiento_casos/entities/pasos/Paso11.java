@@ -42,6 +42,7 @@ public class Paso11 {
 
     @Column(name = "profesorado")
     private String profesorado;
+
     /**
      * Constructor de clase de paso11
      * @param paso11DTO datos no sensibles del alumno correspondientes al paso 11*/

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
  * Expone el endpoint POST /shutdown que detiene el servidor Spring Boot.
  */
 @RestController
+@RequestMapping("/admin")
 public class ShutdownController {
 
     @PostMapping("/shutdown")

@@ -41,6 +41,8 @@ public class Anexo5 {
     @OneToOne(mappedBy = "anexo5", cascade = CascadeType.ALL, orphanRemoval = true)
     private Anexo5FactoresProteccion factoresProteccion;
 
+
+
     /**
      * Constructor por defecto requerido por JPA.
      * <p>
