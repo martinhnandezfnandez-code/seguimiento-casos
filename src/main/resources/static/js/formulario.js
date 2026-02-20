@@ -463,7 +463,7 @@ window.volverMenu = function() {
             return;
         }
     }
-    window.location.href = '/';
+    window.location.href = '/admin/menu';
 };
 
 function detectarCambios() {

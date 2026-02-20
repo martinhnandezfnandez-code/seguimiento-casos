@@ -1,17 +1,12 @@
-
 <th:block th:fragment="paso10(alumno)">
-
     <td>
-        <span th:if="${alumno.paso10DTO != null
-                      and alumno.paso10DTO.seguiminetoInspeccion != null}"
-              class="ok">
+        <span th:if="${alumno.paso10DTO != null and !#strings.isEmpty(alumno.paso10DTO.seguiminetoInspeccion)}"
+              style="color: green; font-weight: 600;">
             ✔ Rellenado
         </span>
-        <span th:unless="${alumno.paso10DTO != null
-                          and alumno.paso10DTO.seguiminetoInspeccion != null}"
-              class="ko">
+        <span th:unless="${alumno.paso10DTO != null and !#strings.isEmpty(alumno.paso10DTO.seguiminetoInspeccion)}"
+              style="color: #b00; font-weight: 600;">
             ✘ Pendiente
         </span>
     </td>
-
 </th:block>

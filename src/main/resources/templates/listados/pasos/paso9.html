@@ -1,17 +1,12 @@
-
 <th:block th:fragment="paso9(alumno)">
-
     <td>
-        <span th:if="${alumno.paso9DTO != null
-                      and alumno.paso9DTO.directorinforma != null}"
-              class="ok">
+        <span th:if="${alumno.paso9DTO != null and !#strings.isEmpty(alumno.paso9DTO.directorinforma)}"
+              style="color: green; font-weight: 600;">
             ✔ Rellenado
         </span>
-        <span th:unless="${alumno.paso9DTO != null
-                          and alumno.paso9DTO.directorinforma != null}"
-              class="ko">
+        <span th:unless="${alumno.paso9DTO != null and !#strings.isEmpty(alumno.paso9DTO.directorinforma)}"
+              style="color: #b00; font-weight: 600;">
             ✘ Pendiente
         </span>
     </td>
-
 </th:block>

@@ -1,23 +1,23 @@
 <th:block th:fragment="paso11(alumno)">
 
     <td>
-        <span th:if="${alumno.paso11DTO?.fecchacierre != null}" class="ok">✔</span>
-        <span th:unless="${alumno.paso11DTO?.fecchacierre != null}" class="ko">✘</span>
+        <span th:if="${alumno.paso11DTO?.fecchacierre != null}" style="color: green; font-weight: 600;">✔ Rellenado</span>
+        <span th:unless="${alumno.paso11DTO?.fecchacierre != null}" style="color: #b00; font-weight: 600;">✘ Pendiente</span>
     </td>
 
     <td>
-        <span th:if="${alumno.paso11DTO?.fechaInspeccion != null}" class="ok">✔</span>
-        <span th:unless="${alumno.paso11DTO?.fechaInspeccion != null}" class="ko">✘</span>
+        <span th:if="${alumno.paso11DTO?.fechaInspeccion != null}" style="color: green; font-weight: 600;">✔ Rellenado</span>
+        <span th:unless="${alumno.paso11DTO?.fechaInspeccion != null}" style="color: #b00; font-weight: 600;">✘ Pendiente</span>
     </td>
 
     <td>
-        <span th:if="${alumno.paso11DTO?.fecchafamilia != null}" class="ok">✔</span>
-        <span th:unless="${alumno.paso11DTO?.fecchafamilia != null}" class="ko">✘</span>
+        <span th:if="${alumno.paso11DTO?.fecchafamilia != null}" style="color: green; font-weight: 600;">✔ Rellenado</span>
+        <span th:unless="${alumno.paso11DTO?.fecchafamilia != null}" style="color: #b00; font-weight: 600;">✘ Pendiente</span>
     </td>
 
     <td>
-        <span th:if="${alumno.paso11DTO?.fechaProfesorado != null}" class="ok">✔</span>
-        <span th:unless="${alumno.paso11DTO?.fechaProfesorado != null}" class="ko">✘</span>
+        <span th:if="${alumno.paso11DTO?.fechaProfesorado != null}" style="color: green; font-weight: 600;">✔ Rellenado</span>
+        <span th:unless="${alumno.paso11DTO?.fechaProfesorado != null}" style="color: #b00; font-weight: 600;">✘ Pendiente</span>
     </td>
 
 </th:block>
